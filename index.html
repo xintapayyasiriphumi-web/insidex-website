@@ -1,0 +1,1107 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>INSIDEX — THE BEST</title>
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700;900&family=Sarabun:wght@300;400;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --purple-light: #a855f7;
+    --purple-mid: #7c3aed;
+    --purple-dark: #4c1d95;
+    --blue-accent: #6366f1;
+    --glow: #c084fc;
+    --bg: #000000;
+    --white: #ffffff;
+    --card-bg: rgba(124, 58, 237, 0.06);
+    --border: rgba(168, 85, 247, 0.25);
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--bg);
+    color: var(--white);
+    font-family: 'Sarabun', sans-serif;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* Custom Cursor */
+  .cursor {
+    width: 12px; height: 12px;
+    background: var(--glow);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.1s;
+    box-shadow: 0 0 15px var(--glow), 0 0 30px var(--purple-light);
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1.5px solid rgba(168,85,247,0.5);
+    border-radius: 50%;
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    transition: all 0.15s ease;
+  }
+
+  /* Noise overlay */
+  body::before {
+    content: '';
+    position: fixed;
+    inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 1;
+  }
+
+  /* ── HERO ── */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+    text-align: center;
+    padding: 2rem;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(ellipse 80% 60% at 50% 40%, rgba(124,58,237,0.18) 0%, transparent 70%),
+      radial-gradient(ellipse 40% 40% at 20% 80%, rgba(99,102,241,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 50% at 80% 20%, rgba(168,85,247,0.1) 0%, transparent 60%),
+      #000;
+  }
+
+  /* Logo as large background watermark */
+  .hero-logo-bg {
+    position: absolute;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -50%);
+    width: min(600px, 80vw);
+    height: min(600px, 80vw);
+    background: url('https://img2.pic.in.th/412a527613340855543.png') center/contain no-repeat;
+    opacity: 0.08;
+    filter: blur(2px);
+    animation: logoPulse 6s ease-in-out infinite;
+  }
+  @keyframes logoPulse {
+    0%,100% { opacity: 0.08; transform: translate(-50%,-50%) scale(1); }
+    50%      { opacity: 0.14; transform: translate(-50%,-50%) scale(1.04); }
+  }
+
+  /* Grid lines */
+  .hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(124,58,237,0.06) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(124,58,237,0.06) 1px, transparent 1px);
+    background-size: 60px 60px;
+    mask-image: radial-gradient(ellipse 80% 80% at 50% 50%, black 30%, transparent 100%);
+  }
+
+  /* Floating particles */
+  .particles { position: absolute; inset: 0; overflow: hidden; }
+  .p {
+    position: absolute;
+    width: 2px; height: 2px;
+    background: var(--glow);
+    border-radius: 50%;
+    animation: floatUp linear infinite;
+    box-shadow: 0 0 6px var(--glow);
+  }
+  @keyframes floatUp {
+    0% { transform: translateY(100vh) translateX(0); opacity: 0; }
+    10% { opacity: 1; }
+    90% { opacity: 1; }
+    100% { transform: translateY(-20px) translateX(var(--dx, 0)); opacity: 0; }
+  }
+
+  .hero-content { position: relative; z-index: 2; }
+
+  .hero-logo {
+    width: min(180px, 40vw);
+    margin-bottom: 2rem;
+    animation: logoIn 1s cubic-bezier(0.16,1,0.3,1) both;
+    filter: drop-shadow(0 0 40px rgba(168,85,247,0.6));
+  }
+  @keyframes logoIn {
+    from { opacity: 0; transform: scale(0.7) translateY(-30px); }
+    to   { opacity: 1; transform: scale(1) translateY(0); }
+  }
+
+  .hero-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(3rem, 10vw, 7rem);
+    font-weight: 900;
+    letter-spacing: 0.15em;
+    line-height: 1;
+    background: linear-gradient(135deg, #fff 0%, var(--purple-light) 40%, var(--blue-accent) 80%, #fff 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    animation: titleIn 1s 0.2s cubic-bezier(0.16,1,0.3,1) both;
+    text-shadow: none;
+    position: relative;
+  }
+  .hero-title::after {
+    content: 'INSIDEX';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, transparent 0%, rgba(168,85,247,0.3) 50%, transparent 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    filter: blur(20px);
+    animation: glowPulse 3s ease-in-out infinite;
+  }
+  @keyframes glowPulse {
+    0%,100% { opacity: 0.5; }
+    50% { opacity: 1; }
+  }
+  @keyframes titleIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-sub {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: clamp(0.9rem, 2.5vw, 1.2rem);
+    letter-spacing: 0.4em;
+    color: rgba(168,85,247,0.8);
+    text-transform: uppercase;
+    margin-top: 0.5rem;
+    animation: titleIn 1s 0.4s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  .hero-desc {
+    margin-top: 1.5rem;
+    font-size: 1rem;
+    color: rgba(255,255,255,0.55);
+    max-width: 500px;
+    line-height: 1.7;
+    animation: titleIn 1s 0.6s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  .hero-cta {
+    margin-top: 2.5rem;
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: center;
+    animation: titleIn 1s 0.8s cubic-bezier(0.16,1,0.3,1) both;
+  }
+
+  /* Discord Button */
+  .btn-discord {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2rem;
+    background: #5865F2;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    position: relative;
+    overflow: visible;
+    transition: transform 0.2s, box-shadow 0.2s;
+    box-shadow: 0 0 30px rgba(88,101,242,0.4), 0 4px 20px rgba(0,0,0,0.4);
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-discord::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(120deg, transparent 30%, rgba(255,255,255,0.15) 50%, transparent 70%);
+    transform: translateX(-100%);
+    transition: transform 0.5s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+  }
+  .btn-discord:hover::before { transform: translateX(100%); }
+  .btn-discord:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 0 50px rgba(88,101,242,0.6), 0 8px 30px rgba(0,0,0,0.5);
+  }
+  .btn-discord svg { width: 22px; height: 22px; flex-shrink: 0; fill: #fff; }
+
+  .btn-outline {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.6rem;
+    padding: 0.9rem 2rem;
+    border: 1.5px solid rgba(168,85,247,0.5);
+    color: var(--purple-light);
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 4px;
+    transition: all 0.2s;
+    clip-path: polygon(8px 0%, 100% 0%, calc(100% - 8px) 100%, 0% 100%);
+    backdrop-filter: blur(10px);
+  }
+  .btn-outline:hover {
+    background: rgba(168,85,247,0.15);
+    border-color: var(--purple-light);
+    transform: translateY(-3px);
+    box-shadow: 0 0 30px rgba(168,85,247,0.2);
+  }
+
+  /* Scroll indicator */
+  .scroll-hint {
+    position: absolute;
+    bottom: 2.5rem;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 0.5rem;
+    opacity: 0.5;
+    animation: bounce 2s ease-in-out infinite;
+  }
+  .scroll-hint span { font-family: 'Rajdhani'; font-size: 0.7rem; letter-spacing: 0.3em; color: var(--purple-light); }
+  @keyframes bounce { 0%,100% { transform: translateX(-50%) translateY(0); } 50% { transform: translateX(-50%) translateY(8px); } }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 1rem 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    backdrop-filter: blur(20px);
+    background: rgba(0,0,0,0.6);
+    border-bottom: 1px solid rgba(168,85,247,0.12);
+    transition: all 0.3s;
+  }
+  .nav-logo {
+    display: flex;
+    align-items: center;
+    gap: 0.7rem;
+    text-decoration: none;
+  }
+  .nav-logo img { width: 36px; height: 36px; filter: drop-shadow(0 0 10px rgba(168,85,247,0.5)); }
+  .nav-logo span {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 1.1rem;
+    background: linear-gradient(135deg, #fff, var(--purple-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    letter-spacing: 0.2em;
+  }
+  .nav-links {
+    display: flex;
+    gap: 2rem;
+    list-style: none;
+  }
+  .nav-links a {
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 600;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.6);
+    text-decoration: none;
+    transition: color 0.2s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0; right: 0;
+    height: 1px;
+    background: var(--purple-light);
+    transform: scaleX(0);
+    transition: transform 0.2s;
+    transform-origin: left;
+  }
+  .nav-links a:hover { color: var(--purple-light); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-discord {
+    padding: 0.5rem 1.2rem;
+    background: #5865F2;
+    color: #fff;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    clip-path: polygon(6px 0%, 100% 0%, calc(100% - 6px) 100%, 0% 100%);
+    transition: opacity 0.2s, transform 0.2s;
+  }
+  .nav-discord:hover { opacity: 0.85; transform: translateY(-1px); }
+
+  /* ── SECTIONS ── */
+  section {
+    padding: 6rem 2rem;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+  }
+
+  .section-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.75rem;
+    letter-spacing: 0.5em;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    margin-bottom: 0.5rem;
+  }
+  .section-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.8rem, 5vw, 3rem);
+    font-weight: 900;
+    background: linear-gradient(135deg, #fff 30%, var(--purple-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: 1rem;
+  }
+  .section-desc {
+    color: rgba(255,255,255,0.45);
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 560px;
+    margin-bottom: 3rem;
+  }
+
+  /* Divider line */
+  .divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, rgba(168,85,247,0.4), transparent);
+    margin: 0;
+  }
+
+  /* ── PRODUCT CARDS ── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+    gap: 1.5rem;
+  }
+
+  .product-card {
+    position: relative;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 2rem;
+    background: var(--card-bg);
+    backdrop-filter: blur(20px);
+    overflow: hidden;
+    transition: transform 0.3s, border-color 0.3s, box-shadow 0.3s;
+    cursor: pointer;
+    clip-path: polygon(16px 0%, 100% 0%, calc(100% - 16px) 100%, 0% 100%);
+  }
+
+  .product-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(135deg, rgba(168,85,247,0.08) 0%, transparent 60%);
+    transition: opacity 0.3s;
+  }
+  .product-card:hover {
+    transform: translateY(-6px);
+    border-color: rgba(168,85,247,0.5);
+    box-shadow: 0 20px 60px rgba(124,58,237,0.2), 0 0 0 1px rgba(168,85,247,0.2);
+  }
+
+  /* Card corner accent */
+  .product-card::after {
+    content: '';
+    position: absolute;
+    top: 0; right: 0;
+    width: 60px; height: 60px;
+    background: linear-gradient(225deg, rgba(168,85,247,0.3) 0%, transparent 60%);
+    transition: opacity 0.3s;
+  }
+
+  .card-icon {
+    width: 52px; height: 52px;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 1.5rem;
+    position: relative;
+    font-size: 1.6rem;
+  }
+  .card-icon-setting { background: linear-gradient(135deg, rgba(124,58,237,0.3), rgba(168,85,247,0.1)); border: 1px solid rgba(168,85,247,0.3); }
+  .card-icon-reshade  { background: linear-gradient(135deg, rgba(99,102,241,0.3), rgba(124,58,237,0.1)); border: 1px solid rgba(99,102,241,0.3); }
+  .card-icon-mode     { background: linear-gradient(135deg, rgba(139,92,246,0.3), rgba(99,102,241,0.1)); border: 1px solid rgba(139,92,246,0.3); }
+  .card-icon-windows  { background: linear-gradient(135deg, rgba(88,101,242,0.3), rgba(124,58,237,0.1)); border: 1px solid rgba(88,101,242,0.3); }
+
+  .card-tag {
+    position: absolute;
+    top: 1rem; right: 1rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.65rem;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    padding: 0.2rem 0.6rem;
+    border-radius: 2px;
+    border: 1px solid;
+  }
+  .tag-hot { color: #f472b6; border-color: rgba(244,114,182,0.4); background: rgba(244,114,182,0.08); }
+  .tag-new { color: #34d399; border-color: rgba(52,211,153,0.4); background: rgba(52,211,153,0.08); }
+  .tag-pro { color: var(--purple-light); border-color: rgba(168,85,247,0.4); background: rgba(168,85,247,0.08); }
+
+  .card-title {
+    font-family: 'Orbitron', monospace;
+    font-weight: 700;
+    font-size: 1.1rem;
+    color: #fff;
+    margin-bottom: 0.5rem;
+    letter-spacing: 0.05em;
+  }
+  .card-desc {
+    font-size: 0.9rem;
+    color: rgba(255,255,255,0.45);
+    line-height: 1.6;
+    margin-bottom: 1.5rem;
+  }
+  .card-features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    margin-bottom: 1.5rem;
+  }
+  .card-features li {
+    font-size: 0.85rem;
+    color: rgba(255,255,255,0.6);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+  }
+  .card-features li::before {
+    content: '';
+    width: 5px; height: 5px;
+    background: var(--purple-light);
+    border-radius: 50%;
+    flex-shrink: 0;
+    box-shadow: 0 0 6px var(--purple-light);
+  }
+  .card-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4rem;
+    font-family: 'Rajdhani', sans-serif;
+    font-weight: 700;
+    font-size: 0.85rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--purple-light);
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0;
+    transition: gap 0.2s, color 0.2s;
+  }
+  .card-btn:hover { color: #fff; gap: 0.7rem; }
+  .card-btn svg { width: 14px; }
+
+  /* Price badge */
+  .card-price {
+    position: absolute;
+    bottom: 1rem; right: 1.5rem;
+    font-family: 'Orbitron', monospace;
+    font-size: 1rem;
+    font-weight: 700;
+    color: var(--glow);
+  }
+
+  /* ── FEATURES STRIP ── */
+  .features-strip {
+    display: flex;
+    gap: 0;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    overflow: hidden;
+    background: rgba(0,0,0,0.4);
+    backdrop-filter: blur(20px);
+    flex-wrap: wrap;
+  }
+  .feature-item {
+    flex: 1;
+    min-width: 180px;
+    padding: 1.8rem 1.5rem;
+    border-right: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+    transition: background 0.2s;
+  }
+  .feature-item:last-child { border-right: none; }
+  .feature-item:hover { background: rgba(124,58,237,0.08); }
+  .feature-num {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 1.8rem;
+    background: linear-gradient(135deg, #fff, var(--purple-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  .feature-label {
+    font-family: 'Rajdhani', sans-serif;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: rgba(255,255,255,0.45);
+  }
+
+  /* ── DISCORD SECTION ── */
+  .discord-section {
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(88,101,242,0.3);
+    border-radius: 12px;
+    padding: 5rem 3rem;
+    text-align: center;
+    background: linear-gradient(135deg, rgba(88,101,242,0.05) 0%, rgba(124,58,237,0.08) 50%, rgba(88,101,242,0.05) 100%);
+    backdrop-filter: blur(30px);
+  }
+  .discord-section::before {
+    content: '';
+    position: absolute;
+    top: -50%; left: -50%;
+    width: 200%; height: 200%;
+    background: radial-gradient(ellipse at center, rgba(88,101,242,0.1) 0%, transparent 60%);
+    animation: rotateBg 20s linear infinite;
+  }
+  @keyframes rotateBg {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
+  .discord-section > * { position: relative; z-index: 1; }
+  .discord-icon {
+    width: 80px; height: 80px;
+    margin: 0 auto 1.5rem;
+    background: #5865F2;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 0 60px rgba(88,101,242,0.4);
+    animation: discordPulse 3s ease-in-out infinite;
+  }
+  @keyframes discordPulse {
+    0%,100% { box-shadow: 0 0 40px rgba(88,101,242,0.4); }
+    50%      { box-shadow: 0 0 80px rgba(88,101,242,0.6); }
+  }
+  .discord-icon svg { width: 44px; height: 44px; fill: white; }
+  .discord-title {
+    font-family: 'Orbitron', monospace;
+    font-size: clamp(1.5rem, 4vw, 2.5rem);
+    font-weight: 900;
+    color: #fff;
+    margin-bottom: 1rem;
+  }
+  .discord-desc {
+    color: rgba(255,255,255,0.5);
+    font-size: 1rem;
+    max-width: 500px;
+    margin: 0 auto 2.5rem;
+    line-height: 1.7;
+  }
+
+  /* ── FOOTER ── */
+  footer {
+    border-top: 1px solid rgba(168,85,247,0.15);
+    padding: 3rem 2rem;
+    text-align: center;
+    position: relative;
+    z-index: 2;
+  }
+  .footer-logo {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.7rem;
+    margin-bottom: 1rem;
+  }
+  .footer-logo img { width: 30px; filter: drop-shadow(0 0 8px rgba(168,85,247,0.5)); }
+  .footer-logo span {
+    font-family: 'Orbitron', monospace;
+    font-weight: 900;
+    font-size: 1rem;
+    letter-spacing: 0.25em;
+    background: linear-gradient(135deg, #fff, var(--purple-light));
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  footer p {
+    font-size: 0.8rem;
+    color: rgba(255,255,255,0.25);
+    letter-spacing: 0.1em;
+    font-family: 'Rajdhani', sans-serif;
+  }
+
+  /* ── ANIMATIONS ── */
+  .fade-in {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .fade-in.visible {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Responsive */
+  @media (max-width: 768px) {
+    .nav-links { display: none; }
+    .features-strip { flex-direction: column; }
+    .feature-item { border-right: none; border-bottom: 1px solid var(--border); }
+    .feature-item:last-child { border-bottom: none; }
+    .discord-section { padding: 3rem 1.5rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="#" class="nav-logo">
+    <img src="https://img2.pic.in.th/412a527613340855543.png" alt="INSIDEX">
+    <span>INSIDEX</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="#products">สินค้า</a></li>
+    <li><a href="#about">เกี่ยวกับ</a></li>
+    <li><a href="#discord">ชุมชน</a></li>
+  </ul>
+  <a href="https://discord.gg/insidex" target="_blank" class="nav-discord">⊕ Discord</a>
+</nav>
+
+<!-- ── HERO ── -->
+<div class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-grid"></div>
+  <div class="hero-logo-bg"></div>
+
+  <!-- Particles -->
+  <div class="particles" id="particles"></div>
+
+  <div class="hero-content">
+    <img src="https://img2.pic.in.th/412a527613340855543.png" alt="INSIDEX" class="hero-logo">
+    <h1 class="hero-title">INSIDEX</h1>
+    <p class="hero-sub">The Best Of Product</p>
+    <p class="hero-desc">ร้านค้าสำหรับนักเล่นเกมที่ต้องการประสิทธิภาพสูงสุด ด้วยสินค้าคุณภาพระดับโปร</p>
+    <div class="hero-cta">
+      <a href="https://discord.gg/insidex" target="_blank" class="btn-discord">
+        <svg xmlns="http://www.w3.org/2000/svg" width="22" height="22" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+        เข้าร่วม Discord
+      </a>
+      <a href="#products" class="btn-outline">
+        ดูสินค้า ↓
+      </a>
+    </div>
+  </div>
+
+  <div class="scroll-hint">
+    <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><path d="M10 3v14M4 13l6 6 6-6" stroke="rgba(168,85,247,0.6)" stroke-width="1.5" stroke-linecap="round"/></svg>
+    <span>Scroll</span>
+  </div>
+</div>
+
+<!-- Stats strip -->
+<div style="position:relative; z-index:2; max-width:1200px; margin: -1px auto 0; padding: 0 2rem;">
+  <div class="features-strip fade-in">
+    <div class="feature-item">
+      <div class="feature-num">1560+</div>
+      <div class="feature-label">ลูกค้าที่พึงพอใจ</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">4</div>
+      <div class="feature-label">หมวดสินค้า</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">24/7</div>
+      <div class="feature-label">Support ตลอดเวลา</div>
+    </div>
+    <div class="feature-item">
+      <div class="feature-num">100%</div>
+      <div class="feature-label">ความพึงพอใจ</div>
+    </div>
+  </div>
+</div>
+
+<div class="divider" style="margin-top: 4rem;"></div>
+
+<!-- ── PRODUCTS ── -->
+<section id="products">
+  <p class="section-label fade-in">// หมวดหมู่สินค้า</p>
+  <h2 class="section-title fade-in">สินค้าของเรา</h2>
+  <p class="section-desc fade-in">เลือกสรรสินค้าคุณภาพสูงเพื่อยกระดับประสบการณ์การเล่นเกมของคุณ</p>
+
+  <div class="products-grid">
+
+    <!-- Setting -->
+    <div class="product-card fade-in">
+      <span class="card-tag tag-hot">HOT</span>
+      <div class="card-icon card-icon-setting">⚙️</div>
+      <h3 class="card-title">SETTING</h3>
+      <p class="card-desc">การตั้งค่าเกมและระบบที่ปรับแต่งมาเพื่อประสิทธิภาพสูงสุด ลดดีเลย์ เพิ่ม FPS+</p>
+      <ul class="card-features">
+        <li>ตั้งค่า FPS สูงสุด</li>
+        <li>ลด Input Lag</li>
+        <li>ปรับ Network Settings</li>
+        <li>Optimize ระบบ Windows</li>
+      </ul>
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        
+      </div>
+      <div class="card-price">฿159-799</div>
+    </div>
+
+    <!-- Reshade -->
+    <div class="product-card fade-in">
+      <span class="card-tag tag-new">POPULAR</span>
+      <div class="card-icon card-icon-reshade">🎨</div>
+      <h3 class="card-title">RESHADE</h3>
+      <p class="card-desc">Preset ReShade ทำให้กราฟิกสวยงามและคมชัดกว่าเดิม</p>
+      <ul class="card-features">
+        <li>Custom Preset สำหรับแต่ละเกม</li>
+        <li>ปรับ Color Grading</li>
+        <li>เพิ่มความคมชัด</li>
+        <li>ทางร้านติดตั้ง ฟรี !</li>
+      </ul>
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        
+      </div>
+      <div class="card-price">฿39-49</div>
+    </div>
+
+    <!-- Mode -->
+    <div class="product-card fade-in">
+      <span class="card-tag tag-pro">POPULAR</span>
+      <div class="card-icon card-icon-mode">🎮</div>
+      <h3 class="card-title">MODE</h3>
+      <p class="card-desc">Mode เพิ่มความคมชัดเเละอถรสในการเล่นมากยิ่งขึ้น</p>
+      <ul class="card-features">
+        <li>Graphic ที่สวยงาม</li>
+        <li>ปรับอะไรต่างๆได้เยอะ</li>
+        <li>Custom Config Files</li>
+      </ul>
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        
+      </div>
+      <div class="card-price">฿69-99</div>
+    </div>
+
+    <!-- Windows OS -->
+    <div class="product-card fade-in">
+      <span class="card-tag tag-hot">TOP</span>
+      <div class="card-icon card-icon-windows">🖥️</div>
+      <h3 class="card-title">WINDOWS OS</h3>
+      <p class="card-desc">Windows ที่ปรับแต่งเฉพาะสำหรับนักเล่นเกม เบา เร็ว ไม่มี Bloatware</p>
+      <ul class="card-features">
+        <li>Windows Gaming Edition</li>
+        <li>ตัด Service ไม่จำเป็น</li>
+        <li>ลด RAM Usage</li>
+        <li>Boot เร็วกว่า Windows ปกติ</li>
+      </ul>
+      <div style="display:flex; align-items:center; justify-content:space-between;">
+        
+      </div>
+      <div class="card-price">฿50-99</div>
+    </div>
+
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ── ABOUT ── -->
+<section id="about">
+  <p class="section-label fade-in">// เกี่ยวกับเรา</p>
+  <h2 class="section-title fade-in">ทำไมต้อง INSIDEX?</h2>
+  <p class="section-desc fade-in">เราคือร้านที่ให้บริการสินค้าดิจิทัลสำหรับนักเล่นเกมโดยเฉพาะ ทุกสินค้าผ่านการทดสอบและพัฒนามาอย่างดี เพื่อให้คุณได้ประสิทธิภาพสูงสุด</p>
+
+  <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-bottom: 4rem;">
+
+    <!-- Setting About -->
+    <div class="fade-in" style="padding: 2rem; border: 1px solid rgba(168,85,247,0.2); border-radius: 10px; background: rgba(124,58,237,0.05); backdrop-filter: blur(20px); position: relative; overflow: hidden;">
+      <div style="position:absolute; top:0; right:0; width:80px; height:80px; background: linear-gradient(225deg, rgba(168,85,247,0.15) 0%, transparent 60%);"></div>
+      <div style="font-size: 2rem; margin-bottom: 1rem;">⚙️</div>
+      <h3 style="font-family: 'Orbitron', monospace; font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.8rem; letter-spacing: 0.05em;">SETTING</h3>
+      <p style="font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.8;">
+        การตั้งค่าที่เราให้บริการนั้นถูกออกแบบและปรับแต่งโดยผู้เชี่ยวชาญ ไม่ว่าจะเป็นการตั้งค่าในเกม, ระบบปฏิบัติการ, หรือ Network เพื่อให้ได้ FPS สูงสุด ดีเลย์ต่ำสุด และ Input Lag น้อยที่สุด เหมาะกับทั้งผู้เล่นทั่วไปและระดับโปร
+      </p>
+      <div style="margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(168,85,247,0.15); display: flex; gap: 1rem; flex-wrap: wrap;">
+        <span style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.15em; color: var(--purple-light);">✦ FPS BOOST</span>
+        <span style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.15em; color: var(--purple-light);">✦ LOW LATENCY</span>
+        <span style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.15em; color: var(--purple-light);">✦ NETWORK OPT</span>
+      </div>
+    </div>
+
+    <!-- Reshade About -->
+    <div class="fade-in" style="padding: 2rem; border: 1px solid rgba(99,102,241,0.2); border-radius: 10px; background: rgba(99,102,241,0.05); backdrop-filter: blur(20px); position: relative; overflow: hidden;">
+      <div style="position:absolute; top:0; right:0; width:80px; height:80px; background: linear-gradient(225deg, rgba(99,102,241,0.15) 0%, transparent 60%);"></div>
+      <div style="font-size: 2rem; margin-bottom: 1rem;">🎨</div>
+      <h3 style="font-family: 'Orbitron', monospace; font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.8rem; letter-spacing: 0.05em;">RESHADE</h3>
+      <p style="font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.8;">
+        ReShade Preset ของเราถูก Custom มาเพื่อให้ภาพในเกมสวยงาม คมชัด และมีสีสันที่สมจริงยิ่งขึ้น โดยไม่กระทบต่อ FPS มากนัก ทีมงานของเราจะติดตั้งให้ฟรีพร้อมปรับแต่งตามความต้องการของคุณ
+      </p>
+      <div style="margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(99,102,241,0.15); display: flex; gap: 1rem; flex-wrap: wrap;">
+        <span style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.15em; color: #818cf8;">✦ COLOR GRADE</span>
+        <span style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.15em; color: #818cf8;">✦ SHARP VISUAL</span>
+        <span style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.15em; color: #818cf8;">✦ FREE INSTALL</span>
+      </div>
+    </div>
+
+    <!-- Mode About -->
+    <div class="fade-in" style="padding: 2rem; border: 1px solid rgba(139,92,246,0.2); border-radius: 10px; background: rgba(139,92,246,0.05); backdrop-filter: blur(20px); position: relative; overflow: hidden;">
+      <div style="position:absolute; top:0; right:0; width:80px; height:80px; background: linear-gradient(225deg, rgba(139,92,246,0.15) 0%, transparent 60%);"></div>
+      <div style="font-size: 2rem; margin-bottom: 1rem;">🎮</div>
+      <h3 style="font-family: 'Orbitron', monospace; font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.8rem; letter-spacing: 0.05em;">MODE</h3>
+      <p style="font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.8;">
+        Mode ของเราช่วยเพิ่มความสวยงามของ Graphic และเปิดตัวเลือกในการปรับแต่งที่มากกว่าปกติ ทำให้คุณสามารถปรับ Config ได้ตามสไตล์ของตัวเอง เพิ่มทั้งความสวยงามและ อรรถรส ในการเล่น
+      </p>
+      <div style="margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(139,92,246,0.15); display: flex; gap: 1rem; flex-wrap: wrap;">
+        <span style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.15em; color: #a78bfa;">✦ CUSTOM CONFIG</span>
+        <span style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.15em; color: #a78bfa;">✦ BETTER VISUAL</span>
+        <span style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.15em; color: #a78bfa;">✦ MULTI GAME</span>
+      </div>
+    </div>
+
+    <!-- Windows OS About -->
+    <div class="fade-in" style="padding: 2rem; border: 1px solid rgba(88,101,242,0.2); border-radius: 10px; background: rgba(88,101,242,0.05); backdrop-filter: blur(20px); position: relative; overflow: hidden;">
+      <div style="position:absolute; top:0; right:0; width:80px; height:80px; background: linear-gradient(225deg, rgba(88,101,242,0.15) 0%, transparent 60%);"></div>
+      <div style="font-size: 2rem; margin-bottom: 1rem;">🖥️</div>
+      <h3 style="font-family: 'Orbitron', monospace; font-size: 1.1rem; font-weight: 700; color: #fff; margin-bottom: 0.8rem; letter-spacing: 0.05em;">WINDOWS OS</h3>
+      <p style="font-size: 0.9rem; color: rgba(255,255,255,0.55); line-height: 1.8;">
+        Windows ที่เราปรับแต่งมานั้นถูก Optimize มาเพื่อการเล่นเกมโดยเฉพาะ ตัด Service และ Process ที่ไม่จำเป็นออกทั้งหมด ทำให้ระบบเบา บูตเร็ว และให้ทรัพยากรกับเกมได้มากที่สุด ไม่มี Bloatware ไม่มีโฆษณา
+      </p>
+      <div style="margin-top: 1.2rem; padding-top: 1rem; border-top: 1px solid rgba(88,101,242,0.15); display: flex; gap: 1rem; flex-wrap: wrap;">
+        <span style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.15em; color: #6366f1;">✦ NO BLOATWARE</span>
+        <span style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.15em; color: #6366f1;">✦ FAST BOOT</span>
+        <span style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.15em; color: #6366f1;">✦ GAMING READY</span>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Why choose us banner -->
+  <div class="fade-in" style="padding: 2.5rem 3rem; border: 1px solid rgba(168,85,247,0.2); border-radius: 10px; background: linear-gradient(135deg, rgba(124,58,237,0.08) 0%, rgba(88,101,242,0.08) 100%); backdrop-filter: blur(20px); display: flex; align-items: center; gap: 2rem; flex-wrap: wrap;">
+    <div style="flex: 1; min-width: 200px;">
+      <p style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.4em; color: var(--purple-light); text-transform:uppercase; margin-bottom:0.5rem;">// WHY INSIDEX</p>
+      <h3 style="font-family:'Orbitron',monospace; font-size:1.4rem; font-weight:900; color:#fff; line-height:1.3;">พร้อมดูแลคุณ<br>ทุกขั้นตอน</h3>
+    </div>
+    <div style="flex: 2; min-width: 280px; display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+      <div style="display:flex; align-items:flex-start; gap:0.7rem;">
+        <span style="color:var(--purple-light); font-size:1.2rem; margin-top:2px;">◈</span>
+        <div>
+          <div style="font-family:'Rajdhani',sans-serif; font-weight:700; font-size:0.9rem; color:#fff; letter-spacing:0.05em;">Support 24/7</div>
+          <div style="font-size:0.8rem; color:rgba(255,255,255,0.45);">ทีมงานพร้อมช่วยเหลือตลอดเวลา</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:flex-start; gap:0.7rem;">
+        <span style="color:var(--purple-light); font-size:1.2rem; margin-top:2px;">◈</span>
+        <div>
+          <div style="font-family:'Rajdhani',sans-serif; font-weight:700; font-size:0.9rem; color:#fff; letter-spacing:0.05em;">ราคาคุ้มค่า</div>
+          <div style="font-size:0.8rem; color:rgba(255,255,255,0.45);">สินค้าคุณภาพในราคาที่เข้าถึงได้</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:flex-start; gap:0.7rem;">
+        <span style="color:var(--purple-light); font-size:1.2rem; margin-top:2px;">◈</span>
+        <div>
+          <div style="font-family:'Rajdhani',sans-serif; font-weight:700; font-size:0.9rem; color:#fff; letter-spacing:0.05em;">ทดสอบจริง</div>
+          <div style="font-size:0.8rem; color:rgba(255,255,255,0.45);">ทุกสินค้าผ่านการทดสอบก่อนขาย</div>
+        </div>
+      </div>
+      <div style="display:flex; align-items:flex-start; gap:0.7rem;">
+        <span style="color:var(--purple-light); font-size:1.2rem; margin-top:2px;">◈</span>
+        <div>
+          <div style="font-family:'Rajdhani',sans-serif; font-weight:700; font-size:0.9rem; color:#fff; letter-spacing:0.05em;">ลูกค้า 1560+</div>
+          <div style="font-size:0.8rem; color:rgba(255,255,255,0.45);">ไว้วางใจเราตลอดหลายปีที่ผ่านมา</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+</section>
+
+<div class="divider"></div>
+<div class="divider"></div>
+
+<!-- ── YOUTUBE SHOWCASE ── -->
+<section id="showcase" style="padding: 6rem 2rem;">
+  <div style="max-width:1200px; margin:0 auto;">
+    <p class="section-label fade-in">// ตัวอย่างสินค้า</p>
+    <h2 class="section-title fade-in">SETTING Showcase</h2>
+    <p class="section-desc fade-in">ดูผลลัพธ์จริงของ Setting จากทางร้าน เห็นความแตกต่างได้ชัดเจน</p>
+
+    <div class="fade-in" style="position: relative; border-radius: 16px; overflow: hidden; border: 1px solid rgba(168,85,247,0.3); box-shadow: 0 0 80px rgba(124,58,237,0.25), 0 0 0 1px rgba(168,85,247,0.1);">
+
+      <!-- Label badge -->
+      <div style="position: absolute; top: 1.2rem; left: 1.2rem; z-index: 10; display: flex; gap: 0.6rem; align-items: center;">
+        <div style="background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); border: 1px solid rgba(168,85,247,0.4); border-radius: 4px; padding: 0.3rem 0.8rem; display: flex; align-items: center; gap: 0.5rem;">
+          <span style="width:8px; height:8px; background:#ef4444; border-radius:50%; display:inline-block; box-shadow: 0 0 8px #ef4444; animation: blink 1.5s ease-in-out infinite;"></span>
+          <span style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.2em; color:#fff; text-transform:uppercase;">LIVE DEMO</span>
+        </div>
+        <div style="background: rgba(124,58,237,0.8); backdrop-filter: blur(10px); border-radius: 4px; padding: 0.3rem 0.8rem;">
+          <span style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.2em; color:#fff; text-transform:uppercase;">⚙️ SETTING</span>
+        </div>
+      </div>
+
+      <!-- YouTube iframe 16:9 -->
+      <div style="position: relative; padding-bottom: 56.25%; height: 0; background: #000;">
+        <iframe
+          width="560" height="315"
+          src="https://www.youtube.com/embed/Qp0ETKFrzP4?si=gfXy60Mwlii4EGKm"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          referrerpolicy="strict-origin-when-cross-origin"
+          allowfullscreen
+          style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;">
+        </iframe>
+      </div>
+
+      <!-- Bottom bar -->
+      <div style="background: rgba(0,0,0,0.85); backdrop-filter: blur(20px); padding: 1.2rem 1.8rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; border-top: 1px solid rgba(168,85,247,0.15);">
+        <div style="display: flex; align-items: center; gap: 1rem;">
+          <div style="width: 40px; height: 40px; background: linear-gradient(135deg, rgba(124,58,237,0.4), rgba(168,85,247,0.2)); border: 1px solid rgba(168,85,247,0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">⚙️</div>
+          <div>
+            <div style="font-family:'Orbitron',monospace; font-size:0.95rem; font-weight:700; color:#fff; letter-spacing:0.05em;">INSIDEX Setting</div>
+            <div style="font-family:'Rajdhani',sans-serif; font-size:0.8rem; color:rgba(255,255,255,0.45); letter-spacing:0.1em;">FPS BOOST · INPUT LAG REDUCTION · NETWORK OPTIMIZATION</div>
+          </div>
+        </div>
+        <a href="https://discord.gg/insidex" target="_blank" class="btn-discord" style="padding: 0.6rem 1.4rem; font-size:0.85rem;">
+          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+          สั่งซื้อตอนนี้
+        </a>
+      </div>
+    </div>
+
+    <!-- Stats row under video -->
+    <div class="fade-in" style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 1rem; margin-top: 1.5rem;">
+      <div style="padding: 1.2rem 1.5rem; border: 1px solid rgba(168,85,247,0.15); border-radius: 8px; background: rgba(124,58,237,0.05); text-align:center; backdrop-filter:blur(10px);">
+        <div style="font-family:'Orbitron',monospace; font-size:1.4rem; font-weight:900; background: linear-gradient(135deg,#fff,var(--purple-light)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">+FPS</div>
+        <div style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-top:0.2rem;">Frame Rate Boost</div>
+      </div>
+      <div style="padding: 1.2rem 1.5rem; border: 1px solid rgba(168,85,247,0.15); border-radius: 8px; background: rgba(124,58,237,0.05); text-align:center; backdrop-filter:blur(10px);">
+        <div style="font-family:'Orbitron',monospace; font-size:1.4rem; font-weight:900; background: linear-gradient(135deg,#fff,var(--purple-light)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">-LAG</div>
+        <div style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-top:0.2rem;">Input Lag Reduced</div>
+      </div>
+      <div style="padding: 1.2rem 1.5rem; border: 1px solid rgba(168,85,247,0.15); border-radius: 8px; background: rgba(124,58,237,0.05); text-align:center; backdrop-filter:blur(10px);">
+        <div style="font-family:'Orbitron',monospace; font-size:1.4rem; font-weight:900; background: linear-gradient(135deg,#fff,var(--purple-light)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">100%</div>
+        <div style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.2em; color:rgba(255,255,255,0.4); text-transform:uppercase; margin-top:0.2rem;">Satisfaction Rate</div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<style>
+@keyframes blink {
+  0%,100% { opacity: 1; }
+  50% { opacity: 0.3; }
+}
+</style>
+
+
+<!-- ── DISCORD JOIN ── -->
+<section id="discord" style="padding: 6rem 2rem;">
+  <div class="discord-section fade-in" style="max-width:1200px; margin:0 auto;">
+    <div class="discord-icon">
+      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+    </div>
+    <h2 class="discord-title">เข้าร่วม INSIDEX Server</h2>
+    <p class="discord-desc">พูดคุย แชร์ประสบการณ์ และรับข่าวสารล่าสุดจากร้านของเรา พร้อม Support ตลอด 24/7</p>
+    <a href="https://discord.gg/insidex" target="_blank" class="btn-discord" style="font-size:1.1rem; padding: 1rem 2.5rem;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+      Join Discord Now
+    </a>
+    <!-- Discord Widget เพิ่มใหม่ -->
+    <div style="display:flex; justify-content:center; margin-top: 2rem;">
+      <div style="border-radius:12px; overflow:hidden; box-shadow: 0 0 40px rgba(88,101,242,0.35), 0 0 0 1px rgba(88,101,242,0.2);">
+        <iframe src="https://discord.com/widget?id=1400021255528382526&theme=dark" width="350" height="500" allowtransparency="true" frameborder="0" sandbox="allow-popups allow-popups-to-escape-sandbox allow-same-origin allow-scripts"></iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── FOOTER ── -->
+<footer>
+  <div class="footer-logo">
+    <img src="https://img2.pic.in.th/412a527613340855543.png" alt="INSIDEX">
+    <span>INSIDEX</span>
+  </div>
+  <p>© 2025 INSIDEX — Premium Gaming Store · All rights reserved</p>
+</footer>
+
+<script>
+  // Cursor
+  const cursor = document.getElementById('cursor');
+  const ring = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+  document.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; cursor.style.left = mx-6+'px'; cursor.style.top = my-6+'px'; });
+  function animRing() { rx += (mx-rx)*0.12; ry += (my-ry)*0.12; ring.style.left = rx-18+'px'; ring.style.top = ry-18+'px'; requestAnimationFrame(animRing); }
+  animRing();
+  document.querySelectorAll('a,button,.product-card').forEach(el => {
+    el.addEventListener('mouseenter', () => { cursor.style.transform='scale(2)'; ring.style.transform='scale(1.5)'; ring.style.borderColor='rgba(168,85,247,0.8)'; });
+    el.addEventListener('mouseleave', () => { cursor.style.transform='scale(1)'; ring.style.transform='scale(1)'; ring.style.borderColor='rgba(168,85,247,0.5)'; });
+  });
+
+  // Particles
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 30; i++) {
+    const p = document.createElement('div');
+    p.className = 'p';
+    const x = Math.random() * 100;
+    const dur = 8 + Math.random() * 12;
+    const delay = Math.random() * 10;
+    const dx = (Math.random()-0.5) * 200;
+    p.style.cssText = `left:${x}%;--dx:${dx}px;animation-duration:${dur}s;animation-delay:-${delay}s;opacity:${0.3+Math.random()*0.7}`;
+    container.appendChild(p);
+  }
+
+  // Scroll fade-in
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.fade-in').forEach(el => obs.observe(el));
+
+  // Stagger cards
+  document.querySelectorAll('.product-card').forEach((c, i) => {
+    c.style.transitionDelay = (i * 0.1) + 's';
+  });
+</script>
+</body>
+</html>
