@@ -685,6 +685,123 @@
     .feature-item:last-child { border-bottom: none; }
     .discord-section { padding: 3rem 1.5rem; }
   }
+
+  /* ── RESPONSIVE / MOBILE ── */
+
+  /* Mobile Nav hamburger */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 200;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--purple-light);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.95);
+    backdrop-filter: blur(20px);
+    z-index: 150;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    letter-spacing: 0.2em;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--purple-light); }
+
+  @media (max-width: 768px) {
+    /* Nav */
+    .nav-links { display: none !important; }
+    .nav-discord { display: none; }
+    .nav-hamburger { display: flex; }
+    nav { padding: 0.8rem 1.2rem; }
+
+    /* Hero */
+    .hero { padding: 5rem 1.2rem 3rem; min-height: 100svh; }
+    .hero-logo { width: min(130px, 35vw); margin-bottom: 1.2rem; }
+    .hero-desc { font-size: 0.9rem; }
+    .hero-cta { flex-direction: column; align-items: center; gap: 0.8rem; }
+    .btn-discord, .btn-outline { width: 100%; max-width: 280px; justify-content: center; font-size: 0.9rem; }
+
+    /* Stats strip */
+    .features-strip { flex-direction: column; }
+    .feature-item { border-right: none !important; border-bottom: 1px solid var(--border); padding: 1.2rem 1.5rem; flex-direction: row; justify-content: space-between; align-items: center; }
+    .feature-item:last-child { border-bottom: none; }
+    .feature-num { font-size: 1.4rem; }
+
+    /* Sections */
+    section { padding: 3.5rem 1.2rem; }
+    .section-title { font-size: clamp(1.4rem, 6vw, 2rem); }
+
+    /* Products grid */
+    .products-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .product-card { clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%); }
+
+    /* About grid */
+    #about > div:first-of-type { grid-template-columns: 1fr !important; gap: 1rem !important; }
+
+    /* Why banner */
+    #about .fade-in:last-child { flex-direction: column !important; padding: 1.5rem !important; }
+    #about .fade-in:last-child > div:last-child { grid-template-columns: 1fr !important; }
+
+    /* Showcase */
+    #showcase { padding: 3.5rem 1.2rem !important; }
+    #showcase > div { max-width: 100% !important; }
+
+    /* Stats under video */
+    #showcase .fade-in:last-child { grid-template-columns: 1fr !important; }
+
+    /* Discord section */
+    .discord-section { padding: 2.5rem 1.2rem !important; }
+    .discord-title { font-size: 1.4rem !important; }
+
+    /* Discord widget */
+    .discord-section iframe { width: 100% !important; max-width: 340px; }
+
+    /* Footer */
+    footer { padding: 2rem 1.2rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: clamp(2.2rem, 14vw, 4rem); }
+    .hero-sub { font-size: 0.75rem; letter-spacing: 0.25em; }
+    .section-title { font-size: clamp(1.2rem, 7vw, 1.8rem); }
+    .feature-num { font-size: 1.2rem; }
+    nav { padding: 0.7rem 1rem; }
+    .nav-logo span { font-size: 0.9rem; }
+    .nav-logo img { width: 28px; height: 28px; }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    section { padding: 4rem 1.5rem; }
+    .hero-title { font-size: clamp(3rem, 8vw, 5rem); }
+  }
+
 </style>
 </head>
 <body>
@@ -705,7 +822,22 @@
     <li><a href="#discord">ชุมชน</a></li>
   </ul>
   <a href="https://discord.gg/insidex" target="_blank" class="nav-discord">⊕ Discord</a>
+  <div class="nav-hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
 </nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#products" onclick="closeMenu()">สินค้า</a>
+  <a href="#about" onclick="closeMenu()">เกี่ยวกับ</a>
+  <a href="#showcase" onclick="closeMenu()">Showcase</a>
+  <a href="#discord" onclick="closeMenu()">ชุมชน</a>
+  <a href="https://discord.gg/insidex" target="_blank" onclick="closeMenu()" class="btn-discord" style="font-size:1rem; padding:0.8rem 1.8rem;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+    Discord
+  </a>
+</div>
 
 <!-- ── HERO ── -->
 <div class="hero">
@@ -972,7 +1104,7 @@
       <div style="position: absolute; top: 1.2rem; left: 1.2rem; z-index: 10; display: flex; gap: 0.6rem; align-items: center;">
         <div style="background: rgba(0,0,0,0.7); backdrop-filter: blur(10px); border: 1px solid rgba(168,85,247,0.4); border-radius: 4px; padding: 0.3rem 0.8rem; display: flex; align-items: center; gap: 0.5rem;">
           <span style="width:8px; height:8px; background:#ef4444; border-radius:50%; display:inline-block; box-shadow: 0 0 8px #ef4444; animation: blink 1.5s ease-in-out infinite;"></span>
-          <span style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.2em; color:#fff; text-transform:uppercase;">SHOWCASE</span>
+          <span style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.2em; color:#fff; text-transform:uppercase;">LIVE DEMO</span>
         </div>
         <div style="background: rgba(124,58,237,0.8); backdrop-filter: blur(10px); border-radius: 4px; padding: 0.3rem 0.8rem;">
           <span style="font-family:'Rajdhani',sans-serif; font-size:0.75rem; letter-spacing:0.2em; color:#fff; text-transform:uppercase;">⚙️ SETTING</span>
@@ -999,7 +1131,7 @@
           <div style="width: 40px; height: 40px; background: linear-gradient(135deg, rgba(124,58,237,0.4), rgba(168,85,247,0.2)); border: 1px solid rgba(168,85,247,0.3); border-radius: 8px; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">⚙️</div>
           <div>
             <div style="font-family:'Orbitron',monospace; font-size:0.95rem; font-weight:700; color:#fff; letter-spacing:0.05em;">INSIDEX Setting</div>
-            <div style="font-family:'Rajdhani',sans-serif; font-size:0.8rem; color:rgba(255,255,255,0.45); letter-spacing:0.1em;">LATENCY FIX · INPUT LAG REDUCTION · NETWORK OPTIMIZATION</div>
+            <div style="font-family:'Rajdhani',sans-serif; font-size:0.8rem; color:rgba(255,255,255,0.45); letter-spacing:0.1em;">FPS BOOST · INPUT LAG REDUCTION · NETWORK OPTIMIZATION</div>
           </div>
         </div>
         <a href="https://discord.gg/insidex" target="_blank" class="btn-discord" style="padding: 0.6rem 1.4rem; font-size:0.85rem;">
@@ -1033,6 +1165,123 @@
   0%,100% { opacity: 1; }
   50% { opacity: 0.3; }
 }
+
+  /* ── RESPONSIVE / MOBILE ── */
+
+  /* Mobile Nav hamburger */
+  .nav-hamburger {
+    display: none;
+    flex-direction: column;
+    gap: 5px;
+    cursor: pointer;
+    padding: 4px;
+    z-index: 200;
+  }
+  .nav-hamburger span {
+    display: block;
+    width: 24px;
+    height: 2px;
+    background: var(--purple-light);
+    border-radius: 2px;
+    transition: all 0.3s;
+  }
+  .nav-hamburger.open span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+  .nav-hamburger.open span:nth-child(2) { opacity: 0; }
+  .nav-hamburger.open span:nth-child(3) { transform: rotate(-45deg) translate(5px, -5px); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.95);
+    backdrop-filter: blur(20px);
+    z-index: 150;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2rem;
+  }
+  .mobile-menu.open { display: flex; }
+  .mobile-menu a {
+    font-family: 'Orbitron', monospace;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: rgba(255,255,255,0.7);
+    text-decoration: none;
+    letter-spacing: 0.2em;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--purple-light); }
+
+  @media (max-width: 768px) {
+    /* Nav */
+    .nav-links { display: none !important; }
+    .nav-discord { display: none; }
+    .nav-hamburger { display: flex; }
+    nav { padding: 0.8rem 1.2rem; }
+
+    /* Hero */
+    .hero { padding: 5rem 1.2rem 3rem; min-height: 100svh; }
+    .hero-logo { width: min(130px, 35vw); margin-bottom: 1.2rem; }
+    .hero-desc { font-size: 0.9rem; }
+    .hero-cta { flex-direction: column; align-items: center; gap: 0.8rem; }
+    .btn-discord, .btn-outline { width: 100%; max-width: 280px; justify-content: center; font-size: 0.9rem; }
+
+    /* Stats strip */
+    .features-strip { flex-direction: column; }
+    .feature-item { border-right: none !important; border-bottom: 1px solid var(--border); padding: 1.2rem 1.5rem; flex-direction: row; justify-content: space-between; align-items: center; }
+    .feature-item:last-child { border-bottom: none; }
+    .feature-num { font-size: 1.4rem; }
+
+    /* Sections */
+    section { padding: 3.5rem 1.2rem; }
+    .section-title { font-size: clamp(1.4rem, 6vw, 2rem); }
+
+    /* Products grid */
+    .products-grid { grid-template-columns: 1fr; gap: 1rem; }
+    .product-card { clip-path: polygon(10px 0%, 100% 0%, calc(100% - 10px) 100%, 0% 100%); }
+
+    /* About grid */
+    #about > div:first-of-type { grid-template-columns: 1fr !important; gap: 1rem !important; }
+
+    /* Why banner */
+    #about .fade-in:last-child { flex-direction: column !important; padding: 1.5rem !important; }
+    #about .fade-in:last-child > div:last-child { grid-template-columns: 1fr !important; }
+
+    /* Showcase */
+    #showcase { padding: 3.5rem 1.2rem !important; }
+    #showcase > div { max-width: 100% !important; }
+
+    /* Stats under video */
+    #showcase .fade-in:last-child { grid-template-columns: 1fr !important; }
+
+    /* Discord section */
+    .discord-section { padding: 2.5rem 1.2rem !important; }
+    .discord-title { font-size: 1.4rem !important; }
+
+    /* Discord widget */
+    .discord-section iframe { width: 100% !important; max-width: 340px; }
+
+    /* Footer */
+    footer { padding: 2rem 1.2rem; }
+  }
+
+  @media (max-width: 480px) {
+    .hero-title { font-size: clamp(2.2rem, 14vw, 4rem); }
+    .hero-sub { font-size: 0.75rem; letter-spacing: 0.25em; }
+    .section-title { font-size: clamp(1.2rem, 7vw, 1.8rem); }
+    .feature-num { font-size: 1.2rem; }
+    nav { padding: 0.7rem 1rem; }
+    .nav-logo span { font-size: 0.9rem; }
+    .nav-logo img { width: 28px; height: 28px; }
+  }
+
+  @media (min-width: 769px) and (max-width: 1024px) {
+    .products-grid { grid-template-columns: repeat(2, 1fr); }
+    section { padding: 4rem 1.5rem; }
+    .hero-title { font-size: clamp(3rem, 8vw, 5rem); }
+  }
+
 </style>
 
 
@@ -1102,6 +1351,26 @@
   document.querySelectorAll('.product-card').forEach((c, i) => {
     c.style.transitionDelay = (i * 0.1) + 's';
   });
+
+  // Mobile menu
+  function toggleMenu() {
+    const menu = document.getElementById('mobileMenu');
+    const ham = document.getElementById('hamburger');
+    menu.classList.toggle('open');
+    ham.classList.toggle('open');
+    document.body.style.overflow = menu.classList.contains('open') ? 'hidden' : '';
+  }
+  function closeMenu() {
+    document.getElementById('mobileMenu').classList.remove('open');
+    document.getElementById('hamburger').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  // Hide cursor on mobile
+  if ('ontouchstart' in window) {
+    document.getElementById('cursor').style.display = 'none';
+    document.getElementById('cursorRing').style.display = 'none';
+  }
 </script>
 </body>
 </html>
