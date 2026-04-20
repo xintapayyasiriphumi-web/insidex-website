@@ -386,36 +386,123 @@
 <section id="showcase" style="padding:6rem 2rem;">
   <div style="max-width:1200px;margin:0 auto;">
     <p class="section-label fade-in">// ตัวอย่างสินค้า</p>
-    <h2 class="section-title fade-in">SETTING Showcase</h2>
-    <p class="section-desc fade-in">ดูผลลัพธ์จริงของ Setting จากทางร้าน เห็นความแตกต่างได้ชัดเจน</p>
-    <div class="fade-in" style="position:relative;border-radius:16px;overflow:hidden;border:1px solid rgba(168,85,247,0.3);box-shadow:0 0 80px rgba(124,58,237,0.25),0 0 0 1px rgba(168,85,247,0.1);">
-      <div style="position:absolute;top:1.2rem;left:1.2rem;z-index:10;">
-        <div style="background:rgba(124,58,237,0.8);backdrop-filter:blur(10px);border-radius:4px;padding:0.3rem 0.8rem;">
-          <span style="font-family:'Rajdhani',sans-serif;font-size:0.75rem;letter-spacing:0.2em;color:#fff;text-transform:uppercase;">⚙️ SETTING</span>
-        </div>
-      </div>
-      <div style="position:relative;padding-bottom:56.25%;height:0;background:#000;">
-        <iframe width="560" height="315" src="https://www.youtube.com/embed/Qp0ETKFrzP4?si=gfXy60Mwlii4EGKm" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"></iframe>
-      </div>
-      <div style="background:rgba(0,0,0,0.85);backdrop-filter:blur(20px);padding:1.2rem 1.8rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(168,85,247,0.15);">
-        <div style="display:flex;align-items:center;gap:1rem;">
-          <div style="width:40px;height:40px;background:linear-gradient(135deg,rgba(124,58,237,0.4),rgba(168,85,247,0.2));border:1px solid rgba(168,85,247,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">⚙️</div>
-          <div>
-            <div style="font-family:'Orbitron',monospace;font-size:0.95rem;font-weight:700;color:#fff;letter-spacing:0.05em;">INSIDEX Setting</div>
-            <div style="font-family:'Rajdhani',sans-serif;font-size:0.8rem;color:rgba(255,255,255,0.45);letter-spacing:0.1em;">FPS BOOST · INPUT LAG REDUCTION · NETWORK OPTIMIZATION</div>
+    <h2 class="section-title fade-in">Video Showcase</h2>
+    <p class="section-desc fade-in">ดูผลลัพธ์จริงจากทางร้าน เลื่อนซ้าย-ขวาเพื่อดูคลิปทั้งหมด</p>
+
+    <!-- Slider Wrapper -->
+    <div class="fade-in" style="position:relative;">
+
+      <!-- Slider Track -->
+      <div id="showcaseSlider" style="overflow:hidden;border-radius:16px;border:1px solid rgba(168,85,247,0.3);box-shadow:0 0 80px rgba(124,58,237,0.25);">
+        <div id="sliderTrack" style="display:flex;transition:transform 0.45s cubic-bezier(0.25,0.46,0.45,0.94);">
+
+          <!-- Slide 1: Setting -->
+          <div class="slide-item" style="min-width:100%;position:relative;">
+            <div style="position:absolute;top:1.2rem;left:1.2rem;z-index:10;display:flex;gap:0.5rem;align-items:center;">
+              <div style="background:rgba(124,58,237,0.85);backdrop-filter:blur(10px);border-radius:4px;padding:0.3rem 0.8rem;">
+                <span style="font-family:'Rajdhani',sans-serif;font-size:0.75rem;letter-spacing:0.2em;color:#fff;text-transform:uppercase;">⚙️ SETTING</span>
+              </div>
+              <div style="background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);border-radius:4px;padding:0.3rem 0.6rem;">
+                <span style="font-family:'Rajdhani',sans-serif;font-size:0.65rem;letter-spacing:0.15em;color:rgba(255,255,255,0.6);text-transform:uppercase;">1 / 3</span>
+              </div>
+            </div>
+            <div style="position:relative;padding-bottom:56.25%;height:0;background:#000;">
+              <iframe src="https://www.youtube.com/embed/Qp0ETKFrzP4?si=gfXy60Mwlii4EGKm" title="INSIDEX Setting Showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"></iframe>
+            </div>
+            <div style="background:rgba(0,0,0,0.88);backdrop-filter:blur(20px);padding:1.2rem 1.8rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(168,85,247,0.15);">
+              <div style="display:flex;align-items:center;gap:1rem;">
+                <div style="width:38px;height:38px;background:linear-gradient(135deg,rgba(124,58,237,0.4),rgba(168,85,247,0.2));border:1px solid rgba(168,85,247,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">⚙️</div>
+                <div>
+                  <div style="font-family:'Orbitron',monospace;font-size:0.9rem;font-weight:700;color:#fff;letter-spacing:0.05em;">INSIDEX SETTING</div>
+                  <div style="font-family:'Rajdhani',sans-serif;font-size:0.75rem;color:rgba(255,255,255,0.4);letter-spacing:0.08em;">FPS BOOST · INPUT LAG REDUCTION · NETWORK OPT</div>
+                </div>
+              </div>
+              <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn-discord" style="padding:0.55rem 1.2rem;font-size:0.82rem;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+                สั่งซื้อ
+              </a>
+            </div>
           </div>
-        </div>
-        <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn-discord" style="padding:0.6rem 1.4rem;font-size:0.85rem;">
-          <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
-          สั่งซื้อตอนนี้
-        </a>
+
+          <!-- Slide 2: ReShade -->
+          <div class="slide-item" style="min-width:100%;position:relative;">
+            <div style="position:absolute;top:1.2rem;left:1.2rem;z-index:10;display:flex;gap:0.5rem;align-items:center;">
+              <div style="background:rgba(99,102,241,0.85);backdrop-filter:blur(10px);border-radius:4px;padding:0.3rem 0.8rem;">
+                <span style="font-family:'Rajdhani',sans-serif;font-size:0.75rem;letter-spacing:0.2em;color:#fff;text-transform:uppercase;">⚙️ SETTING</span>
+              </div>
+              <div style="background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);border-radius:4px;padding:0.3rem 0.6rem;">
+                <span style="font-family:'Rajdhani',sans-serif;font-size:0.65rem;letter-spacing:0.15em;color:rgba(255,255,255,0.6);text-transform:uppercase;">2 / 3</span>
+              </div>
+            </div>
+            <div style="position:relative;padding-bottom:56.25%;height:0;background:#000;">
+              <iframe src="https://www.youtube.com/embed/DAU2uLSaN2o?si=f74OpNctG3fBQ2an" title="INSIDEX Setting Showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"></iframe>
+            </div>
+            <div style="background:rgba(0,0,0,0.88);backdrop-filter:blur(20px);padding:1.2rem 1.8rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(99,102,241,0.2);">
+              <div style="display:flex;align-items:center;gap:1rem;">
+                <div style="width:38px;height:38px;background:linear-gradient(135deg,rgba(99,102,241,0.4),rgba(124,58,237,0.2));border:1px solid rgba(99,102,241,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">⚙️</div>
+                <div>
+                  <div style="font-family:'Orbitron',monospace;font-size:0.9rem;font-weight:700;color:#fff;letter-spacing:0.05em;">INSIDEX SETTING</div>
+                  <div style="font-family:'Rajdhani',sans-serif;font-size:0.75rem;color:rgba(255,255,255,0.4);letter-spacing:0.08em;">FPS BOOST · INPUT LAG REDUCTION · NETWORK OPT</div>
+                </div>
+              </div>
+              <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn-discord" style="padding:0.55rem 1.2rem;font-size:0.82rem;background:#6366f1;box-shadow:0 0 20px rgba(99,102,241,0.4);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+                สั่งซื้อ
+              </a>
+            </div>
+          </div>
+
+          <!-- Slide 3: Windows OS -->
+          <div class="slide-item" style="min-width:100%;position:relative;">
+            <div style="position:absolute;top:1.2rem;left:1.2rem;z-index:10;display:flex;gap:0.5rem;align-items:center;">
+              <div style="background:rgba(88,101,242,0.85);backdrop-filter:blur(10px);border-radius:4px;padding:0.3rem 0.8rem;">
+                <span style="font-family:'Rajdhani',sans-serif;font-size:0.75rem;letter-spacing:0.2em;color:#fff;text-transform:uppercase;">⚙️ STORY REVIEW</span>
+              </div>
+              <div style="background:rgba(0,0,0,0.6);backdrop-filter:blur(10px);border-radius:4px;padding:0.3rem 0.6rem;">
+                <span style="font-family:'Rajdhani',sans-serif;font-size:0.65rem;letter-spacing:0.15em;color:rgba(255,255,255,0.6);text-transform:uppercase;">3 / 3</span>
+              </div>
+            </div>
+            <div style="position:relative;padding-bottom:56.25%;height:0;background:#000;">
+              <iframe src="https://www.youtube.com/embed/btVEop9geP8?si=6UjAddRaxIS4wdnn" title="Setting Story Showcase" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen style="position:absolute;top:0;left:0;width:100%;height:100%;border:none;"></iframe>
+            </div>
+            <div style="background:rgba(0,0,0,0.88);backdrop-filter:blur(20px);padding:1.2rem 1.8rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(88,101,242,0.2);">
+              <div style="display:flex;align-items:center;gap:1rem;">
+                <div style="width:38px;height:38px;background:linear-gradient(135deg,rgba(88,101,242,0.4),rgba(124,58,237,0.2));border:1px solid rgba(88,101,242,0.3);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;">⚙️</div>
+                <div>
+                  <div style="font-family:'Orbitron',monospace;font-size:0.9rem;font-weight:700;color:#fff;letter-spacing:0.05em;">INSIDEX SETTING</div>
+                  <div style="font-family:'Rajdhani',sans-serif;font-size:0.75rem;color:rgba(255,255,255,0.4);letter-spacing:0.08em;">NO BAN · NO INJECT · NO CE</div>
+                </div>
+              </div>
+              <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn-discord" style="padding:0.55rem 1.2rem;font-size:0.82rem;background:#5865F2;box-shadow:0 0 20px rgba(88,101,242,0.4);">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+                สั่งซื้อ
+              </a>
+            </div>
+          </div>
+
+        </div><!-- end sliderTrack -->
+      </div><!-- end showcaseSlider -->
+
+      <!-- Arrow Buttons -->
+      <button id="slidePrev" onclick="slideMove(-1)" aria-label="Previous" style="position:absolute;top:50%;left:-20px;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid rgba(168,85,247,0.4);background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);color:#fff;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;z-index:20;box-shadow:0 0 20px rgba(124,58,237,0.3);">‹</button>
+      <button id="slideNext" onclick="slideMove(1)" aria-label="Next" style="position:absolute;top:50%;right:-20px;transform:translateY(-50%);width:44px;height:44px;border-radius:50%;border:1px solid rgba(168,85,247,0.4);background:rgba(0,0,0,0.8);backdrop-filter:blur(10px);color:#fff;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:all 0.2s;z-index:20;box-shadow:0 0 20px rgba(124,58,237,0.3);">›</button>
+
+      <!-- Dots -->
+      <div style="display:flex;justify-content:center;gap:0.5rem;margin-top:1.2rem;" id="sliderDots">
+        <button onclick="slideTo(0)" class="dot-btn" style="width:8px;height:8px;border-radius:50%;border:none;background:var(--purple-light);opacity:1;cursor:pointer;padding:0;transition:all 0.2s;"></button>
+        <button onclick="slideTo(1)" class="dot-btn" style="width:8px;height:8px;border-radius:50%;border:none;background:var(--purple-light);opacity:0.3;cursor:pointer;padding:0;transition:all 0.2s;"></button>
+        <button onclick="slideTo(2)" class="dot-btn" style="width:8px;height:8px;border-radius:50%;border:none;background:var(--purple-light);opacity:0.3;cursor:pointer;padding:0;transition:all 0.2s;"></button>
       </div>
-    </div>
-    <div class="fade-in" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1.5rem;">
+
+    </div><!-- end slider wrapper -->
+
+    <!-- Stats -->
+    <div class="fade-in" style="display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;">
       <div style="padding:1.2rem 1.5rem;border:1px solid rgba(168,85,247,0.15);border-radius:8px;background:rgba(124,58,237,0.05);text-align:center;backdrop-filter:blur(10px);"><div style="font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:900;background:linear-gradient(135deg,#fff,var(--purple-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">+FPS</div><div style="font-family:'Rajdhani',sans-serif;font-size:0.75rem;letter-spacing:0.2em;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-top:0.2rem;">Frame Rate Boost</div></div>
       <div style="padding:1.2rem 1.5rem;border:1px solid rgba(168,85,247,0.15);border-radius:8px;background:rgba(124,58,237,0.05);text-align:center;backdrop-filter:blur(10px);"><div style="font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:900;background:linear-gradient(135deg,#fff,var(--purple-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">-LAG</div><div style="font-family:'Rajdhani',sans-serif;font-size:0.75rem;letter-spacing:0.2em;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-top:0.2rem;">Input Lag Reduced</div></div>
       <div style="padding:1.2rem 1.5rem;border:1px solid rgba(168,85,247,0.15);border-radius:8px;background:rgba(124,58,237,0.05);text-align:center;backdrop-filter:blur(10px);"><div style="font-family:'Orbitron',monospace;font-size:1.4rem;font-weight:900;background:linear-gradient(135deg,#fff,var(--purple-light));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;">100%</div><div style="font-family:'Rajdhani',sans-serif;font-size:0.75rem;letter-spacing:0.2em;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-top:0.2rem;">Satisfaction Rate</div></div>
     </div>
+
   </div>
 </section>
 
@@ -502,6 +589,48 @@
     document.getElementById('cursor').style.display = 'none';
     document.getElementById('cursorRing').style.display = 'none';
   }
+
+
+  // ── Video Slider ──
+  var sliderIndex = 0;
+  var sliderTotal = 3;
+  function slideTo(n) {
+    // pause all iframes
+    document.querySelectorAll('#sliderTrack iframe').forEach(function(f) {
+      var src = f.src;
+      f.src = '';
+      f.src = src;
+    });
+    sliderIndex = (n + sliderTotal) % sliderTotal;
+    document.getElementById('sliderTrack').style.transform = 'translateX(-' + (sliderIndex * 100) + '%)';
+    document.querySelectorAll('.dot-btn').forEach(function(d, i) {
+      d.style.opacity = i === sliderIndex ? '1' : '0.3';
+      d.style.width = i === sliderIndex ? '20px' : '8px';
+      d.style.borderRadius = '4px';
+    });
+  }
+  function slideMove(dir) { slideTo(sliderIndex + dir); }
+
+  // Swipe support
+  (function() {
+    var slider = document.getElementById('showcaseSlider');
+    if (!slider) return;
+    var startX = 0;
+    slider.addEventListener('touchstart', function(e) { startX = e.touches[0].clientX; }, {passive:true});
+    slider.addEventListener('touchend', function(e) {
+      var diff = startX - e.changedTouches[0].clientX;
+      if (Math.abs(diff) > 50) slideMove(diff > 0 ? 1 : -1);
+    });
+    // Mouse drag
+    var isDragging = false, dragStartX = 0;
+    slider.addEventListener('mousedown', function(e) { isDragging = true; dragStartX = e.clientX; });
+    slider.addEventListener('mouseup', function(e) {
+      if (!isDragging) return; isDragging = false;
+      var diff = dragStartX - e.clientX;
+      if (Math.abs(diff) > 60) slideMove(diff > 0 ? 1 : -1);
+    });
+    slider.addEventListener('mouseleave', function() { isDragging = false; });
+  })();
 
   // 3D Logo mouse tracking (single clean block)
   (function() {
