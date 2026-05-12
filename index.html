@@ -688,6 +688,49 @@ nav.scrolled{
 }
 
 /* ══════════════════════════════════════════════════
+   TESTIMONIALS
+══════════════════════════════════════════════════ */
+.testi-section{padding:7rem 2rem;max-width:1200px;margin:0 auto;position:relative;z-index:2}
+.testi-header{display:flex;align-items:flex-end;justify-content:space-between;flex-wrap:wrap;gap:1.5rem;margin-bottom:3rem}
+.testi-track-wrap{overflow:hidden;position:relative}
+.testi-track-wrap::before,.testi-track-wrap::after{
+  content:'';position:absolute;top:0;bottom:0;width:80px;z-index:10;pointer-events:none;
+}
+.testi-track-wrap::before{left:0;background:linear-gradient(to right,var(--bg),transparent)}
+.testi-track-wrap::after{right:0;background:linear-gradient(to left,var(--bg),transparent)}
+.testi-track{
+  display:flex;gap:1.2rem;
+  animation:testiScroll 32s linear infinite;
+  width:max-content;
+}
+.testi-track:hover{animation-play-state:paused}
+@keyframes testiScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+.testi-card{
+  flex-shrink:0;width:300px;
+  padding:1.6rem;border:1px solid var(--border);border-radius:var(--radius);
+  background:rgba(255,255,255,.025);backdrop-filter:blur(20px);
+  position:relative;overflow:hidden;
+  transition:border-color .3s,transform .3s var(--ease-out);
+}
+.testi-card:hover{border-color:rgba(168,85,247,.4);transform:translateY(-4px)}
+.testi-card::before{content:'';position:absolute;top:0;right:0;width:60px;height:60px;background:linear-gradient(225deg,rgba(168,85,247,.12),transparent 65%)}
+.testi-stars{display:flex;gap:3px;margin-bottom:1rem}
+.testi-star{color:var(--p1);font-size:.9rem}
+.testi-quote{font-size:.88rem;color:var(--text-muted);line-height:1.75;margin-bottom:1.2rem;position:relative;padding-left:.2rem}
+.testi-quote::before{content:'\201C';position:absolute;top:-.5rem;left:-.3rem;font-size:2.8rem;color:rgba(168,85,247,.2);font-family:Georgia,serif;line-height:1;pointer-events:none}
+.testi-author{display:flex;align-items:center;gap:.75rem;border-top:1px solid rgba(168,85,247,.1);padding-top:1rem}
+.testi-avatar{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--p3),var(--b1));display:flex;align-items:center;justify-content:center;font-family:'Orbitron',monospace;font-weight:700;font-size:.6rem;color:#fff;border:1px solid rgba(168,85,247,.3)}
+.testi-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.88rem;color:var(--text);letter-spacing:.04em}
+.testi-product{font-size:.7rem;color:var(--text-dim);margin-top:.1rem}
+.testi-badge{position:absolute;top:.9rem;right:.9rem;font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .5rem;border-radius:2px;border:1px solid rgba(168,85,247,.22);color:rgba(168,85,247,.65);background:rgba(168,85,247,.06)}
+.testi-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
+.testi-sum-card{padding:1.4rem;border:1px solid var(--border);border-radius:var(--radius);background:rgba(124,58,237,.04);text-align:center;backdrop-filter:blur(10px);transition:border-color .25s,transform .25s}
+.testi-sum-card:hover{border-color:rgba(168,85,247,.35);transform:translateY(-2px)}
+.testi-sum-num{font-family:'Orbitron',monospace;font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,#fff,var(--p1));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.testi-sum-label{font-family:'Rajdhani',sans-serif;font-size:.7rem;letter-spacing:.22em;color:var(--text-dim);text-transform:uppercase;margin-top:.3rem}
+@media(max-width:768px){.testi-section{padding:4rem 1.2rem}.testi-header{flex-direction:column;align-items:flex-start}.testi-summary{grid-template-columns:1fr}}
+
+/* ══════════════════════════════════════════════════
    FAQ
 ══════════════════════════════════════════════════ */
 .faq-section{padding:7rem 2rem;max-width:1200px;margin:0 auto;position:relative;z-index:2}
@@ -853,6 +896,7 @@ footer{
     <li><a href="#products" class="nav-link">สินค้า</a></li>
     <li><a href="#about" class="nav-link">เกี่ยวกับ</a></li>
     <li><a href="#showcase" class="nav-link">Showcase</a></li>
+    <li><a href="#reviews" class="nav-link">รีวิว</a></li>
     <li><a href="#faq" class="nav-link">FAQ</a></li>
     <li><a href="#discord" class="nav-link">ชุมชน</a></li>
   </ul>
@@ -873,6 +917,7 @@ footer{
   <a href="#products" class="mob-link" onclick="closeMob()">สินค้า</a>
   <a href="#about" class="mob-link" onclick="closeMob()">เกี่ยวกับ</a>
   <a href="#showcase" class="mob-link" onclick="closeMob()">Showcase</a>
+  <a href="#reviews" class="mob-link" onclick="closeMob()">รีวิว</a>
   <a href="#faq" class="mob-link" onclick="closeMob()">FAQ</a>
   <a href="#discord" class="mob-link" onclick="closeMob()">ชุมชน</a>
   <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn btn-primary" onclick="closeMob()">
@@ -1223,6 +1268,210 @@ footer{
   </div>
 </section>
 
+<div class="divider"></div>
+
+<!-- ══ TESTIMONIALS ══ -->
+<section class="testi-section" id="reviews">
+  <div class="testi-header">
+    <div class="testi-header-left">
+      <p class="section-eyebrow reveal">รีวิวจากลูกค้าจริง</p>
+      <h2 class="section-title reveal" style="margin-bottom:0">เสียงจากลูกค้า<br>1,850+ คน</h2>
+    </div>
+    <div class="reveal" style="display:flex;align-items:center;gap:.5rem">
+      <div style="display:flex">
+        <span style="color:var(--p1);font-size:1.1rem">★★★★★</span>
+      </div>
+      <span style="font-family:'Orbitron',monospace;font-weight:900;font-size:1.2rem;color:#fff">5.0</span>
+      <span style="font-size:.8rem;color:var(--text-dim);font-family:'Rajdhani',sans-serif;letter-spacing:.1em">/ 5.0 rating</span>
+    </div>
+  </div>
+
+  <!-- Infinite scroll track -->
+  <div class="testi-track-wrap reveal">
+    <div class="testi-track" id="testiTrack">
+
+      <!-- === SET 1 === -->
+      <div class="testi-card">
+        <span class="testi-badge">SETTING</span>
+        <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
+        <p class="testi-quote">เพิ่ม FPS ได้เยอะมากเลยครับ เล่น FiveM ลื่นขึ้นชัดเจน ทีมงาน Remote มาลงให้เลย ง่ายมาก</p>
+        <div class="testi-author">
+          <div class="testi-avatar">NK</div>
+          <div><div class="testi-name">NightKing_TH</div><div class="testi-product">SETTING · FiveM</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <span class="testi-badge">RESHADE</span>
+        <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
+        <p class="testi-quote">ReShade สวยมากครับ สีสันชัดขึ้นเยอะ กราฟิกดูดีกว่าเดิมมาก แถมยัง FPS ไม่ตกเลย</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#6366f1,#4c1d95)">PX</div>
+          <div><div class="testi-name">Pixel_Wolf</div><div class="testi-product">RESHADE · CS2</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <span class="testi-badge">WINDOWS OS</span>
+        <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
+        <p class="testi-quote">Windows ลงมาแล้วเครื่องเบาขึ้นเยอะมาก Boot เร็วกว่าเดิมเป็นเท่าตัว RAM ลดลงชัดเจน</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#5865F2,#3730a3)">ZX</div>
+          <div><div class="testi-name">ZeroX_Gaming</div><div class="testi-product">WINDOWS OS</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <span class="testi-badge">SETTING</span>
+        <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
+        <p class="testi-quote">Support ดีมากครับ มีปัญหาหลังลง Setting ทีมงาน Remote กลับมาแก้ให้ทันทีเลย ไม่เสียเงินเพิ่ม</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#7c3aed,#db2777)">SR</div>
+          <div><div class="testi-name">SkyRider99</div><div class="testi-product">SETTING · Valorant</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <span class="testi-badge">MODE</span>
+        <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
+        <p class="testi-quote">Mode ที่ได้มาปรับกราฟิกได้เยอะมาก สีสวย คมชัดขึ้น เล่นแล้วสนุกกว่าเดิมมากครับ</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#0f766e,#1d4ed8)">GX</div>
+          <div><div class="testi-name">GhostX_TH</div><div class="testi-product">MODE · FiveM</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <span class="testi-badge">SETTING</span>
+        <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
+        <p class="testi-quote">ราคาคุ้มมากเลยครับ จ่ายไปนิดเดียวแต่ได้ FPS เพิ่มชัดเจน Input Lag ลดลงมาก aim ดีขึ้นด้วย</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#b45309,#7c3aed)">DV</div>
+          <div><div class="testi-name">DarkVoid</div><div class="testi-product">SETTING · CS2</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <span class="testi-badge">RESHADE</span>
+        <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
+        <p class="testi-quote">ติดตั้งให้ฟรีเลยครับ ไม่ต้องทำเองเลย แค่เปิดเครื่องรอก็ได้ ReShade สวยกว่าที่คิดมากๆ</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#0891b2,#6366f1)">NV</div>
+          <div><div class="testi-name">NeonViper</div><div class="testi-product">RESHADE · Fortnite</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <span class="testi-badge">WINDOWS OS</span>
+        <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
+        <p class="testi-quote">ลง Windows ใหม่แล้วรู้สึกได้เลยว่าเครื่องเบาขึ้น เกมลื่นขึ้นชัดเจน ไม่มี Bloatware ให้รำคาญ</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#dc2626,#7c3aed)">AP</div>
+          <div><div class="testi-name">AlphaPhoenix</div><div class="testi-product">WINDOWS OS</div></div>
+        </div>
+      </div>
+
+      <!-- === SET 2 (clone for seamless loop) === -->
+      <div class="testi-card">
+        <span class="testi-badge">SETTING</span>
+        <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
+        <p class="testi-quote">เพิ่ม FPS ได้เยอะมากเลยครับ เล่น FiveM ลื่นขึ้นชัดเจน ทีมงาน Remote มาลงให้เลย ง่ายมาก</p>
+        <div class="testi-author">
+          <div class="testi-avatar">NK</div>
+          <div><div class="testi-name">NightKing_TH</div><div class="testi-product">SETTING · FiveM</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <span class="testi-badge">RESHADE</span>
+        <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
+        <p class="testi-quote">ReShade สวยมากครับ สีสันชัดขึ้นเยอะ กราฟิกดูดีกว่าเดิมมาก แถมยัง FPS ไม่ตกเลย</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#6366f1,#4c1d95)">PX</div>
+          <div><div class="testi-name">Pixel_Wolf</div><div class="testi-product">RESHADE · CS2</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <span class="testi-badge">WINDOWS OS</span>
+        <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
+        <p class="testi-quote">Windows ลงมาแล้วเครื่องเบาขึ้นเยอะมาก Boot เร็วกว่าเดิมเป็นเท่าตัว RAM ลดลงชัดเจน</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#5865F2,#3730a3)">ZX</div>
+          <div><div class="testi-name">ZeroX_Gaming</div><div class="testi-product">WINDOWS OS</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <span class="testi-badge">SETTING</span>
+        <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
+        <p class="testi-quote">Support ดีมากครับ มีปัญหาหลังลง Setting ทีมงาน Remote กลับมาแก้ให้ทันทีเลย ไม่เสียเงินเพิ่ม</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#7c3aed,#db2777)">SR</div>
+          <div><div class="testi-name">SkyRider99</div><div class="testi-product">SETTING · Valorant</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <span class="testi-badge">MODE</span>
+        <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
+        <p class="testi-quote">Mode ที่ได้มาปรับกราฟิกได้เยอะมาก สีสวย คมชัดขึ้น เล่นแล้วสนุกกว่าเดิมมากครับ</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#0f766e,#1d4ed8)">GX</div>
+          <div><div class="testi-name">GhostX_TH</div><div class="testi-product">MODE · FiveM</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <span class="testi-badge">SETTING</span>
+        <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
+        <p class="testi-quote">ราคาคุ้มมากเลยครับ จ่ายไปนิดเดียวแต่ได้ FPS เพิ่มชัดเจน Input Lag ลดลงมาก aim ดีขึ้นด้วย</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#b45309,#7c3aed)">DV</div>
+          <div><div class="testi-name">DarkVoid</div><div class="testi-product">SETTING · CS2</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <span class="testi-badge">RESHADE</span>
+        <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
+        <p class="testi-quote">ติดตั้งให้ฟรีเลยครับ ไม่ต้องทำเองเลย แค่เปิดเครื่องรอก็ได้ ReShade สวยกว่าที่คิดมากๆ</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#0891b2,#6366f1)">NV</div>
+          <div><div class="testi-name">NeonViper</div><div class="testi-product">RESHADE · Fortnite</div></div>
+        </div>
+      </div>
+
+      <div class="testi-card">
+        <span class="testi-badge">WINDOWS OS</span>
+        <div class="testi-stars"><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span><span class="testi-star">★</span></div>
+        <p class="testi-quote">ลง Windows ใหม่แล้วรู้สึกได้เลยว่าเครื่องเบาขึ้น เกมลื่นขึ้นชัดเจน ไม่มี Bloatware ให้รำคาญ</p>
+        <div class="testi-author">
+          <div class="testi-avatar" style="background:linear-gradient(135deg,#dc2626,#7c3aed)">AP</div>
+          <div><div class="testi-name">AlphaPhoenix</div><div class="testi-product">WINDOWS OS</div></div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Summary stats -->
+  <div class="testi-summary">
+    <div class="testi-sum-card reveal" style="transition-delay:.05s">
+      <div class="testi-sum-num">5.0</div>
+      <div class="testi-sum-label">★ Average Rating</div>
+    </div>
+    <div class="testi-sum-card reveal" style="transition-delay:.1s">
+      <div class="testi-sum-num" data-target="1850" data-suffix="+">0+</div>
+      <div class="testi-sum-label">ลูกค้าที่พึงพอใจ</div>
+    </div>
+    <div class="testi-sum-card reveal" style="transition-delay:.15s">
+      <div class="testi-sum-num">100%</div>
+      <div class="testi-sum-label">Satisfaction Rate</div>
+    </div>
+  </div>
+</section>
+
 <!-- ══ SHOP BANNER ══ -->
 <div class="shop-banner">
   <a href="https://insidex.rexzy.xyz/" target="_blank" class="shop-banner-inner reveal">
@@ -1264,7 +1513,7 @@ footer{
         </button>
         <div class="faq-body">
           <div class="faq-body-inner">
-            <p>หลังจากสั่งซื้อแล้ว ทีมงานจะนัด Remote เข้าเครื่องผ่าน Ultraviwer แล้วลง Setup ให้โดยตรง คุณไม่ต้องทำอะไรเองเลย แค่เปิดเครื่องทิ้งไว้ก็พอ ใช้เวลาประมาณ 3–5 นาที เเล้วเเต่สินค้า</p>
+            <p>หลังจากสั่งซื้อแล้ว ทีมงานจะนัด Remote เข้าเครื่องผ่าน Ultraviewer แล้วลง Setup ให้โดยตรง คุณไม่ต้องทำอะไรเองเลย แค่เปิดเครื่องทิ้งไว้ก็พอ ใช้เวลาประมาณ 3-5 นาที</p>
             <div class="faq-tags">
               <span class="faq-tag">Remote Setup</span>
               <span class="faq-tag">Support 24/7</span>
@@ -1281,7 +1530,7 @@ footer{
         </button>
         <div class="faq-body">
           <div class="faq-body-inner">
-            <p>สินค้าส่วนใหญ่เป็น Lifetime — ซื้อครั้งเดียวใช้ได้ตลอด ถ้าไม่ได้ไปลง Setting ร้านอื่นมาเเละค่าเกิดการทับกันขึ้นมา</p>
+            <p>สินค้าส่วนใหญ่เป็น Lifetime — ซื้อครั้งเดียวใช้ได้ตลอด ถ้าไม่ได้ไปลง Setting ของร้านอื่นเเล้วค่าเกิดการทับกัน</p>
             <div class="faq-tags">
               <span class="faq-tag">Lifetime</span>
               <span class="faq-tag">ไม่มีค่ารายเดือน</span>
@@ -1333,7 +1582,7 @@ footer{
         </button>
         <div class="faq-body">
           <div class="faq-body-inner">
-            <p>ชำระผ่านร้านค้า insidex.rexzy.xyz หรือติดต่อผ่าน Discord โดยตรง รองรับ ธนาคารไทยทุกธนาคาร,PromptPay, TrueMoney Wallet และช่องทางอื่นๆ</p>
+            <p>ชำระผ่านร้านค้า insidex.rexzy.xyz หรือติดต่อผ่าน Discord โดยตรง รองรับ ทุกธนาคารในไทย,PromptPay, TrueMoney Wallet และช่องทางอื่นๆ</p>
             <div class="faq-tags">
               <span class="faq-tag">PromptPay</span>
               <span class="faq-tag">TrueMoney</span>
