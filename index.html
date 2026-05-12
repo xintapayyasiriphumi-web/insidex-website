@@ -285,7 +285,7 @@
 
 <div style="position:relative;z-index:2;max-width:1200px;margin:-1px auto 0;padding:0 2rem;">
   <div class="features-strip fade-in">
-    <div class="feature-item"><div class="feature-num">1,600+</div><div class="feature-label">ลูกค้าที่พึงพอใจ</div></div>
+    <div class="feature-item"><div class="feature-num">1,850+</div><div class="feature-label">ลูกค้าที่พึงพอใจ</div></div>
     <div class="feature-item"><div class="feature-num">4</div><div class="feature-label">หมวดสินค้า</div></div>
     <div class="feature-item"><div class="feature-num">24/7</div><div class="feature-label">Support ตลอดเวลา</div></div>
     <div class="feature-item"><div class="feature-num">100%</div><div class="feature-label">ปลอดภัย</div></div>
@@ -590,8 +590,8 @@
         nodes.push({
           x: Math.random() * W,
           y: Math.random() * H,
-          vx: randRange(-0.05, 0.05),
-          vy: randRange(-0.05, 0.05),
+          vx: randRange(-0.18, 0.18),
+          vy: randRange(-0.18, 0.18),
           r: randRange(1.5, 3),
           pulse: Math.random() * Math.PI * 2
         });
@@ -618,8 +618,8 @@
           n.vy += (dy / dist) * force;
         }
         // Damping แทน speed cap — ค่อยๆ ลดความเร็ว ไม่กระเด็น
-        n.vx *= 0.97;
-        n.vy *= 0.97;
+        n.vx *= 0.985;
+        n.vy *= 0.985;
       });
 
       // Draw edges
