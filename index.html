@@ -863,6 +863,99 @@ footer{
   .cards{grid-template-columns:repeat(2,1fr)}
   .section{padding:5rem 1.5rem}
 }
+
+/* ══ GOATX UPDATE BANNER ══ */
+.goatx-section{position:relative;z-index:2;max-width:1200px;margin:0 auto;padding:4rem 2rem 0}
+.goatx-inner{
+  position:relative;overflow:hidden;border:1px solid rgba(220,38,38,0.45);border-radius:16px;
+  background:linear-gradient(135deg,rgba(30,0,0,0.92) 0%,rgba(10,0,0,0.97) 60%);
+  backdrop-filter:blur(24px);
+  box-shadow:0 0 80px rgba(220,38,38,0.2),inset 0 0 80px rgba(0,0,0,0.5);
+  display:grid;grid-template-columns:1fr 1fr;min-height:480px;
+  transition:border-color .3s,box-shadow .3s;
+}
+.goatx-inner:hover{
+  border-color:rgba(239,68,68,0.7);
+  box-shadow:0 0 120px rgba(220,38,38,0.35),inset 0 0 80px rgba(0,0,0,0.5);
+}
+.goatx-left{
+  padding:3.5rem 3rem;display:flex;flex-direction:column;
+  justify-content:center;position:relative;z-index:2;
+}
+.goatx-tag{
+  display:inline-flex;align-items:center;gap:.5rem;
+  font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.4em;
+  text-transform:uppercase;color:#ef4444;background:rgba(239,68,68,.08);
+  border:1px solid rgba(239,68,68,.3);border-radius:999px;
+  padding:.35rem .9rem;margin-bottom:1.4rem;animation:blink 1.4s infinite;width:fit-content;
+}
+.goatx-tag::before{
+  content:'';width:6px;height:6px;border-radius:50%;
+  background:#ef4444;box-shadow:0 0 8px #ef4444;
+}
+.goatx-version{
+  font-family:'Orbitron',monospace;font-size:.7rem;letter-spacing:.35em;
+  color:rgba(239,68,68,.7);text-transform:uppercase;margin-bottom:.5rem;
+}
+.goatx-title{
+  font-family:'Orbitron',monospace;font-weight:900;
+  font-size:clamp(2rem,4.5vw,3.4rem);line-height:.95;letter-spacing:.06em;
+  background:linear-gradient(160deg,#fff 0%,#fca5a5 40%,#ef4444 75%,#fff 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  margin-bottom:.5rem;
+}
+.goatx-sub{
+  font-family:'Orbitron',monospace;font-weight:900;
+  font-size:clamp(1rem,2.5vw,1.6rem);letter-spacing:.1em;
+  color:#ef4444;margin-bottom:1.6rem;
+}
+.goatx-feats{display:flex;flex-direction:column;gap:.55rem;margin-bottom:2rem}
+.goatx-feat{
+  display:flex;align-items:center;gap:.6rem;font-family:'Rajdhani',sans-serif;
+  font-size:.92rem;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.04em;
+}
+.goatx-feat::before{
+  content:'';width:6px;height:6px;border-radius:50%;flex-shrink:0;
+  background:#ef4444;box-shadow:0 0 8px #ef4444;
+}
+.goatx-cta-row{display:flex;gap:.8rem;flex-wrap:wrap}
+.btn-red{
+  background:linear-gradient(135deg,#dc2626,#991b1b);color:#fff;
+  box-shadow:0 4px 24px rgba(220,38,38,.45),0 0 0 1px rgba(220,38,38,.3);
+}
+.btn-red:hover{
+  box-shadow:0 8px 40px rgba(220,38,38,.65),0 0 0 1px rgba(220,38,38,.55);
+}
+.goatx-right{position:relative;overflow:hidden}
+.goatx-img{
+  width:100%;height:100%;object-fit:cover;object-position:center top;
+  display:block;position:absolute;inset:0;
+}
+.goatx-img-fade{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    linear-gradient(to right,rgba(10,0,0,0.55) 0%,transparent 28%,transparent 80%,rgba(10,0,0,0.3) 100%),
+    linear-gradient(to top,rgba(10,0,0,0.25) 0%,transparent 18%);
+}
+.goatx-red-glow{
+  position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(ellipse 80% 60% at 30% 30%,rgba(220,38,38,.1) 0%,transparent 65%);
+}
+.goatx-corner-badge{
+  position:absolute;top:1.2rem;right:1.2rem;z-index:10;
+  font-family:'Orbitron',monospace;font-size:.6rem;font-weight:700;
+  letter-spacing:.25em;text-transform:uppercase;
+  background:rgba(220,38,38,.88);backdrop-filter:blur(12px);
+  border-radius:4px;padding:.35rem .9rem;color:#fff;
+  box-shadow:0 0 20px rgba(220,38,38,.5);
+}
+@media(max-width:768px){
+  .goatx-inner{grid-template-columns:1fr}
+  .goatx-right{min-height:320px;position:relative}
+  .goatx-left{padding:2rem 1.5rem}
+  .goatx-section{padding:3rem 1.2rem 0}
+}
+
 </style>
 </head>
 <body>
@@ -987,6 +1080,43 @@ footer{
 </div>
 
 <div class="divider" style="margin-top:4rem"></div>
+
+<!-- ══ GOATX UPDATE BANNER ══ -->
+<div class="goatx-section reveal">
+  <div class="goatx-inner">
+    <div class="goatx-red-glow"></div>
+    <span class="goatx-corner-badge">🔥 NEW UPDATE</span>
+ 
+    <!-- Left: info -->
+    <div class="goatx-left">
+      <div class="goatx-tag">UPDATE · AVAILABLE NOW</div>
+      <div class="goatx-version">// GOATX v2.0</div>
+      <div class="goatx-title">GOATX</div>
+      <div class="goatx-sub">SETTING v2.0</div>
+      <ul class="goatx-feats">
+        <li class="goatx-feat">ภาพตรง — คมชัดกว่าเดิม</li>
+        <li class="goatx-feat">สั่งง่าย — ลงให้โดยตรง</li>
+        <li class="goatx-feat">LOW INPUT LAG</li>
+        <li class="goatx-feat">การตอบสนองเห็นผลทุกเกม</li>
+        <li class="goatx-feat">วงนัวตัวไหลขึ้น</li>
+      </ul>
+      <div class="goatx-cta-row">
+        <a href="https://insidex.rexzy.xyz/" target="_blank" class="btn btn-red">
+          🛒 สั่งซื้อ GOATX v2.0
+        </a>
+        <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn btn-ghost">
+          Discord →
+        </a>
+      </div>
+    </div>
+
+  <!-- Right: image — แทนที่ GOATX_IMAGE_URL_HERE ด้วย URL จริง -->
+    <div class="goatx-right">
+      <img src="https://i.postimg.cc/prn5wDs3/45-1.png" alt="GOATX Setting v2.0" class="goatx-img">
+      <div class="goatx-img-fade"></div>
+    </div>
+  </div>
+</div>
 
 <!-- ══ PRODUCTS ══ -->
 <section class="section" id="products">
