@@ -1014,8 +1014,11 @@ footer{
   width:32px;height:32px;border-radius:50%;
   border:1px solid rgba(168,85,247,.25);color:var(--text-muted);
   display:flex;align-items:center;justify-content:center;font-size:1rem;
-  cursor:pointer;transition:all .2s;z-index:10;
+  cursor:pointer !important;transition:all .2s;
+  z-index:99999 !important;
   background:rgba(10,10,15,.95);flex-shrink:0;
+  pointer-events:all !important;
+  isolation:isolate;
 }
 .ix-modal-close:hover{background:rgba(168,85,247,.2);color:var(--p1);border-color:var(--p1)}
 .ix-modal-title{
@@ -1968,7 +1971,7 @@ footer{
 <!-- ── Modal: User Panel ── -->
 <div class="ix-overlay" id="modalUser" onclick="if(event.target===this)closeModal('modalUser')">
   <div class="ix-modal">
-    <button class="ix-modal-close" onclick="closeModal('modalUser')">✕</button>
+    <button onclick="closeModal('modalUser')" style="position:absolute;top:.8rem;right:.8rem;width:32px;height:32px;border-radius:50%;border:1px solid rgba(168,85,247,.25);background:rgba(10,10,15,.95);color:#fff;font-size:1rem;cursor:pointer;z-index:99999;display:flex;align-items:center;justify-content:center;pointer-events:all">✕</button>
     <div class="ix-modal-body">
     <div class="ix-modal-title">MY <span>ACCOUNT</span></div>
 
@@ -2003,7 +2006,7 @@ footer{
 <!-- ── Modal: Topup ── -->
 <div class="ix-overlay" id="modalTopup" onclick="if(event.target===this)closeModal('modalTopup')">
   <div class="ix-modal">
-    <button class="ix-modal-close" onclick="closeModal('modalTopup')">✕</button>
+    <button onclick="closeModal('modalTopup')" style="position:absolute;top:.8rem;right:.8rem;width:32px;height:32px;border-radius:50%;border:1px solid rgba(168,85,247,.25);background:rgba(10,10,15,.95);color:#fff;font-size:1rem;cursor:pointer;z-index:99999;display:flex;align-items:center;justify-content:center;pointer-events:all">✕</button>
     <div class="ix-modal-body">
     <div class="ix-modal-title">เติม <span>POINT</span></div>
     <div class="ix-modal-title">เติม <span>POINT</span></div>
@@ -2027,7 +2030,7 @@ footer{
 <!-- ── Modal: Shop ── -->
 <div class="ix-overlay" id="modalShop" onclick="if(event.target===this)closeModal('modalShop')">
   <div class="ix-modal" style="max-width:500px">
-    <button class="ix-modal-close" onclick="closeModal('modalShop')">✕</button>
+    <button onclick="closeModal('modalShop')" style="position:absolute;top:.8rem;right:.8rem;width:32px;height:32px;border-radius:50%;border:1px solid rgba(168,85,247,.25);background:rgba(10,10,15,.95);color:#fff;font-size:1rem;cursor:pointer;z-index:99999;display:flex;align-items:center;justify-content:center;pointer-events:all">✕</button>
     <div class="ix-modal-body">
     <div class="ix-modal-title">🛒 <span>SHOP</span></div>
 
