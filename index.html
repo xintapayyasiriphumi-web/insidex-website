@@ -1000,22 +1000,24 @@ footer{
 }
 .ix-overlay.open{opacity:1;pointer-events:all}
 .ix-modal{
-  width:100%;max-width:440px;max-height:90vh;overflow-y:auto;
+  width:100%;max-width:440px;
   background:#0a0a0f;border:1px solid rgba(168,85,247,.3);border-radius:16px;
-  padding:2.5rem 2rem 2rem;position:relative;
+  padding:0;position:relative;overflow:hidden;
   transform:translateY(20px);transition:transform .3s var(--ease-out);
+}
+.ix-modal-body{
+  max-height:85vh;overflow-y:auto;padding:2rem;
 }
 .ix-overlay.open .ix-modal{transform:translateY(0)}
 .ix-modal-close{
-  position:fixed;top:auto;right:auto;
-  margin-top:-1.5rem;margin-left:calc(100% - 2.5rem);
-  width:28px;height:28px;border-radius:50%;
+  position:absolute;top:.8rem;right:.8rem;
+  width:32px;height:32px;border-radius:50%;
   border:1px solid rgba(168,85,247,.25);color:var(--text-muted);
   display:flex;align-items:center;justify-content:center;font-size:1rem;
-  cursor:pointer;transition:all .2s;
-  z-index:6000;background:#0a0a0f;
+  cursor:pointer;transition:all .2s;z-index:10;
+  background:rgba(10,10,15,.95);flex-shrink:0;
 }
-.ix-modal-close:hover{background:rgba(168,85,247,.1);color:var(--p1)}
+.ix-modal-close:hover{background:rgba(168,85,247,.2);color:var(--p1);border-color:var(--p1)}
 .ix-modal-title{
   font-family:'Orbitron',monospace;font-weight:900;font-size:1.1rem;
   color:#fff;margin-bottom:1.5rem;letter-spacing:.06em;
@@ -1967,6 +1969,7 @@ footer{
 <div class="ix-overlay" id="modalUser" onclick="if(event.target===this)closeModal('modalUser')">
   <div class="ix-modal">
     <button class="ix-modal-close" onclick="closeModal('modalUser')">✕</button>
+    <div class="ix-modal-body">
     <div class="ix-modal-title">MY <span>ACCOUNT</span></div>
 
     <div class="user-profile" id="userProfile">
@@ -1994,12 +1997,15 @@ footer{
 
     <button class="ix-btn ix-btn-danger" style="width:100%" onclick="doLogout()">ออกจากระบบ</button>
   </div>
+  </div>
 </div>
 
 <!-- ── Modal: Topup ── -->
 <div class="ix-overlay" id="modalTopup" onclick="if(event.target===this)closeModal('modalTopup')">
   <div class="ix-modal">
     <button class="ix-modal-close" onclick="closeModal('modalTopup')">✕</button>
+    <div class="ix-modal-body">
+    <div class="ix-modal-title">เติม <span>POINT</span></div>
     <div class="ix-modal-title">เติม <span>POINT</span></div>
     <div style="font-size:.82rem;color:var(--text-muted);margin-bottom:1.2rem">1 บาท = 1 Point · เลือกจำนวนที่ต้องการ</div>
 
@@ -2015,13 +2021,14 @@ footer{
     <div style="margin-top:.8rem;font-size:.72rem;color:var(--text-dim);text-align:center">
       หลังเลือกแพ็กเกจ — โอนเงินแล้วแจ้ง Discord เพื่อรับ Point
     </div>
+    </div>
   </div>
 </div>
-
 <!-- ── Modal: Shop ── -->
 <div class="ix-overlay" id="modalShop" onclick="if(event.target===this)closeModal('modalShop')">
   <div class="ix-modal" style="max-width:500px">
     <button class="ix-modal-close" onclick="closeModal('modalShop')">✕</button>
+    <div class="ix-modal-body">
     <div class="ix-modal-title">🛒 <span>SHOP</span></div>
 
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
@@ -2042,9 +2049,9 @@ footer{
     <button class="ix-btn ix-btn-primary" style="width:100%;margin-top:1rem" id="buyBtn" onclick="doBuy()">
       ยืนยันซื้อสินค้า
     </button>
+    </div>
   </div>
 </div>
-
 <script>
 /* ══════════════════════════════════════════════════
    LOADER
