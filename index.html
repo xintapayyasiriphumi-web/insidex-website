@@ -1002,18 +1002,18 @@ footer{
 .ix-modal{
   width:100%;max-width:440px;max-height:90vh;overflow-y:auto;
   background:#0a0a0f;border:1px solid rgba(168,85,247,.3);border-radius:16px;
-  padding:2rem;position:relative;
+  padding:2.5rem 2rem 2rem;position:relative;
   transform:translateY(20px);transition:transform .3s var(--ease-out);
 }
 .ix-overlay.open .ix-modal{transform:translateY(0)}
 .ix-modal-close{
-  position:absolute;top:1rem;right:1rem;
+  position:fixed;top:auto;right:auto;
+  margin-top:-1.5rem;margin-left:calc(100% - 2.5rem);
   width:28px;height:28px;border-radius:50%;
   border:1px solid rgba(168,85,247,.25);color:var(--text-muted);
   display:flex;align-items:center;justify-content:center;font-size:1rem;
   cursor:pointer;transition:all .2s;
-  z-index:10;
-  background:#0a0a0f;
+  z-index:6000;background:#0a0a0f;
 }
 .ix-modal-close:hover{background:rgba(168,85,247,.1);color:var(--p1)}
 .ix-modal-title{
