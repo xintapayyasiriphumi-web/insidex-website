@@ -1134,6 +1134,11 @@ footer{
   .ix-modal{padding:1.5rem}
 }
 
+.ix-overlay button {
+  cursor: pointer !important;
+  pointer-events: all !important;
+}
+
 </style>
 </head>
 <body>
@@ -2009,7 +2014,6 @@ footer{
     <button onclick="closeModal('modalTopup')" style="position:absolute;top:.8rem;right:.8rem;width:32px;height:32px;border-radius:50%;border:1px solid rgba(168,85,247,.25);background:rgba(10,10,15,.95);color:#fff;font-size:1rem;cursor:pointer;z-index:99999;display:flex;align-items:center;justify-content:center;pointer-events:all">✕</button>
     <div class="ix-modal-body">
     <div class="ix-modal-title">เติม <span>POINT</span></div>
-    <div class="ix-modal-title">เติม <span>POINT</span></div>
     <div style="font-size:.82rem;color:var(--text-muted);margin-bottom:1.2rem">1 บาท = 1 Point · เลือกจำนวนที่ต้องการ</div>
 
     <div class="pkg-grid" id="pkgGrid">
@@ -2567,16 +2571,8 @@ function copyKey() {
   navigator.clipboard.writeText(key).then(() => toast('Copy Key แล้ว!', 'success'));
 }
 
-/* ── Wire up modals to buttons ── */
 document.addEventListener('DOMContentLoaded', () => {
   checkLogin();
-  // Override topup/shop buttons ใน user panel
-  document.querySelectorAll('[onclick*="modalTopup"]').forEach(el => {
-    el.addEventListener('click', () => { closeModalUser(); openTopup(); });
-  });
-  document.querySelectorAll('[onclick*="modalShop"]').forEach(el => {
-    el.addEventListener('click', () => { closeModalUser(); openShop(); });
-  });
 });
 
 
