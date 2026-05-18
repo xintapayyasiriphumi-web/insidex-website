@@ -957,6 +957,151 @@ footer{
 }
 
 </style>
+
+/* ══════════════════════════════════════════════════
+   INSIDEX SHOP SYSTEM
+══════════════════════════════════════════════════ */
+:root { --api: 'https://cozy-healing-production-ee02.up.railway.app'; }
+
+/* ── USER BAR ── */
+.user-bar{
+  display:flex;align-items:center;gap:.6rem;
+  background:rgba(168,85,247,.08);border:1px solid rgba(168,85,247,.2);
+  border-radius:999px;padding:.3rem .7rem .3rem .4rem;cursor:pointer;
+  transition:all .2s;
+}
+.user-bar:hover{background:rgba(168,85,247,.15);border-color:rgba(168,85,247,.45)}
+.user-avatar{
+  width:26px;height:26px;border-radius:50%;
+  border:1px solid rgba(168,85,247,.4);object-fit:cover;
+}
+.user-avatar-placeholder{
+  width:26px;height:26px;border-radius:50%;
+  background:linear-gradient(135deg,var(--p3),var(--b1));
+  display:flex;align-items:center;justify-content:center;
+  font-family:'Orbitron',monospace;font-size:.55rem;color:#fff;font-weight:700;
+}
+.user-name{
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;
+  letter-spacing:.06em;color:var(--text);max-width:90px;
+  overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
+}
+.user-points-badge{
+  font-family:'Orbitron',monospace;font-size:.6rem;font-weight:700;
+  color:var(--p1);background:rgba(168,85,247,.1);
+  border:1px solid rgba(168,85,247,.25);border-radius:999px;
+  padding:.15rem .5rem;white-space:nowrap;
+}
+
+/* ── MODAL OVERLAY ── */
+.ix-overlay{
+  position:fixed;inset:0;z-index:5000;
+  background:rgba(0,0,0,.75);backdrop-filter:blur(8px);
+  display:flex;align-items:center;justify-content:center;padding:1rem;
+  opacity:0;pointer-events:none;transition:opacity .3s;
+}
+.ix-overlay.open{opacity:1;pointer-events:all}
+.ix-modal{
+  width:100%;max-width:440px;max-height:90vh;overflow-y:auto;
+  background:#0a0a0f;border:1px solid rgba(168,85,247,.3);border-radius:16px;
+  padding:2rem;position:relative;
+  transform:translateY(20px);transition:transform .3s var(--ease-out);
+}
+.ix-overlay.open .ix-modal{transform:translateY(0)}
+.ix-modal-close{
+  position:absolute;top:1rem;right:1rem;
+  width:28px;height:28px;border-radius:50%;
+  border:1px solid rgba(168,85,247,.25);color:var(--text-muted);
+  display:flex;align-items:center;justify-content:center;font-size:1rem;
+  cursor:pointer;transition:all .2s;
+}
+.ix-modal-close:hover{background:rgba(168,85,247,.1);color:var(--p1)}
+.ix-modal-title{
+  font-family:'Orbitron',monospace;font-weight:900;font-size:1.1rem;
+  color:#fff;margin-bottom:1.5rem;letter-spacing:.06em;
+}
+.ix-modal-title span{color:var(--p1)}
+
+/* ── USER DROPDOWN MODAL ── */
+.user-profile{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(168,85,247,.1)}
+.user-profile-avatar{width:52px;height:52px;border-radius:50%;border:2px solid rgba(168,85,247,.4);object-fit:cover}
+.user-profile-name{font-family:'Orbitron',monospace;font-weight:700;font-size:.9rem;color:#fff}
+.user-profile-id{font-size:.72rem;color:var(--text-dim);margin-top:.2rem;font-family:'Space Mono',monospace}
+.points-display{
+  text-align:center;padding:1.2rem;border:1px solid rgba(168,85,247,.2);
+  border-radius:10px;background:rgba(168,85,247,.05);margin-bottom:1.5rem;
+}
+.points-num{
+  font-family:'Orbitron',monospace;font-weight:900;font-size:2.2rem;
+  background:linear-gradient(135deg,#fff,var(--p1));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.points-label{font-family:'Rajdhani',sans-serif;font-size:.7rem;letter-spacing:.25em;color:var(--text-dim);text-transform:uppercase;margin-top:.2rem}
+.ix-btn-row{display:flex;gap:.6rem;flex-wrap:wrap}
+.ix-btn{
+  flex:1;min-width:120px;padding:.65rem 1rem;border-radius:6px;
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;
+  letter-spacing:.1em;text-transform:uppercase;text-align:center;
+  cursor:pointer;transition:all .2s;border:none;
+}
+.ix-btn-primary{background:linear-gradient(135deg,var(--p3),var(--p2));color:#fff}
+.ix-btn-primary:hover{filter:brightness(1.15);transform:translateY(-1px)}
+.ix-btn-ghost{background:transparent;color:var(--p1);border:1px solid rgba(168,85,247,.3)}
+.ix-btn-ghost:hover{background:rgba(168,85,247,.1)}
+.ix-btn-danger{background:transparent;color:#f87171;border:1px solid rgba(248,113,113,.25)}
+.ix-btn-danger:hover{background:rgba(248,113,113,.08)}
+.ix-history-item{
+  display:flex;justify-content:space-between;align-items:center;
+  padding:.7rem 0;border-bottom:1px solid rgba(168,85,247,.07);font-size:.82rem;
+}
+.ix-history-item:last-child{border-bottom:none}
+.ix-history-type{color:var(--text-muted)}
+.ix-history-amount{font-family:'Orbitron',monospace;font-weight:700;font-size:.8rem}
+.ix-history-amount.plus{color:#34d399}
+.ix-history-amount.minus{color:#f87171}
+
+/* ── TOPUP MODAL ── */
+.pkg-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:.6rem;margin-bottom:1.5rem}
+.pkg-card{
+  padding:.8rem .5rem;border:1px solid rgba(168,85,247,.2);border-radius:8px;
+  text-align:center;cursor:pointer;transition:all .2s;
+  background:rgba(168,85,247,.04);
+}
+.pkg-card:hover,.pkg-card.selected{
+  border-color:var(--p1);background:rgba(168,85,247,.12);
+  transform:translateY(-2px);
+}
+.pkg-amount{font-family:'Orbitron',monospace;font-weight:900;font-size:1rem;color:#fff}
+.pkg-pts{font-family:'Rajdhani',sans-serif;font-size:.68rem;letter-spacing:.15em;color:var(--p1);text-transform:uppercase;margin-top:.2rem}
+
+/* ── SHOP MODAL ── */
+.shop-product-card{
+  display:flex;align-items:center;gap:1rem;
+  padding:1rem;border:1px solid rgba(168,85,247,.15);border-radius:10px;
+  background:rgba(168,85,247,.04);margin-bottom:.75rem;
+  cursor:pointer;transition:all .2s;
+}
+.shop-product-card:hover,.shop-product-card.selected{
+  border-color:rgba(168,85,247,.5);background:rgba(168,85,247,.1);
+}
+.shop-product-icon{font-size:1.6rem;flex-shrink:0}
+.shop-product-name{font-family:'Orbitron',monospace;font-weight:700;font-size:.85rem;color:#fff}
+.shop-product-desc{font-size:.75rem;color:var(--text-muted);margin-top:.2rem}
+.shop-product-meta{display:flex;gap:.5rem;align-items:center;margin-top:.4rem}
+.shop-product-price{font-family:'Orbitron',monospace;font-size:.78rem;color:var(--p1);font-weight:700}
+.shop-product-stock{font-size:.65rem;color:var(--text-dim);font-family:'Space Mono',monospace}
+.key-result{
+  margin-top:1rem;padding:1rem;border:1px solid rgba(52,211,153,.3);border-radius:8px;
+  background:rgba(52,211,153,.05);
+}
+.key-result-label{font-size:.65rem;letter-spacing:.25em;text-transform:uppercase;color:rgba(52,211,153,.7);font-family:'Space Mono',monospace;margin-bottom:.4rem}
+.key-result-value{
+  font-family:'Space Mono',monospace;font-size:.95rem;color:#34d399;
+  word-break:break-all;font-weight:700;
+}
+.key-copy-btn{
+  margin-top:.6rem;font-size:.7
+
 </head>
 <body>
 
@@ -993,16 +1138,20 @@ footer{
     <li><a href="#faq" class="nav-link">FAQ</a></li>
     <li><a href="#discord" class="nav-link">ชุมชน</a></li>
   </ul>
-  <div class="nav-actions">
-    <a href="https://insidex.rexzy.xyz/" target="_blank" class="nav-btn nav-btn-ghost">🛒 ร้านค้า</a>
-    <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="nav-btn nav-btn-disc">
-      <svg width="14" height="14" viewBox="0 0 127.14 96.36" fill="#fff" style="display:inline;margin-right:4px"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
-      Discord
-    </a>
+  <div class="nav-actions" id="navActions">
+  <a href="https://insidex.rexzy.xyz/" target="_blank" class="nav-btn nav-btn-ghost">🛒 ร้านค้า</a>
+  <!-- Login btn (แสดงเมื่อยังไม่ login) -->
+  <a href="https://cozy-healing-production-ee02.up.railway.app/auth/discord" class="nav-btn nav-btn-disc" id="loginBtn">
+    <svg width="14" height="14" viewBox="0 0 127.14 96.36" fill="#fff" style="display:inline;margin-right:4px"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+    Login Discord
+  </a>
+  <!-- User bar (แสดงเมื่อ login แล้ว) -->
+  <div class="user-bar" id="userBar" style="display:none" onclick="openModalUser()">
+    <img class="user-avatar" id="navAvatar" src="" alt="">
+    <span class="user-name" id="navUsername">—</span>
+    <span class="user-points-badge" id="navPoints">0 pts</span>
   </div>
-  <button class="nav-ham" id="navHam" onclick="toggleMob()" aria-label="Menu">
-    <span></span><span></span><span></span>
-  </button>
+</div>
 </nav>
 
 <!-- Mobile Menu -->
@@ -2013,6 +2162,372 @@ function faqToggle(item) {
   });
   document.addEventListener('mouseleave', stop);
 })();
+
+/* ══════════════════════════════════════════════════
+   INSIDEX SHOP SYSTEM
+══════════════════════════════════════════════════ */
+const API = 'https://cozy-healing-production-ee02.up.railway.app';
+let currentUser = null;
+let selectedPkg = null;
+let selectedProduct = null;
+
+/* ── Toast ── */
+function toast(msg, type = 'info', ms = 3000) {
+  const t = document.getElementById('ixToast');
+  t.textContent = msg;
+  t.className = `ix-toast ${type} show`;
+  setTimeout(() => t.classList.remove('show'), ms);
+}
+
+/* ── Modal helpers ── */
+function openModal(id) {
+  document.getElementById(id).classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(id, e) {
+  if (e && e.target !== document.getElementById(id)) return;
+  document.getElementById(id).classList.remove('open');
+  document.body.style.overflow = '';
+}
+function openModalUser() {
+  openModal('modalUser');
+  loadTxHistory();
+}
+function closeModalUser(e) {
+  if (e && e.target !== document.getElementById('modalUser')) return;
+  document.getElementById('modalUser').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+/* ── Check login on load ── */
+async function checkLogin() {
+  try {
+    const res = await fetch(`${API}/auth/me`, { credentials: 'include' });
+    const data = await res.json();
+    if (data.loggedIn) {
+      currentUser = data.user;
+      updateNavUser(data.user);
+      // ถ้า URL มี ?login=success แสดง toast
+      if (location.search.includes('login=success')) {
+        toast(`ยินดีต้อนรับ ${data.user.username}! 🎉`, 'success');
+        history.replaceState({}, '', location.pathname);
+      }
+    }
+  } catch(e) {}
+}
+
+/* ── Update navbar ── */
+function updateNavUser(user) {
+  document.getElementById('loginBtn').style.display = 'none';
+  const bar = document.getElementById('userBar');
+  bar.style.display = 'flex';
+  const avatar = document.getElementById('navAvatar');
+  avatar.src = user.avatar;
+  avatar.onerror = () => { avatar.style.display='none'; };
+  document.getElementById('navUsername').textContent = user.username;
+  document.getElementById('navPoints').textContent = user.points + ' pts';
+  // profile modal
+  document.getElementById('profileName').textContent = user.username;
+  document.getElementById('profileId').textContent = 'Discord: ' + user.discord_id;
+  document.getElementById('profilePoints').textContent = user.points;
+  const pa = document.getElementById('profileAvatar');
+  if (user.avatar) {
+    const img = document.createElement('img');
+    img.src = user.avatar;
+    img.className = 'user-profile-avatar';
+    pa.replaceWith(img);
+  } else {
+    pa.textContent = user.username.slice(0,2).toUpperCase();
+  }
+}
+
+/* ── Refresh points ── */
+async function refreshPoints() {
+  try {
+    const res = await fetch(`${API}/points/balance`, { credentials: 'include' });
+    const data = await res.json();
+    if (data.points !== undefined) {
+      if (currentUser) currentUser.points = data.points;
+      document.getElementById('navPoints').textContent = data.points + ' pts';
+      document.getElementById('profilePoints').textContent = data.points;
+      document.getElementById('shopPoints').textContent = data.points + ' pts';
+    }
+  } catch(e) {}
+}
+
+/* ── TX History ── */
+async function loadTxHistory() {
+  try {
+    const res = await fetch(`${API}/points/history`, { credentials: 'include' });
+    const data = await res.json();
+    const el = document.getElementById('txHistory');
+    if (!data.length) {
+      el.innerHTML = '<div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:.5rem">ยังไม่มีรายการ</div>';
+      return;
+    }
+    el.innerHTML = data.slice(0,5).map(tx => `
+      <div class="ix-history-item">
+        <span class="ix-history-type">${tx.note || tx.type}</span>
+        <span class="ix-history-amount ${tx.amount > 0 ? 'plus' : 'minus'}">
+          ${tx.amount > 0 ? '+' : ''}${tx.amount} pts
+        </span>
+      </div>
+    `).join('');
+  } catch(e) {}
+}
+
+/* ── Logout ── */
+async function doLogout() {
+  await fetch(`${API}/auth/logout`, { method: 'POST', credentials: 'include' });
+  currentUser = null;
+  document.getElementById('loginBtn').style.display = '';
+  document.getElementById('userBar').style.display = 'none';
+  document.getElementById('modalUser').classList.remove('open');
+  document.body.style.overflow = '';
+  toast('ออกจากระบบแล้ว', 'info');
+}
+
+/* ══ TOPUP ══ */
+async function openTopup() {
+  openModal('modalTopup');
+  selectedPkg = null;
+  document.getElementById('topupInfo').style.display = 'none';
+  // Load packages
+  try {
+    const res = await fetch(`${API}/points/packages`);
+    const pkgs = await res.json();
+    document.getElementById('pkgGrid').innerHTML = pkgs.map(p => `
+      <div class="pkg-card" onclick="selectPkg(this,${p.amount},${p.points})">
+        <div class="pkg-amount">฿${p.amount}</div>
+        <div class="pkg-pts">${p.points} pts</div>
+      </div>
+    `).join('');
+  } catch(e) {
+    document.getElementById('pkgGrid').innerHTML = '<div style="color:var(--text-dim);font-size:.8rem;grid-column:1/-1;text-align:center">โหลดไม่สำเร็จ</div>';
+  }
+}
+function selectPkg(el, amount, points) {
+  document.querySelectorAll('.pkg-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedPkg = { amount, points };
+  const info = document.getElementById('topupInfo');
+  info.style.display = 'block';
+  info.innerHTML = `
+    เติม <b style="color:var(--p1)">฿${amount}</b> รับ <b style="color:var(--p1)">${points} Points</b><br>
+    โอนเงินผ่าน PromptPay หรือ TrueMoney แล้วแคปสลิปส่งใน 
+    <a href="https://discord.gg/7thT8xaRpw" target="_blank" style="color:var(--p1)">Discord</a> 
+    ทีมงานจะเติม Point ให้ทันที
+  `;
+}
+async function doTopup() {
+  if (!currentUser) { toast('กรุณา Login ก่อน', 'error'); return; }
+  if (!selectedPkg) { toast('กรุณาเลือกแพ็กเกจ', 'error'); return; }
+  const btn = document.getElementById('topupBtn');
+  btn.innerHTML = '<span class="ix-spin"></span> กำลังส่ง...';
+  btn.disabled = true;
+  try {
+    const res = await fetch(`${API}/points/topup/request`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ amount: selectedPkg.amount })
+    });
+    const data = await res.json();
+    const info = document.getElementById('topupInfo');
+    info.style.display = 'block';
+    info.innerHTML = `
+      <b style="color:#34d399">✓ สร้างคำขอสำเร็จ!</b><br>
+      Ref: <b style="color:var(--p1);font-family:'Space Mono',monospace">${data.ref}</b><br><br>
+      โอน <b>฿${selectedPkg.amount}</b> แล้วแจ้ง Ref ใน 
+      <a href="https://discord.gg/7thT8xaRpw" target="_blank" style="color:var(--p1)">Discord</a>
+      ทีมงานจะเติม <b style="color:var(--p1)">${selectedPkg.points} Points</b> ให้ทันที
+    `;
+    toast(`สร้าง Ref สำเร็จ! แจ้ง Discord ได้เลย`, 'success');
+  } catch(e) {
+    toast('เกิดข้อผิดพลาด', 'error');
+  }
+  btn.innerHTML = 'ยืนยันเติม Point';
+  btn.disabled = false;
+}
+
+/* ══ SHOP ══ */
+async function openShop() {
+  openModal('modalShop');
+  selectedProduct = null;
+  document.getElementById('keyResult').style.display = 'none';
+  document.getElementById('buyBtn').textContent = 'ยืนยันซื้อสินค้า';
+  await refreshPoints();
+  // Load products
+  try {
+    const res = await fetch(`${API}/products`);
+    const products = await res.json();
+    const icons = { setting:'⚙️', reshade:'🎨', mode:'🎮', windows:'🖥️' };
+    document.getElementById('productList').innerHTML = products.map(p => `
+      <div class="shop-product-card" onclick="selectProduct(this,${p.id},'${p.name.replace(/'/g,"\\'")}',${p.price})">
+        <div class="shop-product-icon">${icons[p.category] || '📦'}</div>
+        <div style="flex:1">
+          <div class="shop-product-name">${p.name}</div>
+          <div class="shop-product-desc">${p.description || ''}</div>
+          <div class="shop-product-meta">
+            <span class="shop-product-price">${p.price} pts</span>
+            <span class="shop-product-stock">stock: ${p.stock_count}</span>
+          </div>
+        </div>
+      </div>
+    `).join('');
+  } catch(e) {
+    document.getElementById('productList').innerHTML = '<div style="color:var(--text-dim);text-align:center;padding:1rem">โหลดไม่สำเร็จ</div>';
+  }
+}
+function selectProduct(el, id, name, price) {
+  document.querySelectorAll('.shop-product-card').forEach(c => c.classList.remove('selected'));
+  el.classList.add('selected');
+  selectedProduct = { id, name, price };
+  document.getElementById('keyResult').style.display = 'none';
+  document.getElementById('buyBtn').textContent = `ซื้อ ${name} — ${price} pts`;
+}
+async function doBuy() {
+  if (!currentUser) { toast('กรุณา Login ก่อน', 'error'); return; }
+  if (!selectedProduct) { toast('กรุณาเลือกสินค้า', 'error'); return; }
+  const btn = document.getElementById('buyBtn');
+  btn.innerHTML = '<span class="ix-spin"></span> กำลังซื้อ...';
+  btn.disabled = true;
+  try {
+    const res = await fetch(`${API}/shop/buy`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ product_id: selectedProduct.id })
+    });
+    const data = await res.json();
+    if (data.success) {
+      document.getElementById('keyValue').textContent = data.key;
+      document.getElementById('keyResult').style.display = 'block';
+      toast(`ซื้อสำเร็จ! เหลือ ${data.balance_remaining} pts`, 'success');
+      await refreshPoints();
+      btn.textContent = 'ซื้อสำเร็จ ✓';
+    } else {
+      toast(data.error || 'เกิดข้อผิดพลาด', 'error');
+      btn.textContent = `ซื้อ ${selectedProduct.name} — ${selectedProduct.price} pts`;
+      btn.disabled = false;
+    }
+  } catch(e) {
+    toast('เกิดข้อผิดพลาด', 'error');
+    btn.textContent = `ซื้อ ${selectedProduct.name} — ${selectedProduct.price} pts`;
+    btn.disabled = false;
+  }
+}
+function copyKey() {
+  const key = document.getElementById('keyValue').textContent;
+  navigator.clipboard.writeText(key).then(() => toast('Copy Key แล้ว!', 'success'));
+}
+
+/* ── Wire up modals to buttons ── */
+document.addEventListener('DOMContentLoaded', () => {
+  checkLogin();
+  // Override topup/shop buttons ใน user panel
+  document.querySelectorAll('[onclick*="modalTopup"]').forEach(el => {
+    el.addEventListener('click', () => { closeModalUser(); openTopup(); });
+  });
+  document.querySelectorAll('[onclick*="modalShop"]').forEach(el => {
+    el.addEventListener('click', () => { closeModalUser(); openShop(); });
+  });
+});
+
+// Patch openModal to load data
+const _openModal = openModal;
+window.openModal = function(id) {
+  _openModal(id);
+  if (id === 'modalTopup') openTopup();
+  if (id === 'modalShop') openShop();
+};
+
 </script>
+<!-- ══ SHOP SYSTEM HTML ══ -->
+
+<!-- Toast -->
+<div class="ix-toast" id="ixToast"></div>
+
+<!-- ── Modal: User Panel ── -->
+<div class="ix-overlay" id="modalUser" onclick="closeModalUser(event)">
+  <div class="ix-modal">
+    <button class="ix-modal-close" onclick="document.getElementById('modalUser').classList.remove('open')">✕</button>
+    <div class="ix-modal-title">MY <span>ACCOUNT</span></div>
+
+    <div class="user-profile" id="userProfile">
+      <div class="user-avatar-placeholder" id="profileAvatar">?</div>
+      <div>
+        <div class="user-profile-name" id="profileName">—</div>
+        <div class="user-profile-id" id="profileId">—</div>
+      </div>
+    </div>
+
+    <div class="points-display">
+      <div class="points-num" id="profilePoints">0</div>
+      <div class="points-label">Points คงเหลือ</div>
+    </div>
+
+    <div class="ix-btn-row" style="margin-bottom:1rem">
+      <button class="ix-btn ix-btn-primary" onclick="openModal('modalTopup');closeModalUser()">💰 เติม Point</button>
+      <button class="ix-btn ix-btn-ghost" onclick="openModal('modalShop');closeModalUser()">🛒 ซื้อสินค้า</button>
+    </div>
+
+    <div style="margin-bottom:.75rem">
+      <div style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.6rem">ประวัติล่าสุด</div>
+      <div id="txHistory"><div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:.5rem">กำลังโหลด...</div></div>
+    </div>
+
+    <button class="ix-btn ix-btn-danger" style="width:100%" onclick="doLogout()">ออกจากระบบ</button>
+  </div>
+</div>
+
+<!-- ── Modal: Topup ── -->
+<div class="ix-overlay" id="modalTopup" onclick="closeModal('modalTopup',event)">
+  <div class="ix-modal">
+    <button class="ix-modal-close" onclick="document.getElementById('modalTopup').classList.remove('open')">✕</button>
+    <div class="ix-modal-title">เติม <span>POINT</span></div>
+    <div style="font-size:.82rem;color:var(--text-muted);margin-bottom:1.2rem">1 บาท = 1 Point · เลือกจำนวนที่ต้องการ</div>
+
+    <div class="pkg-grid" id="pkgGrid">
+      <div style="color:var(--text-dim);font-size:.8rem;grid-column:1/-1;text-align:center;padding:1rem">กำลังโหลด...</div>
+    </div>
+
+    <div id="topupInfo" style="display:none;margin-bottom:1rem;padding:1rem;border:1px solid rgba(168,85,247,.2);border-radius:8px;background:rgba(168,85,247,.05);font-size:.82rem;color:var(--text-muted);line-height:1.7"></div>
+
+    <button class="ix-btn ix-btn-primary" style="width:100%" id="topupBtn" onclick="doTopup()">
+      ยืนยันเติม Point
+    </button>
+    <div style="margin-top:.8rem;font-size:.72rem;color:var(--text-dim);text-align:center">
+      หลังเลือกแพ็กเกจ — โอนเงินแล้วแจ้ง Discord เพื่อรับ Point
+    </div>
+  </div>
+</div>
+
+<!-- ── Modal: Shop ── -->
+<div class="ix-overlay" id="modalShop" onclick="closeModal('modalShop',event)">
+  <div class="ix-modal" style="max-width:500px">
+    <button class="ix-modal-close" onclick="document.getElementById('modalShop').classList.remove('open')">✕</button>
+    <div class="ix-modal-title">🛒 <span>SHOP</span></div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+      <div style="font-size:.82rem;color:var(--text-muted)">เลือกสินค้าที่ต้องการ</div>
+      <div style="font-family:'Orbitron',monospace;font-size:.78rem;color:var(--p1)" id="shopPoints">— pts</div>
+    </div>
+
+    <div id="productList">
+      <div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:2rem">กำลังโหลด...</div>
+    </div>
+
+    <div id="keyResult" style="display:none" class="key-result">
+      <div class="key-result-label">🔑 KEY ของคุณ</div>
+      <div class="key-result-value" id="keyValue">—</div>
+      <button class="key-copy-btn" onclick="copyKey()">📋 COPY KEY</button>
+    </div>
+
+    <button class="ix-btn ix-btn-primary" style="width:100%;margin-top:1rem" id="buyBtn" onclick="doBuy()">
+      ยืนยันซื้อสินค้า
+    </button>
+  </div>
+</div>
 </body>
 </html>
