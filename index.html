@@ -2315,22 +2315,37 @@ function closeModalUser(e) {
 
 /* ── Check login on load ── */
 async function checkLogin() {
-  try {
-    const res = await fetch(`${API}/auth/me`, {
-    credentials: 'include',
-    mode: 'cors',
-  });
-    const data = await res.json();
-    if (data.loggedIn) {
-      currentUser = data.user;
-      updateNavUser(data.user);
-      // ถ้า URL มี ?login=success แสดง toast
-      if (location.search.includes('login=success')) {
-        toast(`ยินดีต้อนรับ ${data.user.username}! 🎉`, 'success');
-        history.replaceState({}, '', location.pathname);
+  // เช็ค URL param ก่อน (หลัง Discord callback)
+  const params = new URLSearchParams(location.search);
+  const userParam = params.get('user');
+
+  if (userParam) {
+    try {
+      const user = JSON.parse(decodeURIComponent(userParam));
+      // บันทึกลง localStorage
+      localStorage.setItem('ix_user', JSON.stringify(user));
+      currentUser = user;
+      updateNavUser(user);
+      if (params.get('login') === 'success') {
+        toast(`ยินดีต้อนรับ ${user.username}! 🎉`, 'success');
       }
-    }
-  } catch(e) {}
+      history.replaceState({}, '', location.pathname);
+      return;
+    } catch(e) {}
+  }
+
+  // เช็ค localStorage (กลับมาหน้าเว็บครั้งถัดไป)
+  const saved = localStorage.getItem('ix_user');
+  if (saved) {
+    try {
+      const user = JSON.parse(saved);
+      currentUser = user;
+      updateNavUser(user);
+      // sync points จาก server
+      refreshPoints();
+      return;
+    } catch(e) {}
+  }
 }
 
 /* ── Update navbar ── */
@@ -2396,6 +2411,7 @@ async function loadTxHistory() {
 /* ── Logout ── */
 async function doLogout() {
   await fetch(`${API}/auth/logout`, { method: 'POST', credentials: 'include' });
+  localStorage.removeItem('ix_user');
   currentUser = null;
   document.getElementById('loginBtn').style.display = '';
   document.getElementById('userBar').style.display = 'none';
