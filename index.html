@@ -2375,14 +2375,16 @@ function updateNavUser(user) {
 
 /* ── Refresh points ── */
 async function refreshPoints() {
+  if (!currentUser) return;
   try {
-    const res = await fetch(`${API}/points/balance`, { credentials: 'include' });
-    const data = await res.json();
-    if (data.points !== undefined) {
-      if (currentUser) currentUser.points = data.points;
-      document.getElementById('navPoints').textContent = data.points + ' pts';
-      document.getElementById('profilePoints').textContent = data.points;
-      document.getElementById('shopPoints').textContent = data.points + ' pts';
+    const saved = localStorage.getItem('ix_user');
+    if (saved) {
+      const user = JSON.parse(saved);
+      document.getElementById('navPoints').textContent = user.points + ' pts';
+      const pp = document.getElementById('profilePoints');
+      if (pp) pp.textContent = user.points;
+      const sp = document.getElementById('shopPoints');
+      if (sp) sp.textContent = user.points + ' pts';
     }
   } catch(e) {}
 }
@@ -2489,7 +2491,11 @@ async function openShop() {
   selectedProduct = null;
   document.getElementById('keyResult').style.display = 'none';
   document.getElementById('buyBtn').textContent = 'ยืนยันซื้อสินค้า';
-  await refreshPoints();
+  
+  // แสดง points จาก currentUser โดยตรง
+  const sp = document.getElementById('shopPoints');
+  if (sp && currentUser) sp.textContent = currentUser.points + ' pts';
+  
   // Load products
   try {
     const res = await fetch(`${API}/products`);
@@ -2537,7 +2543,6 @@ async function doBuy() {
       document.getElementById('keyValue').textContent = data.key;
       document.getElementById('keyResult').style.display = 'block';
       toast(`ซื้อสำเร็จ! เหลือ ${data.balance_remaining} pts`, 'success');
-      await refreshPoints();
       btn.textContent = 'ซื้อสำเร็จ ✓';
     } else {
       toast(data.error || 'เกิดข้อผิดพลาด', 'error');
