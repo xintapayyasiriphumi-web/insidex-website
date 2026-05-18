@@ -956,8 +956,6 @@ footer{
   .goatx-section{padding:3rem 1.2rem 0}
 }
 
-</style>
-
 /* ══════════════════════════════════════════════════
    INSIDEX SHOP SYSTEM
 ══════════════════════════════════════════════════ */
@@ -1100,8 +1098,36 @@ footer{
   word-break:break-all;font-weight:700;
 }
 .key-copy-btn{
-  margin-top:.6rem;font-size:.7
+  margin-top:.6rem;font-size:.7rem;color:var(--p1);cursor:pointer;
+  font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.1em;
+  text-transform:uppercase;background:none;border:none;padding:0;
+  transition:color .2s;
+}
+.key-copy-btn:hover{color:#fff}
+.ix-toast{
+  position:fixed;bottom:5rem;right:2rem;z-index:9000;
+  padding:.7rem 1.2rem;border-radius:8px;font-family:'Rajdhani',sans-serif;
+  font-weight:700;font-size:.82rem;letter-spacing:.08em;
+  backdrop-filter:blur(20px);border:1px solid;
+  transform:translateX(120%);transition:transform .35s var(--ease-out);
+  pointer-events:none;
+}
+.ix-toast.show{transform:translateX(0)}
+.ix-toast.success{background:rgba(52,211,153,.12);border-color:rgba(52,211,153,.3);color:#34d399}
+.ix-toast.error{background:rgba(248,113,113,.12);border-color:rgba(248,113,113,.3);color:#f87171}
+.ix-toast.info{background:rgba(168,85,247,.12);border-color:rgba(168,85,247,.3);color:var(--p1)}
+.ix-spin{
+  width:18px;height:18px;border:2px solid rgba(168,85,247,.3);
+  border-top-color:var(--p1);border-radius:50%;
+  animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;
+}
+@keyframes spin{to{transform:rotate(360deg)}}
+@media(max-width:768px){
+  .pkg-grid{grid-template-columns:repeat(2,1fr)}
+  .ix-modal{padding:1.5rem}
+}
 
+</style>
 </head>
 <body>
 
@@ -1929,6 +1955,94 @@ footer{
   </a>
 </div>
 
+
+<!-- ══ SHOP SYSTEM HTML ══ -->
+
+<!-- Toast -->
+<div class="ix-toast" id="ixToast"></div>
+
+<!-- ── Modal: User Panel ── -->
+<div class="ix-overlay" id="modalUser" onclick="closeModalUser(event)">
+  <div class="ix-modal">
+    <button class="ix-modal-close" onclick="document.getElementById('modalUser').classList.remove('open')">✕</button>
+    <div class="ix-modal-title">MY <span>ACCOUNT</span></div>
+
+    <div class="user-profile" id="userProfile">
+      <div class="user-avatar-placeholder" id="profileAvatar">?</div>
+      <div>
+        <div class="user-profile-name" id="profileName">—</div>
+        <div class="user-profile-id" id="profileId">—</div>
+      </div>
+    </div>
+
+    <div class="points-display">
+      <div class="points-num" id="profilePoints">0</div>
+      <div class="points-label">Points คงเหลือ</div>
+    </div>
+
+    <div class="ix-btn-row" style="margin-bottom:1rem">
+      <button class="ix-btn ix-btn-primary" onclick="openModal('modalTopup');closeModalUser()">💰 เติม Point</button>
+      <button class="ix-btn ix-btn-ghost" onclick="openModal('modalShop');closeModalUser()">🛒 ซื้อสินค้า</button>
+    </div>
+
+    <div style="margin-bottom:.75rem">
+      <div style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.6rem">ประวัติล่าสุด</div>
+      <div id="txHistory"><div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:.5rem">กำลังโหลด...</div></div>
+    </div>
+
+    <button class="ix-btn ix-btn-danger" style="width:100%" onclick="doLogout()">ออกจากระบบ</button>
+  </div>
+</div>
+
+<!-- ── Modal: Topup ── -->
+<div class="ix-overlay" id="modalTopup" onclick="closeModal('modalTopup',event)">
+  <div class="ix-modal">
+    <button class="ix-modal-close" onclick="document.getElementById('modalTopup').classList.remove('open')">✕</button>
+    <div class="ix-modal-title">เติม <span>POINT</span></div>
+    <div style="font-size:.82rem;color:var(--text-muted);margin-bottom:1.2rem">1 บาท = 1 Point · เลือกจำนวนที่ต้องการ</div>
+
+    <div class="pkg-grid" id="pkgGrid">
+      <div style="color:var(--text-dim);font-size:.8rem;grid-column:1/-1;text-align:center;padding:1rem">กำลังโหลด...</div>
+    </div>
+
+    <div id="topupInfo" style="display:none;margin-bottom:1rem;padding:1rem;border:1px solid rgba(168,85,247,.2);border-radius:8px;background:rgba(168,85,247,.05);font-size:.82rem;color:var(--text-muted);line-height:1.7"></div>
+
+    <button class="ix-btn ix-btn-primary" style="width:100%" id="topupBtn" onclick="doTopup()">
+      ยืนยันเติม Point
+    </button>
+    <div style="margin-top:.8rem;font-size:.72rem;color:var(--text-dim);text-align:center">
+      หลังเลือกแพ็กเกจ — โอนเงินแล้วแจ้ง Discord เพื่อรับ Point
+    </div>
+  </div>
+</div>
+
+<!-- ── Modal: Shop ── -->
+<div class="ix-overlay" id="modalShop" onclick="closeModal('modalShop',event)">
+  <div class="ix-modal" style="max-width:500px">
+    <button class="ix-modal-close" onclick="document.getElementById('modalShop').classList.remove('open')">✕</button>
+    <div class="ix-modal-title">🛒 <span>SHOP</span></div>
+
+    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
+      <div style="font-size:.82rem;color:var(--text-muted)">เลือกสินค้าที่ต้องการ</div>
+      <div style="font-family:'Orbitron',monospace;font-size:.78rem;color:var(--p1)" id="shopPoints">— pts</div>
+    </div>
+
+    <div id="productList">
+      <div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:2rem">กำลังโหลด...</div>
+    </div>
+
+    <div id="keyResult" style="display:none" class="key-result">
+      <div class="key-result-label">🔑 KEY ของคุณ</div>
+      <div class="key-result-value" id="keyValue">—</div>
+      <button class="key-copy-btn" onclick="copyKey()">📋 COPY KEY</button>
+    </div>
+
+    <button class="ix-btn ix-btn-primary" style="width:100%;margin-top:1rem" id="buyBtn" onclick="doBuy()">
+      ยืนยันซื้อสินค้า
+    </button>
+  </div>
+</div>
+
 <script>
 /* ══════════════════════════════════════════════════
    LOADER
@@ -2443,91 +2557,5 @@ window.openModal = function(id) {
 };
 
 </script>
-<!-- ══ SHOP SYSTEM HTML ══ -->
-
-<!-- Toast -->
-<div class="ix-toast" id="ixToast"></div>
-
-<!-- ── Modal: User Panel ── -->
-<div class="ix-overlay" id="modalUser" onclick="closeModalUser(event)">
-  <div class="ix-modal">
-    <button class="ix-modal-close" onclick="document.getElementById('modalUser').classList.remove('open')">✕</button>
-    <div class="ix-modal-title">MY <span>ACCOUNT</span></div>
-
-    <div class="user-profile" id="userProfile">
-      <div class="user-avatar-placeholder" id="profileAvatar">?</div>
-      <div>
-        <div class="user-profile-name" id="profileName">—</div>
-        <div class="user-profile-id" id="profileId">—</div>
-      </div>
-    </div>
-
-    <div class="points-display">
-      <div class="points-num" id="profilePoints">0</div>
-      <div class="points-label">Points คงเหลือ</div>
-    </div>
-
-    <div class="ix-btn-row" style="margin-bottom:1rem">
-      <button class="ix-btn ix-btn-primary" onclick="openModal('modalTopup');closeModalUser()">💰 เติม Point</button>
-      <button class="ix-btn ix-btn-ghost" onclick="openModal('modalShop');closeModalUser()">🛒 ซื้อสินค้า</button>
-    </div>
-
-    <div style="margin-bottom:.75rem">
-      <div style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.6rem">ประวัติล่าสุด</div>
-      <div id="txHistory"><div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:.5rem">กำลังโหลด...</div></div>
-    </div>
-
-    <button class="ix-btn ix-btn-danger" style="width:100%" onclick="doLogout()">ออกจากระบบ</button>
-  </div>
-</div>
-
-<!-- ── Modal: Topup ── -->
-<div class="ix-overlay" id="modalTopup" onclick="closeModal('modalTopup',event)">
-  <div class="ix-modal">
-    <button class="ix-modal-close" onclick="document.getElementById('modalTopup').classList.remove('open')">✕</button>
-    <div class="ix-modal-title">เติม <span>POINT</span></div>
-    <div style="font-size:.82rem;color:var(--text-muted);margin-bottom:1.2rem">1 บาท = 1 Point · เลือกจำนวนที่ต้องการ</div>
-
-    <div class="pkg-grid" id="pkgGrid">
-      <div style="color:var(--text-dim);font-size:.8rem;grid-column:1/-1;text-align:center;padding:1rem">กำลังโหลด...</div>
-    </div>
-
-    <div id="topupInfo" style="display:none;margin-bottom:1rem;padding:1rem;border:1px solid rgba(168,85,247,.2);border-radius:8px;background:rgba(168,85,247,.05);font-size:.82rem;color:var(--text-muted);line-height:1.7"></div>
-
-    <button class="ix-btn ix-btn-primary" style="width:100%" id="topupBtn" onclick="doTopup()">
-      ยืนยันเติม Point
-    </button>
-    <div style="margin-top:.8rem;font-size:.72rem;color:var(--text-dim);text-align:center">
-      หลังเลือกแพ็กเกจ — โอนเงินแล้วแจ้ง Discord เพื่อรับ Point
-    </div>
-  </div>
-</div>
-
-<!-- ── Modal: Shop ── -->
-<div class="ix-overlay" id="modalShop" onclick="closeModal('modalShop',event)">
-  <div class="ix-modal" style="max-width:500px">
-    <button class="ix-modal-close" onclick="document.getElementById('modalShop').classList.remove('open')">✕</button>
-    <div class="ix-modal-title">🛒 <span>SHOP</span></div>
-
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
-      <div style="font-size:.82rem;color:var(--text-muted)">เลือกสินค้าที่ต้องการ</div>
-      <div style="font-family:'Orbitron',monospace;font-size:.78rem;color:var(--p1)" id="shopPoints">— pts</div>
-    </div>
-
-    <div id="productList">
-      <div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:2rem">กำลังโหลด...</div>
-    </div>
-
-    <div id="keyResult" style="display:none" class="key-result">
-      <div class="key-result-label">🔑 KEY ของคุณ</div>
-      <div class="key-result-value" id="keyValue">—</div>
-      <button class="key-copy-btn" onclick="copyKey()">📋 COPY KEY</button>
-    </div>
-
-    <button class="ix-btn ix-btn-primary" style="width:100%;margin-top:1rem" id="buyBtn" onclick="doBuy()">
-      ยืนยันซื้อสินค้า
-    </button>
-  </div>
-</div>
 </body>
 </html>
