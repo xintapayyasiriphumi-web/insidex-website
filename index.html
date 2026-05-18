@@ -1981,8 +1981,8 @@ footer{
     </div>
 
     <div class="ix-btn-row" style="margin-bottom:1rem">
-      <button class="ix-btn ix-btn-primary" onclick="openModal('modalTopup');closeModalUser()">💰 เติม Point</button>
-      <button class="ix-btn ix-btn-ghost" onclick="openModal('modalShop');closeModalUser()">🛒 ซื้อสินค้า</button>
+      <button class="ix-btn ix-btn-primary" onclick="closeModalUser();openTopup()">💰 เติม Point</button>
+      <button class="ix-btn ix-btn-ghost" onclick="closeModalUser();openShop()">🛒 ซื้อสินค้า</button>
     </div>
 
     <div style="margin-bottom:.75rem">
@@ -2567,13 +2567,7 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
-// Patch openModal to load data
-const _openModal = openModal;
-window.openModal = function(id) {
-  _openModal(id);
-  if (id === 'modalTopup') openTopup();
-  if (id === 'modalShop') openShop();
-};
+
 
 </script>
 </body>
