@@ -1964,7 +1964,7 @@ footer{
 <!-- ── Modal: User Panel ── -->
 <div class="ix-overlay" id="modalUser" onclick="if(event.target===this)closeModal('modalUser')">
   <div class="ix-modal">
-    <button class="ix-modal-close" onclick="document.getElementById('modalUser').classList.remove('open')">✕</button>
+    <button class="ix-modal-close" onclick="closeModal('modalUser')">✕</button>
     <div class="ix-modal-title">MY <span>ACCOUNT</span></div>
 
     <div class="user-profile" id="userProfile">
@@ -1997,7 +1997,7 @@ footer{
 <!-- ── Modal: Topup ── -->
 <div class="ix-overlay" id="modalTopup" onclick="if(event.target===this)closeModal('modalTopup')">
   <div class="ix-modal">
-    <button class="ix-modal-close" onclick="document.getElementById('modalTopup').classList.remove('open')">✕</button>
+    <button class="ix-modal-close" onclick="closeModal('modalTopup')">✕</button>
     <div class="ix-modal-title">เติม <span>POINT</span></div>
     <div style="font-size:.82rem;color:var(--text-muted);margin-bottom:1.2rem">1 บาท = 1 Point · เลือกจำนวนที่ต้องการ</div>
 
@@ -2019,7 +2019,7 @@ footer{
 <!-- ── Modal: Shop ── -->
 <div class="ix-overlay" id="modalShop" onclick="if(event.target===this)closeModal('modalShop')">
   <div class="ix-modal" style="max-width:500px">
-    <button class="ix-modal-close" onclick="document.getElementById('modalShop').classList.remove('open')">✕</button>
+    <button class="ix-modal-close" onclick="closeModal('modalShop')">✕</button>
     <div class="ix-modal-title">🛒 <span>SHOP</span></div>
 
     <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
