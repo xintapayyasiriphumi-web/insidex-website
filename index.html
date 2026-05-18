@@ -1962,7 +1962,7 @@ footer{
 <div class="ix-toast" id="ixToast"></div>
 
 <!-- ── Modal: User Panel ── -->
-<div class="ix-overlay" id="modalUser" onclick="closeModalUser(event)">
+<div class="ix-overlay" id="modalUser" onclick="if(event.target===this)closeModal('modalUser')">
   <div class="ix-modal">
     <button class="ix-modal-close" onclick="document.getElementById('modalUser').classList.remove('open')">✕</button>
     <div class="ix-modal-title">MY <span>ACCOUNT</span></div>
@@ -1995,7 +1995,7 @@ footer{
 </div>
 
 <!-- ── Modal: Topup ── -->
-<div class="ix-overlay" id="modalTopup" onclick="closeModal('modalTopup',event)">
+<div class="ix-overlay" id="modalTopup" onclick="if(event.target===this)closeModal('modalTopup')">
   <div class="ix-modal">
     <button class="ix-modal-close" onclick="document.getElementById('modalTopup').classList.remove('open')">✕</button>
     <div class="ix-modal-title">เติม <span>POINT</span></div>
@@ -2017,7 +2017,7 @@ footer{
 </div>
 
 <!-- ── Modal: Shop ── -->
-<div class="ix-overlay" id="modalShop" onclick="closeModal('modalShop',event)">
+<div class="ix-overlay" id="modalShop" onclick="if(event.target===this)closeModal('modalShop')">
   <div class="ix-modal" style="max-width:500px">
     <button class="ix-modal-close" onclick="document.getElementById('modalShop').classList.remove('open')">✕</button>
     <div class="ix-modal-title">🛒 <span>SHOP</span></div>
@@ -2298,20 +2298,30 @@ function openModal(id) {
   document.getElementById(id).classList.add('open');
   document.body.style.overflow = 'hidden';
 }
-function closeModal(id, e) {
-  if (e && e.target !== document.getElementById(id)) return;
-  document.getElementById(id).classList.remove('open');
+
+function closeModal(id) {
+  const el = document.getElementById(id);
+  if (el) el.classList.remove('open');
   document.body.style.overflow = '';
 }
+
 function openModalUser() {
   openModal('modalUser');
   loadTxHistory();
 }
-function closeModalUser(e) {
-  if (e && e.target !== document.getElementById('modalUser')) return;
-  document.getElementById('modalUser').classList.remove('open');
-  document.body.style.overflow = '';
+
+function closeModalUser() {
+  closeModal('modalUser');
 }
+
+// ปิดด้วย ESC
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeModal('modalUser');
+    closeModal('modalTopup');
+    closeModal('modalShop');
+  }
+});
 
 /* ── Check login on load ── */
 async function checkLogin() {
@@ -2391,23 +2401,8 @@ async function refreshPoints() {
 
 /* ── TX History ── */
 async function loadTxHistory() {
-  try {
-    const res = await fetch(`${API}/points/history`, { credentials: 'include' });
-    const data = await res.json();
-    const el = document.getElementById('txHistory');
-    if (!data.length) {
-      el.innerHTML = '<div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:.5rem">ยังไม่มีรายการ</div>';
-      return;
-    }
-    el.innerHTML = data.slice(0,5).map(tx => `
-      <div class="ix-history-item">
-        <span class="ix-history-type">${tx.note || tx.type}</span>
-        <span class="ix-history-amount ${tx.amount > 0 ? 'plus' : 'minus'}">
-          ${tx.amount > 0 ? '+' : ''}${tx.amount} pts
-        </span>
-      </div>
-    `).join('');
-  } catch(e) {}
+  const el = document.getElementById('txHistory');
+  el.innerHTML = '<div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:.5rem">ยังไม่มีรายการ</div>';
 }
 
 /* ── Logout ── */
