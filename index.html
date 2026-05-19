@@ -1250,7 +1250,7 @@ footer{
   <div class="user-bar" id="userBar" style="display:none" onclick="openModalUser()">
     <img class="user-avatar" id="navAvatar" src="" alt="">
     <span class="user-name" id="navUsername">—</span>
-    <span class="user-points-badge">MEMBER</span>
+    <span class="user-points-badge" id="navBadge">MEMBER</span>
   </div>
 </div>
 </nav>
@@ -2459,6 +2459,9 @@ function updateNavUser(user) {
   avatar.src = user.avatar;
   avatar.onerror = () => { avatar.style.display='none'; };
   document.getElementById('navUsername').textContent = user.username;
+  const badge = document.getElementById('navBadge');
+  if (badge) badge.textContent = user.is_admin ? 'ADMIN' : 'MEMBER';
+  if (badge && user.is_admin) badge.style.color = '#ef4444';
 
   // profile modal
   document.getElementById('profileName').textContent = user.username;
