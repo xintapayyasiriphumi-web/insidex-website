@@ -2422,19 +2422,18 @@ async function checkLogin() {
   const userParam = params.get('user');
 
   if (userParam) {
-    try {
-      const user = JSON.parse(decodeURIComponent(userParam));
-      // บันทึกลง localStorage
-      localStorage.setItem('ix_user', JSON.stringify(user));
-      currentUser = user;
-      updateNavUser(user);
-      if (params.get('login') === 'success') {
-        toast(`ยินดีต้อนรับ ${user.username}! 🎉`, 'success');
-      }
-      history.replaceState({}, '', location.pathname);
-      return;
-    } catch(e) {}
-  }
+  try {
+    const user = JSON.parse(decodeURIComponent(userParam));
+    localStorage.setItem('ix_user', JSON.stringify(user));
+    currentUser = user;
+    setTimeout(() => updateNavUser(user), 100); // เพิ่ม setTimeout ตรงนี้ด้วย
+    if (params.get('login') === 'success') {
+      toast(`ยินดีต้อนรับ ${user.username}! 🎉`, 'success');
+    }
+    history.replaceState({}, '', location.pathname);
+    return;
+  } catch(e) {}
+}
 
   // เช็ค localStorage (กลับมาหน้าเว็บครั้งถัดไป)
   const saved = localStorage.getItem('ix_user');
@@ -2442,8 +2441,8 @@ async function checkLogin() {
     try {
       const user = JSON.parse(saved);
       currentUser = user;
-      updateNavUser(user);
-      // sync points จาก server
+      // รอให้ DOM โหลดเสร็จก่อน
+      setTimeout(() => updateNavUser(user), 100);
       refreshPoints();
       return;
     } catch(e) {}
