@@ -2492,19 +2492,26 @@ async function openShop() {
     const res = await fetch(`${API}/products`);
     const products = await res.json();
     const icons = { setting:'⚙️', reshade:'🎨', mode:'🎮', windows:'🖥️' };
-    document.getElementById('productList').innerHTML = products.map(p => `
-      <div class="shop-product-card" onclick="selectProduct(this,${p.id},'${p.name.replace(/'/g,"\\'")}',${p.price})">
-        <div class="shop-product-icon">${icons[p.category] || '📦'}</div>
-        <div style="flex:1">
-          <div class="shop-product-name">${p.name}</div>
-          <div class="shop-product-desc">${p.description || ''}</div>
-          <div class="shop-product-meta">
-            <span class="shop-product-price">฿${p.price}</span>
-            <span class="shop-product-stock">stock: ${p.stock_count}</span>
-          </div>
+    document.getElementById('productList').innerHTML = products.map(p => {
+      const outOfStock = p.stock_count <= 0;
+      return `
+        <div class="shop-product-card ${outOfStock ? 'out-of-stock' : ''}"
+          onclick="${outOfStock ? '' : `selectProduct(this,${p.id},'${p.name.replace(/'/g,"\\'")}',${p.price})`}"
+          style="${outOfStock ? 'opacity:.4;cursor:not-allowed;pointer-events:none;' : ''}">
+          <div class="shop-product-icon">${icons[p.category] || '📦'}</div>
+          <div style="flex:1">
+            <div class="shop-product-name">${p.name}</div>
+            <div class="shop-product-desc">${p.description || ''}</div>
+            <div class="shop-product-meta">
+              <span class="shop-product-price">฿${p.price}</span>
+              <span class="shop-product-stock" style="${outOfStock ? 'color:#f87171' : ''}">
+                ${outOfStock ? '❌ หมด stock' : `stock: ${p.stock_count}`}
+          </span>
         </div>
       </div>
-    `).join('');
+    </div>
+  `;
+}).join('');
   } catch(e) {
     document.getElementById('productList').innerHTML = '<div style="color:var(--text-dim);text-align:center;padding:1rem">โหลดไม่สำเร็จ</div>';
   }
