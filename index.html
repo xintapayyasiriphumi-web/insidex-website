@@ -2428,22 +2428,20 @@ function updateNavUser(user) {
   avatar.src = user.avatar;
   avatar.onerror = () => { avatar.style.display='none'; };
   document.getElementById('navUsername').textContent = user.username;
-  document.getElementById('navPoints').textContent = user.points + ' pts';
+
   // profile modal
   document.getElementById('profileName').textContent = user.username;
   document.getElementById('profileId').textContent = 'Discord: ' + user.discord_id;
-  document.getElementById('profilePoints').textContent = user.points;
   const pa = document.getElementById('profileAvatar');
   if (pa) {
-  if (user.avatar) {
-    pa.outerHTML = `<img id="profileAvatar" src="${user.avatar}" class="user-profile-avatar" alt="">`;
-  } else {
-    pa.textContent = user.username.slice(0,2).toUpperCase();
+    if (user.avatar) {
+      pa.outerHTML = `<img id="profileAvatar" src="${user.avatar}" class="user-profile-avatar" alt="">`;
+    } else {
+      pa.textContent = user.username.slice(0,2).toUpperCase();
+    }
   }
 }
-document.getElementById('profileName').textContent = user.username;
-document.getElementById('profileId').textContent = 'Discord: ' + user.discord_id;
-}
+
 
 /* ── Refresh points ── */
 async function refreshPoints() {
