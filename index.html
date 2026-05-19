@@ -1281,7 +1281,7 @@ footer{
 <div class="stats reveal">
   <div class="stats-inner">
     <div class="stat">
-      <div class="stat-num" data-target="1850" data-suffix="+">0+</div>
+      <div class="stat-num" data-target="1900" data-suffix="+">0+</div>
       <div class="stat-label">ลูกค้าที่พึงพอใจ</div>
     </div>
     <div class="stat">
@@ -1812,7 +1812,7 @@ footer{
       <div class="testi-sum-label">★ Average Rating</div>
     </div>
     <div class="testi-sum-card reveal" style="transition-delay:.1s">
-      <div class="testi-sum-num" data-target="1850" data-suffix="+">0+</div>
+      <div class="testi-sum-num" data-target="1900" data-suffix="+">0+</div>
       <div class="testi-sum-label">ลูกค้าที่พึงพอใจ</div>
     </div>
     <div class="testi-sum-card reveal" style="transition-delay:.15s">
@@ -2474,12 +2474,20 @@ async function loadTxHistory() {
       el.innerHTML = '<div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:.5rem">ยังไม่มีรายการ</div>';
       return;
     }
-    el.innerHTML = data.slice(0,5).map(p => `
-      <div class="ix-history-item" onclick="showPurchaseKey('${p.key}')" style="cursor:pointer">
+    el.innerHTML = data.slice(0,5).map(p => {
+  const d = new Date(p.created_at);
+  const date = d.toLocaleDateString('th-TH', { day:'2-digit', month:'2-digit', year:'2-digit' });
+  const time = d.toLocaleTimeString('th-TH', { hour:'2-digit', minute:'2-digit' });
+  return `
+    <div class="ix-history-item" onclick="showPurchaseKey('${p.key}')" style="cursor:pointer;flex-direction:column;align-items:flex-start;gap:.2rem">
+      <div style="display:flex;justify-content:space-between;width:100%">
         <span class="ix-history-type">⚙️ ${p.product_name}</span>
         <span style="font-size:.65rem;color:var(--p1);font-family:'Space Mono',monospace">คลิกดู KEY →</span>
       </div>
-    `).join('');
+      <div style="font-size:.65rem;color:var(--text-dim);font-family:'Space Mono',monospace">${date} · ${time}</div>
+    </div>
+  `;
+}).join('');
   } catch(e) {
     el.innerHTML = '<div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:.5rem">โหลดไม่สำเร็จ</div>';
   }
