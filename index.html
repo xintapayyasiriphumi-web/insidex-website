@@ -2476,7 +2476,7 @@ async function doTopup() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
-      body: JSON.stringify({ amount: selectedPkg.amount })
+      body: JSON.stringify({ amount: selectedPkg.amount, discord_id: currentUser?.discord_id })
     });
     const data = await res.json();
     const info = document.getElementById('topupInfo');
@@ -2547,7 +2547,7 @@ async function doBuy() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       credentials: 'include',
-      body: JSON.stringify({ product_id: selectedProduct.id })
+      body: JSON.stringify({ product_id: selectedProduct.id, discord_id: currentUser?.discord_id })
     });
     const data = await res.json();
     if (data.success) {
@@ -2555,6 +2555,16 @@ async function doBuy() {
       document.getElementById('keyResult').style.display = 'block';
       toast(`ซื้อสำเร็จ! เหลือ ${data.balance_remaining} pts`, 'success');
       btn.textContent = 'ซื้อสำเร็จ ✓';
+      // อัพเดต points ใน localStorage และ navbar
+      const saved = JSON.parse(localStorage.getItem('ix_user') || '{}');
+      saved.points = data.balance_remaining;
+      localStorage.setItem('ix_user', JSON.stringify(saved));
+      if (currentUser) currentUser.points = data.balance_remaining;
+      document.getElementById('navPoints').textContent = data.balance_remaining + ' pts';
+      const pp = document.getElementById('profilePoints');
+      if (pp) pp.textContent = data.balance_remaining;
+      const sp = document.getElementById('shopPoints');
+      if (sp) sp.textContent = data.balance_remaining + ' pts';
     } else {
       toast(data.error || 'เกิดข้อผิดพลาด', 'error');
       btn.textContent = `ซื้อ ${selectedProduct.name} — ${selectedProduct.price} pts`;
