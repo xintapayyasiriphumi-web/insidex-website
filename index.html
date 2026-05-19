@@ -1080,12 +1080,45 @@ footer{
 .pkg-pts{font-family:'Rajdhani',sans-serif;font-size:.68rem;letter-spacing:.15em;color:var(--p1);text-transform:uppercase;margin-top:.2rem}
 
 /* ── SHOP MODAL ── */
-.shop-product-card{
-  display:flex;align-items:center;gap:1rem;
-  padding:1rem;border:1px solid rgba(168,85,247,.15);border-radius:10px;
-  background:rgba(168,85,247,.04);margin-bottom:.75rem;
-  cursor:pointer;transition:all .2s;
+.shop-product-card {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+  padding: 1rem;
+  border: 1px solid rgba(168,85,247,.2);
+  border-radius: 8px;
+  background: rgba(168,85,247,.04);
+  cursor: pointer;
+  transition: all .2s;
+  margin-bottom: .6rem;
 }
+.shop-product-card:hover,
+.shop-product-card.selected {
+  border-color: rgba(168,85,247,.5);
+  background: rgba(168,85,247,.1);
+}
+/* ── QR PAYMENT ── */
+.qr-box{text-align:center;padding:1rem 0}
+.qr-img{width:180px;height:180px;margin:0 auto .8rem;border-radius:12px;border:2px solid rgba(168,85,247,.3)}
+.qr-amount{font-family:'Orbitron',monospace;font-weight:900;font-size:1.8rem;color:var(--p1);margin-bottom:.3rem}
+.qr-label{font-size:.72rem;color:var(--text-dim);letter-spacing:.2em;text-transform:uppercase}
+.slip-upload{margin-top:1rem}
+.slip-upload-label{
+  display:flex;align-items:center;justify-content:center;gap:.5rem;
+  padding:.8rem;border:2px dashed rgba(168,85,247,.3);border-radius:10px;
+  cursor:pointer;transition:all .2s;font-size:.82rem;color:var(--text-muted);
+}
+.slip-upload-label:hover{border-color:var(--p1);color:var(--p1);background:rgba(168,85,247,.05)}
+.slip-preview{max-width:100%;border-radius:8px;margin-top:.6rem;display:none}
+.shop-steps{display:flex;gap:.5rem;margin-bottom:1.2rem}
+.shop-step{
+  flex:1;text-align:center;padding:.6rem .3rem;
+  border-radius:8px;background:rgba(168,85,247,.06);
+  border:1px solid rgba(168,85,247,.15);font-size:.68rem;
+  color:var(--text-dim);letter-spacing:.05em;
+}
+.shop-step.active{border-color:var(--p1);color:var(--p1);background:rgba(168,85,247,.1)}
+.shop-step-num{font-family:'Orbitron',monospace;font-weight:900;font-size:1rem;color:var(--p1);display:block;margin-bottom:.2rem}
 .shop-product-card:hover,.shop-product-card.selected{
   border-color:rgba(168,85,247,.5);background:rgba(168,85,247,.1);
 }
@@ -1823,8 +1856,8 @@ footer{
     <!-- Right: accordion -->
     <div class="faq-list reveal-r">
 
-      <div class="faq-item faq-open" onclick="faqToggle(this)">
-        <button class="faq-q">
+      <div class="faq-item faq-open" >
+        <button class="faq-q" onclick="faqToggle(this)">
           ทีมงานลง Setup ให้ยังไง?
           <span class="faq-q-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
         </button>
@@ -1840,8 +1873,8 @@ footer{
         </div>
       </div>
 
-      <div class="faq-item" onclick="faqToggle(this)">
-        <button class="faq-q">
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
           ซื้อแล้วใช้ได้นานแค่ไหน?
           <span class="faq-q-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
         </button>
@@ -1856,8 +1889,8 @@ footer{
         </div>
       </div>
 
-      <div class="faq-item" onclick="faqToggle(this)">
-        <button class="faq-q">
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
           ปลอดภัยไหม? โดน Ban ได้ไหม?
           <span class="faq-q-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
         </button>
@@ -1873,8 +1906,8 @@ footer{
         </div>
       </div>
 
-      <div class="faq-item" onclick="faqToggle(this)">
-        <button class="faq-q">
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
           รองรับเกมอะไรบ้าง?
           <span class="faq-q-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
         </button>
@@ -1892,8 +1925,8 @@ footer{
         </div>
       </div>
 
-      <div class="faq-item" onclick="faqToggle(this)">
-        <button class="faq-q">
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
           ชำระเงินผ่านช่องทางไหนได้บ้าง?
           <span class="faq-q-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
         </button>
@@ -1909,8 +1942,8 @@ footer{
         </div>
       </div>
 
-      <div class="faq-item" onclick="faqToggle(this)">
-        <button class="faq-q">
+      <div class="faq-item">
+        <button class="faq-q" onclick="faqToggle(this)">
           ถ้ามีปัญหาหลังลง Setup จะทำยังไง?
           <span class="faq-q-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
         </button>
@@ -1994,8 +2027,8 @@ footer{
     </div>
 
     <div class="ix-btn-row" style="margin-bottom:1rem">
-      <button class="ix-btn ix-btn-primary" onclick="closeModalUser();openTopup()">💰 เติม Point</button>
-      <button class="ix-btn ix-btn-ghost" onclick="closeModalUser();openShop()">🛒 ซื้อสินค้า</button>
+      <button class="ix-btn ix-btn-primary" onclick="closeModal('modalUser');setTimeout(openTopup,200)">💰 เติม Point</button>
+      <button class="ix-btn ix-btn-ghost" onclick="closeModal('modalUser');setTimeout(openShop,200)">🛒 ซื้อสินค้า</button>
     </div>
 
     <div style="margin-bottom:.75rem">
@@ -2036,26 +2069,67 @@ footer{
   <div class="ix-modal" style="max-width:500px">
     <button onclick="closeModal('modalShop')" style="position:absolute;top:.8rem;right:.8rem;width:32px;height:32px;border-radius:50%;border:1px solid rgba(168,85,247,.25);background:rgba(10,10,15,.95);color:#fff;font-size:1rem;cursor:pointer;z-index:99999;display:flex;align-items:center;justify-content:center;pointer-events:all">✕</button>
     <div class="ix-modal-body">
-    <div class="ix-modal-title">🛒 <span>SHOP</span></div>
+      <div class="ix-modal-title">🛒 <span>SHOP</span></div>
 
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:1rem">
-      <div style="font-size:.82rem;color:var(--text-muted)">เลือกสินค้าที่ต้องการ</div>
-      <div style="font-family:'Orbitron',monospace;font-size:.78rem;color:var(--p1)" id="shopPoints">— pts</div>
-    </div>
+      <!-- Steps indicator -->
+      <div class="shop-steps" id="shopSteps">
+        <div class="shop-step active" id="step1"><span class="shop-step-num">1</span>เลือกสินค้า</div>
+        <div class="shop-step" id="step2"><span class="shop-step-num">2</span>ชำระเงิน</div>
+        <div class="shop-step" id="step3"><span class="shop-step-num">3</span>รับ Key</div>
+      </div>
 
-    <div id="productList">
-      <div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:2rem">กำลังโหลด...</div>
-    </div>
+      <!-- Step 1: เลือกสินค้า -->
+      <div id="shopStep1">
+        <div id="productList">
+          <div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:2rem">กำลังโหลด...</div>
+        </div>
+        <button class="ix-btn ix-btn-primary" style="width:100%;margin-top:1rem" id="buyBtn" onclick="goToPayment()">
+          ยืนยันซื้อสินค้า
+        </button>
+      </div>
 
-    <div id="keyResult" style="display:none" class="key-result">
-      <div class="key-result-label">🔑 KEY ของคุณ</div>
-      <div class="key-result-value" id="keyValue">—</div>
-      <button class="key-copy-btn" onclick="copyKey()">📋 COPY KEY</button>
-    </div>
+      <!-- Step 2: QR + อัพสลิป -->
+      <div id="shopStep2" style="display:none">
+        <div class="qr-box">
+          <div class="qr-amount" id="qrAmount">฿0</div>
+          <div class="qr-label">โอนผ่าน PromptPay</div>
+          <img class="qr-img" id="qrImg" src="" alt="QR PromptPay">
+          <div style="font-size:.72rem;color:var(--text-dim);margin-top:.4rem">แสกนแล้วกรอกยอดให้ตรง</div>
+        </div>
 
-    <button class="ix-btn ix-btn-primary" style="width:100%;margin-top:1rem" id="buyBtn" onclick="doBuy()">
-      ยืนยันซื้อสินค้า
-    </button>
+        <div class="slip-upload">
+          <label class="slip-upload-label" for="slipInput">
+            📎 แนบสลิปโอนเงิน
+          </label>
+          <input type="file" id="slipInput" accept="image/*" style="display:none" onchange="previewSlip(this)">
+          <img class="slip-preview" id="slipPreview" alt="slip preview">
+        </div>
+
+        <button class="ix-btn ix-btn-primary" style="width:100%;margin-top:1rem" id="confirmSlipBtn" onclick="submitSlip()">
+          ยืนยันการชำระเงิน
+        </button>
+        <button class="ix-btn ix-btn-ghost" style="width:100%;margin-top:.5rem" onclick="backToProducts()">
+          ← กลับ
+        </button>
+      </div>
+
+      <!-- Step 3: Key result -->
+      <div id="shopStep3" style="display:none">
+        <div style="text-align:center;padding:1rem 0 1.5rem">
+          <div style="font-size:2.5rem;margin-bottom:.5rem">🎉</div>
+          <div style="font-family:'Orbitron',monospace;font-weight:700;color:#34d399;margin-bottom:.3rem">ชำระเงินสำเร็จ!</div>
+          <div style="font-size:.8rem;color:var(--text-muted)" id="keyProductName"></div>
+        </div>
+        <div class="key-result">
+          <div class="key-result-label">🔑 KEY ของคุณ</div>
+          <div class="key-result-value" id="keyValue">—</div>
+          <button class="key-copy-btn" onclick="copyKey()">📋 COPY KEY</button>
+        </div>
+        <button class="ix-btn ix-btn-ghost" style="width:100%;margin-top:1rem" onclick="backToProducts()">
+          ซื้อสินค้าอื่น
+        </button>
+      </div>
+
     </div>
   </div>
 </div>
@@ -2403,16 +2477,20 @@ function updateNavUser(user) {
 async function refreshPoints() {
   if (!currentUser) return;
   try {
-    const saved = localStorage.getItem('ix_user');
-    if (saved) {
-      const user = JSON.parse(saved);
-      document.getElementById('navPoints').textContent = user.points + ' pts';
+    const res = await fetch(`${API}/users/${currentUser.discord_id}/points`);
+    const data = await res.json();
+    if (data.points !== undefined) {
+      currentUser.points = data.points;
+      const saved = JSON.parse(localStorage.getItem('ix_user') || '{}');
+      saved.points = data.points;
+      localStorage.setItem('ix_user', JSON.stringify(saved));
+      document.getElementById('navPoints').textContent = data.points + ' pts';
       const pp = document.getElementById('profilePoints');
-      if (pp) pp.textContent = user.points;
-      const sp = document.getElementById('shopPoints');
-      if (sp) sp.textContent = user.points + ' pts';
+      if (pp) pp.textContent = data.points;
     }
-  } catch(e) {}
+  } catch(e) {
+    console.warn('refreshPoints failed:', e);
+  }
 }
 
 /* ── TX History ── */
@@ -2500,14 +2578,7 @@ async function doTopup() {
 async function openShop() {
   openModal('modalShop');
   selectedProduct = null;
-  document.getElementById('keyResult').style.display = 'none';
-  document.getElementById('buyBtn').textContent = 'ยืนยันซื้อสินค้า';
-  
-  // แสดง points จาก currentUser โดยตรง
-  const sp = document.getElementById('shopPoints');
-  if (sp && currentUser) sp.textContent = currentUser.points + ' pts';
-  
-  // Load products
+  showShopStep(1);
   try {
     const res = await fetch(`${API}/products`);
     const products = await res.json();
@@ -2519,7 +2590,7 @@ async function openShop() {
           <div class="shop-product-name">${p.name}</div>
           <div class="shop-product-desc">${p.description || ''}</div>
           <div class="shop-product-meta">
-            <span class="shop-product-price">${p.price} pts</span>
+            <span class="shop-product-price">฿${p.price}</span>
             <span class="shop-product-stock">stock: ${p.stock_count}</span>
           </div>
         </div>
@@ -2529,53 +2600,143 @@ async function openShop() {
     document.getElementById('productList').innerHTML = '<div style="color:var(--text-dim);text-align:center;padding:1rem">โหลดไม่สำเร็จ</div>';
   }
 }
+
+function showShopStep(n) {
+  [1,2,3].forEach(i => {
+    document.getElementById(`shopStep${i}`).style.display = i === n ? '' : 'none';
+    const s = document.getElementById(`step${i}`);
+    if (s) s.classList.toggle('active', i === n);
+  });
+}
+
 function selectProduct(el, id, name, price) {
   document.querySelectorAll('.shop-product-card').forEach(c => c.classList.remove('selected'));
   el.classList.add('selected');
   selectedProduct = { id, name, price };
-  document.getElementById('keyResult').style.display = 'none';
-  document.getElementById('buyBtn').textContent = `ซื้อ ${name} — ${price} pts`;
+  document.getElementById('buyBtn').textContent = `ซื้อ ${name} — ฿${price}`;
 }
-async function doBuy() {
+
+function goToPayment() {
   if (!currentUser) { toast('กรุณา Login ก่อน', 'error'); return; }
   if (!selectedProduct) { toast('กรุณาเลือกสินค้า', 'error'); return; }
-  const btn = document.getElementById('buyBtn');
-  btn.innerHTML = '<span class="ix-spin"></span> กำลังซื้อ...';
+
+  // Generate QR PromptPay ด้วย promptpay-qr CDN
+  const phone = '0822099267';
+  const amount = selectedProduct.price;
+  document.getElementById('qrAmount').textContent = `฿${amount}`;
+
+  // ใช้ promptpay-qr library generate QR
+  const payload = generatePromptPayPayload(phone, amount);
+  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(payload)}`;
+  document.getElementById('qrImg').src = qrUrl;
+
+  // reset slip
+  document.getElementById('slipInput').value = '';
+  document.getElementById('slipPreview').style.display = 'none';
+  document.getElementById('slipPreview').src = '';
+
+  showShopStep(2);
+}
+
+function generatePromptPayPayload(phone, amount) {
+  const sanitized = '0066' + phone.replace(/^0/, '');
+
+  function f(id, value) {
+    const len = value.length.toString().padStart(2, '0');
+    return `${id}${len}${value}`;
+  }
+  function crc16(str) {
+    let crc = 0xFFFF;
+    for (let i = 0; i < str.length; i++) {
+      crc ^= str.charCodeAt(i) << 8;
+      for (let j = 0; j < 8; j++) {
+        crc = (crc & 0x8000) ? ((crc << 1) ^ 0x1021) : (crc << 1);
+      }
+    }
+    return (crc & 0xFFFF).toString(16).toUpperCase().padStart(4, '0');
+  }
+
+  const aid = f('00', 'A000000677010111');
+  const mobile = f('01', sanitized);
+  const merchantInfo = f('29', aid + mobile);
+  const amountStr = amount.toFixed(2);
+  const payload =
+    f('00', '01') +
+    f('01', '12') +
+    merchantInfo +
+    f('53', '764') +
+    f('54', amountStr) +
+    f('58', 'TH') +
+    '6304';
+
+  return payload + crc16(payload);
+}
+
+function backToProducts() {
+  showShopStep(1);
+  selectedProduct = null;
+  document.getElementById('buyBtn').textContent = 'ยืนยันซื้อสินค้า';
+}
+
+function previewSlip(input) {
+  const file = input.files[0];
+  if (!file) return;
+  const reader = new FileReader();
+  reader.onload = e => {
+    const prev = document.getElementById('slipPreview');
+    prev.src = e.target.result;
+    prev.style.display = 'block';
+    document.querySelector('.slip-upload-label').textContent = '✅ ' + file.name;
+  };
+  reader.readAsDataURL(file);
+}
+
+async function submitSlip() {
+  if (!currentUser) { toast('กรุณา Login ก่อน', 'error'); return; }
+  const fileInput = document.getElementById('slipInput');
+  if (!fileInput.files[0]) { toast('กรุณาแนบสลิปก่อน', 'error'); return; }
+
+  const btn = document.getElementById('confirmSlipBtn');
+  btn.innerHTML = '<span class="ix-spin"></span> กำลัง verify...';
   btn.disabled = true;
+
   try {
-    const res = await fetch(`${API}/shop/buy`, {
+    // อัพโหลดรูปเป็น base64 ส่งไป backend
+    const file = fileInput.files[0];
+    const base64 = await new Promise(resolve => {
+      const r = new FileReader();
+      r.onload = e => resolve(e.target.result);
+      r.readAsDataURL(file);
+    });
+
+    const res = await fetch(`${API}/shop/buy-slip`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({ product_id: selectedProduct.id, discord_id: currentUser?.discord_id })
+      body: JSON.stringify({
+        product_id: selectedProduct.id,
+        discord_id: currentUser.discord_id,
+        slip_image: base64
+      })
     });
     const data = await res.json();
+
     if (data.success) {
       document.getElementById('keyValue').textContent = data.key;
-      document.getElementById('keyResult').style.display = 'block';
-      toast(`ซื้อสำเร็จ! เหลือ ${data.balance_remaining} pts`, 'success');
-      btn.textContent = 'ซื้อสำเร็จ ✓';
-      // อัพเดต points ใน localStorage และ navbar
-      const saved = JSON.parse(localStorage.getItem('ix_user') || '{}');
-      saved.points = data.balance_remaining;
-      localStorage.setItem('ix_user', JSON.stringify(saved));
-      if (currentUser) currentUser.points = data.balance_remaining;
-      document.getElementById('navPoints').textContent = data.balance_remaining + ' pts';
-      const pp = document.getElementById('profilePoints');
-      if (pp) pp.textContent = data.balance_remaining;
-      const sp = document.getElementById('shopPoints');
-      if (sp) sp.textContent = data.balance_remaining + ' pts';
+      document.getElementById('keyProductName').textContent = data.product;
+      showShopStep(3);
+      toast('ได้รับ Key แล้ว! 🎉', 'success');
     } else {
       toast(data.error || 'เกิดข้อผิดพลาด', 'error');
-      btn.textContent = `ซื้อ ${selectedProduct.name} — ${selectedProduct.price} pts`;
+      btn.innerHTML = 'ยืนยันการชำระเงิน';
       btn.disabled = false;
     }
   } catch(e) {
     toast('เกิดข้อผิดพลาด', 'error');
-    btn.textContent = `ซื้อ ${selectedProduct.name} — ${selectedProduct.price} pts`;
+    btn.innerHTML = 'ยืนยันการชำระเงิน';
     btn.disabled = false;
   }
 }
+
 function copyKey() {
   const key = document.getElementById('keyValue').textContent;
   navigator.clipboard.writeText(key).then(() => toast('Copy Key แล้ว!', 'success'));
