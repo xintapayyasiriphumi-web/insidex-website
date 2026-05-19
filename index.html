@@ -2057,7 +2057,7 @@ footer{
     </div>
 
     <div class="ix-btn-row" style="margin-bottom:1rem">
-      <button class="ix-btn ix-btn-ghost" onclick="closeModal('modalUser');setTimeout(openShop,200)">🛒 ซื้อสินค้า</button>
+      <button class="ix-btn ix-btn-ghost" onclick="event.stopPropagation();closeModal('modalUser');setTimeout(openShop,200)">🛒 ซื้อสินค้า</button>
     </div>
 
     <div style="margin-bottom:.75rem">
@@ -2065,7 +2065,7 @@ footer{
       <div id="txHistory"><div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:.5rem">กำลังโหลด...</div></div>
     </div>
 
-    <button class="ix-btn ix-btn-danger" style="width:100%" onclick="doLogout()">ออกจากระบบ</button>
+    <button class="ix-btn ix-btn-danger" style="width:100%" onclick="event.stopPropagation();doLogout()">ออกจากระบบ</button>
   </div>
   </div>
 </div>
