@@ -2378,7 +2378,7 @@ function faqToggle(item) {
 const API = 'https://cozy-healing-production-ee02.up.railway.app';
 let currentUser = null;
 let selectedPkg = null;
-let selectedProduct = null;
+let selectedProducts = [];
 
 /* ── Toast ── */
 function toast(msg, type = 'info', ms = 3000) {
@@ -2550,7 +2550,7 @@ async function doLogout() {
 async function openShop() {
   openModal('modalShop');
   selectedProduct = null;
-  showShopStep(1);
+  selectedProducts = [];
   try {
     const res = await fetch(`${API}/products`);
     const products = await res.json();
@@ -2595,30 +2595,43 @@ function showShopStep(n) {
 }
 
 function selectProduct(el, id, name, price) {
-  document.querySelectorAll('.shop-product-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  selectedProduct = { id, name, price };
-  document.getElementById('buyBtn').textContent = `ซื้อ ${name} — ฿${price}`;
+  const idx = selectedProducts.findIndex(p => p.id === id);
+  if (idx > -1) {
+    // คลิกซ้ำ → เอาออก
+    selectedProducts.splice(idx, 1);
+    el.classList.remove('selected');
+  } else {
+    // เพิ่มเข้า
+    selectedProducts.push({ id, name, price });
+    el.classList.add('selected');
+  }
+  // อัพเดตปุ่ม
+  const btn = document.getElementById('buyBtn');
+  if (selectedProducts.length === 0) {
+    btn.textContent = 'ยืนยันซื้อสินค้า';
+  } else {
+    const total = selectedProducts.reduce((sum, p) => sum + p.price, 0);
+    const names = selectedProducts.map(p => p.name).join(', ');
+    btn.textContent = `ซื้อ ${names} — ฿${total}`;
+  }
 }
 
 function goToPayment() {
   if (!currentUser) { toast('กรุณา Login ก่อน', 'error'); return; }
-  if (!selectedProduct) { toast('กรุณาเลือกสินค้า', 'error'); return; }
+  if (selectedProducts.length === 0) { toast('กรุณาเลือกสินค้า', 'error'); return; }
 
-  // Generate QR PromptPay ด้วย promptpay-qr CDN
-  const phone = '0822099267';
-  const amount = selectedProduct.price;
-  document.getElementById('qrAmount').textContent = `฿${amount}`;
+  const total = selectedProducts.reduce((sum, p) => sum + p.price, 0);
+  const names = selectedProducts.map(p => p.name).join(' + ');
+  document.getElementById('qrAmount').textContent = `฿${total}`;
+  document.querySelector('.qr-label').textContent = `โอนผ่าน PromptPay · ${names}`;
 
-  // ใช้ promptpay-qr library generate QR
-  const payload = generatePromptPayPayload(phone, amount);
+  const payload = generatePromptPayPayload('0822099267', total);
   const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(payload)}`;
   document.getElementById('qrImg').src = qrUrl;
 
-  // reset slip
   document.getElementById('slipInput').value = '';
   document.getElementById('slipPreview').style.display = 'none';
-  document.getElementById('slipPreview').src = '';
+  document.querySelector('.slip-upload-label').textContent = '📎 แนบสลิปโอนเงิน';
 
   showShopStep(2);
 }
@@ -2659,8 +2672,9 @@ function generatePromptPayPayload(phone, amount) {
 
 function backToProducts() {
   showShopStep(1);
-  selectedProduct = null;
+  selectedProducts = [];
   document.getElementById('buyBtn').textContent = 'ยืนยันซื้อสินค้า';
+  document.querySelectorAll('.product-card-new').forEach(c => c.classList.remove('selected'));
 }
 
 function previewSlip(input) {
@@ -2686,7 +2700,6 @@ async function submitSlip() {
   btn.disabled = true;
 
   try {
-    // อัพโหลดรูปเป็น base64 ส่งไป backend
     const file = fileInput.files[0];
     const base64 = await new Promise(resolve => {
       const r = new FileReader();
@@ -2698,7 +2711,7 @@ async function submitSlip() {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({
-        product_id: selectedProduct.id,
+        product_ids: selectedProducts.map(p => p.id),
         discord_id: currentUser.discord_id,
         slip_image: base64
       })
@@ -2706,8 +2719,8 @@ async function submitSlip() {
     const data = await res.json();
 
     if (data.success) {
-      document.getElementById('keyValue').textContent = data.key;
-      document.getElementById('keyProductName').textContent = data.product;
+      document.getElementById('keyValue').textContent = data.keys.join('\n');
+      document.getElementById('keyProductName').textContent = data.products.join(', ');
       showShopStep(3);
       toast('ได้รับ Key แล้ว! 🎉', 'success');
     } else {
