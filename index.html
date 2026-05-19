@@ -2434,14 +2434,15 @@ function updateNavUser(user) {
   document.getElementById('profileId').textContent = 'Discord: ' + user.discord_id;
   document.getElementById('profilePoints').textContent = user.points;
   const pa = document.getElementById('profileAvatar');
+  if (pa) {
   if (user.avatar) {
-    const img = document.createElement('img');
-    img.src = user.avatar;
-    img.className = 'user-profile-avatar';
-    pa.replaceWith(img);
+    pa.outerHTML = `<img id="profileAvatar" src="${user.avatar}" class="user-profile-avatar" alt="">`;
   } else {
     pa.textContent = user.username.slice(0,2).toUpperCase();
   }
+}
+document.getElementById('profileName').textContent = user.username;
+document.getElementById('profileId').textContent = 'Discord: ' + user.discord_id;
 }
 
 /* ── Refresh points ── */
