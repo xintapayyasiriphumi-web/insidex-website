@@ -2466,7 +2466,28 @@ async function refreshPoints() {
 /* ── TX History ── */
 async function loadTxHistory() {
   const el = document.getElementById('txHistory');
-  el.innerHTML = '<div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:.5rem">ยังไม่มีรายการ</div>';
+  if (!currentUser) return;
+  try {
+    const res = await fetch(`${API}/shop/history/${currentUser.discord_id}`);
+    const data = await res.json();
+    if (!data.length) {
+      el.innerHTML = '<div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:.5rem">ยังไม่มีรายการ</div>';
+      return;
+    }
+    el.innerHTML = data.slice(0,5).map(p => `
+      <div class="ix-history-item" onclick="showPurchaseKey('${p.key}')" style="cursor:pointer">
+        <span class="ix-history-type">⚙️ ${p.product_name}</span>
+        <span style="font-size:.65rem;color:var(--p1);font-family:'Space Mono',monospace">คลิกดู KEY →</span>
+      </div>
+    `).join('');
+  } catch(e) {
+    el.innerHTML = '<div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:.5rem">โหลดไม่สำเร็จ</div>';
+  }
+}
+
+function showPurchaseKey(key) {
+  toast(`🔑 ${key}`, 'success', 8000);
+  navigator.clipboard.writeText(key).then(() => {});
 }
 
 /* ── Logout ── */
