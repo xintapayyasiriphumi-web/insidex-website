@@ -1220,7 +1220,7 @@ footer{
   <div class="user-bar" id="userBar" style="display:none" onclick="openModalUser()">
     <img class="user-avatar" id="navAvatar" src="" alt="">
     <span class="user-name" id="navUsername">—</span>
-    <span class="user-points-badge" id="navPoints">0 pts</span>
+    <span class="user-points-badge">MEMBER</span>
   </div>
 </div>
 </nav>
@@ -2027,7 +2027,6 @@ footer{
     </div>
 
     <div class="ix-btn-row" style="margin-bottom:1rem">
-      <button class="ix-btn ix-btn-primary" onclick="closeModal('modalUser');setTimeout(openTopup,200)">💰 เติม Point</button>
       <button class="ix-btn ix-btn-ghost" onclick="closeModal('modalUser');setTimeout(openShop,200)">🛒 ซื้อสินค้า</button>
     </div>
 
@@ -2041,29 +2040,6 @@ footer{
   </div>
 </div>
 
-<!-- ── Modal: Topup ── -->
-<div class="ix-overlay" id="modalTopup" onclick="if(event.target===this)closeModal('modalTopup')">
-  <div class="ix-modal">
-    <button onclick="closeModal('modalTopup')" style="position:absolute;top:.8rem;right:.8rem;width:32px;height:32px;border-radius:50%;border:1px solid rgba(168,85,247,.25);background:rgba(10,10,15,.95);color:#fff;font-size:1rem;cursor:pointer;z-index:99999;display:flex;align-items:center;justify-content:center;pointer-events:all">✕</button>
-    <div class="ix-modal-body">
-    <div class="ix-modal-title">เติม <span>POINT</span></div>
-    <div style="font-size:.82rem;color:var(--text-muted);margin-bottom:1.2rem">1 บาท = 1 Point · เลือกจำนวนที่ต้องการ</div>
-
-    <div class="pkg-grid" id="pkgGrid">
-      <div style="color:var(--text-dim);font-size:.8rem;grid-column:1/-1;text-align:center;padding:1rem">กำลังโหลด...</div>
-    </div>
-
-    <div id="topupInfo" style="display:none;margin-bottom:1rem;padding:1rem;border:1px solid rgba(168,85,247,.2);border-radius:8px;background:rgba(168,85,247,.05);font-size:.82rem;color:var(--text-muted);line-height:1.7"></div>
-
-    <button class="ix-btn ix-btn-primary" style="width:100%" id="topupBtn" onclick="doTopup()">
-      ยืนยันเติม Point
-    </button>
-    <div style="margin-top:.8rem;font-size:.72rem;color:var(--text-dim);text-align:center">
-      หลังเลือกแพ็กเกจ — โอนเงินแล้วแจ้ง Discord เพื่อรับ Point
-    </div>
-    </div>
-  </div>
-</div>
 <!-- ── Modal: Shop ── -->
 <div class="ix-overlay" id="modalShop" onclick="if(event.target===this)closeModal('modalShop')">
   <div class="ix-modal" style="max-width:500px">
@@ -2511,68 +2487,7 @@ async function doLogout() {
   toast('ออกจากระบบแล้ว', 'info');
 }
 
-/* ══ TOPUP ══ */
-async function openTopup() {
-  openModal('modalTopup');
-  selectedPkg = null;
-  document.getElementById('topupInfo').style.display = 'none';
-  // Load packages
-  try {
-    const res = await fetch(`${API}/points/packages`);
-    const pkgs = await res.json();
-    document.getElementById('pkgGrid').innerHTML = pkgs.map(p => `
-      <div class="pkg-card" onclick="selectPkg(this,${p.amount},${p.points})">
-        <div class="pkg-amount">฿${p.amount}</div>
-        <div class="pkg-pts">${p.points} pts</div>
-      </div>
-    `).join('');
-  } catch(e) {
-    document.getElementById('pkgGrid').innerHTML = '<div style="color:var(--text-dim);font-size:.8rem;grid-column:1/-1;text-align:center">โหลดไม่สำเร็จ</div>';
-  }
-}
-function selectPkg(el, amount, points) {
-  document.querySelectorAll('.pkg-card').forEach(c => c.classList.remove('selected'));
-  el.classList.add('selected');
-  selectedPkg = { amount, points };
-  const info = document.getElementById('topupInfo');
-  info.style.display = 'block';
-  info.innerHTML = `
-    เติม <b style="color:var(--p1)">฿${amount}</b> รับ <b style="color:var(--p1)">${points} Points</b><br>
-    โอนเงินผ่าน PromptPay หรือ TrueMoney แล้วแคปสลิปส่งใน 
-    <a href="https://discord.gg/7thT8xaRpw" target="_blank" style="color:var(--p1)">Discord</a> 
-    ทีมงานจะเติม Point ให้ทันที
-  `;
-}
-async function doTopup() {
-  if (!currentUser) { toast('กรุณา Login ก่อน', 'error'); return; }
-  if (!selectedPkg) { toast('กรุณาเลือกแพ็กเกจ', 'error'); return; }
-  const btn = document.getElementById('topupBtn');
-  btn.innerHTML = '<span class="ix-spin"></span> กำลังส่ง...';
-  btn.disabled = true;
-  try {
-    const res = await fetch(`${API}/points/topup/request`, {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      credentials: 'include',
-      body: JSON.stringify({ amount: selectedPkg.amount, discord_id: currentUser?.discord_id })
-    });
-    const data = await res.json();
-    const info = document.getElementById('topupInfo');
-    info.style.display = 'block';
-    info.innerHTML = `
-      <b style="color:#34d399">✓ สร้างคำขอสำเร็จ!</b><br>
-      Ref: <b style="color:var(--p1);font-family:'Space Mono',monospace">${data.ref}</b><br><br>
-      โอน <b>฿${selectedPkg.amount}</b> แล้วแจ้ง Ref ใน 
-      <a href="https://discord.gg/7thT8xaRpw" target="_blank" style="color:var(--p1)">Discord</a>
-      ทีมงานจะเติม <b style="color:var(--p1)">${selectedPkg.points} Points</b> ให้ทันที
-    `;
-    toast(`สร้าง Ref สำเร็จ! แจ้ง Discord ได้เลย`, 'success');
-  } catch(e) {
-    toast('เกิดข้อผิดพลาด', 'error');
-  }
-  btn.innerHTML = 'ยืนยันเติม Point';
-  btn.disabled = false;
-}
+
 
 /* ══ SHOP ══ */
 async function openShop() {
