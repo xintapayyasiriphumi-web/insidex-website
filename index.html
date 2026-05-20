@@ -2087,6 +2087,7 @@ footer{
 
     <div class="ix-btn-row" style="margin-bottom:1rem">
       <button class="ix-btn ix-btn-ghost" onclick="event.stopPropagation();closeModal('modalUser');setTimeout(openShop,200)">🛒 ซื้อสินค้า</button>
+      <button class="ix-btn ix-btn-ghost" onclick="event.stopPropagation();openHistory()">📋 ประวัติการซื้อ</button>
     </div>
 
     <div style="margin-bottom:.75rem">
@@ -2163,6 +2164,17 @@ footer{
         <button class="ix-btn ix-btn-ghost" style="width:100%;margin-top:1rem" onclick="backToProducts()">
           ซื้อสินค้าอื่น
         </button>
+      </div>
+
+      <!-- ── Modal: History ── -->
+      <div class="ix-overlay" id="modalHistory" onclick="if(event.target===this)closeModal('modalHistory')">
+        <div class="ix-modal">
+          <button onclick="closeModal('modalHistory')" style="position:absolute;top:.8rem;right:.8rem;width:32px;height:32px;border-radius:50%;border:1px solid rgba(168,85,247,.25);background:rgba(10,10,15,.95);color:#fff;font-size:1rem;cursor:pointer;z-index:99999;display:flex;align-items:center;justify-content:center;pointer-events:all">✕</button>
+          <div class="ix-modal-body">
+            <div class="ix-modal-title">📋 <span>ประวัติการซื้อ</span></div>
+            <div id="historyList"></div>
+          </div>
+        </div>
       </div>
 
     </div>
@@ -2446,6 +2458,7 @@ document.addEventListener('keydown', e => {
     closeModal('modalUser');
     closeModal('modalTopup');
     closeModal('modalShop');
+    closeModal('modalHistory');
   }
 });
 
@@ -2480,6 +2493,55 @@ async function checkLogin() {
       refreshPoints();
       return;
     } catch(e) {}
+  }
+}
+
+async function openHistory() {
+  openModal('modalHistory');
+  const el = document.getElementById('historyList');
+
+  // skeleton
+  el.innerHTML = [1,2,3].map(() => `
+    <div class="skeleton-history">
+      <div style="display:flex;justify-content:space-between">
+        <div class="skeleton skeleton-line medium" style="height:10px"></div>
+        <div class="skeleton skeleton-line short" style="height:10px"></div>
+      </div>
+      <div class="skeleton skeleton-line short" style="height:8px;width:30%;margin-top:.3rem"></div>
+    </div>
+  `).join('');
+
+  try {
+    const res = await fetch(`${API}/shop/history/${currentUser.discord_id}`);
+    const data = await res.json();
+
+    if (!data.length) {
+      el.innerHTML = '<div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:2rem">ยังไม่มีประวัติการซื้อ</div>';
+      return;
+    }
+
+    el.innerHTML = data.map(p => {
+      const d = new Date(p.created_at);
+      const date = d.toLocaleDateString('th-TH', { day:'2-digit', month:'2-digit', year:'2-digit' });
+      const time = d.toLocaleTimeString('th-TH', { hour:'2-digit', minute:'2-digit' });
+      return `
+        <div style="padding:.9rem;border:1px solid rgba(168,85,247,.12);border-radius:10px;margin-bottom:.6rem;background:rgba(168,85,247,.03)">
+          <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
+            <span style="font-family:'Orbitron',monospace;font-weight:700;font-size:.82rem;color:#fff">⚙️ ${p.product_name}</span>
+            <span style="font-size:.62rem;color:var(--text-dim);font-family:'Space Mono',monospace">${date} · ${time}</span>
+          </div>
+          <div style="display:flex;justify-content:space-between;align-items:center">
+            <span style="font-family:'Space Mono',monospace;font-size:.78rem;color:#34d399;font-weight:700">${p.key}</span>
+            <button onclick="navigator.clipboard.writeText('${p.key}').then(()=>toast('Copy แล้ว!','success'))" 
+              style="font-size:.65rem;color:var(--p1);cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:none;border:none;padding:0">
+              📋 COPY
+            </button>
+          </div>
+        </div>
+      `;
+    }).join('');
+  } catch(e) {
+    el.innerHTML = '<div style="color:var(--text-dim);font-size:.8rem;text-align:center;padding:1rem">โหลดไม่สำเร็จ</div>';
   }
 }
 
