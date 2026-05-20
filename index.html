@@ -2166,7 +2166,13 @@ footer{
         </button>
       </div>
 
-      <!-- ── Modal: History ── -->
+      
+
+    </div>
+  </div>
+</div>
+
+<!-- ── Modal: History ── -->
       <div class="ix-overlay" id="modalHistory" onclick="if(event.target===this)closeModal('modalHistory')">
         <div class="ix-modal">
           <button onclick="closeModal('modalHistory')" style="position:absolute;top:.8rem;right:.8rem;width:32px;height:32px;border-radius:50%;border:1px solid rgba(168,85,247,.25);background:rgba(10,10,15,.95);color:#fff;font-size:1rem;cursor:pointer;z-index:99999;display:flex;align-items:center;justify-content:center;pointer-events:all">✕</button>
@@ -2177,9 +2183,6 @@ footer{
         </div>
       </div>
 
-    </div>
-  </div>
-</div>
 <script>
 /* ══════════════════════════════════════════════════
    LOADER
@@ -2490,7 +2493,6 @@ async function checkLogin() {
       currentUser = user;
       // รอให้ DOM โหลดเสร็จก่อน
       setTimeout(() => updateNavUser(user), 100);
-      refreshPoints();
       return;
     } catch(e) {}
   }
