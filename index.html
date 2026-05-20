@@ -2168,20 +2168,33 @@ footer{
 
       <!-- Step 3: Key result -->
       <div id="shopStep3" style="display:none">
-        <div style="text-align:center;padding:1rem 0 1.5rem">
-          <div style="font-size:2.5rem;margin-bottom:.5rem">🎉</div>
-          <div style="font-family:'Orbitron',monospace;font-weight:700;color:#34d399;margin-bottom:.3rem">ชำระเงินสำเร็จ!</div>
-          <div style="font-size:.8rem;color:var(--text-muted)" id="keyProductName"></div>
-        </div>
-        <div class="key-result">
-          <div class="key-result-label">🔑 KEY ของคุณ</div>
-          <div class="key-result-value" id="keyValue">—</div>
-          <button class="key-copy-btn" onclick="copyKey()">📋 COPY KEY</button>
-        </div>
-        <button class="ix-btn ix-btn-ghost" style="width:100%;margin-top:1rem" onclick="backToProducts()">
-          ซื้อสินค้าอื่น
-        </button>
-      </div>
+  <!-- celebrate header -->
+  <div style="text-align:center;padding:1.2rem 0 1rem">
+    <div style="font-size:2.8rem;margin-bottom:.6rem;animation:bounceY 1s ease-in-out 3">🎉</div>
+    <div style="font-family:'Orbitron',monospace;font-weight:900;font-size:1.1rem;color:#34d399;margin-bottom:.3rem;letter-spacing:.04em">ชำระเงินสำเร็จ!</div>
+    <div style="font-size:.78rem;color:var(--text-muted)" id="keyProductName"></div>
+  </div>
+
+  <!-- keys list -->
+  <div id="keysList"></div>
+
+  <!-- discord notice -->
+  <div style="margin-top:1rem;padding:.9rem 1rem;border:1px solid rgba(88,101,242,.3);border-radius:10px;background:rgba(88,101,242,.07);display:flex;align-items:center;gap:.8rem">
+    <div style="font-size:1.4rem;flex-shrink:0">💬</div>
+    <div>
+      <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;color:#fff;margin-bottom:.2rem">นำ Key ไปส่งให้ Admin ใน Discord</div>
+      <div style="font-size:.72rem;color:var(--text-muted);margin-bottom:.4rem">Admin จะเข้ามา Remote ลง Setting ให้ทันที</div>
+      <a href="https://discord.gg/7thT8xaRpw" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:#5865F2;transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
+        <svg width="14" height="14" viewBox="0 0 127.14 96.36" fill="#5865F2"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+        เข้า Discord Server →
+      </a>
+    </div>
+  </div>
+
+  <button class="ix-btn ix-btn-ghost" style="width:100%;margin-top:.8rem;border-radius:8px" onclick="backToProducts()">
+    ← ซื้อสินค้าอื่น
+  </button>
+</div>
 
       
 
@@ -2841,11 +2854,29 @@ async function submitSlip() {
     const data = await res.json();
 
     if (data.success) {
-      document.getElementById('keyValue').textContent = data.keys.join('\n');
-      document.getElementById('keyProductName').textContent = data.products.join(', ');
-      showShopStep(3);
-      toast('ได้รับ Key แล้ว! 🎉', 'success');
-    } else {
+  document.getElementById('keyProductName').textContent = data.products.join(' + ');
+  
+  // render แต่ละ key แยกกัน
+  document.getElementById('keysList').innerHTML = data.keys.map((key, i) => `
+    <div style="margin-bottom:.6rem;padding:.9rem 1rem;border:1px solid rgba(52,211,153,.25);border-radius:10px;background:rgba(52,211,153,.05)">
+      <div style="font-size:.6rem;letter-spacing:.2em;text-transform:uppercase;color:rgba(52,211,153,.6);font-family:'Space Mono',monospace;margin-bottom:.35rem">
+        🔑 ${data.products[i] || 'KEY ' + (i+1)}
+      </div>
+      <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem">
+        <div style="font-family:'Space Mono',monospace;font-size:.85rem;color:#34d399;font-weight:700;word-break:break-all">${key}</div>
+        <button onclick="navigator.clipboard.writeText('${key}').then(()=>toast('Copy แล้ว! 📋','success'))"
+          style="flex-shrink:0;font-size:.65rem;color:var(--p1);cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);border-radius:4px;padding:.3rem .6rem;transition:all .2s"
+          onmouseover="this.style.background='rgba(168,85,247,.2)'"
+          onmouseout="this.style.background='rgba(168,85,247,.1)'">
+          📋 COPY
+        </button>
+      </div>
+    </div>
+  `).join('');
+
+  showShopStep(3);
+  toast('ได้รับ Key แล้ว! 🎉', 'success', 5000);
+} else {
       toast(data.error || 'เกิดข้อผิดพลาด', 'error');
       btn.innerHTML = 'ยืนยันการชำระเงิน';
       btn.disabled = false;
