@@ -2120,28 +2120,50 @@ footer{
 
       <!-- Step 2: QR + อัพสลิป -->
       <div id="shopStep2" style="display:none">
-        <div class="qr-box">
-          <div class="qr-amount" id="qrAmount">฿0</div>
-          <div class="qr-label">โอนผ่าน PromptPay</div>
-          <img class="qr-img" id="qrImg" src="" alt="QR PromptPay">
-          <div style="font-size:.72rem;color:var(--text-dim);margin-top:.4rem">แสกนแล้วกรอกยอดให้ตรง</div>
-        </div>
+  <div class="qr-box">
+    <div style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.8rem;text-align:center">PromptPay Payment</div>
+    <div class="qr-amount" id="qrAmount">฿0</div>
+    <div class="qr-label" id="qrLabel">กำลังสร้าง QR Code...</div>
 
-        <div class="slip-upload">
-          <label class="slip-upload-label" for="slipInput">
-            📎 แนบสลิปโอนเงิน
-          </label>
-          <input type="file" id="slipInput" accept="image/*" style="display:none" onchange="previewSlip(this)">
-          <img class="slip-preview" id="slipPreview" alt="slip preview">
-        </div>
-
-        <button class="ix-btn ix-btn-primary" style="width:100%;margin-top:1rem" id="confirmSlipBtn" onclick="submitSlip()">
-          ยืนยันการชำระเงิน
-        </button>
-        <button class="ix-btn ix-btn-ghost" style="width:100%;margin-top:.5rem" onclick="backToProducts()">
-          ← กลับ
-        </button>
+    <!-- QR wrapper with animation -->
+    <div id="qrWrapper" style="position:relative;width:200px;height:200px;margin:1rem auto">
+      <!-- Loading state -->
+      <div id="qrLoading" style="position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;border:1px solid rgba(168,85,247,.2);border-radius:16px;background:rgba(168,85,247,.04)">
+        <div style="width:36px;height:36px;border:2px solid rgba(168,85,247,.2);border-top-color:var(--p1);border-radius:50%;animation:spin .7s linear infinite;margin-bottom:.6rem"></div>
+        <div style="font-size:.65rem;color:var(--text-dim);font-family:'Space Mono',monospace;letter-spacing:.1em">GENERATING...</div>
       </div>
+      <!-- QR image -->
+      <img id="qrImg" src="" alt="QR PromptPay"
+        style="width:200px;height:200px;border-radius:16px;border:2px solid rgba(168,85,247,.3);display:none;opacity:0;transition:opacity .4s ease">
+    </div>
+
+    <!-- Payment info -->
+    <div id="qrInfo" style="display:none;margin-top:.5rem">
+      <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.3rem">
+        <div style="width:6px;height:6px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;animation:blink 1.4s infinite"></div>
+        <span style="font-size:.72rem;color:#34d399;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.1em">QR พร้อมใช้งาน</span>
+      </div>
+      <div style="font-size:.65rem;color:var(--text-dim);text-align:center;font-family:'Space Mono',monospace">สแกนแล้วกรอกยอดให้ตรง</div>
+    </div>
+  </div>
+
+  <!-- Slip upload -->
+  <div style="margin-top:1rem;padding:1rem;border:1px solid rgba(168,85,247,.15);border-radius:12px;background:rgba(168,85,247,.03)">
+    <div style="font-family:'Space Mono',monospace;font-size:.58rem;letter-spacing:.25em;text-transform:uppercase;color:var(--text-dim);margin-bottom:.6rem">แนบหลักฐานการโอน</div>
+    <label class="slip-upload-label" for="slipInput">
+      📎 อัพโหลดสลิปโอนเงิน
+    </label>
+    <input type="file" id="slipInput" accept="image/*" style="display:none" onchange="previewSlip(this)">
+    <img class="slip-preview" id="slipPreview" alt="slip preview">
+  </div>
+
+  <button class="ix-btn ix-btn-primary" style="width:100%;margin-top:1rem;padding:.85rem;border-radius:8px" id="confirmSlipBtn" onclick="submitSlip()">
+    ✓ ยืนยันการชำระเงิน
+  </button>
+  <button class="ix-btn ix-btn-ghost" style="width:100%;margin-top:.5rem;border-radius:8px" onclick="backToProducts()">
+    ← กลับเลือกสินค้า
+  </button>
+</div>
 
       <!-- Step 3: Key result -->
       <div id="shopStep3" style="display:none">
@@ -2697,18 +2719,38 @@ function goToPayment() {
 
   const total = selectedProducts.reduce((sum, p) => sum + p.price, 0);
   const names = selectedProducts.map(p => p.name).join(' + ');
-  document.getElementById('qrAmount').textContent = `฿${total}`;
-  document.querySelector('.qr-label').textContent = `โอนผ่าน PromptPay · ${names}`;
 
-  const payload = generatePromptPayPayload('0822099267', total);
-  const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=180x180&data=${encodeURIComponent(payload)}`;
-  document.getElementById('qrImg').src = qrUrl;
+  document.getElementById('qrAmount').textContent = `฿${total.toLocaleString()}`;
+  document.getElementById('qrLabel').textContent = names;
 
+  // reset slip
   document.getElementById('slipInput').value = '';
   document.getElementById('slipPreview').style.display = 'none';
-  document.querySelector('.slip-upload-label').textContent = '📎 แนบสลิปโอนเงิน';
+  document.querySelector('.slip-upload-label').textContent = '📎 อัพโหลดสลิปโอนเงิน';
+
+  // แสดง loading QR
+  document.getElementById('qrLoading').style.display = 'flex';
+  document.getElementById('qrImg').style.display = 'none';
+  document.getElementById('qrImg').style.opacity = '0';
+  document.getElementById('qrInfo').style.display = 'none';
 
   showShopStep(2);
+
+  // generate QR หลัง transition
+  setTimeout(() => {
+    const payload = generatePromptPayPayload('0822099267', total);
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(payload)}&bgcolor=ffffff&color=000000&margin=10`;
+    const img = document.getElementById('qrImg');
+    img.onload = () => {
+      document.getElementById('qrLoading').style.display = 'none';
+      img.style.display = 'block';
+      setTimeout(() => {
+        img.style.opacity = '1';
+        document.getElementById('qrInfo').style.display = 'block';
+      }, 50);
+    };
+    img.src = qrUrl;
+  }, 400);
 }
 
 function generatePromptPayPayload(phone, amount) {
