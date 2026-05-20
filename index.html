@@ -2143,7 +2143,7 @@ footer{
         <div style="width:6px;height:6px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;animation:blink 1.4s infinite"></div>
         <span style="font-size:.72rem;color:#34d399;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.1em">QR พร้อมใช้งาน</span>
       </div>
-      <div style="font-size:.65rem;color:var(--text-dim);text-align:center;font-family:'Space Mono',monospace">สแกนแล้วกรอกยอดให้ตรง</div>
+      <div style="font-size:.65rem;color:var(--text-dim);text-align:center;font-family:'Space Mono',monospace">INISDEXSTORE</div>
     </div>
   </div>
 
@@ -2657,11 +2657,15 @@ async function openShop() {
     document.getElementById('productList').innerHTML = `<div class="product-grid">${
       products.map(p => {
         const outOfStock = p.stock_count <= 0;
+        const closed = !p.is_active;
+        const disabled = outOfStock || closed;
         const imgUrl = p.image_url;
         return `
-          <div class="product-card-new ${outOfStock ? 'disabled' : ''}"
-            onclick="${outOfStock ? '' : `selectProduct(this,${p.id},'${p.name.replace(/'/g,"\\'")}',${p.price})`}">
+          <div class="product-card-new ${disabled ? 'disabled' : ''}"
+            onclick="${disabled ? '' : `selectProduct(this,${p.id},'${p.name.replace(/'/g,"\\'")}',${p.price})`}"
+            style="${disabled ? 'opacity:.45;cursor:not-allowed;pointer-events:none;filter:grayscale(1)' : ''}">
             <div class="product-selected-badge">✓ เลือกแล้ว</div>
+            ${closed ? '<div style="position:absolute;top:.5rem;left:.5rem;z-index:10;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:.2rem .6rem;font-family:\'Space Mono\',monospace;font-size:.55rem;color:rgba(255,255,255,.6);letter-spacing:.1em">🔒 ปิดการขาย</div>' : ''}
             ${imgUrl
               ? `<img class="product-card-img" src="${imgUrl}" alt="${p.name}">`
               : `<div class="product-card-img-placeholder">⚙️</div>`
@@ -2670,9 +2674,9 @@ async function openShop() {
               <div class="product-card-name">${p.name}</div>
               <div class="product-card-desc">${p.description || ''}</div>
               <div class="product-card-footer">
-                <span class="product-card-price">฿${p.price}</span>
+                <span class="product-card-price" style="${disabled ? 'color:rgba(255,255,255,.3)' : ''}">฿${p.price}</span>
                 <span class="product-card-stock ${outOfStock ? 'empty' : ''}">
-                  ${outOfStock ? '❌ หมด' : `stock: ${p.stock_count}`}
+                  ${closed ? '🔒 ปิดการขาย' : outOfStock ? '❌ หมด' : `stock: ${p.stock_count}`}
                 </span>
               </div>
             </div>
