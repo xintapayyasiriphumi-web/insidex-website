@@ -1238,6 +1238,47 @@ footer{
   display:flex;flex-direction:column;gap:.4rem;
 }
 
+/* ══ MOBILE FIXES ══ */
+@media(max-width:480px){
+
+  /* Navbar — แสดง user bar บน mobile */
+  .nav-actions{display:flex!important;gap:.4rem;align-items:center}
+  #loginBtn{font-size:.65rem;padding:.4rem .7rem}
+  .user-bar{padding:.25rem .5rem .25rem .3rem}
+  .user-name{max-width:60px;font-size:.7rem}
+  .user-points-badge{font-size:.55rem;padding:.1rem .35rem}
+
+  /* Shop modal — เต็มจอ */
+  .ix-overlay{padding:.5rem}
+  .ix-modal{border-radius:12px}
+  .ix-modal-body{padding:1.2rem}
+  .shop-modal-wide{max-width:100%!important}
+
+  /* Product grid — 1 column บน mobile เล็ก */
+  .product-grid{grid-template-columns:1fr!important;gap:.6rem}
+  .product-card-img{height:140px}
+
+  /* QR box */
+  .qr-box{padding:.5rem 0}
+  #qrWrapper{width:160px!important;height:160px!important}
+  #qrImg{width:160px!important;height:160px!important}
+  .qr-amount{font-size:1.4rem}
+
+  /* Hero CTA buttons */
+  .hero-cta{gap:.6rem}
+  .btn{padding:.75rem 1.2rem;font-size:.82rem}
+
+  /* Modal user */
+  .user-profile-avatar{width:42px;height:42px}
+  .ix-btn-row{flex-direction:column}
+  .ix-btn{min-width:unset}
+}
+
+@media(max-width:375px){
+  .product-grid{grid-template-columns:1fr!important}
+  .nav-logo-text{font-size:.8rem;letter-spacing:.12em}
+}
+
 </style>
 </head>
 <body>
@@ -1275,6 +1316,12 @@ footer{
     <li><a href="#faq" class="nav-link">FAQ</a></li>
     <li><a href="#discord" class="nav-link">ชุมชน</a></li>
   </ul>
+  <div class="nav-ham" id="navHam" onclick="toggleMob()">
+    <span></span>
+    <span></span>
+    <span></span>
+  </div>
+  <div class="nav-actions" id="navActions">
   <div class="nav-actions" id="navActions">
   <!-- Login btn (แสดงเมื่อยังไม่ login) -->
   <a href="https://cozy-healing-production-ee02.up.railway.app/auth/discord" class="nav-btn nav-btn-disc" id="loginBtn">
