@@ -2665,7 +2665,7 @@ async function openShop() {
             onclick="${disabled ? '' : `selectProduct(this,${p.id},'${p.name.replace(/'/g,"\\'")}',${p.price})`}"
             style="${disabled ? 'opacity:.45;cursor:not-allowed;pointer-events:none;filter:grayscale(1)' : ''}">
             <div class="product-selected-badge">✓ เลือกแล้ว</div>
-            ${closed ? '<div style="position:absolute;top:.5rem;left:.5rem;z-index:10;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:.2rem .6rem;font-family:\'Space Mono\',monospace;font-size:.55rem;color:rgba(255,255,255,.6);letter-spacing:.1em">🔒 ปิดการขาย</div>' : ''}
+            ${closed ? '<div style="position:absolute;top:.5rem;left:.5rem;z-index:10;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:.2rem .6rem;font-family:\'Space Mono\',monospace;font-size:.55rem;color:rgba(255,255,255,.6);letter-spacing:.1em">🔒 LOCK</div>' : ''}
             ${imgUrl
               ? `<img class="product-card-img" src="${imgUrl}" alt="${p.name}">`
               : `<div class="product-card-img-placeholder">⚙️</div>`
