@@ -467,7 +467,7 @@ nav.scrolled{
   padding:2rem;background:var(--surface);backdrop-filter:blur(20px);
   overflow:hidden;transition:transform .35s var(--ease-out),border-color .3s,box-shadow .35s;
   clip-path:polygon(16px 0%,100% 0%,calc(100% - 16px) 100%,0% 100%);
-  group:true;
+  display:flex;flex-direction:column;
 }
 .card-glow{
   position:absolute;inset:0;opacity:0;
@@ -500,7 +500,7 @@ nav.scrolled{
   color:var(--text);margin-bottom:.5rem;letter-spacing:.04em;
 }
 .card-desc{font-size:.88rem;color:var(--text-muted);line-height:1.65;margin-bottom:1.4rem}
-.card-feats{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.8rem}
+.card-feats{display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.8rem;flex:1}
 .card-feat{
   font-size:.82rem;color:rgba(255,255,255,.55);
   display:flex;align-items:center;gap:.5rem;
@@ -1515,8 +1515,8 @@ footer{
         <li class="card-feat">ปรับ Network Settings</li>
         <li class="card-feat">Optimize ระบบ Windows</li>
       </ul>
-      <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="card-cta">🛒 สั่งซื้อ →</a>
-      <div class="card-price">฿159–799</div>
+      <a href="#" onclick="if(currentUser){openShop()}else{window.location.href='https://cozy-healing-production-ee02.up.railway.app/auth/discord'}" class="card-cta">🛒 สั่งซื้อ →</a>
+      <div class="card-price">฿309–฿629</div>
     </div>
 
     <div class="card reveal" style="transition-delay:.1s">
@@ -1533,7 +1533,7 @@ footer{
         <li class="card-feat">ติดตั้งฟรี !</li>
       </ul>
       <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="card-cta">🛒 สั่งซื้อ →</a>
-      <div class="card-price">฿39–49</div>
+      <div class="card-price">฿39</div>
     </div>
 
     <div class="card reveal" style="transition-delay:.15s">
@@ -1566,7 +1566,7 @@ footer{
         <li class="card-feat">Boot เร็วกว่า Windows ปกติ</li>
       </ul>
       <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="card-cta">🛒 สั่งซื้อ →</a>
-      <div class="card-price">฿50–99</div>
+      <div class="card-price">฿99–250</div>
     </div>
   </div>
 </section>
@@ -2804,7 +2804,7 @@ async function openShop() {
               <div class="product-card-footer">
                 <span class="product-card-price" style="${disabled ? 'color:rgba(255,255,255,.3)' : ''}">฿${p.price}</span>
                 <span class="product-card-stock ${outOfStock ? 'empty' : ''}">
-                  ${closed ? '🔒 ปิดการขาย' : outOfStock ? '❌ หมด' : `stock: ${p.stock_count}`}
+                  ${closed ? '🔒 LOCK' : outOfStock ? '❌ หมด' : `stock: ${p.stock_count}`}
                 </span>
               </div>
             </div>
