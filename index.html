@@ -2145,7 +2145,7 @@ footer{
       <div style="text-align:left">
         <div style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:#5865F2;margin-bottom:1rem;opacity:.8">// COMMUNITY</div>
         <h2 class="discord-title" style="text-align:left;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:1rem">เข้าร่วม<br><span style="color:#5865F2">INSIDEX</span><br>Community</h2>
-        <p style="color:var(--text-muted);font-size:.92rem;line-height:1.75;margin-bottom:2rem">พูดคุย รับข่าวสาร และ Support 24/7<br>มีสมาชิกกว่า <span style="color:#fff;font-weight:700">1,200+</span> คน</p>
+        <p style="color:var(--text-muted);font-size:.92rem;line-height:1.75;margin-bottom:2rem">พูดคุย รับข่าวสาร และ Support 24/7<br>มีสมาชิกกว่า <span style="color:#fff;font-weight:700">3,800+</span> คน</p>
         
         <div style="display:flex;flex-direction:column;gap:.8rem;margin-bottom:2rem">
           <div style="display:flex;align-items:center;gap:.7rem;font-size:.88rem;color:var(--text-muted)">
@@ -2504,7 +2504,11 @@ function closeMob() {
 ══════════════════════════════════════════════════ */
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
-    if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); }
+    if (e.isIntersecting) {
+      e.target.classList.add('in');
+    } else {
+      e.target.classList.remove('in');
+    }
   });
 }, {threshold: .12});
 document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => io.observe(el));
