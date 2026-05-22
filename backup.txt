@@ -1476,7 +1476,7 @@ footer{
  
     <!-- Left: info -->
     <div class="goatx-left">
-      <div class="goatx-tag">UPDATE · COMING SOON</div>
+      <div class="goatx-tag">UPDATE · v2.0</div>
       <div class="goatx-version">// GOATX v2.0</div>
       <div class="goatx-title">GOATX</div>
       <div class="goatx-sub">SETTING v2.0</div>
@@ -3054,6 +3054,55 @@ document.addEventListener('DOMContentLoaded', () => {
   checkLogin();
 });
 
+
+async function openShopProduct(productId) {
+  openModal('modalShop');
+  selectedProducts = [];
+  showShopStep(1);
+
+  try {
+    const res = await fetch(`${API}/products`);
+    const products = await res.json();
+    const product = products.find(p => p.id === productId);
+    if (!product) { toast('ไม่พบสินค้า', 'error'); return; }
+
+    // เลือกสินค้าทันที
+    selectedProducts = [{ id: product.id, name: product.name, price: product.price }];
+
+    // ไปหน้า QR เลย
+    const total = product.price;
+    document.getElementById('qrAmount').textContent = `฿${total.toLocaleString()}`;
+    document.getElementById('qrLabel').textContent = product.name;
+
+    document.getElementById('slipInput').value = '';
+    document.getElementById('slipPreview').style.display = 'none';
+    document.querySelector('.slip-upload-label').textContent = '📎 อัพโหลดสลิปโอนเงิน';
+    document.getElementById('qrLoading').style.display = 'flex';
+    document.getElementById('qrImg').style.display = 'none';
+    document.getElementById('qrImg').style.opacity = '0';
+    document.getElementById('qrInfo').style.display = 'none';
+
+    showShopStep(2);
+
+    setTimeout(() => {
+      const payload = generatePromptPayPayload('0822099267', total);
+      const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(payload)}&bgcolor=ffffff&color=000000&margin=10`;
+      const img = document.getElementById('qrImg');
+      img.onload = () => {
+        document.getElementById('qrLoading').style.display = 'none';
+        img.style.display = 'block';
+        setTimeout(() => {
+          img.style.opacity = '1';
+          document.getElementById('qrInfo').style.display = 'block';
+        }, 50);
+      };
+      img.src = qrUrl;
+    }, 400);
+
+  } catch(e) {
+    toast('เกิดข้อผิดพลาด', 'error');
+  }
+}
 
 
 </script>
