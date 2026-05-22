@@ -1488,8 +1488,8 @@ footer{
         <li class="goatx-feat">วงนัวตัวไหลขึ้น</li>
       </ul>
       <div class="goatx-cta-row">
-        <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn btn-red">
-          COMING SOON...
+        <a href="#" onclick="if(currentUser){openShop()}else{window.location.href='https://cozy-healing-production-ee02.up.railway.app/auth/discord'}" class="btn btn-red">
+          🛒 Buy
         </a>
         <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn btn-ghost">
           Discord →
