@@ -488,7 +488,7 @@ async function openShop() {
             onclick="${disabled ? '' : `selectProduct(this,${p.id},'${p.name.replace(/'/g,"\\'")}',${p.price})`}"
             style="${disabled ? 'opacity:.45;cursor:not-allowed;pointer-events:none;filter:grayscale(1)' : ''}">
             <div class="product-selected-badge">✓ SELECT</div>
-            ${closed ? '<div style="position:absolute;top:.5rem;left:.5rem;z-index:10;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:.2rem .6rem;font-family:\'Space Mono\',monospace;font-size:.55rem;color:rgba(255,255,255,.6);letter-spacing:.1em">🔒 LOCK</div>' : ''}
+            ${closed ? '<div style="position:absolute;top:.5rem;left:.5rem;z-index:10;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:.2rem .6rem;font-family:\'Space Mono\',monospace;font-size:.55rem;color:rgba(255,255,255,.6);letter-spacing:.1em">🛍️ PRE-ORDER</div>' : ''}
             ${imgUrl
               ? `<img class="product-card-img" src="${imgUrl}" alt="${p.name}">`
               : `<div class="product-card-img-placeholder">⚙️</div>`
@@ -499,7 +499,7 @@ async function openShop() {
               <div class="product-card-footer">
                 <span class="product-card-price" style="${disabled ? 'color:rgba(255,255,255,.3)' : ''}">฿${p.price}</span>
                 <span class="product-card-stock ${outOfStock ? 'empty' : ''}">
-                  ${closed ? '🔒 LOCK' : outOfStock ? '❌ หมด' : `stock: ${p.stock_count}`}
+                  ${closed ? '🛍️ PRE-ORDER' : outOfStock ? '❌ หมด' : `stock: ${p.stock_count}`}
                 </span>
               </div>
             </div>
