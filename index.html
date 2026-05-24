@@ -2860,7 +2860,12 @@ async function openShop() {
             onclick="${disabled ? '' : `selectProduct(this,${p.id},'${p.name.replace(/'/g,"\\'")}',${p.price})`}"
             style="${disabled ? 'opacity:.45;cursor:not-allowed;pointer-events:none;filter:grayscale(1)' : ''}">
             <div class="product-selected-badge">✓ SELECT</div>
-            ${closed ? '<div style="position:absolute;top:.5rem;left:.5rem;z-index:10;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:.2rem .6rem;font-family:\'Space Mono\',monospace;font-size:.55rem;color:rgba(255,255,255,.6);letter-spacing:.1em">🔒 LOCK</div>' : ''}
+            ${closed ? `<div style="position:absolute;top:.5rem;left:.5rem;z-index:10;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:.2rem .6rem;font-family:'Space Mono',monospace;font-size:.55rem;color:rgba(255,255,255,.6);letter-spacing:.1em">🔒 LOCK</div>
+<div style="position:absolute;inset:0;z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,.6);backdrop-filter:blur(4px)">
+  <div style="font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.2em;color:rgba(239,68,68,.8);margin-bottom:.4rem">⏳ เปิดขาย</div>
+  <div style="font-family:'Orbitron',monospace;font-weight:900;font-size:.9rem;color:#ef4444" id="shopCd_${p.id}">--:--:--</div>
+  <div style="font-family:'Space Mono',monospace;font-size:.45rem;color:rgba(255,255,255,.4);margin-top:.2rem;letter-spacing:.1em">1 มิ.ย. 69 · 18:00</div>
+</div>` : ''}
             ${imgUrl
               ? `<img class="product-card-img" src="${imgUrl}" alt="${p.name}">`
               : `<div class="product-card-img-placeholder">⚙️</div>`
@@ -2879,6 +2884,21 @@ async function openShop() {
         `;
       }).join('')
     }</div>`;
+
+    // countdown ทับ card ที่ปิดอยู่
+    const goatxTarget = new Date('2026-06-01T18:00:00+07:00').getTime();
+    const cdInterval = setInterval(() => {
+      const diff = goatxTarget - Date.now();
+      if (diff <= 0) { clearInterval(cdInterval); return; }
+      const h = Math.floor(diff / 3600000);
+      const m = Math.floor((diff % 3600000) / 60000);
+      const s = Math.floor((diff % 60000) / 1000);
+      products.forEach(p => {
+        const el = document.getElementById(`shopCd_${p.id}`);
+        if (el) el.textContent = `${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`;
+      });
+    }, 1000);
+
   } catch(e) {
     document.getElementById('productList').innerHTML = '<div style="color:var(--text-dim);text-align:center;padding:1rem">โหลดไม่สำเร็จ</div>';
   }
