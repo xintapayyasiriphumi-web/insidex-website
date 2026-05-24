@@ -1232,7 +1232,7 @@ footer{
 .product-card-new{
   border:1px solid rgba(168,85,247,.2);border-radius:12px;
   background:rgba(168,85,247,.04);cursor:pointer;
-  transition:all .25s;overflow:hidden;position:relative;
+  transition:all .25s;overflow:visible;position:relative;
 }
 .product-card-new:hover{border-color:var(--p1);background:rgba(168,85,247,.1);transform:translateY(-3px);box-shadow:0 8px 32px rgba(124,58,237,.2)}
 .product-card-new.selected{border-color:var(--p1);background:rgba(168,85,247,.15);box-shadow:0 0 0 2px var(--p1)}
@@ -1337,6 +1337,12 @@ footer{
   .discord-inner div[style*="text-align:left"]{text-align:center!important}
 }
 
+
+.product-card-new{
+  border:1px solid rgba(168,85,247,.2);border-radius:12px;
+  background:rgba(168,85,247,.04);cursor:pointer;
+  transition:all .25s;overflow:hidden;position:relative;
+}
 </style>
 </head>
 <body>
@@ -2858,7 +2864,7 @@ async function openShop() {
         return `
   <div class="product-card-new ${outOfStock && !closed ? 'disabled' : ''}"
     onclick="${closed ? `showClosedToast()` : outOfStock ? '' : `selectProduct(this,${p.id},'${p.name.replace(/'/g,"\\'")}',${p.price})`}"
-    style="${closed ? 'filter:grayscale(1);cursor:pointer;position:relative' : outOfStock ? 'opacity:.45;cursor:not-allowed;pointer-events:none;filter:grayscale(1)' : ''}">
+    style="${closed ? 'filter:grayscale(1);cursor:pointer' : outOfStock ? 'opacity:.45;cursor:not-allowed;pointer-events:none;filter:grayscale(1)' : ''}">
     <div class="product-selected-badge">✓ SELECT</div>
     ${closed ? `
     <div style="position:absolute;inset:0;z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,.65);backdrop-filter:blur(3px);border-radius:12px">
