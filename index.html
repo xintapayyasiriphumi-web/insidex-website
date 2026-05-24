@@ -1512,9 +1512,9 @@ footer{
         <li class="goatx-feat">วงนัวตัวไหลขึ้น</li>
       </ul>
       <div class="goatx-cta-row">
-        <a href="#" onclick="if(currentUser){openShopProduct(1)}else{window.location.href='https://cozy-healing-production-ee02.up.railway.app/auth/discord'}" class="btn btn-red">
+        <!-- <a href="#" onclick="if(currentUser){openShopProduct(1)}else{window.location.href='https://cozy-healing-production-ee02.up.railway.app/auth/discord'}" class="btn btn-red">
           🛒 Buy now
-        </a>
+        </a> -->
         <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn btn-ghost">
           Discord →
         </a>
@@ -2856,32 +2856,32 @@ async function openShop() {
         const disabled = outOfStock || closed;
         const imgUrl = p.image_url;
         return `
-          <div class="product-card-new ${disabled ? 'disabled' : ''}"
-            onclick="${disabled ? '' : `selectProduct(this,${p.id},'${p.name.replace(/'/g,"\\'")}',${p.price})`}"
-            style="${disabled ? 'opacity:.45;cursor:not-allowed;pointer-events:none;filter:grayscale(1)' : ''}">
-            <div class="product-selected-badge">✓ SELECT</div>
-            ${closed ? `<div style="position:absolute;top:.5rem;left:.5rem;z-index:10;background:rgba(0,0,0,.75);backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.15);border-radius:4px;padding:.2rem .6rem;font-family:'Space Mono',monospace;font-size:.55rem;color:rgba(255,255,255,.6);letter-spacing:.1em">🔒 LOCK</div>
-<div style="position:absolute;inset:0;z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,.6);backdrop-filter:blur(4px)">
-  <div style="font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.2em;color:rgba(239,68,68,.8);margin-bottom:.4rem">⏳ เปิดขาย</div>
-  <div style="font-family:'Orbitron',monospace;font-weight:900;font-size:.9rem;color:#ef4444" id="shopCd_${p.id}">--:--:--</div>
-  <div style="font-family:'Space Mono',monospace;font-size:.45rem;color:rgba(255,255,255,.4);margin-top:.2rem;letter-spacing:.1em">1 มิ.ย. 69 · 18:00</div>
-</div>` : ''}
-            ${imgUrl
-              ? `<img class="product-card-img" src="${imgUrl}" alt="${p.name}">`
-              : `<div class="product-card-img-placeholder">⚙️</div>`
-            }
-            <div class="product-card-body">
-              <div class="product-card-name">${p.name}</div>
-              <div class="product-card-desc">${p.description || ''}</div>
-              <div class="product-card-footer">
-                <span class="product-card-price" style="${disabled ? 'color:rgba(255,255,255,.3)' : ''}">฿${p.price}</span>
-                <span class="product-card-stock ${outOfStock ? 'empty' : ''}">
-                  ${closed ? '🔒 LOCK' : outOfStock ? '❌ หมด' : `stock: ${p.stock_count}`}
-                </span>
-              </div>
-            </div>
-          </div>
-        `;
+  <div class="product-card-new ${outOfStock && !closed ? 'disabled' : ''}"
+    onclick="${closed ? `showClosedToast()` : outOfStock ? '' : `selectProduct(this,${p.id},'${p.name.replace(/'/g,"\\'")}',${p.price})`}"
+    style="${closed ? 'filter:grayscale(1);cursor:pointer;position:relative' : outOfStock ? 'opacity:.45;cursor:not-allowed;pointer-events:none;filter:grayscale(1)' : ''}">
+    <div class="product-selected-badge">✓ SELECT</div>
+    ${closed ? `
+    <div style="position:absolute;inset:0;z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,.65);backdrop-filter:blur(3px);border-radius:12px">
+      <div style="font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.2em;color:rgba(239,68,68,.8);margin-bottom:.3rem">⏳ เปิดขาย</div>
+      <div style="font-family:'Orbitron',monospace;font-weight:900;font-size:1rem;color:#ef4444" id="shopCd_${p.id}">--:--:--</div>
+      <div style="font-family:'Space Mono',monospace;font-size:.45rem;color:rgba(255,255,255,.4);margin-top:.2rem;letter-spacing:.1em">1 มิ.ย. 69 · 18:00</div>
+    </div>` : ''}
+    ${imgUrl
+      ? `<img class="product-card-img" src="${imgUrl}" alt="${p.name}">`
+      : `<div class="product-card-img-placeholder">⚙️</div>`
+    }
+    <div class="product-card-body">
+      <div class="product-card-name">${p.name}</div>
+      <div class="product-card-desc">${p.description || ''}</div>
+      <div class="product-card-footer">
+        <span class="product-card-price" style="${disabled ? 'color:rgba(255,255,255,.3)' : ''}">฿${p.price}</span>
+        <span class="product-card-stock ${outOfStock ? 'empty' : ''}">
+          ${closed ? '🔒 SOON' : outOfStock ? '❌ หมด' : `stock: ${p.stock_count}`}
+        </span>
+      </div>
+    </div>
+  </div>
+`;
       }).join('')
     }</div>`;
 
@@ -3182,6 +3182,17 @@ async function openShopProduct(productId) {
   setInterval(updateCountdown, 1000);
 })();
 
+
+function showClosedToast() {
+  const target = new Date('2026-06-01T18:00:00+07:00').getTime();
+  const diff = target - Date.now();
+  if (diff <= 0) { toast('สินค้านี้ยังไม่พร้อมขาย', 'info'); return; }
+  const d = Math.floor(diff / 86400000);
+  const h = Math.floor((diff % 86400000) / 3600000);
+  const m = Math.floor((diff % 3600000) / 60000);
+  const s = Math.floor((diff % 60000) / 1000);
+  toast(`⏳ เปิดขายอีก ${d} วัน ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`, 'info', 4000);
+}
 </script>
 </body>
 </html>
