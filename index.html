@@ -2858,9 +2858,9 @@ async function openShop() {
     document.getElementById('productList').innerHTML = `<div class="product-grid">${
       products.map(p => {
         const outOfStock = p.stock_count <= 0;
-        const isGoatx = p.name.toLowerCase().includes('goatx') || p.id === 1;
-        const goatxOpen = isGoatx && Date.now() >= new Date('2026-06-01T18:00:00+07:00').getTime();
-        const closed = !p.is_active && !goatxOpen;
+        const releaseTime = p.release_at ? new Date(p.release_at).getTime() : null;
+        const clientOpen  = releaseTime !== null && Date.now() >= releaseTime;
+        const closed      = !p.is_active && !clientOpen;
         const disabled = outOfStock || closed;
         const imgUrl = p.image_url;
         return `
@@ -3159,38 +3159,42 @@ async function openShopProduct(productId) {
 
 /* ══ GOATX COUNTDOWN ══ */
 (function() {
-  // 1 มิถุนายน 2569 = 2026 เวลา 18:00 timezone ไทย (UTC+7)
   const target = new Date('2026-06-01T18:00:00+07:00').getTime();
+
+  function onGoatxReleased() {
+    const cd = document.getElementById('goatxCountdown');
+    if (cd) cd.style.display = 'none';
+    const buyRow = document.getElementById('goatxBuyRow');
+    const discRow = document.getElementById('goatxDiscordRow');
+    if (buyRow) buyRow.style.display = 'flex';
+    if (discRow) discRow.style.display = 'none';
+  }
 
   function updateCountdown() {
     const now = Date.now();
     const diff = target - now;
-
     const cd = document.getElementById('goatxCountdown');
     if (!cd) return;
-
-if (diff <= 0) {
-  cd.style.display = 'none';
-  // โชว์ปุ่ม Buy Now
-  const buyRow = document.getElementById('goatxBuyRow');
-  if (buyRow) buyRow.style.display = 'flex';
-  clearInterval(window._goatxCdInterval);
-  return;
-}
-
-    const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-    const hours = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-    const mins = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-    const secs = Math.floor((diff % (1000 * 60)) / 1000);
-
-    document.getElementById('cdDays').textContent = String(days).padStart(2, '0');
-    document.getElementById('cdHours').textContent = String(hours).padStart(2, '0');
-    document.getElementById('cdMins').textContent = String(mins).padStart(2, '0');
-    document.getElementById('cdSecs').textContent = String(secs).padStart(2, '0');
+    if (diff <= 0) { onGoatxReleased(); return; }
+    const days  = Math.floor(diff / 86400000);
+    const hours = Math.floor((diff % 86400000) / 3600000);
+    const mins  = Math.floor((diff % 3600000) / 60000);
+    const secs  = Math.floor((diff % 60000) / 1000);
+    document.getElementById('cdDays').textContent  = String(days).padStart(2,'0');
+    document.getElementById('cdHours').textContent = String(hours).padStart(2,'0');
+    document.getElementById('cdMins').textContent  = String(mins).padStart(2,'0');
+    document.getElementById('cdSecs').textContent  = String(secs).padStart(2,'0');
   }
 
-  updateCountdown();
-  setInterval(updateCountdown, 1000);
+  if (Date.now() >= target) {
+    document.addEventListener('DOMContentLoaded', onGoatxReleased);
+  } else {
+    updateCountdown();
+    const _iv = setInterval(() => {
+      if (Date.now() >= target) { clearInterval(_iv); onGoatxReleased(); }
+      else updateCountdown();
+    }, 1000);
+  }
 })();
 
 
