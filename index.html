@@ -2810,7 +2810,25 @@ async function refreshPoints() {
   }
 }
 
+async function initGoatxBtn() {
+  try {
+    const res = await fetch(`${API}/products`);
+    const products = await res.json();
+    const goatx = products.find(p => p.id === 1);
+    
+    const buyRow = document.getElementById('goatxBuyRow');
+    if (!buyRow) return;
 
+    if (!goatx || goatx.stock_count <= 0) {
+      buyRow.innerHTML = `
+        <button class="btn btn-ghost" disabled style="opacity:.45;cursor:not-allowed;filter:grayscale(1)">
+          ❌ สินค้าหมด Stock
+        </button>
+        <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn btn-ghost">Discord →</a>
+      `;
+    }
+  } catch(e) {}
+}
 
 
 /* ── Logout ── */
@@ -3168,6 +3186,7 @@ async function openShopProduct(productId) {
     const discRow = document.getElementById('goatxDiscordRow');
     if (buyRow) buyRow.style.display = 'flex';
     if (discRow) discRow.style.display = 'none';
+    initGoatxBtn(); // ← เพิ่มบรรทัดนี้
   }
 
   function updateCountdown() {
