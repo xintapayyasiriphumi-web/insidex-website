@@ -1343,6 +1343,64 @@ footer{
   background:rgba(168,85,247,.04);cursor:pointer;
   transition:all .25s;overflow:hidden;position:relative;
 }
+
+/* ══ MOTION ANIMATIONS ══ */
+
+/* 1. Glow Button Pulse — btn-primary & btn-red */
+.btn-primary{
+  animation:glowPrimary 2.5s ease-in-out infinite;
+}
+@keyframes glowPrimary{
+  0%,100%{box-shadow:0 4px 24px rgba(88,101,242,.4),0 0 0 1px rgba(88,101,242,.3)}
+  50%{box-shadow:0 4px 40px rgba(88,101,242,.75),0 0 30px rgba(88,101,242,.35),0 0 0 1px rgba(88,101,242,.6)}
+}
+.btn-primary:hover{animation:none;box-shadow:0 8px 50px rgba(88,101,242,.8),0 0 0 1px rgba(88,101,242,.6)}
+
+.btn-red{animation:glowRed 2.5s ease-in-out infinite}
+@keyframes glowRed{
+  0%,100%{box-shadow:0 4px 24px rgba(220,38,38,.45),0 0 0 1px rgba(220,38,38,.3)}
+  50%{box-shadow:0 4px 40px rgba(220,38,38,.8),0 0 30px rgba(220,38,38,.35),0 0 0 1px rgba(220,38,38,.65)}
+}
+.btn-red:hover{animation:none;box-shadow:0 8px 50px rgba(220,38,38,.85),0 0 0 1px rgba(220,38,38,.65)}
+
+/* 2. Loader fill blur */
+@keyframes loaderFill{
+  0%{width:0%;filter:blur(0)}
+  40%{width:60%;filter:blur(3px) brightness(1.5)}
+  75%{width:90%;filter:blur(4px) brightness(1.8)}
+  95%{width:100%;filter:blur(0)}
+  100%{width:100%;filter:blur(0)}
+}
+
+/* 3. Glitch — GOATX title */
+.goatx-title{position:relative}
+.goatx-title::before,.goatx-title::after{
+  content:attr(data-text);
+  position:absolute;top:0;left:0;width:100%;
+  background:linear-gradient(160deg,#fff 0%,#fca5a5 40%,#ef4444 75%,#fff 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+  pointer-events:none;
+}
+.goatx-title::before{
+  animation:glitchA 4s step-end infinite;
+  clip-path:polygon(0 0,100% 0,100% 38%,0 38%);
+}
+.goatx-title::after{
+  animation:glitchB 4s step-end infinite;
+  clip-path:polygon(0 62%,100% 62%,100% 100%,0 100%);
+}
+@keyframes glitchA{
+  0%,85%,100%{transform:translate(0);opacity:1}
+  86%{transform:translate(-4px,2px);opacity:.9;filter:hue-rotate(90deg)}
+  88%{transform:translate(3px,-1px)}
+  90%{transform:translate(0);opacity:1;filter:none}
+}
+@keyframes glitchB{
+  0%,85%,100%{transform:translate(0);opacity:1}
+  87%{transform:translate(4px,-2px);opacity:.9;filter:hue-rotate(-90deg)}
+  89%{transform:translate(-3px,1px)}
+  91%{transform:translate(0);opacity:1;filter:none}
+}
 </style>
 </head>
 <body>
@@ -1370,7 +1428,7 @@ footer{
 <nav id="nav">
   <a href="#" class="nav-logo">
     <img src="https://img2.pic.in.th/412a527613340855543.png" alt="INSIDEX">
-    <span class="nav-logo-text">INSIDEX</span>
+    <span class="nav-logo-text" id="navLogoText">INSIDEX</span>
   </a>
   <ul class="nav-links">
     <li><a href="#products" class="nav-link">สินค้า</a></li>
@@ -1484,7 +1542,7 @@ footer{
     <div class="goatx-left">
       <div class="goatx-tag">UPDATE · v2.0</div>
       <div class="goatx-version">// GOATX v2.0</div>
-      <div class="goatx-title">GOATX</div>
+      <div class="goatx-title" data-text="GOATX">GOATX</div>
       <div class="goatx-sub">SETTING v2.0</div>
       <div id="goatxCountdown" style="margin-bottom:1.4rem;padding:.8rem 1rem;border:1px solid rgba(239,68,68,.3);border-radius:10px;background:rgba(239,68,68,.06)">
   <div style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(239,68,68,.7);margin-bottom:.5rem">⏳ เปิดขาย 1 มิ.ย. 69 เวลา 18:00</div>
@@ -3227,6 +3285,41 @@ function showClosedToast() {
   const s = Math.floor((diff % 60000) / 1000);
   toast(`⏳ เปิดขายอีก ${d} วัน ${String(h).padStart(2,'0')}:${String(m).padStart(2,'0')}:${String(s).padStart(2,'0')}`, 'info', 4000);
 }
+
+/* ══ TEXT SCRAMBLE — Navbar Logo ══ */
+(function(){
+  const el = document.getElementById('navLogoText');
+  if (!el) return;
+  const original = 'INSIDEX';
+  const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789#@!%';
+  let interval = null, isScrambling = false;
+
+  function scramble() {
+    if (isScrambling) return;
+    isScrambling = true;
+    let iter = 0;
+    clearInterval(interval);
+    interval = setInterval(() => {
+      el.textContent = original.split('').map((c, i) => {
+        if (i < iter) return original[i];
+        return chars[Math.floor(Math.random() * chars.length)];
+      }).join('');
+      iter += .45;
+      if (iter >= original.length) {
+        clearInterval(interval);
+        el.textContent = original;
+        isScrambling = false;
+      }
+    }, 40);
+  }
+
+  const logo = document.querySelector('.nav-logo');
+  if (logo) {
+    logo.addEventListener('mouseenter', scramble);
+    // auto scramble ครั้งแรกหลัง loader หายไป
+    setTimeout(scramble, 2200);
+  }
+})();
 </script>
 </body>
 </html>
