@@ -198,7 +198,7 @@ nav.scrolled{
 .nav-logo-text{
   font-family:'Orbitron',monospace;font-weight:900;font-size:1rem;
   letter-spacing:.2em;
-  background:linear-gradient(135deg,#fff,var(--p1));
+  background:linear-gradient(135deg,#a78bfa,#6366f1,#312e81);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .nav-links{display:flex;align-items:center;gap:1.8rem}
@@ -331,14 +331,14 @@ nav.scrolled{
 .hero-title{
   font-family:'Orbitron',monospace;font-weight:900;
   font-size:clamp(3.5rem,11vw,8rem);line-height:.95;letter-spacing:.1em;
-  background:linear-gradient(160deg,#fff 0%,var(--p1) 40%,var(--b1) 75%,#fff 100%);
+  background:linear-gradient(160deg,#fff 0%,#a78bfa 15%,#7c3aed 40%,#4f46e5 65%,#312e81 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   animation:fadeUp 1s .35s var(--ease-out) both;
   position:relative;
 }
 .hero-title-glow{
   position:absolute;inset:0;
-  background:linear-gradient(160deg,transparent,rgba(168,85,247,.3),transparent);
+  background:linear-gradient(160deg,transparent,rgba(124,58,237,.4),rgba(79,70,229,.3),transparent);
   -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;
   filter:blur(24px);animation:glowPulse 3.5s ease-in-out infinite;
   pointer-events:none;user-select:none;
@@ -1401,6 +1401,64 @@ footer{
   89%{transform:translate(-3px,1px)}
   91%{transform:translate(0);opacity:1;filter:none}
 }
+
+/* ══ ADDED MOTION ══ */
+
+/* 1. Card hover — blur lift */
+.card{transition:transform .35s var(--ease-out),border-color .3s,box-shadow .35s,filter .35s}
+.card:hover{transform:translateY(-7px);filter:blur(0);box-shadow:0 24px 64px rgba(124,58,237,.25),0 0 0 1px rgba(168,85,247,.3)}
+.card:active{transform:translateY(-3px) scale(.99);filter:blur(.4px);transition-duration:.1s}
+
+/* 2. Slider arrow — scale + glow hover */
+.slider-arrow{transition:all .25s var(--ease-out)}
+.slider-arrow:hover{
+  border-color:var(--p1);
+  transform:translateY(-50%) scale(1.15);
+  box-shadow:0 0 28px rgba(168,85,247,.55),0 0 0 1px rgba(168,85,247,.4);
+  filter:brightness(1.2);
+}
+.slider-arrow:active{transform:translateY(-50%) scale(.95);transition-duration:.08s}
+
+/* 3. Progress bar — blur trail */
+#progress{
+  box-shadow:0 0 12px var(--p2),0 0 28px rgba(168,85,247,.4);
+  filter:blur(0);
+  transition:width .08s linear,filter .1s;
+}
+#progress.scrolling{filter:blur(1.5px) brightness(1.4)}
+
+/* 4. FAQ body — slide blur */
+.faq-body{
+  transition:max-height .45s var(--ease-out),opacity .35s var(--ease-out),filter .35s;
+  opacity:0;filter:blur(4px);
+}
+.faq-item.faq-open .faq-body{max-height:320px;opacity:1;filter:blur(0)}
+
+/* 5. Reveal — blur on enter */
+.reveal{opacity:0;transform:translateY(28px);filter:blur(6px);transition:opacity .75s var(--ease-out),transform .75s var(--ease-out),filter .6s var(--ease-out)}
+.reveal.in{opacity:1;transform:translateY(0);filter:blur(0)}
+.reveal-l{opacity:0;transform:translateX(-28px);filter:blur(6px);transition:opacity .75s var(--ease-out),transform .75s var(--ease-out),filter .6s var(--ease-out)}
+.reveal-l.in{opacity:1;transform:translateX(0);filter:blur(0)}
+.reveal-r{opacity:0;transform:translateX(28px);filter:blur(6px);transition:opacity .75s var(--ease-out),transform .75s var(--ease-out),filter .6s var(--ease-out)}
+.reveal-r.in{opacity:1;transform:translateX(0);filter:blur(0)}
+
+/* 6. Nav logo img — spin blur on hover */
+.nav-logo:hover img{
+  filter:drop-shadow(0 0 20px rgba(168,85,247,1));
+  animation:logoSpin .6s var(--ease-out);
+}
+@keyframes logoSpin{
+  0%{transform:rotateY(0) scale(1)}
+  40%{transform:rotateY(180deg) scale(1.1);filter:blur(2px) drop-shadow(0 0 24px rgba(168,85,247,1))}
+  100%{transform:rotateY(360deg) scale(1);filter:blur(0)}
+}
+
+/* 7. Toast — blur entrance */
+.ix-toast{
+  transition:transform .45s var(--ease-out),opacity .4s ease,filter .4s;
+  filter:blur(8px);
+}
+.ix-toast.show{transform:translate(-50%,0);opacity:1;filter:blur(0)}
 </style>
 </head>
 <body>
@@ -2568,7 +2626,7 @@ function closeMob() {
       }
       const n = nodes[i], g = .55 + Math.sin(n.p) * .45;
       const gr = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 3.5);
-      gr.addColorStop(0, `rgba(192,132,252,${g})`);
+      gr.addColorStop(0, `rgba(99,102,241,${g})`);
       gr.addColorStop(1, 'rgba(124,58,237,0)');
       ctx.beginPath(); ctx.arc(n.x, n.y, n.r * 3.5, 0, Math.PI * 2);
       ctx.fillStyle = gr; ctx.fill();
@@ -3319,6 +3377,46 @@ function showClosedToast() {
     // auto scramble ครั้งแรกหลัง loader หายไป
     setTimeout(scramble, 2200);
   }
+})();
+
+/* ══ PROGRESS BAR BLUR ON SCROLL ══ */
+(function(){
+  let scrollTimer;
+  const p = document.getElementById('progress');
+  document.addEventListener('scroll', () => {
+    p.classList.add('scrolling');
+    clearTimeout(scrollTimer);
+    scrollTimer = setTimeout(() => p.classList.remove('scrolling'), 120);
+  }, {passive:true});
+})();
+
+/* ══ DEVTOOLS PROTECTION ══ */
+(function(){
+  // ปิด right-click
+  document.addEventListener('contextmenu', e => e.preventDefault());
+
+  // ปิด F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S
+  document.addEventListener('keydown', e => {
+    if (
+      e.key === 'F12' ||
+      (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key)) ||
+      (e.ctrlKey && ['U','S','A'].includes(e.key))
+    ) e.preventDefault();
+  });
+
+  // detect devtools เปิดอยู่ → redirect
+  let devOpen = false;
+  const threshold = 160;
+  setInterval(() => {
+    const w = window.outerWidth - window.innerWidth > threshold;
+    const h = window.outerHeight - window.innerHeight > threshold;
+    if ((w || h) && !devOpen) {
+      devOpen = true;
+      document.body.innerHTML = '';
+      window.location.href = 'https://insidex.online';
+    }
+    if (!w && !h) devOpen = false;
+  }, 1000);
 })();
 </script>
 </body>
