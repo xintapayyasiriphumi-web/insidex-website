@@ -2626,7 +2626,7 @@ function closeMob() {
       }
       const n = nodes[i], g = .55 + Math.sin(n.p) * .45;
       const gr = ctx.createRadialGradient(n.x, n.y, 0, n.x, n.y, n.r * 3.5);
-      gr.addColorStop(0, `rgba(192,132,252,${g})`);
+      gr.addColorStop(0, `rgba(99,102,241,${g})`);
       gr.addColorStop(1, 'rgba(124,58,237,0)');
       ctx.beginPath(); ctx.arc(n.x, n.y, n.r * 3.5, 0, Math.PI * 2);
       ctx.fillStyle = gr; ctx.fill();
@@ -3388,6 +3388,35 @@ function showClosedToast() {
     clearTimeout(scrollTimer);
     scrollTimer = setTimeout(() => p.classList.remove('scrolling'), 120);
   }, {passive:true});
+})();
+
+/* ══ DEVTOOLS PROTECTION ══ */
+(function(){
+  // ปิด right-click
+  document.addEventListener('contextmenu', e => e.preventDefault());
+
+  // ปิด F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S
+  document.addEventListener('keydown', e => {
+    if (
+      e.key === 'F12' ||
+      (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key)) ||
+      (e.ctrlKey && ['U','S','A'].includes(e.key))
+    ) e.preventDefault();
+  });
+
+  // detect devtools เปิดอยู่ → redirect
+  let devOpen = false;
+  const threshold = 160;
+  setInterval(() => {
+    const w = window.outerWidth - window.innerWidth > threshold;
+    const h = window.outerHeight - window.innerHeight > threshold;
+    if ((w || h) && !devOpen) {
+      devOpen = true;
+      document.body.innerHTML = '';
+      window.location.href = 'https://insidex.online';
+    }
+    if (!w && !h) devOpen = false;
+  }, 1000);
 })();
 </script>
 </body>
