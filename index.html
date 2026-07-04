@@ -585,7 +585,7 @@ nav.scrolled{
   box-shadow:0 0 80px rgba(124,58,237,.2);
 }
 .slider-track{display:flex;transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
-.slide{min-width:100%;position:relative}
+.slide{min-width:100%;flex-shrink:0;position:relative}
 .slide-badge-row{
   position:absolute;top:1.2rem;left:1.2rem;z-index:10;
   display:flex;gap:.5rem;align-items:center;
@@ -1936,6 +1936,7 @@ footer{
       <button class="dot active" onclick="slideTo(0)"></button>
       <button class="dot" onclick="slideTo(1)"></button>
       <button class="dot" onclick="slideTo(2)"></button>
+      <button class="dot" onclick="slideTo(3)"></button>
     </div>
   </div>
 
@@ -2709,10 +2710,17 @@ document.querySelectorAll('[data-target]').forEach(el => counterIo.observe(el));
 /* ══════════════════════════════════════════════════
    VIDEO SLIDER
 ══════════════════════════════════════════════════ */
-let si = 0, total = 3;
+let si = 0, total = 4;
+// แทนที่ทั้งบล็อกนี้
 function slideTo(n) {
-  document.querySelectorAll('#sliderTrack iframe').forEach(f => { const s = f.src; f.src = ''; f.src = s; });
+  const prev = si;
   si = ((n % total) + total) % total;
+  const frames = document.querySelectorAll('#sliderTrack iframe');
+  if (frames[prev]) {
+    const s = frames[prev].src;
+    frames[prev].src = '';
+    frames[prev].src = s;
+  }
   document.getElementById('sliderTrack').style.transform = `translateX(-${si * 100}%)`;
   document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === si));
 }
