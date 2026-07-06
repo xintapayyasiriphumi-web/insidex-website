@@ -1460,6 +1460,11 @@ footer{
 .reveal-r{opacity:0;transform:translateX(28px);filter:blur(6px);transition:opacity .75s var(--ease-out),transform .75s var(--ease-out),filter .6s var(--ease-out)}
 .reveal-r.in{opacity:1;transform:translateX(0);filter:blur(0)}
 
+/* ถ้า JS ไม่ทำงานเลย (ปิด JS หรือโหลดพัง) ให้เนื้อหาแสดงปกติหลัง 3 วิ */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-l, .reveal-r { opacity: 1 !important; transform: none !important; filter: none !important; }
+}
+
 /* 6. Nav logo img — spin blur on hover */
 .nav-logo:hover img{
   filter:drop-shadow(0 0 20px rgba(168,85,247,1));
@@ -2745,7 +2750,7 @@ function closeMob() {
 })();
 
 /* ══════════════════════════════════════════════════
-   REVEAL ON SCROLL
+   REVEAL ON SCROLL (with safety fallback)
 ══════════════════════════════════════════════════ */
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
@@ -2755,8 +2760,19 @@ const io = new IntersectionObserver(entries => {
       e.target.classList.remove('in');
     }
   });
-}, {threshold: .12});
-document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => io.observe(el));
+}, {threshold: .05, rootMargin: '0px 0px -5% 0px'}); // เกาะเร็วขึ้น ไวขึ้น
+
+const revealEls = document.querySelectorAll('.reveal,.reveal-l,.reveal-r');
+revealEls.forEach(el => io.observe(el));
+
+// Safety net: ถ้า element ยังไม่ถูกเปิดใน 2.5 วิ (เช่น JS ช้า/พลาดจังหวะ) ให้บังคับแสดงเลย
+setTimeout(() => {
+  revealEls.forEach(el => {
+    if (!el.classList.contains('in')) {
+      el.classList.add('in');
+    }
+  });
+}, 2500);
 
 /* ══════════════════════════════════════════════════
    COUNTER ANIMATION
