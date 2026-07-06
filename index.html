@@ -464,7 +464,7 @@ nav.scrolled{
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:1.25rem}
 .card{
   position:relative;border:1px solid var(--border);border-radius:var(--radius);
-  padding:2rem;background:var(--surface);backdrop-filter:blur(20px);
+  padding:2rem;background:rgba(10,10,15,.55); /* เพิ่มความทึบแทน blur */
   overflow:hidden;transition:transform .35s var(--ease-out),border-color .3s,box-shadow .35s;
   clip-path:polygon(16px 0%,100% 0%,calc(100% - 16px) 100%,0% 100%);
   display:flex;flex-direction:column;
@@ -528,7 +528,7 @@ nav.scrolled{
 @media(max-width:768px){.why-grid{grid-template-columns:1fr}}
 .why-card{
   padding:2rem;border:1px solid rgba(168,85,247,.15);border-radius:var(--radius);
-  background:rgba(255,255,255,.02);backdrop-filter:blur(20px);
+  background:rgba(10,10,15,.5); /* แทน blur */
   position:relative;overflow:hidden;
   transition:border-color .3s,transform .3s var(--ease-out);
 }
@@ -553,7 +553,7 @@ nav.scrolled{
 .value-banner{
   padding:2.5rem 3rem;border:1px solid rgba(168,85,247,.2);border-radius:var(--radius);
   background:linear-gradient(135deg,rgba(124,58,237,.09) 0%,rgba(88,101,242,.07) 100%);
-  backdrop-filter:blur(20px);
+  backdrop-filter:blur(10px);
   display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap;
 }
 .value-left{flex:1;min-width:180px}
@@ -618,7 +618,7 @@ nav.scrolled{
 .slide-video:hover .yt-play-btn{transform:translate(-50%,-50%) scale(1.15)}
 
 .slide-footer{
-  background:rgba(3,3,5,.92);backdrop-filter:blur(24px);
+  background:rgba(3,3,5,.95);backdrop-filter:blur(10px);
   padding:1.2rem 1.8rem;
   display:flex;align-items:center;justify-content:space-between;
   flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(168,85,247,.12);
@@ -661,7 +661,8 @@ nav.scrolled{
 .show-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
 .show-stat{
   padding:1.2rem 1.5rem;border:1px solid rgba(168,85,247,.12);border-radius:8px;
-  background:rgba(124,58,237,.04);text-align:center;backdrop-filter:blur(12px);
+  background:rgba(124,58,237,.08); /* เพิ่มความทึบเล็กน้อยแทน blur */
+  text-align:center;
   transition:border-color .25s,transform .25s;
 }
 .show-stat:hover{border-color:rgba(168,85,247,.3);transform:translateY(-2px)}
@@ -686,8 +687,8 @@ nav.scrolled{
   display:flex;align-items:center;justify-content:space-between;
   flex-wrap:wrap;gap:1.5rem;padding:2rem 2.5rem;
   border:1px solid rgba(168,85,247,.3);border-radius:var(--radius);
-  background:linear-gradient(135deg,rgba(124,58,237,.1),rgba(168,85,247,.05));
-  backdrop-filter:blur(24px);
+  background:linear-gradient(135deg,rgba(124,58,237,.13),rgba(168,85,247,.07));
+  backdrop-filter:blur(10px);
   transition:border-color .3s,box-shadow .3s;
 }
 .shop-banner-inner:hover{border-color:rgba(168,85,247,.6);box-shadow:0 0 48px rgba(124,58,237,.18)}
@@ -719,8 +720,8 @@ nav.scrolled{
   max-width:1200px;margin:0 auto;position:relative;overflow:hidden;
   border:1px solid rgba(88,101,242,.25);border-radius:16px;
   padding:5rem 3rem;text-align:center;
-  background:linear-gradient(135deg,rgba(88,101,242,.07),rgba(124,58,237,.09),rgba(88,101,242,.07));
-  backdrop-filter:blur(32px);
+  background:linear-gradient(135deg,rgba(88,101,242,.1),rgba(124,58,237,.12),rgba(88,101,242,.1));
+  backdrop-filter:blur(14px);
 }
 .discord-inner::before{
   content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
@@ -770,7 +771,7 @@ nav.scrolled{
 .testi-card{
   flex-shrink:0;width:300px;
   padding:1.6rem;border:1px solid var(--border);border-radius:var(--radius);
-  background:rgba(255,255,255,.025);backdrop-filter:blur(20px);
+  background:rgba(10,10,15,.55); /* แทน blur */
   position:relative;overflow:hidden;
   transition:border-color .3s,transform .3s var(--ease-out);
 }
@@ -805,7 +806,11 @@ nav.scrolled{
 .faq-left-cta{display:inline-flex;align-items:center;gap:.5rem;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--p1);border:1px solid rgba(168,85,247,.3);padding:.6rem 1.2rem;border-radius:4px;transition:all .2s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
 .faq-left-cta:hover{background:rgba(168,85,247,.1);border-color:var(--p1);gap:.8rem}
 .faq-list{display:flex;flex-direction:column;gap:.6rem}
-.faq-item{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:rgba(255,255,255,.02);backdrop-filter:blur(16px);transition:border-color .3s,box-shadow .3s}
+.faq-item{
+  border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+  background:rgba(255,255,255,.02);backdrop-filter:blur(8px);
+  transition:border-color .3s,box-shadow .3s
+}
 .faq-item.faq-open{border-color:rgba(168,85,247,.45);box-shadow:0 8px 32px rgba(124,58,237,.12)}
 .faq-q{width:100%;text-align:left;padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.03em;color:var(--text);background:none;border:none;cursor:pointer;transition:color .2s}
 .faq-q:hover{color:var(--p1)}
@@ -3518,10 +3523,10 @@ function showClosedToast() {
 
 /* ══ DEVTOOLS PROTECTION ══ */
 (function(){
-  // ปิด right-click
+  // ปิด right-click (ยังใช้ได้ทุก device)
   document.addEventListener('contextmenu', e => e.preventDefault());
 
-  // ปิด F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S
+  // ปิด F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S (ใช้ได้เฉพาะ desktop keyboard อยู่แล้ว ไม่กระทบมือถือ)
   document.addEventListener('keydown', e => {
     if (
       e.key === 'F12' ||
@@ -3530,14 +3535,20 @@ function showClosedToast() {
     ) e.preventDefault();
   });
 
-  // detect devtools เปิดอยู่ → redirect
+  // เช็คว่าเป็น touch device (มือถือ/แท็บเล็ต) ไหม — ถ้าใช่ ข้ามการเช็ค devtools ไปเลย
+  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
+  if (isTouchDevice) return; // ออกจากฟังก์ชันทันที ไม่ต้องรัน interval เลย
+
+  // detect devtools เปิดอยู่ → redirect (รันเฉพาะ desktop)
   let devOpen = false;
   const threshold = 160;
+  let redirected = false; // กันลูป ถ้าเคย redirect ไปแล้วไม่ redirect ซ้ำ
   setInterval(() => {
     const w = window.outerWidth - window.innerWidth > threshold;
     const h = window.outerHeight - window.innerHeight > threshold;
-    if ((w || h) && !devOpen) {
+    if ((w || h) && !devOpen && !redirected) {
       devOpen = true;
+      redirected = true;
       document.body.innerHTML = '';
       window.location.href = 'https://insidex.online';
     }
