@@ -2646,7 +2646,7 @@ function closeMob() {
 }
 
 /* ══════════════════════════════════════════════════
-   HERO CANVAS — Particle Network
+   HERO CANVAS — Particle Network (with pause when off-screen)
 ══════════════════════════════════════════════════ */
 (function() {
   const canvas = document.getElementById('heroCanvas');
@@ -2654,6 +2654,8 @@ function closeMob() {
   const ctx = canvas.getContext('2d');
   const N = 60, LINK = 155, MOUSE_R = 190;
   let W, H, nodes, mouse = {x: -9999, y: -9999};
+  let rafId = null;
+  let isVisible = true;
 
   function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
 
@@ -2668,6 +2670,8 @@ function closeMob() {
   }
 
   function draw() {
+    if (!isVisible) { rafId = null; return; } // หยุด loop จริงๆ เมื่อไม่อยู่ในจอ
+
     ctx.clearRect(0, 0, W, H);
     nodes.forEach(n => {
       n.x += n.vx; n.y += n.vy; n.p += .022;
@@ -2704,8 +2708,35 @@ function closeMob() {
       ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(200,140,255,${g})`; ctx.fill();
     }
-    requestAnimationFrame(draw);
+    rafId = requestAnimationFrame(draw);
   }
+
+  function startLoop() {
+    if (rafId === null) {
+      rafId = requestAnimationFrame(draw);
+    }
+  }
+
+  // IntersectionObserver: เช็คว่า hero section อยู่ในจอไหม
+  const heroSection = canvas.closest('.hero');
+  const visIo = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      isVisible = e.isIntersecting;
+      if (isVisible) startLoop();
+    });
+  }, {threshold: 0});
+  if (heroSection) visIo.observe(heroSection);
+
+  // หยุด/รันตาม tab visibility ด้วย (ประหยัดขึ้นอีกเมื่อสลับแท็บ)
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      isVisible = false;
+    } else if (heroSection) {
+      const rect = heroSection.getBoundingClientRect();
+      isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+      if (isVisible) startLoop();
+    }
+  });
 
   window.addEventListener('resize', resize);
   document.addEventListener('mousemove', e => {
@@ -2713,7 +2744,9 @@ function closeMob() {
     mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
   });
   document.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
-  init(); draw();
+
+  init();
+  startLoop();
 })();
 
 /* ══════════════════════════════════════════════════
