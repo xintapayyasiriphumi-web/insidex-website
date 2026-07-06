@@ -2651,14 +2651,14 @@ function closeMob() {
 }
 
 /* ══════════════════════════════════════════════════
-   HERO CANVAS — Particle Network (with pause when off-screen)
+   HERO CANVAS — Particle Network (no mouse interaction, reduced count)
 ══════════════════════════════════════════════════ */
 (function() {
   const canvas = document.getElementById('heroCanvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  const N = 60, LINK = 155, MOUSE_R = 190;
-  let W, H, nodes, mouse = {x: -9999, y: -9999};
+  const N = 32, LINK = 140; // ลดจำนวนจุดจาก 60 เหลือ 32, ลดระยะเชื่อมเส้นเล็กน้อย
+  let W, H, nodes;
   let rafId = null;
   let isVisible = true;
 
@@ -2675,19 +2675,15 @@ function closeMob() {
   }
 
   function draw() {
-    if (!isVisible) { rafId = null; return; } // หยุด loop จริงๆ เมื่อไม่อยู่ในจอ
+    if (!isVisible) { rafId = null; return; }
 
     ctx.clearRect(0, 0, W, H);
     nodes.forEach(n => {
       n.x += n.vx; n.y += n.vy; n.p += .022;
       if (n.x < 0 || n.x > W) n.vx *= -1;
       if (n.y < 0 || n.y > H) n.vy *= -1;
-      const dx = mouse.x - n.x, dy = mouse.y - n.y, d = Math.hypot(dx, dy);
-      if (d < MOUSE_R && d > 0) {
-        const f = (1 - d / MOUSE_R) * .007;
-        n.vx += dx / d * f; n.vy += dy / d * f;
-      }
       n.vx *= .988; n.vy *= .988;
+      // ไม่มี mouse-follow force แล้ว
     });
 
     for (let i = 0; i < nodes.length; i++) {
@@ -2722,7 +2718,6 @@ function closeMob() {
     }
   }
 
-  // IntersectionObserver: เช็คว่า hero section อยู่ในจอไหม
   const heroSection = canvas.closest('.hero');
   const visIo = new IntersectionObserver(entries => {
     entries.forEach(e => {
@@ -2732,7 +2727,6 @@ function closeMob() {
   }, {threshold: 0});
   if (heroSection) visIo.observe(heroSection);
 
-  // หยุด/รันตาม tab visibility ด้วย (ประหยัดขึ้นอีกเมื่อสลับแท็บ)
   document.addEventListener('visibilitychange', () => {
     if (document.hidden) {
       isVisible = false;
@@ -2744,11 +2738,7 @@ function closeMob() {
   });
 
   window.addEventListener('resize', resize);
-  document.addEventListener('mousemove', e => {
-    const r = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
-  });
-  document.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
+  // ไม่มี mousemove/mouseleave listener แล้ว — ตัดการตอบสนองกับเมาส์/ทัชออกทั้งหมด
 
   init();
   startLoop();
