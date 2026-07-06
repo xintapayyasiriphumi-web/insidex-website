@@ -3521,40 +3521,7 @@ function showClosedToast() {
   }, {passive:true});
 })();
 
-/* ══ DEVTOOLS PROTECTION ══ */
-(function(){
-  // ปิด right-click (ยังใช้ได้ทุก device)
-  document.addEventListener('contextmenu', e => e.preventDefault());
 
-  // ปิด F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S (ใช้ได้เฉพาะ desktop keyboard อยู่แล้ว ไม่กระทบมือถือ)
-  document.addEventListener('keydown', e => {
-    if (
-      e.key === 'F12' ||
-      (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key)) ||
-      (e.ctrlKey && ['U','S','A'].includes(e.key))
-    ) e.preventDefault();
-  });
-
-  // เช็คว่าเป็น touch device (มือถือ/แท็บเล็ต) ไหม — ถ้าใช่ ข้ามการเช็ค devtools ไปเลย
-  const isTouchDevice = ('ontouchstart' in window) || (navigator.maxTouchPoints > 0);
-  if (isTouchDevice) return; // ออกจากฟังก์ชันทันที ไม่ต้องรัน interval เลย
-
-  // detect devtools เปิดอยู่ → redirect (รันเฉพาะ desktop)
-  let devOpen = false;
-  const threshold = 160;
-  let redirected = false; // กันลูป ถ้าเคย redirect ไปแล้วไม่ redirect ซ้ำ
-  setInterval(() => {
-    const w = window.outerWidth - window.innerWidth > threshold;
-    const h = window.outerHeight - window.innerHeight > threshold;
-    if ((w || h) && !devOpen && !redirected) {
-      devOpen = true;
-      redirected = true;
-      document.body.innerHTML = '';
-      window.location.href = 'https://insidex.online';
-    }
-    if (!w && !h) devOpen = false;
-  }, 1000);
-})();
 </script>
 </body>
 </html>
