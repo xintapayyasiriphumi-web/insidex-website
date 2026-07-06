@@ -1570,7 +1570,7 @@ footer{
 <div class="stats reveal">
   <div class="stats-inner">
     <div class="stat">
-      <div class="stat-num" data-target="2000" data-suffix="+">0+</div>
+      <div class="stat-num" data-target="2200" data-suffix="+">0+</div>
       <div class="stat-label">ลูกค้าที่พึงพอใจ</div>
     </div>
     <div class="stat">

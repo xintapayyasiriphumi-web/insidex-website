@@ -602,8 +602,21 @@ nav.scrolled{
   font-family:'Space Mono',monospace;font-size:.6rem;
   letter-spacing:.15em;color:rgba(255,255,255,.55);
 }
-.slide-video{position:relative;padding-bottom:56.25%;height:0;background:#000}
+.slide-video{position:relative;padding-bottom:56.25%;height:0;background:#000;cursor:pointer;overflow:hidden}
 .slide-video iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.yt-thumb{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;transition:transform .4s var(--ease-out),filter .3s;
+}
+.slide-video:hover .yt-thumb{transform:scale(1.04);filter:brightness(.75)}
+.yt-play-btn{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:68px;height:48px;border:none;background:transparent;cursor:pointer;
+  filter:drop-shadow(0 4px 20px rgba(0,0,0,.5));
+  transition:transform .25s var(--ease-out);
+}
+.slide-video:hover .yt-play-btn{transform:translate(-50%,-50%) scale(1.15)}
+
 .slide-footer{
   background:rgba(3,3,5,.92);backdrop-filter:blur(24px);
   padding:1.2rem 1.8rem;
@@ -1570,7 +1583,7 @@ footer{
 <div class="stats reveal">
   <div class="stats-inner">
     <div class="stat">
-      <div class="stat-num" data-target="2000" data-suffix="+">0+</div>
+      <div class="stat-num" data-target="2200" data-suffix="+">0+</div>
       <div class="stat-label">ลูกค้าที่พึงพอใจ</div>
     </div>
     <div class="stat">
@@ -1836,10 +1849,16 @@ footer{
         <div class="slide">
           <div class="slide-badge-row">
             <div class="slide-badge">⚙️ SETTING ULTIMATEX</div>
-            <div class="slide-counter">1 / 3</div>
+            <div class="slide-counter">1 / 4</div>
           </div>
-          <div class="slide-video">
-            <iframe src="https://www.youtube.com/embed/S3UemzzmksQ" title="INSIDEX Showcase 1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+          <div class="slide-video" data-video-id="S3UemzzmksQ" onclick="loadYoutube(this)">
+            <img src="https://img.youtube.com/vi/S3UemzzmksQ/maxresdefault.jpg" alt="INSIDEX Showcase 1" class="yt-thumb" loading="lazy">
+            <button class="yt-play-btn" aria-label="Play video">
+              <svg viewBox="0 0 68 48" width="68" height="48">
+                <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24 S67.94,13.05,66.52,7.74z" fill="#f00"/>
+                <path d="M 45,24 27,14 27,34" fill="#fff"/>
+              </svg>
+            </button>
           </div>
           <div class="slide-footer">
             <div class="slide-info">
@@ -1860,10 +1879,16 @@ footer{
         <div class="slide">
           <div class="slide-badge-row">
             <div class="slide-badge">⚙️ SETTING ULTIMATEX + PLUS</div>
-            <div class="slide-counter">2 / 3</div>
+            <div class="slide-counter">2 / 4</div>
           </div>
-          <div class="slide-video">
-            <iframe src="https://www.youtube.com/embed/woKB168nZzY" title="INSIDEX Showcase 2" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+          <div class="slide-video" data-video-id="woKB168nZzY" onclick="loadYoutube(this)">
+            <img src="https://img.youtube.com/vi/woKB168nZzY/maxresdefault.jpg" alt="INSIDEX Showcase 2" class="yt-thumb" loading="lazy">
+            <button class="yt-play-btn" aria-label="Play video">
+              <svg viewBox="0 0 68 48" width="68" height="48">
+                <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24 S67.94,13.05,66.52,7.74z" fill="#f00"/>
+                <path d="M 45,24 27,14 27,34" fill="#fff"/>
+              </svg>
+            </button>
           </div>
           <div class="slide-footer" style="border-top-color:rgba(99,102,241,.2)">
             <div class="slide-info">
@@ -1884,10 +1909,16 @@ footer{
         <div class="slide">
           <div class="slide-badge-row">
             <div class="slide-badge">⚙️ SETTING ULTIMATEX + PLUS</div>
-            <div class="slide-counter">3 / 3</div>
+            <div class="slide-counter">3 / 4</div>
           </div>
-          <div class="slide-video">
-            <iframe src="https://www.youtube.com/embed/L9vBNf6GiM0" title="INSIDEX Showcase 3" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+          <div class="slide-video" data-video-id="L9vBNf6GiM0" onclick="loadYoutube(this)">
+            <img src="https://img.youtube.com/vi/L9vBNf6GiM0/maxresdefault.jpg" alt="INSIDEX Showcase 3" class="yt-thumb" loading="lazy">
+            <button class="yt-play-btn" aria-label="Play video">
+              <svg viewBox="0 0 68 48" width="68" height="48">
+                <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24 S67.94,13.05,66.52,7.74z" fill="#f00"/>
+                <path d="M 45,24 27,14 27,34" fill="#fff"/>
+              </svg>
+            </button>
           </div>
           <div class="slide-footer" style="border-top-color:rgba(88,101,242,.2)">
             <div class="slide-info">
@@ -1908,10 +1939,16 @@ footer{
         <div class="slide">
           <div class="slide-badge-row">
             <div class="slide-badge">⚙️ SETTING GOATX</div>
-            <div class="slide-counter">3 / 3</div>
+            <div class="slide-counter">4 / 4</div>
           </div>
-          <div class="slide-video">
-            <iframe src="https://www.youtube.com/embed/UpA3W2p5-gU" title="INSIDEX Showcase 4" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+          <div class="slide-video" data-video-id="UpA3W2p5-gU" onclick="loadYoutube(this)">
+            <img src="https://img.youtube.com/vi/UpA3W2p5-gU/maxresdefault.jpg" alt="INSIDEX Showcase 4" class="yt-thumb" loading="lazy">
+            <button class="yt-play-btn" aria-label="Play video">
+              <svg viewBox="0 0 68 48" width="68" height="48">
+                <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24 S67.94,13.05,66.52,7.74z" fill="#f00"/>
+                <path d="M 45,24 27,14 27,34" fill="#fff"/>
+              </svg>
+            </button>
           </div>
           <div class="slide-footer" style="border-top-color:rgba(88,101,242,.2)">
             <div class="slide-info">
@@ -2538,6 +2575,15 @@ footer{
       </div>
 
 <script>
+
+function loadYoutube(el) {
+  const id = el.dataset.videoId;
+  if (!id) return;
+  el.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" 
+    title="INSIDEX Showcase" frameborder="0" 
+    allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" 
+    allowfullscreen></iframe>`;
+}
 /* ══════════════════════════════════════════════════
    LOADER
 ══════════════════════════════════════════════════ */
