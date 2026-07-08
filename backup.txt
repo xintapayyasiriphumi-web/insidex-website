@@ -464,7 +464,7 @@ nav.scrolled{
 .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(265px,1fr));gap:1.25rem}
 .card{
   position:relative;border:1px solid var(--border);border-radius:var(--radius);
-  padding:2rem;background:var(--surface);backdrop-filter:blur(20px);
+  padding:2rem;background:rgba(10,10,15,.55); /* เพิ่มความทึบแทน blur */
   overflow:hidden;transition:transform .35s var(--ease-out),border-color .3s,box-shadow .35s;
   clip-path:polygon(16px 0%,100% 0%,calc(100% - 16px) 100%,0% 100%);
   display:flex;flex-direction:column;
@@ -528,7 +528,7 @@ nav.scrolled{
 @media(max-width:768px){.why-grid{grid-template-columns:1fr}}
 .why-card{
   padding:2rem;border:1px solid rgba(168,85,247,.15);border-radius:var(--radius);
-  background:rgba(255,255,255,.02);backdrop-filter:blur(20px);
+  background:rgba(10,10,15,.5); /* แทน blur */
   position:relative;overflow:hidden;
   transition:border-color .3s,transform .3s var(--ease-out);
 }
@@ -553,7 +553,7 @@ nav.scrolled{
 .value-banner{
   padding:2.5rem 3rem;border:1px solid rgba(168,85,247,.2);border-radius:var(--radius);
   background:linear-gradient(135deg,rgba(124,58,237,.09) 0%,rgba(88,101,242,.07) 100%);
-  backdrop-filter:blur(20px);
+  backdrop-filter:blur(10px);
   display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap;
 }
 .value-left{flex:1;min-width:180px}
@@ -585,7 +585,7 @@ nav.scrolled{
   box-shadow:0 0 80px rgba(124,58,237,.2);
 }
 .slider-track{display:flex;transition:transform .5s cubic-bezier(.25,.46,.45,.94)}
-.slide{min-width:100%;position:relative}
+.slide{min-width:100%;flex-shrink:0;position:relative}
 .slide-badge-row{
   position:absolute;top:1.2rem;left:1.2rem;z-index:10;
   display:flex;gap:.5rem;align-items:center;
@@ -602,10 +602,23 @@ nav.scrolled{
   font-family:'Space Mono',monospace;font-size:.6rem;
   letter-spacing:.15em;color:rgba(255,255,255,.55);
 }
-.slide-video{position:relative;padding-bottom:56.25%;height:0;background:#000}
+.slide-video{position:relative;padding-bottom:56.25%;height:0;background:#000;cursor:pointer;overflow:hidden}
 .slide-video iframe{position:absolute;inset:0;width:100%;height:100%;border:none}
+.yt-thumb{
+  position:absolute;inset:0;width:100%;height:100%;
+  object-fit:cover;transition:transform .4s var(--ease-out),filter .3s;
+}
+.slide-video:hover .yt-thumb{transform:scale(1.04);filter:brightness(.75)}
+.yt-play-btn{
+  position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
+  width:68px;height:48px;border:none;background:transparent;cursor:pointer;
+  filter:drop-shadow(0 4px 20px rgba(0,0,0,.5));
+  transition:transform .25s var(--ease-out);
+}
+.slide-video:hover .yt-play-btn{transform:translate(-50%,-50%) scale(1.15)}
+
 .slide-footer{
-  background:rgba(3,3,5,.92);backdrop-filter:blur(24px);
+  background:rgba(3,3,5,.95);backdrop-filter:blur(10px);
   padding:1.2rem 1.8rem;
   display:flex;align-items:center;justify-content:space-between;
   flex-wrap:wrap;gap:1rem;border-top:1px solid rgba(168,85,247,.12);
@@ -648,7 +661,8 @@ nav.scrolled{
 .show-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem}
 .show-stat{
   padding:1.2rem 1.5rem;border:1px solid rgba(168,85,247,.12);border-radius:8px;
-  background:rgba(124,58,237,.04);text-align:center;backdrop-filter:blur(12px);
+  background:rgba(124,58,237,.08); /* เพิ่มความทึบเล็กน้อยแทน blur */
+  text-align:center;
   transition:border-color .25s,transform .25s;
 }
 .show-stat:hover{border-color:rgba(168,85,247,.3);transform:translateY(-2px)}
@@ -673,8 +687,8 @@ nav.scrolled{
   display:flex;align-items:center;justify-content:space-between;
   flex-wrap:wrap;gap:1.5rem;padding:2rem 2.5rem;
   border:1px solid rgba(168,85,247,.3);border-radius:var(--radius);
-  background:linear-gradient(135deg,rgba(124,58,237,.1),rgba(168,85,247,.05));
-  backdrop-filter:blur(24px);
+  background:linear-gradient(135deg,rgba(124,58,237,.13),rgba(168,85,247,.07));
+  backdrop-filter:blur(10px);
   transition:border-color .3s,box-shadow .3s;
 }
 .shop-banner-inner:hover{border-color:rgba(168,85,247,.6);box-shadow:0 0 48px rgba(124,58,237,.18)}
@@ -706,8 +720,8 @@ nav.scrolled{
   max-width:1200px;margin:0 auto;position:relative;overflow:hidden;
   border:1px solid rgba(88,101,242,.25);border-radius:16px;
   padding:5rem 3rem;text-align:center;
-  background:linear-gradient(135deg,rgba(88,101,242,.07),rgba(124,58,237,.09),rgba(88,101,242,.07));
-  backdrop-filter:blur(32px);
+  background:linear-gradient(135deg,rgba(88,101,242,.1),rgba(124,58,237,.12),rgba(88,101,242,.1));
+  backdrop-filter:blur(14px);
 }
 .discord-inner::before{
   content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
@@ -757,7 +771,7 @@ nav.scrolled{
 .testi-card{
   flex-shrink:0;width:300px;
   padding:1.6rem;border:1px solid var(--border);border-radius:var(--radius);
-  background:rgba(255,255,255,.025);backdrop-filter:blur(20px);
+  background:rgba(10,10,15,.55); /* แทน blur */
   position:relative;overflow:hidden;
   transition:border-color .3s,transform .3s var(--ease-out);
 }
@@ -792,7 +806,11 @@ nav.scrolled{
 .faq-left-cta{display:inline-flex;align-items:center;gap:.5rem;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--p1);border:1px solid rgba(168,85,247,.3);padding:.6rem 1.2rem;border-radius:4px;transition:all .2s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
 .faq-left-cta:hover{background:rgba(168,85,247,.1);border-color:var(--p1);gap:.8rem}
 .faq-list{display:flex;flex-direction:column;gap:.6rem}
-.faq-item{border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:rgba(255,255,255,.02);backdrop-filter:blur(16px);transition:border-color .3s,box-shadow .3s}
+.faq-item{
+  border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
+  background:rgba(255,255,255,.02);backdrop-filter:blur(8px);
+  transition:border-color .3s,box-shadow .3s
+}
 .faq-item.faq-open{border-color:rgba(168,85,247,.45);box-shadow:0 8px 32px rgba(124,58,237,.12)}
 .faq-q{width:100%;text-align:left;padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.03em;color:var(--text);background:none;border:none;cursor:pointer;transition:color .2s}
 .faq-q:hover{color:var(--p1)}
@@ -1442,6 +1460,11 @@ footer{
 .reveal-r{opacity:0;transform:translateX(28px);filter:blur(6px);transition:opacity .75s var(--ease-out),transform .75s var(--ease-out),filter .6s var(--ease-out)}
 .reveal-r.in{opacity:1;transform:translateX(0);filter:blur(0)}
 
+/* ถ้า JS ไม่ทำงานเลย (ปิด JS หรือโหลดพัง) ให้เนื้อหาแสดงปกติหลัง 3 วิ */
+@media (prefers-reduced-motion: reduce) {
+  .reveal, .reveal-l, .reveal-r { opacity: 1 !important; transform: none !important; filter: none !important; }
+}
+
 /* 6. Nav logo img — spin blur on hover */
 .nav-logo:hover img{
   filter:drop-shadow(0 0 20px rgba(168,85,247,1));
@@ -1835,11 +1858,17 @@ footer{
         <!-- Slide 1 -->
         <div class="slide">
           <div class="slide-badge-row">
-            <div class="slide-badge">⚙️ SETTING FROM INSIDEX</div>
-            <div class="slide-counter">1 / 3</div>
+            <div class="slide-badge">⚙️ SETTING ULTIMATEX</div>
+            <div class="slide-counter">1 / 4</div>
           </div>
-          <div class="slide-video">
-            <iframe src="https://www.youtube.com/embed/S3UemzzmksQ" title="INSIDEX Showcase 1" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+          <div class="slide-video" data-video-id="S3UemzzmksQ" onclick="loadYoutube(this)">
+            <img src="https://img.youtube.com/vi/S3UemzzmksQ/maxresdefault.jpg" alt="INSIDEX Showcase 1" class="yt-thumb" loading="lazy">
+            <button class="yt-play-btn" aria-label="Play video">
+              <svg viewBox="0 0 68 48" width="68" height="48">
+                <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24 S67.94,13.05,66.52,7.74z" fill="#f00"/>
+                <path d="M 45,24 27,14 27,34" fill="#fff"/>
+              </svg>
+            </button>
           </div>
           <div class="slide-footer">
             <div class="slide-info">
@@ -1859,11 +1888,17 @@ footer{
         <!-- Slide 2 -->
         <div class="slide">
           <div class="slide-badge-row">
-            <div class="slide-badge">⚙️ SETTING FROM INSIDEX</div>
-            <div class="slide-counter">2 / 3</div>
+            <div class="slide-badge">⚙️ SETTING ULTIMATEX + PLUS</div>
+            <div class="slide-counter">2 / 4</div>
           </div>
-          <div class="slide-video">
-            <iframe src="https://www.youtube.com/embed/woKB168nZzY" title="INSIDEX Showcase 2" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+          <div class="slide-video" data-video-id="woKB168nZzY" onclick="loadYoutube(this)">
+            <img src="https://img.youtube.com/vi/woKB168nZzY/maxresdefault.jpg" alt="INSIDEX Showcase 2" class="yt-thumb" loading="lazy">
+            <button class="yt-play-btn" aria-label="Play video">
+              <svg viewBox="0 0 68 48" width="68" height="48">
+                <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24 S67.94,13.05,66.52,7.74z" fill="#f00"/>
+                <path d="M 45,24 27,14 27,34" fill="#fff"/>
+              </svg>
+            </button>
           </div>
           <div class="slide-footer" style="border-top-color:rgba(99,102,241,.2)">
             <div class="slide-info">
@@ -1883,11 +1918,47 @@ footer{
         <!-- Slide 3 -->
         <div class="slide">
           <div class="slide-badge-row">
-            <div class="slide-badge">⚙️ SETTING FROM INSIDEX</div>
-            <div class="slide-counter">3 / 3</div>
+            <div class="slide-badge">⚙️ SETTING ULTIMATEX + PLUS</div>
+            <div class="slide-counter">3 / 4</div>
           </div>
-          <div class="slide-video">
-            <iframe src="https://www.youtube.com/embed/L9vBNf6GiM0" title="INSIDEX Showcase 3" frameborder="0" allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" allowfullscreen></iframe>
+          <div class="slide-video" data-video-id="L9vBNf6GiM0" onclick="loadYoutube(this)">
+            <img src="https://img.youtube.com/vi/L9vBNf6GiM0/maxresdefault.jpg" alt="INSIDEX Showcase 3" class="yt-thumb" loading="lazy">
+            <button class="yt-play-btn" aria-label="Play video">
+              <svg viewBox="0 0 68 48" width="68" height="48">
+                <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24 S67.94,13.05,66.52,7.74z" fill="#f00"/>
+                <path d="M 45,24 27,14 27,34" fill="#fff"/>
+              </svg>
+            </button>
+          </div>
+          <div class="slide-footer" style="border-top-color:rgba(88,101,242,.2)">
+            <div class="slide-info">
+              <div class="slide-icon" style="background:linear-gradient(135deg,rgba(88,101,242,.4),rgba(124,58,237,.15));border-color:rgba(88,101,242,.3)">🖥️</div>
+              <div>
+                <div class="slide-title">Setting from INSIDEX</div>
+                <div class="slide-meta">FPS BOOST · INPUT LAG REDUCTION · NETWORK OPT</div>
+              </div>
+            </div>
+            <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn btn-primary" style="padding:.5rem 1.2rem;font-size:.78rem">
+              <svg width="16" height="16" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+              สั่งซื้อ
+            </a>
+          </div>
+        </div>
+
+        <!-- Slide 4 -->
+        <div class="slide">
+          <div class="slide-badge-row">
+            <div class="slide-badge">⚙️ SETTING GOATX</div>
+            <div class="slide-counter">4 / 4</div>
+          </div>
+          <div class="slide-video" data-video-id="UpA3W2p5-gU" onclick="loadYoutube(this)">
+            <img src="https://img.youtube.com/vi/UpA3W2p5-gU/maxresdefault.jpg" alt="INSIDEX Showcase 4" class="yt-thumb" loading="lazy">
+            <button class="yt-play-btn" aria-label="Play video">
+              <svg viewBox="0 0 68 48" width="68" height="48">
+                <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24 S67.94,13.05,66.52,7.74z" fill="#f00"/>
+                <path d="M 45,24 27,14 27,34" fill="#fff"/>
+              </svg>
+            </button>
           </div>
           <div class="slide-footer" style="border-top-color:rgba(88,101,242,.2)">
             <div class="slide-info">
@@ -1912,6 +1983,7 @@ footer{
       <button class="dot active" onclick="slideTo(0)"></button>
       <button class="dot" onclick="slideTo(1)"></button>
       <button class="dot" onclick="slideTo(2)"></button>
+      <button class="dot" onclick="slideTo(3)"></button>
     </div>
   </div>
 
@@ -1938,7 +2010,7 @@ footer{
   <div class="testi-header">
     <div class="testi-header-left">
       <p class="section-eyebrow reveal">รีวิวจากลูกค้าจริง</p>
-      <h2 class="section-title reveal" style="margin-bottom:0">เสียงจากลูกค้า<br>2,000+ คน</h2>
+      <h2 class="section-title reveal" style="margin-bottom:0">เสียงจากลูกค้า<br>2,200+ คน</h2>
     </div>
     <div class="reveal" style="display:flex;align-items:center;gap:.5rem">
       <div style="display:flex">
@@ -2125,7 +2197,7 @@ footer{
       <div class="testi-sum-label">★ Average Rating</div>
     </div>
     <div class="testi-sum-card reveal" style="transition-delay:.1s">
-      <div class="testi-sum-num" data-target="2000" data-suffix="+">0+</div>
+      <div class="testi-sum-num" data-target="2200" data-suffix="+">0+</div>
       <div class="testi-sum-label">ลูกค้าที่พึงพอใจ</div>
     </div>
     <div class="testi-sum-card reveal" style="transition-delay:.15s">
@@ -2291,7 +2363,7 @@ footer{
       <div style="text-align:left">
         <div style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:#5865F2;margin-bottom:1rem;opacity:.8">// COMMUNITY</div>
         <h2 class="discord-title" style="text-align:left;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:1rem">เข้าร่วม<br><span style="color:#5865F2">INSIDEX</span><br>Community</h2>
-        <p style="color:var(--text-muted);font-size:.92rem;line-height:1.75;margin-bottom:2rem">พูดคุย รับข่าวสาร และ Support 24/7<br>มีสมาชิกกว่า <span style="color:#fff;font-weight:700">4,000+</span> คน</p>
+        <p style="color:var(--text-muted);font-size:.92rem;line-height:1.75;margin-bottom:2rem">พูดคุย รับข่าวสาร และ Support 24/7<br>มีสมาชิกกว่า <span style="color:#fff;font-weight:700">4,569+</span> คน</p>
         
         <div style="display:flex;flex-direction:column;gap:.8rem;margin-bottom:2rem">
           <div style="display:flex;align-items:center;gap:.7rem;font-size:.88rem;color:var(--text-muted)">
@@ -2336,7 +2408,7 @@ footer{
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.2 8.2 0 004.79 1.53V6.77a4.85 4.85 0 01-1.02-.08z"/></svg>
     TikTok
   </a>
-  <a href="https://www.facebook.com/profile.php?id=61583734874732" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#1877f2'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
+  <a href="https://www.facebook.com/profile.php?id=61591270036108" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#1877f2'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
     Facebook
   </a>
@@ -2513,6 +2585,15 @@ footer{
       </div>
 
 <script>
+
+function loadYoutube(el) {
+  const id = el.dataset.videoId;
+  if (!id) return;
+  el.innerHTML = `<iframe src="https://www.youtube.com/embed/${id}?autoplay=1&rel=0" 
+    title="INSIDEX Showcase" frameborder="0" 
+    allow="accelerometer;autoplay;clipboard-write;encrypted-media;gyroscope;picture-in-picture" 
+    allowfullscreen></iframe>`;
+}
 /* ══════════════════════════════════════════════════
    LOADER
 ══════════════════════════════════════════════════ */
@@ -2575,14 +2656,16 @@ function closeMob() {
 }
 
 /* ══════════════════════════════════════════════════
-   HERO CANVAS — Particle Network
+   HERO CANVAS — Particle Network (no mouse interaction, reduced count)
 ══════════════════════════════════════════════════ */
 (function() {
   const canvas = document.getElementById('heroCanvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
-  const N = 60, LINK = 155, MOUSE_R = 190;
-  let W, H, nodes, mouse = {x: -9999, y: -9999};
+  const N = 32, LINK = 140; // ลดจำนวนจุดจาก 60 เหลือ 32, ลดระยะเชื่อมเส้นเล็กน้อย
+  let W, H, nodes;
+  let rafId = null;
+  let isVisible = true;
 
   function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
 
@@ -2597,17 +2680,15 @@ function closeMob() {
   }
 
   function draw() {
+    if (!isVisible) { rafId = null; return; }
+
     ctx.clearRect(0, 0, W, H);
     nodes.forEach(n => {
       n.x += n.vx; n.y += n.vy; n.p += .022;
       if (n.x < 0 || n.x > W) n.vx *= -1;
       if (n.y < 0 || n.y > H) n.vy *= -1;
-      const dx = mouse.x - n.x, dy = mouse.y - n.y, d = Math.hypot(dx, dy);
-      if (d < MOUSE_R && d > 0) {
-        const f = (1 - d / MOUSE_R) * .007;
-        n.vx += dx / d * f; n.vy += dy / d * f;
-      }
       n.vx *= .988; n.vy *= .988;
+      // ไม่มี mouse-follow force แล้ว
     });
 
     for (let i = 0; i < nodes.length; i++) {
@@ -2633,20 +2714,43 @@ function closeMob() {
       ctx.beginPath(); ctx.arc(n.x, n.y, n.r, 0, Math.PI * 2);
       ctx.fillStyle = `rgba(200,140,255,${g})`; ctx.fill();
     }
-    requestAnimationFrame(draw);
+    rafId = requestAnimationFrame(draw);
   }
 
-  window.addEventListener('resize', resize);
-  document.addEventListener('mousemove', e => {
-    const r = canvas.getBoundingClientRect();
-    mouse.x = e.clientX - r.left; mouse.y = e.clientY - r.top;
+  function startLoop() {
+    if (rafId === null) {
+      rafId = requestAnimationFrame(draw);
+    }
+  }
+
+  const heroSection = canvas.closest('.hero');
+  const visIo = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      isVisible = e.isIntersecting;
+      if (isVisible) startLoop();
+    });
+  }, {threshold: 0});
+  if (heroSection) visIo.observe(heroSection);
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden) {
+      isVisible = false;
+    } else if (heroSection) {
+      const rect = heroSection.getBoundingClientRect();
+      isVisible = rect.top < window.innerHeight && rect.bottom > 0;
+      if (isVisible) startLoop();
+    }
   });
-  document.addEventListener('mouseleave', () => { mouse.x = -9999; mouse.y = -9999; });
-  init(); draw();
+
+  window.addEventListener('resize', resize);
+  // ไม่มี mousemove/mouseleave listener แล้ว — ตัดการตอบสนองกับเมาส์/ทัชออกทั้งหมด
+
+  init();
+  startLoop();
 })();
 
 /* ══════════════════════════════════════════════════
-   REVEAL ON SCROLL
+   REVEAL ON SCROLL (with safety fallback)
 ══════════════════════════════════════════════════ */
 const io = new IntersectionObserver(entries => {
   entries.forEach(e => {
@@ -2656,8 +2760,19 @@ const io = new IntersectionObserver(entries => {
       e.target.classList.remove('in');
     }
   });
-}, {threshold: .12});
-document.querySelectorAll('.reveal,.reveal-l,.reveal-r').forEach(el => io.observe(el));
+}, {threshold: .05, rootMargin: '0px 0px -5% 0px'}); // เกาะเร็วขึ้น ไวขึ้น
+
+const revealEls = document.querySelectorAll('.reveal,.reveal-l,.reveal-r');
+revealEls.forEach(el => io.observe(el));
+
+// Safety net: ถ้า element ยังไม่ถูกเปิดใน 2.5 วิ (เช่น JS ช้า/พลาดจังหวะ) ให้บังคับแสดงเลย
+setTimeout(() => {
+  revealEls.forEach(el => {
+    if (!el.classList.contains('in')) {
+      el.classList.add('in');
+    }
+  });
+}, 2500);
 
 /* ══════════════════════════════════════════════════
    COUNTER ANIMATION
@@ -2685,10 +2800,32 @@ document.querySelectorAll('[data-target]').forEach(el => counterIo.observe(el));
 /* ══════════════════════════════════════════════════
    VIDEO SLIDER
 ══════════════════════════════════════════════════ */
-let si = 0, total = 3;
+let si = 0, total = 4;
+// แทนที่ทั้งบล็อกนี้
 function slideTo(n) {
-  document.querySelectorAll('#sliderTrack iframe').forEach(f => { const s = f.src; f.src = ''; f.src = s; });
+  const prev = si;
   si = ((n % total) + total) % total;
+
+  // หยุดวิดีโอเฉพาะใน slide ก่อนหน้าที่กำลังเล่นอยู่ (ถ้ามี)
+  const slides = document.querySelectorAll('#sliderTrack .slide');
+  const prevSlide = slides[prev];
+  if (prevSlide) {
+    const iframe = prevSlide.querySelector('iframe');
+    if (iframe) {
+      const videoWrap = prevSlide.querySelector('.slide-video');
+      const videoId = videoWrap.dataset.videoId;
+      // คืนกลับเป็น thumbnail แทนที่จะปล่อยให้เล่นต่อ
+      videoWrap.innerHTML = `
+        <img src="https://img.youtube.com/vi/${videoId}/maxresdefault.jpg" alt="" class="yt-thumb" loading="lazy">
+        <button class="yt-play-btn" aria-label="Play video">
+          <svg viewBox="0 0 68 48" width="68" height="48">
+            <path d="M66.52,7.74c-0.78-2.93-2.49-5.41-5.42-6.19C55.79,.13,34,0,34,0S12.21,.13,6.9,1.55 C3.97,2.33,2.27,4.81,1.48,7.74C0.06,13.05,0,24,0,24s0.06,10.95,1.48,16.26c0.78,2.93,2.49,5.41,5.42,6.19 C12.21,47.87,34,48,34,48s21.79-0.13,27.1-1.55c2.93-0.78,4.64-3.26,5.42-6.19C67.94,34.95,68,24,68,24 S67.94,13.05,66.52,7.74z" fill="#f00"/>
+            <path d="M 45,24 27,14 27,34" fill="#fff"/>
+          </svg>
+        </button>`;
+    }
+  }
+
   document.getElementById('sliderTrack').style.transform = `translateX(-${si * 100}%)`;
   document.querySelectorAll('.dot').forEach((d, i) => d.classList.toggle('active', i === si));
 }
@@ -3390,34 +3527,7 @@ function showClosedToast() {
   }, {passive:true});
 })();
 
-/* ══ DEVTOOLS PROTECTION ══ */
-(function(){
-  // ปิด right-click
-  document.addEventListener('contextmenu', e => e.preventDefault());
 
-  // ปิด F12, Ctrl+Shift+I, Ctrl+U, Ctrl+S
-  document.addEventListener('keydown', e => {
-    if (
-      e.key === 'F12' ||
-      (e.ctrlKey && e.shiftKey && ['I','J','C'].includes(e.key)) ||
-      (e.ctrlKey && ['U','S','A'].includes(e.key))
-    ) e.preventDefault();
-  });
-
-  // detect devtools เปิดอยู่ → redirect
-  let devOpen = false;
-  const threshold = 160;
-  setInterval(() => {
-    const w = window.outerWidth - window.innerWidth > threshold;
-    const h = window.outerHeight - window.innerHeight > threshold;
-    if ((w || h) && !devOpen) {
-      devOpen = true;
-      document.body.innerHTML = '';
-      window.location.href = 'https://insidex.online';
-    }
-    if (!w && !h) devOpen = false;
-  }, 1000);
-})();
 </script>
 </body>
 </html>

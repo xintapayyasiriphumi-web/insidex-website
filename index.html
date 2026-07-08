@@ -1482,6 +1482,74 @@ footer{
   filter:blur(8px);
 }
 .ix-toast.show{transform:translate(-50%,0);opacity:1;filter:blur(0)}
+
+/* ══════════════════════════════════════════════════
+   PRODUCT SHELF
+══════════════════════════════════════════════════ */
+.shelf-grid{
+  display:grid;grid-template-columns:repeat(5,1fr);gap:1.4rem;
+}
+.shelf-item{
+  position:relative;cursor:pointer;
+  display:flex;flex-direction:column;align-items:center;
+  padding:2rem 1rem 1.5rem;
+  border:1px solid var(--border);border-radius:var(--radius);
+  background:rgba(10,10,15,.55);
+  transition:transform .35s var(--ease-out),border-color .3s,box-shadow .35s;
+  overflow:hidden;
+}
+.shelf-item::before{
+  content:'';position:absolute;inset:0;opacity:0;pointer-events:none;
+  background:linear-gradient(160deg,rgba(168,85,247,.1),transparent 60%);
+  transition:opacity .3s;
+}
+.shelf-item:hover{
+  transform:translateY(-8px);
+  border-color:rgba(168,85,247,.5);
+  box-shadow:0 24px 60px rgba(124,58,237,.22),0 0 0 1px rgba(168,85,247,.28);
+}
+.shelf-item:hover::before{opacity:1}
+.shelf-img-wrap{
+  position:relative;width:100%;height:130px;
+  display:flex;align-items:center;justify-content:center;
+  margin-bottom:1.1rem;
+}
+.shelf-img{
+  max-width:100%;max-height:130px;object-fit:contain;position:relative;z-index:2;
+  filter:drop-shadow(0 10px 22px rgba(0,0,0,.55));
+  transition:transform .4s var(--ease-out),filter .4s;
+}
+.shelf-item:hover .shelf-img{
+  transform:scale(1.08) translateY(-4px);
+  filter:drop-shadow(0 16px 30px rgba(168,85,247,.4));
+}
+.shelf-glow{
+  position:absolute;bottom:6px;left:50%;width:65%;height:22px;
+  transform:translateX(-50%);
+  background:radial-gradient(ellipse,rgba(168,85,247,.5) 0%,transparent 72%);
+  filter:blur(9px);opacity:.55;z-index:1;
+  transition:opacity .35s,width .35s;
+}
+.shelf-item:hover .shelf-glow{opacity:1;width:82%}
+.shelf-platform{
+  width:60%;height:1px;margin-bottom:.9rem;
+  background:linear-gradient(90deg,transparent,rgba(168,85,247,.45),transparent);
+}
+.shelf-label{
+  font-family:'Orbitron',monospace;font-weight:700;font-size:.8rem;
+  letter-spacing:.1em;text-align:center;
+  background:linear-gradient(135deg,#fff,var(--p1));
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+@media(max-width:1024px){
+  .shelf-grid{grid-template-columns:repeat(3,1fr)}
+}
+@media(max-width:640px){
+  .shelf-grid{grid-template-columns:repeat(2,1fr);gap:1rem}
+  .shelf-item{padding:1.5rem .8rem 1.1rem}
+  .shelf-img-wrap{height:105px}
+  .shelf-img{max-height:105px}
+}
 </style>
 </head>
 <body>
@@ -1513,6 +1581,7 @@ footer{
   </a>
   <ul class="nav-links">
     <li><a href="#products" class="nav-link">สินค้า</a></li>
+    <li><a href="#shelf" class="nav-link">ชั้นวางสินค้า</a></li>
     <li><a href="#about" class="nav-link">เกี่ยวกับ</a></li>
     <li><a href="#showcase" class="nav-link">Showcase</a></li>
     <li><a href="#reviews" class="nav-link">รีวิว</a></li>
@@ -1540,6 +1609,7 @@ footer{
 <!-- Mobile Menu -->
 <div class="mob-menu" id="mobMenu">
   <a href="#products" class="mob-link" onclick="closeMob()">สินค้า</a>
+  <a href="#shelf" class="mob-link" onclick="closeMob()">ชั้นวางสินค้า</a>
   <a href="#about" class="mob-link" onclick="closeMob()">เกี่ยวกับ</a>
   <a href="#showcase" class="mob-link" onclick="closeMob()">Showcase</a>
   <a href="#reviews" class="mob-link" onclick="closeMob()">รีวิว</a>
@@ -1746,6 +1816,62 @@ footer{
       </ul>
       <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="card-cta">🛒 สั่งซื้อ →</a>
       <div class="card-price">฿99–250</div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ══ PRODUCT SHELF ══ -->
+<section class="section" id="shelf">
+  <p class="section-eyebrow reveal">คลังสินค้าทั้งหมด</p>
+  <h2 class="section-title reveal">ชั้นวางสินค้า INSIDEX</h2>
+  <p class="section-desc reveal">รวมสินค้าเด่นของเราไว้ในที่เดียว — คลิกเพื่อเลือกซื้อได้ทันที</p>
+
+  <div class="shelf-grid">
+    <div class="shelf-item reveal" style="transition-delay:.05s" onclick="if(currentUser){openShop()}else{window.location.href='https://cozy-healing-production-ee02.up.railway.app/auth/discord'}">
+      <div class="shelf-img-wrap">
+        <div class="shelf-glow"></div>
+        <img src="https://i.postimg.cc/tgjdHzvV/51.png" alt="GOATX" class="shelf-img" loading="lazy">
+      </div>
+      <div class="shelf-platform"></div>
+      <div class="shelf-label">GOATX</div>
+    </div>
+
+    <div class="shelf-item reveal" style="transition-delay:.1s" onclick="if(currentUser){openShop()}else{window.location.href='https://cozy-healing-production-ee02.up.railway.app/auth/discord'}">
+      <div class="shelf-img-wrap">
+        <div class="shelf-glow"></div>
+        <img src="https://i.postimg.cc/mZ5Qr464/58.png" alt="ULTIMATEX PLUS" class="shelf-img" loading="lazy">
+      </div>
+      <div class="shelf-platform"></div>
+      <div class="shelf-label">ULTIMATEX PLUS</div>
+    </div>
+
+    <div class="shelf-item reveal" style="transition-delay:.15s" onclick="if(currentUser){openShop()}else{window.location.href='https://cozy-healing-production-ee02.up.railway.app/auth/discord'}">
+      <div class="shelf-img-wrap">
+        <div class="shelf-glow"></div>
+        <img src="https://i.postimg.cc/W1PqD1mL/56.png" alt="ULTIMATEX" class="shelf-img" loading="lazy">
+      </div>
+      <div class="shelf-platform"></div>
+      <div class="shelf-label">ULTIMATEX</div>
+    </div>
+
+    <div class="shelf-item reveal" style="transition-delay:.2s" onclick="if(currentUser){openShop()}else{window.location.href='https://cozy-healing-production-ee02.up.railway.app/auth/discord'}">
+      <div class="shelf-img-wrap">
+        <div class="shelf-glow"></div>
+        <img src="https://i.postimg.cc/59TPjTPd/55.png" alt="SHX V.2" class="shelf-img" loading="lazy">
+      </div>
+      <div class="shelf-platform"></div>
+      <div class="shelf-label">SHX V.2</div>
+    </div>
+
+    <div class="shelf-item reveal" style="transition-delay:.25s" onclick="if(currentUser){openShop()}else{window.location.href='https://cozy-healing-production-ee02.up.railway.app/auth/discord'}">
+      <div class="shelf-img-wrap">
+        <div class="shelf-glow"></div>
+        <img src="https://i.postimg.cc/bvH1rDc4/57.png" alt="INSIDEX TOOLBOX" class="shelf-img" loading="lazy">
+      </div>
+      <div class="shelf-platform"></div>
+      <div class="shelf-label">INSIDEX TOOLBOX</div>
     </div>
   </div>
 </section>
