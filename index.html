@@ -576,6 +576,86 @@ nav.scrolled{
 .value-item-desc{font-size:.78rem;color:var(--text-dim)}
 
 /* ══════════════════════════════════════════════════
+   TOOLBOX PREMIUM
+══════════════════════════════════════════════════ */
+.tbx-wrap{
+  border:1px solid rgba(168,85,247,.2);border-radius:var(--radius);
+  background:linear-gradient(160deg,rgba(124,58,237,.08) 0%,rgba(10,10,15,.6) 55%);
+  overflow:hidden;position:relative;
+}
+.tbx-top{
+  display:grid;grid-template-columns:1.05fr 1fr;gap:0;align-items:stretch;
+}
+@media(max-width:860px){.tbx-top{grid-template-columns:1fr}}
+.tbx-media{
+  position:relative;min-height:280px;overflow:hidden;
+  border-right:1px solid rgba(168,85,247,.15);
+}
+@media(max-width:860px){.tbx-media{border-right:none;border-bottom:1px solid rgba(168,85,247,.15)}}
+.tbx-media img{
+  width:100%;height:100%;object-fit:cover;position:absolute;inset:0;
+  filter:saturate(1.1);
+}
+.tbx-media::after{
+  content:'';position:absolute;inset:0;
+  background:linear-gradient(90deg,rgba(3,3,5,.15) 0%,transparent 40%);
+}
+@media(max-width:860px){.tbx-media::after{background:linear-gradient(0deg,rgba(3,3,5,.35) 0%,transparent 40%)}}
+.tbx-body{padding:2.5rem 2.5rem 2rem}
+.tbx-badge{
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.25em;text-transform:uppercase;
+  color:var(--p1);border:1px solid rgba(168,85,247,.3);background:rgba(168,85,247,.08);
+  padding:.3rem .7rem;border-radius:2px;margin-bottom:1.1rem;
+}
+.tbx-title{
+  font-family:'Orbitron',monospace;font-weight:900;font-size:clamp(1.4rem,3vw,2rem);
+  color:#fff;margin-bottom:.8rem;line-height:1.25;
+}
+.tbx-desc{font-size:.92rem;color:var(--text-muted);line-height:1.75;margin-bottom:1.6rem}
+.tbx-feats{display:grid;grid-template-columns:1fr 1fr;gap:.6rem 1.2rem}
+@media(max-width:480px){.tbx-feats{grid-template-columns:1fr}}
+.tbx-feat{
+  font-size:.82rem;color:rgba(255,255,255,.65);
+  display:flex;align-items:center;gap:.55rem;
+}
+.tbx-feat::before{
+  content:'';width:5px;height:5px;border-radius:50%;flex-shrink:0;
+  background:var(--p1);box-shadow:0 0 7px var(--p1);
+}
+.tbx-plans{
+  padding:2rem 2.5rem 2.5rem;border-top:1px solid rgba(168,85,247,.15);
+  display:grid;grid-template-columns:repeat(3,1fr);gap:1.1rem;
+}
+@media(max-width:768px){.tbx-plans{grid-template-columns:1fr}}
+.tbx-plan{
+  position:relative;border:1px solid var(--border);border-radius:8px;
+  padding:1.6rem 1.4rem;background:rgba(10,10,15,.55);
+  display:flex;flex-direction:column;align-items:flex-start;gap:.9rem;
+  transition:transform .3s var(--ease-out),border-color .3s,box-shadow .3s;
+}
+.tbx-plan:hover{transform:translateY(-5px);border-color:rgba(168,85,247,.5);box-shadow:0 20px 48px rgba(124,58,237,.18)}
+.tbx-plan.is-best{border-color:rgba(168,85,247,.55);background:linear-gradient(160deg,rgba(124,58,237,.15),rgba(10,10,15,.6))}
+.tbx-plan-badge{
+  position:absolute;top:-11px;right:1.2rem;
+  font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;
+  color:#fff;background:linear-gradient(135deg,var(--p3),var(--p1));
+  padding:.25rem .55rem;border-radius:2px;
+}
+.tbx-plan-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted)}
+.tbx-plan-price{font-family:'Orbitron',monospace;font-weight:900;font-size:1.7rem;color:#fff}
+.tbx-plan-price span{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.85rem;color:var(--text-dim)}
+.tbx-plan-cta{
+  width:100%;text-align:center;justify-content:center;
+  display:inline-flex;align-items:center;gap:.4rem;
+  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;
+  letter-spacing:.1em;text-transform:uppercase;color:var(--p1);
+  border:1px solid rgba(168,85,247,.4);border-radius:6px;padding:.65rem 1rem;
+  transition:background .25s,color .25s,border-color .25s;
+}
+.tbx-plan-cta:hover{background:rgba(168,85,247,.12);color:#fff;border-color:var(--p1)}
+
+/* ══════════════════════════════════════════════════
    SHOWCASE / SLIDER
 ══════════════════════════════════════════════════ */
 .showcase-wrap{position:relative}
@@ -1971,6 +2051,55 @@ footer{
 
 <div class="divider"></div>
 
+<!-- ══ TOOLBOX PREMIUM ══ -->
+<section class="section" id="toolbox-premium">
+  <p class="section-eyebrow reveal">ซอฟต์แวร์เรือธง</p>
+  <h2 class="section-title reveal">INSIDEX Toolbox Premium</h2>
+  <p class="section-desc reveal">รวมทุกเครื่องมือ Optimize ไว้ในโปรแกรมเดียว กดใช้งานได้ทันทีโดยไม่ต้องตั้งค่าเอง</p>
+
+  <div class="tbx-wrap reveal">
+    <div class="tbx-top">
+      <div class="tbx-media">
+        <img src="https://i.postimg.cc/cJwxXLPt/premiumxtoolbox.png" alt="INSIDEX Toolbox Premium" loading="lazy">
+      </div>
+      <div class="tbx-body">
+        <span class="tbx-badge">⚡ PREMIUM</span>
+        <h3 class="tbx-title">All-in-One Optimization Suite</h3>
+        <p class="tbx-desc">โปรแกรม Toolbox ที่รวมฟังก์ชัน Optimize ระบบ, เครือข่าย และเกมไว้ในที่เดียว ใช้งานง่ายด้วยการกดเพียงคลิกเดียว พร้อมอัปเดตฟีเจอร์ใหม่ต่อเนื่อง</p>
+        <div class="tbx-feats">
+          <div class="tbx-feat">Boost FPS &amp; Gaming Mode</div>
+          <div class="tbx-feat">Network &amp; Ping Optimizer</div>
+          <div class="tbx-feat">System Junk &amp; Log Cleaner</div>
+          <div class="tbx-feat">Bloatware &amp; Startup Manager</div>
+          <div class="tbx-feat">Save/Load Optimize Profile</div>
+          <div class="tbx-feat">อัปเดตฟรีตลอดอายุการใช้งาน</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="tbx-plans">
+      <div class="tbx-plan">
+        <div class="tbx-plan-name">1 เดือน</div>
+        <div class="tbx-plan-price">฿199<span>/เดือน</span></div>
+        <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="tbx-plan-cta">🛒 สั่งซื้อ</a>
+      </div>
+      <div class="tbx-plan is-best">
+        <span class="tbx-plan-badge">คุ้มสุด</span>
+        <div class="tbx-plan-name">3 เดือน</div>
+        <div class="tbx-plan-price">฿549<span>/3 เดือน</span></div>
+        <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="tbx-plan-cta">🛒 สั่งซื้อ</a>
+      </div>
+      <div class="tbx-plan">
+        <div class="tbx-plan-name">12 เดือน</div>
+        <div class="tbx-plan-price">฿1990<span>/ปี</span></div>
+        <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="tbx-plan-cta">🛒 สั่งซื้อ</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ══ SHOWCASE ══ -->
 <section class="section" id="showcase">
   <p class="section-eyebrow reveal">ตัวอย่างสินค้า</p>
@@ -2793,7 +2922,15 @@ function closeMob() {
   let rafId = null;
   let isVisible = true;
 
-  function resize() { W = canvas.width = canvas.offsetWidth; H = canvas.height = canvas.offsetHeight; }
+  function resize() {
+    const oldW = W, oldH = H;
+    W = canvas.width = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+    if (nodes && oldW && oldH) {
+      const sx = W / oldW, sy = H / oldH;
+      nodes.forEach(n => { n.x *= sx; n.y *= sy; });
+    }
+  }
 
   function init() {
     resize();
