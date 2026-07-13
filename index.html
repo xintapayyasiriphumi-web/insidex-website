@@ -1731,7 +1731,7 @@ footer{
 </section>
 
 <!-- ══ STATS ══ -->
-<div class="stats reveal">
+<div class="stats">
   <div class="stats-inner">
     <div class="stat">
       <div class="stat-num" data-target="2200" data-suffix="+">0+</div>
@@ -1755,7 +1755,7 @@ footer{
 <div class="divider" style="margin-top:4rem"></div>
 
 <!-- ══ GOATX UPDATE BANNER ══ -->
-<div class="goatx-section reveal">
+<div class="goatx-section">
   <div class="goatx-inner">
     <div class="goatx-red-glow"></div>
     <span class="goatx-corner-badge">🔥 NEW PRODUCT</span>
@@ -3099,7 +3099,20 @@ const counterIo = new IntersectionObserver(entries => {
     counterIo.unobserve(el);
   });
 }, {threshold: .5});
-document.querySelectorAll('[data-target]').forEach(el => counterIo.observe(el));
+const counterEls = document.querySelectorAll('[data-target]');
+counterEls.forEach(el => counterIo.observe(el));
+
+// Safety net: ถ้ายังไม่นับขึ้นภายใน 1.2 วิ (เช่น observer พลาดจังหวะ) ให้แสดงค่าสุดท้ายเลย
+setTimeout(() => {
+  counterEls.forEach(el => {
+    const target = parseInt(el.dataset.target);
+    if (isNaN(target)) return;
+    const current = parseInt(el.textContent);
+    if (current === target) return;
+    counterIo.unobserve(el);
+    el.textContent = target + (el.dataset.suffix || '');
+  });
+}, 1200);
 
 /* ══════════════════════════════════════════════════
    VIDEO SLIDER
