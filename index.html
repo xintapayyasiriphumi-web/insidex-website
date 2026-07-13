@@ -3064,19 +3064,19 @@ const io = new IntersectionObserver(entries => {
       e.target.classList.remove('in');
     }
   });
-}, {threshold: .05, rootMargin: '0px 0px -5% 0px'}); // เกาะเร็วขึ้น ไวขึ้น
+}, {threshold: .05, rootMargin: '0px 0px 150px 0px'}); // ขยายโซนตรวจจับลงล่าง ให้ขึ้นก่อนเลื่อนไปถึงจริงๆ
 
 const revealEls = document.querySelectorAll('.reveal,.reveal-l,.reveal-r');
 revealEls.forEach(el => io.observe(el));
 
-// Safety net: ถ้า element ยังไม่ถูกเปิดใน 2.5 วิ (เช่น JS ช้า/พลาดจังหวะ) ให้บังคับแสดงเลย
+// Safety net: ถ้า element ยังไม่ถูกเปิดใน 0.8 วิ (เช่น JS ช้า/พลาดจังหวะ) ให้บังคับแสดงเลย
 setTimeout(() => {
   revealEls.forEach(el => {
     if (!el.classList.contains('in')) {
       el.classList.add('in');
     }
   });
-}, 2500);
+}, 800);
 
 /* ══════════════════════════════════════════════════
    COUNTER ANIMATION
