@@ -1123,16 +1123,19 @@ footer{
   opacity:0;pointer-events:none;transition:opacity .3s;
 }
 .ix-overlay.open{opacity:1;pointer-events:all}
-.ix-modal{
-  width:100%;max-width:440px;
-  background:#0a0a0f;border:1px solid rgba(168,85,247,.3);border-radius:16px;
-  padding:0;position:relative;overflow:hidden;
+.ix-modal-wrap{
+  position:relative;width:100%;max-width:440px;
   transform:translateY(20px);transition:transform .3s var(--ease-out);
+}
+.ix-modal{
+  width:100%;
+  background:#0a0a0f;border:1px solid rgba(168,85,247,.3);border-radius:16px;
+  padding:0;
 }
 .ix-modal-body{
   max-height:85vh;overflow-y:auto;padding:3.6rem 2rem 2rem;
 }
-.ix-overlay.open .ix-modal{transform:translateY(0)}
+.ix-overlay.open .ix-modal-wrap{transform:translateY(0)}
 .ix-modal-close{
   position:absolute;top:.6rem;right:.6rem;
   width:44px;height:44px;border-radius:50%;
@@ -1334,12 +1337,11 @@ footer{
 @keyframes spin{to{transform:rotate(360deg)}}
 @media(max-width:768px){
   .pkg-grid{grid-template-columns:repeat(2,1fr)}
-  .ix-modal{padding:1.5rem}
 }
 
 
 /* ── SHOP CARDS ── */
-.shop-modal-wide{max-width:700px!important}
+.ix-modal-wrap.shop-modal-wide{max-width:700px!important}
 .product-grid{display:grid;grid-template-columns:1fr 1fr;gap:.8rem;margin-bottom:1rem}
 .product-card-new{
   border:1px solid rgba(168,85,247,.2);border-radius:12px;
@@ -1412,7 +1414,7 @@ footer{
   .ix-overlay{padding:.5rem}
   .ix-modal{border-radius:12px}
   .ix-modal-body{padding:1.2rem}
-  .shop-modal-wide{max-width:100%!important}
+  .ix-modal-wrap.shop-modal-wide{max-width:100%!important}
 
   /* Product grid — 1 column บน mobile เล็ก */
   .product-grid{grid-template-columns:1fr!important;gap:.6rem}
@@ -2229,6 +2231,7 @@ footer{
               สั่งซื้อ
             </a>
           </div>
+          </div>
         </div>
       </div>
     </div>
@@ -2700,8 +2703,9 @@ footer{
 
 <!-- ── Modal: User Panel ── -->
 <div class="ix-overlay" id="modalUser" onclick="if(event.target===this)closeModal('modalUser')">
-  <div class="ix-modal">
+  <div class="ix-modal-wrap">
     <button class="ix-modal-close" onclick="closeModal('modalUser')" aria-label="ปิดหน้าต่าง">✕</button>
+    <div class="ix-modal">
     <div class="ix-modal-body">
     <div class="ix-modal-title">MY <span>ACCOUNT</span></div>
 
@@ -2721,16 +2725,18 @@ footer{
 
     <button class="ix-btn ix-btn-danger" style="width:100%" onclick="event.stopPropagation();doLogout()">ออกจากระบบ</button>
   </div>
+    </div>
   </div>
 </div>
 
 <!-- ── Modal: Shop ── -->
 <div class="ix-overlay" id="modalShop" onclick="if(event.target===this)closeModal('modalShop')">
-  <div class="ix-modal shop-modal-wide">
+  <div class="ix-modal-wrap shop-modal-wide">
     <button class="ix-modal-close" onclick="closeModal('modalShop')" aria-label="ปิดหน้าต่าง">✕</button>
     <button id="shopBackBtn" class="ix-modal-back" onclick="backToProducts()" aria-label="กลับเลือกสินค้า">
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
     </button>
+    <div class="ix-modal">
     <div class="ix-modal-body">
       <div style="text-align:center;margin-bottom:1rem">
         <div class="ix-modal-title" style="margin-bottom:.3rem"><span>SHOP</span></div>
@@ -2839,8 +2845,9 @@ footer{
 
 <!-- ── Modal: History ── -->
       <div class="ix-overlay" id="modalHistory" onclick="if(event.target===this)closeModal('modalHistory')">
-        <div class="ix-modal">
+        <div class="ix-modal-wrap">
           <button class="ix-modal-close" onclick="closeModal('modalHistory')" aria-label="ปิดหน้าต่าง">✕</button>
+          <div class="ix-modal">
           <div class="ix-modal-body">
             <div class="ix-modal-title"><span>ประวัติการซื้อ</span></div>
             <div id="historyList"></div>
