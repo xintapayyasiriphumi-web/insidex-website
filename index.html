@@ -60,7 +60,7 @@
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=Sarabun:wght@300;400;600&family=Kanit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=Sarabun:wght@300;400;600&family=Kanit:wght@400;600;700;900&display=swap" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════════════════
    DESIGN SYSTEM
@@ -223,7 +223,7 @@ nav.scrolled{
 /* Mobile Menu */
 .mob-menu{
   display:none;position:fixed;inset:0;z-index:99;
-  background:rgba(3,3,5,0.97);backdrop-filter:blur(40px);
+  background:rgba(3,3,5,0.97);
   flex-direction:column;align-items:center;justify-content:center;gap:2.5rem;
 }
 .mob-menu.open{display:flex;animation:mobIn .4s var(--ease-out)}
@@ -390,7 +390,7 @@ nav.scrolled{
 .stats-inner{
   display:grid;grid-template-columns:repeat(4,1fr);
   border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
-  background:rgba(3,3,5,.7);backdrop-filter:blur(24px);
+  background:rgba(3,3,5,.92);
 }
 .stat{
   padding:2rem 1.5rem;border-right:1px solid var(--border);
@@ -531,8 +531,7 @@ nav.scrolled{
 /* Value banner */
 .value-banner{
   padding:2.5rem 3rem;border:1px solid rgba(168,85,247,.2);border-radius:var(--radius);
-  background:linear-gradient(135deg,rgba(124,58,237,.09) 0%,rgba(88,101,242,.07) 100%);
-  backdrop-filter:blur(10px);
+  background:linear-gradient(135deg,rgba(23,16,40,.95) 0%,rgba(16,16,32,.95) 100%);
   display:flex;align-items:center;gap:2.5rem;flex-wrap:wrap;
 }
 .value-left{flex:1;min-width:180px}
@@ -779,8 +778,7 @@ nav.scrolled{
   max-width:1200px;margin:0 auto;position:relative;overflow:hidden;
   border:1px solid rgba(88,101,242,.25);border-radius:16px;
   padding:5rem 3rem;text-align:center;
-  background:linear-gradient(135deg,rgba(88,101,242,.1),rgba(124,58,237,.12),rgba(88,101,242,.1));
-  backdrop-filter:blur(14px);
+  background:linear-gradient(135deg,rgba(20,20,35,.95),rgba(30,20,45,.95));
 }
 .discord-inner::before{
   content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
@@ -846,7 +844,7 @@ nav.scrolled{
 .testi-product{font-size:.7rem;color:var(--text-dim);margin-top:.1rem}
 .testi-badge{position:absolute;top:.9rem;right:.9rem;font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .5rem;border-radius:2px;border:1px solid rgba(168,85,247,.22);color:rgba(168,85,247,.65);background:rgba(168,85,247,.06)}
 .testi-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
-.testi-sum-card{padding:1.4rem;border:1px solid var(--border);border-radius:var(--radius);background:rgba(124,58,237,.04);text-align:center;backdrop-filter:blur(10px);transition:border-color .25s,transform .25s}
+.testi-sum-card{padding:1.4rem;border:1px solid var(--border);border-radius:var(--radius);background:rgba(20,16,28,.9);text-align:center;transition:border-color .25s,transform .25s}
 .testi-sum-card:hover{border-color:rgba(168,85,247,.35);transform:translateY(-2px)}
 .testi-sum-num{font-family:'Orbitron','Kanit',monospace;font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,#fff,var(--p1));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
 .testi-sum-label{font-family:'Rajdhani','Kanit',sans-serif;font-size:.7rem;letter-spacing:.22em;color:var(--text-dim);text-transform:uppercase;margin-top:.3rem}
@@ -867,7 +865,7 @@ nav.scrolled{
 .faq-list{display:flex;flex-direction:column;gap:.6rem}
 .faq-item{
   border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;
-  background:rgba(255,255,255,.02);backdrop-filter:blur(8px);
+  background:rgba(14,12,20,.92);
   transition:border-color .3s,box-shadow .3s
 }
 .faq-item.faq-open{border-color:rgba(168,85,247,.45);box-shadow:0 8px 32px rgba(124,58,237,.12)}
@@ -1122,7 +1120,7 @@ footer{
 /* ── MODAL OVERLAY ── */
 .ix-overlay{
   position:fixed;inset:0;z-index:5000;
-  background:rgba(0,0,0,.75);backdrop-filter:blur(8px);
+  background:rgba(0,0,0,.85);
   display:flex;align-items:center;justify-content:center;padding:1rem;
   opacity:0;pointer-events:none;transition:opacity .3s;
 }
