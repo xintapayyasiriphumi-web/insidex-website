@@ -1646,11 +1646,13 @@ footer{
 }
 
 /* ── LANG PICKER ── */
-.lang-picker{display:inline-flex;align-items:center;gap:1px;background:rgba(255,255,255,.04);border:1px solid rgba(168,85,247,.2);border-radius:999px;padding:3px 7px;margin-right:4px}
-.lang-btn{font-size:16px;cursor:pointer;background:none;border:none;padding:2px 3px;border-radius:999px;opacity:.35;transition:opacity .2s,transform .15s;line-height:1;display:inline-flex;align-items:center}
-.lang-btn.active{opacity:1;transform:scale(1.15)}
+.lang-picker{display:inline-flex;align-items:center;gap:2px;background:rgba(255,255,255,.04);border:1px solid rgba(168,85,247,.2);border-radius:999px;padding:4px 7px}
+.lang-btn{cursor:pointer;background:none;border:none;padding:2px 3px;border-radius:6px;opacity:.35;transition:opacity .2s,transform .15s;line-height:0;display:inline-flex;align-items:center;justify-content:center}
+.lang-btn svg{border-radius:3px;display:block}
+.lang-btn.active{opacity:1;transform:scale(1.1)}
 .lang-btn:hover:not(.active){opacity:.7}
-@media(max-width:480px){.lang-picker{padding:2px 5px}.lang-btn{font-size:14px}}
+@media(max-width:900px){.lang-picker{padding:3px 5px}.lang-btn svg{width:19px;height:13px}}
+@media(max-width:480px){.lang-picker{padding:2px 4px}.lang-btn svg{width:17px;height:11px}}
 
 </style>
 </head>
@@ -1686,17 +1688,23 @@ footer{
     <li><a href="#faq" class="nav-link">FAQ</a></li>
     <li><a href="#discord" class="nav-link" data-i18n="nav.community">ชุมชน</a></li>
   </ul>
-  <div class="lang-picker" id="langPicker">
-    <button class="lang-btn" data-lang="th" onclick="setLang('th')" title="ภาษาไทย">🇹🇭</button>
-    <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">🇬🇧</button>
-    <button class="lang-btn" data-lang="vi" onclick="setLang('vi')" title="Tiếng Việt">🇻🇳</button>
-  </div>
   <div class="nav-ham" id="navHam" onclick="toggleMob()">
     <span></span>
     <span></span>
     <span></span>
   </div>
   <div class="nav-actions" id="navActions">
+    <div class="lang-picker" id="langPicker">
+      <button class="lang-btn" data-lang="th" onclick="setLang('th')" title="ภาษาไทย">
+        <svg viewBox="0 0 30 20" width="22" height="15" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#A51931"/><rect y="3.33" width="30" height="13.34" fill="#F4F5F8"/><rect y="6.67" width="30" height="6.66" fill="#2D2A4A"/></svg>
+      </button>
+      <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">
+        <svg viewBox="0 0 60 30" width="22" height="15" xmlns="http://www.w3.org/2000/svg"><rect width="60" height="30" fill="#012169"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#fff" stroke-width="6"/><path d="M0,0 L60,30 M60,0 L0,30" stroke="#C8102E" stroke-width="4"/><path d="M30,0 V30 M0,15 H60" stroke="#fff" stroke-width="10"/><path d="M30,0 V30 M0,15 H60" stroke="#C8102E" stroke-width="6"/></svg>
+      </button>
+      <button class="lang-btn" data-lang="vi" onclick="setLang('vi')" title="Tiếng Việt">
+        <svg viewBox="0 0 30 20" width="22" height="15" xmlns="http://www.w3.org/2000/svg"><rect width="30" height="20" fill="#DA251D"/><polygon points="15,4 16.41,8.06 20.71,8.15 17.28,10.74 18.53,14.85 15,12.4 11.47,14.85 12.72,10.74 9.29,8.15 13.59,8.06" fill="#FFFF00"/></svg>
+      </button>
+    </div>
     <a href="https://cozy-healing-production-ee02.up.railway.app/auth/discord" class="nav-btn nav-btn-disc" id="loginBtn">
       <svg width="14" height="14" viewBox="0 0 127.14 96.36" fill="#fff" style="flex-shrink:0"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
       <span data-i18n="nav.login">Login Discord</span>
