@@ -2714,7 +2714,7 @@ footer{
 <!-- ── Modal: User Panel ── -->
 <div class="ix-overlay" id="modalUser" onclick="if(event.target===this)closeModal('modalUser')">
   <div class="ix-modal-wrap">
-    <button class="ix-modal-close" onclick="closeModal('modalUser')" aria-label="ปิดหน้าต่าง">✕</button>
+    <button class="ix-modal-close" onclick="event.stopPropagation();closeModal('modalUser')" aria-label="ปิดหน้าต่าง">✕</button>
     <div class="ix-modal">
     <div class="ix-modal-body">
     <div class="ix-modal-title">MY <span>ACCOUNT</span></div>
@@ -2742,8 +2742,8 @@ footer{
 <!-- ── Modal: Shop ── -->
 <div class="ix-overlay" id="modalShop" onclick="if(event.target===this)closeModal('modalShop')">
   <div class="ix-modal-wrap shop-modal-wide">
-    <button class="ix-modal-close" onclick="closeModal('modalShop')" aria-label="ปิดหน้าต่าง">✕</button>
-    <button id="shopBackBtn" class="ix-modal-back" onclick="backToProducts()" aria-label="กลับเลือกสินค้า">
+    <button class="ix-modal-close" onclick="event.stopPropagation();closeModal('modalShop')" aria-label="ปิดหน้าต่าง">✕</button>
+    <button id="shopBackBtn" class="ix-modal-back" onclick="event.stopPropagation();backToProducts()" aria-label="กลับเลือกสินค้า">
       <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
     </button>
     <div class="ix-modal">
@@ -2856,7 +2856,7 @@ footer{
 <!-- ── Modal: History ── -->
       <div class="ix-overlay" id="modalHistory" onclick="if(event.target===this)closeModal('modalHistory')">
         <div class="ix-modal-wrap">
-          <button class="ix-modal-close" onclick="closeModal('modalHistory')" aria-label="ปิดหน้าต่าง">✕</button>
+          <button class="ix-modal-close" onclick="event.stopPropagation();closeModal('modalHistory')" aria-label="ปิดหน้าต่าง">✕</button>
           <div class="ix-modal">
           <div class="ix-modal-body">
             <div class="ix-modal-title"><span>ประวัติการซื้อ</span></div>
@@ -3234,6 +3234,9 @@ function toast(msg, type = 'info', ms = 3000) {
 
 /* ── Modal helpers ── */
 function openModal(id) {
+  ['modalUser','modalShop','modalHistory'].forEach(m=>{
+    if(m!==id){const e=document.getElementById(m);if(e)e.classList.remove('open');}
+  });
   document.getElementById(id).classList.add('open');
   document.body.style.overflow = 'hidden';
 }
