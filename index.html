@@ -89,29 +89,11 @@
 /* ── RESET ── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:'Sarabun',sans-serif;overflow-x:hidden;cursor:none}
+body{background:var(--bg);color:var(--text);font-family:'Chakra Petch','Sarabun',sans-serif;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{background:none;border:none;font:inherit;cursor:pointer}
 ul{list-style:none}
-
-/* ══════════════════════════════════════════════════
-   CURSOR
-══════════════════════════════════════════════════ */
-#cx-dot{
-  position:fixed;width:8px;height:8px;border-radius:50%;
-  background:var(--p1);pointer-events:none;z-index:9999;
-  box-shadow:0 0 10px var(--p1),0 0 20px var(--p2);
-  transition:transform .1s,opacity .2s;transform:translate(-50%,-50%);
-}
-#cx-ring{
-  position:fixed;width:32px;height:32px;border-radius:50%;
-  border:1px solid rgba(168,85,247,0.6);pointer-events:none;z-index:9998;
-  transform:translate(-50%,-50%);transition:width .25s var(--ease-out),height .25s var(--ease-out),opacity .2s;
-}
-body:has(a:hover) #cx-ring,
-body:has(button:hover) #cx-ring,
-body:has(.card:hover) #cx-ring{width:52px;height:52px;border-color:var(--p1);background:rgba(168,85,247,0.05)}
 
 /* ══════════════════════════════════════════════════
    LOADER
@@ -206,14 +188,14 @@ nav.scrolled{
   border-radius:999px;padding:.3rem;margin:0 auto;
 }
 .nav-link{
-  font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.86rem;
+  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:600;font-size:.86rem;
   letter-spacing:.01em;color:var(--text-muted);
   transition:all .2s;position:relative;padding:.5rem 1.1rem;border-radius:999px;
 }
 .nav-link:hover{color:#fff;background:rgba(255,255,255,.06)}
 .nav-actions{display:flex;gap:.6rem;align-items:center;flex-shrink:0}
 .nav-btn{
-  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;
+  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.82rem;
   letter-spacing:.01em;padding:.55rem 1.3rem;
   border-radius:999px;transition:all .2s;white-space:nowrap;
 }
@@ -341,7 +323,7 @@ nav.scrolled{
 }
 @keyframes glowPulse{0%,100%{opacity:.5}50%{opacity:1}}
 .hero-sub{
-  font-family:'Rajdhani',sans-serif;font-size:clamp(.85rem,2.2vw,1.1rem);
+  font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:clamp(.85rem,2.2vw,1.1rem);
   letter-spacing:.45em;color:rgba(168,85,247,.7);text-transform:uppercase;
   margin-top:.6rem;
   animation:fadeUp 1s .5s var(--ease-out) both;
@@ -359,7 +341,7 @@ nav.scrolled{
 /* Buttons */
 .btn{
   display:inline-flex;align-items:center;gap:.55rem;
-  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.95rem;
+  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.95rem;
   letter-spacing:.12em;text-transform:uppercase;
   padding:.9rem 2rem;border-radius:4px;
   transition:transform .25s var(--ease-out),box-shadow .25s;
@@ -427,7 +409,7 @@ nav.scrolled{
   line-height:1.1;
 }
 .stat-label{
-  font-family:'Rajdhani',sans-serif;font-size:.72rem;
+  font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;
   letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-top:.3rem;
 }
 
@@ -511,7 +493,7 @@ nav.scrolled{
 }
 .card-cta{
   display:inline-flex;align-items:center;gap:.4rem;
-  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.75rem;
+  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.75rem;
   letter-spacing:.12em;text-transform:uppercase;color:var(--p1);
   transition:gap .2s,color .2s;
 }
@@ -541,7 +523,7 @@ nav.scrolled{
 .why-card-desc{font-size:.88rem;color:var(--text-muted);line-height:1.75}
 .why-tags{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.2rem;padding-top:1rem;border-top:1px solid rgba(168,85,247,.1)}
 .why-tag{
-  font-family:'Rajdhani',sans-serif;font-size:.68rem;letter-spacing:.18em;
+  font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.68rem;letter-spacing:.18em;
   text-transform:uppercase;color:var(--p1);
 }
 
@@ -566,7 +548,7 @@ nav.scrolled{
 .value-item{display:flex;align-items:flex-start;gap:.7rem}
 .value-dot{color:var(--p1);font-size:1.2rem;margin-top:2px;flex-shrink:0}
 .value-item-title{
-  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.88rem;
+  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.88rem;
   color:#fff;letter-spacing:.04em;margin-bottom:.2rem;
 }
 .value-item-desc{font-size:.78rem;color:var(--text-dim)}
@@ -638,13 +620,13 @@ nav.scrolled{
   color:#fff;background:linear-gradient(135deg,var(--p3),var(--p1));
   padding:.25rem .55rem;border-radius:2px;
 }
-.tbx-plan-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted)}
+.tbx-plan-name{font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted)}
 .tbx-plan-price{font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1.7rem;color:#fff}
-.tbx-plan-price span{font-family:'Rajdhani',sans-serif;font-weight:600;font-size:.85rem;color:var(--text-dim)}
+.tbx-plan-price span{font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:600;font-size:.85rem;color:var(--text-dim)}
 .tbx-plan-cta{
   width:100%;text-align:center;justify-content:center;
   display:inline-flex;align-items:center;gap:.4rem;
-  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;
+  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.78rem;
   letter-spacing:.1em;text-transform:uppercase;color:var(--p1);
   border:1px solid rgba(168,85,247,.4);border-radius:6px;padding:.65rem 1rem;
   transition:background .25s,color .25s,border-color .25s;
@@ -669,7 +651,7 @@ nav.scrolled{
 .slide-badge{
   background:rgba(124,58,237,.88);backdrop-filter:blur(12px);
   border-radius:4px;padding:.3rem .8rem;
-  font-family:'Rajdhani',sans-serif;font-size:.72rem;
+  font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;
   letter-spacing:.2em;color:#fff;text-transform:uppercase;
 }
 .slide-counter{
@@ -707,7 +689,7 @@ nav.scrolled{
   border:1px solid rgba(168,85,247,.3);
 }
 .slide-title{font-family:'Orbitron','Chakra Petch',monospace;font-size:.85rem;font-weight:700;color:#fff;letter-spacing:.04em}
-.slide-meta{font-family:'Rajdhani',sans-serif;font-size:.72rem;color:var(--text-dim);letter-spacing:.08em}
+.slide-meta{font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;color:var(--text-dim);letter-spacing:.08em}
 
 /* Arrows */
 .slider-arrow{
@@ -748,7 +730,7 @@ nav.scrolled{
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .show-stat-label{
-  font-family:'Rajdhani',sans-serif;font-size:.68rem;
+  font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.68rem;
   letter-spacing:.22em;color:var(--text-dim);text-transform:uppercase;margin-top:.25rem;
 }
 
@@ -782,7 +764,7 @@ nav.scrolled{
 .shop-banner-title{font-family:'Orbitron','Chakra Petch',monospace;font-size:1.05rem;font-weight:700;color:#fff;letter-spacing:.04em}
 .shop-banner-desc{font-size:.8rem;color:var(--text-muted);margin-top:.15rem}
 .shop-banner-cta{
-  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;
+  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.82rem;
   letter-spacing:.18em;text-transform:uppercase;color:var(--p1);white-space:nowrap;
   transition:letter-spacing .25s;
 }
@@ -859,14 +841,14 @@ nav.scrolled{
 .testi-quote::before{content:'\201C';position:absolute;top:-.5rem;left:-.3rem;font-size:2.8rem;color:rgba(168,85,247,.2);font-family:Georgia,serif;line-height:1;pointer-events:none}
 .testi-author{display:flex;align-items:center;gap:.75rem;border-top:1px solid rgba(168,85,247,.1);padding-top:1rem}
 .testi-avatar{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--p3),var(--b1));display:flex;align-items:center;justify-content:center;font-family:'Orbitron','Chakra Petch',monospace;font-weight:700;font-size:.6rem;color:#fff;border:1px solid rgba(168,85,247,.3)}
-.testi-name{font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.88rem;color:var(--text);letter-spacing:.04em}
+.testi-name{font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.88rem;color:var(--text);letter-spacing:.04em}
 .testi-product{font-size:.7rem;color:var(--text-dim);margin-top:.1rem}
 .testi-badge{position:absolute;top:.9rem;right:.9rem;font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .5rem;border-radius:2px;border:1px solid rgba(168,85,247,.22);color:rgba(168,85,247,.65);background:rgba(168,85,247,.06)}
 .testi-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
 .testi-sum-card{padding:1.4rem;border:1px solid var(--border);border-radius:var(--radius);background:rgba(124,58,237,.04);text-align:center;backdrop-filter:blur(10px);transition:border-color .25s,transform .25s}
 .testi-sum-card:hover{border-color:rgba(168,85,247,.35);transform:translateY(-2px)}
 .testi-sum-num{font-family:'Orbitron','Chakra Petch',monospace;font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,#fff,var(--p1));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.testi-sum-label{font-family:'Rajdhani',sans-serif;font-size:.7rem;letter-spacing:.22em;color:var(--text-dim);text-transform:uppercase;margin-top:.3rem}
+.testi-sum-label{font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.7rem;letter-spacing:.22em;color:var(--text-dim);text-transform:uppercase;margin-top:.3rem}
 @media(max-width:768px){.testi-section{padding:4rem 1.2rem}.testi-header{flex-direction:column;align-items:flex-start}.testi-summary{grid-template-columns:1fr}}
 
 /* ══════════════════════════════════════════════════
@@ -879,7 +861,7 @@ nav.scrolled{
 .faq-left-eyebrow::before{content:'//';opacity:.5}
 .faq-left-title{font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:clamp(1.6rem,4vw,2.4rem);background:linear-gradient(135deg,#fff 30%,var(--p1));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.15;margin-bottom:1rem}
 .faq-left-desc{font-size:.92rem;color:var(--text-muted);line-height:1.75;margin-bottom:2rem}
-.faq-left-cta{display:inline-flex;align-items:center;gap:.5rem;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--p1);border:1px solid rgba(168,85,247,.3);padding:.6rem 1.2rem;border-radius:4px;transition:all .2s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.faq-left-cta{display:inline-flex;align-items:center;gap:.5rem;font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--p1);border:1px solid rgba(168,85,247,.3);padding:.6rem 1.2rem;border-radius:4px;transition:all .2s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
 .faq-left-cta:hover{background:rgba(168,85,247,.1);border-color:var(--p1);gap:.8rem}
 .faq-list{display:flex;flex-direction:column;gap:.6rem}
 .faq-item{
@@ -888,7 +870,7 @@ nav.scrolled{
   transition:border-color .3s,box-shadow .3s
 }
 .faq-item.faq-open{border-color:rgba(168,85,247,.45);box-shadow:0 8px 32px rgba(124,58,237,.12)}
-.faq-q{width:100%;text-align:left;padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.03em;color:var(--text);background:none;border:none;cursor:pointer;transition:color .2s}
+.faq-q{width:100%;text-align:left;padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.03em;color:var(--text);background:none;border:none;cursor:pointer;transition:color .2s}
 .faq-q:hover{color:var(--p1)}
 .faq-item.faq-open .faq-q{color:var(--p1)}
 .faq-q-icon{width:26px;height:26px;flex-shrink:0;border-radius:50%;border:1px solid rgba(168,85,247,.3);display:flex;align-items:center;justify-content:center;transition:transform .35s var(--ease-out),background .2s,border-color .2s;background:rgba(168,85,247,.06)}
@@ -940,7 +922,7 @@ footer{
 .fab-main:hover{transform:scale(1.12);box-shadow:0 8px 40px rgba(88,101,242,.7)}
 .fab-main svg{width:26px;height:26px;fill:#fff}
 .fab-tooltip{
-  font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;
+  font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;font-weight:700;
   letter-spacing:.12em;text-transform:uppercase;
   background:rgba(3,3,5,.9);backdrop-filter:blur(12px);
   border:1px solid rgba(168,85,247,.2);
@@ -964,11 +946,13 @@ footer{
 /* ══════════════════════════════════════════════════
    RESPONSIVE
 ══════════════════════════════════════════════════ */
-@media(max-width:768px){
+@media(max-width:900px){
   .nav-links,.nav-actions{display:none!important}
   .nav-ham{display:flex}
   nav{padding:.8rem 1.2rem}
   nav.scrolled{padding:.7rem 1.2rem}
+}
+@media(max-width:768px){
 
   .hero{padding:6rem 1.2rem 4rem;min-height:100svh}
   .hero-logo-wrap{width:min(120px,34vw)}
@@ -1053,7 +1037,7 @@ footer{
 }
 .goatx-feats{display:flex;flex-direction:column;gap:.55rem;margin-bottom:2rem}
 .goatx-feat{
-  display:flex;align-items:center;gap:.6rem;font-family:'Rajdhani',sans-serif;
+  display:flex;align-items:center;gap:.6rem;font-family:'Rajdhani','Chakra Petch',sans-serif;
   font-size:.92rem;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.04em;
 }
 .goatx-feat::before{
@@ -1123,7 +1107,7 @@ footer{
   font-family:'Orbitron','Chakra Petch',monospace;font-size:.55rem;color:#fff;font-weight:700;
 }
 .user-name{
-  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;
+  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.78rem;
   letter-spacing:.06em;color:var(--text);max-width:90px;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
@@ -1184,11 +1168,11 @@ footer{
   background:linear-gradient(135deg,#fff,var(--p1));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
-.points-label{font-family:'Rajdhani',sans-serif;font-size:.7rem;letter-spacing:.25em;color:var(--text-dim);text-transform:uppercase;margin-top:.2rem}
+.points-label{font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.7rem;letter-spacing:.25em;color:var(--text-dim);text-transform:uppercase;margin-top:.2rem}
 .ix-btn-row{display:flex;gap:.6rem;flex-wrap:wrap}
 .ix-btn{
   flex:1;min-width:120px;padding:.65rem 1rem;border-radius:6px;
-  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.78rem;
+  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.78rem;
   letter-spacing:.1em;text-transform:uppercase;text-align:center;
   cursor:pointer;transition:all .2s;border:none;
 }
@@ -1220,7 +1204,7 @@ footer{
   transform:translateY(-2px);
 }
 .pkg-amount{font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1rem;color:#fff}
-.pkg-pts{font-family:'Rajdhani',sans-serif;font-size:.68rem;letter-spacing:.15em;color:var(--p1);text-transform:uppercase;margin-top:.2rem}
+.pkg-pts{font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.68rem;letter-spacing:.15em;color:var(--p1);text-transform:uppercase;margin-top:.2rem}
 
 /* ── SHOP MODAL ── */
 .shop-product-card {
@@ -1283,7 +1267,7 @@ footer{
 .key-result-value { white-space: pre-line; }
 .key-copy-btn{
   margin-top:.6rem;font-size:.7rem;color:var(--p1);cursor:pointer;
-  font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.1em;
+  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;letter-spacing:.1em;
   text-transform:uppercase;background:none;border:none;padding:0;
   transition:color .2s;
 }
@@ -1291,7 +1275,7 @@ footer{
 .ix-toast{
   position:fixed;bottom:2rem;left:50%;z-index:9000;
   padding:.75rem 1.5rem;border-radius:999px;
-  font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:.1em;
+  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:.1em;
   backdrop-filter:blur(24px);border:1px solid;
   display:flex;align-items:center;gap:.5rem;
   transform:translate(-50%, 120px);
@@ -1489,10 +1473,10 @@ footer{
 
 /* ══ ADDED MOTION ══ */
 
-/* 1. Card hover — blur lift */
-.card{transition:transform .35s var(--ease-out),border-color .3s,box-shadow .35s,filter .35s}
-.card:hover{transform:translateY(-7px);filter:blur(0);box-shadow:0 24px 64px rgba(124,58,237,.25),0 0 0 1px rgba(168,85,247,.3)}
-.card:active{transform:translateY(-3px) scale(.99);filter:blur(.4px);transition-duration:.1s}
+/* 1. Card hover — lift */
+.card{transition:transform .35s var(--ease-out),border-color .3s,box-shadow .35s}
+.card:hover{transform:translateY(-7px);box-shadow:0 24px 64px rgba(124,58,237,.25),0 0 0 1px rgba(168,85,247,.3)}
+.card:active{transform:translateY(-3px) scale(.99);transition-duration:.1s}
 
 /* 2. Slider arrow — scale + glow hover */
 .slider-arrow{transition:all .25s var(--ease-out)}
@@ -1504,51 +1488,48 @@ footer{
 }
 .slider-arrow:active{transform:translateY(-50%) scale(.95);transition-duration:.08s}
 
-/* 3. Progress bar — blur trail */
+/* 3. Progress bar */
 #progress{
   box-shadow:0 0 12px var(--p2),0 0 28px rgba(168,85,247,.4);
-  filter:blur(0);
-  transition:width .08s linear,filter .1s;
+  transition:width .08s linear;
 }
-#progress.scrolling{filter:blur(1.5px) brightness(1.4)}
 
-/* 4. FAQ body — slide blur */
+/* 4. FAQ body — slide */
 .faq-body{
-  transition:max-height .45s var(--ease-out),opacity .35s var(--ease-out),filter .35s;
-  opacity:0;filter:blur(4px);
+  transition:max-height .45s var(--ease-out),opacity .35s var(--ease-out);
+  opacity:0;
 }
-.faq-item.faq-open .faq-body{max-height:320px;opacity:1;filter:blur(0)}
+.faq-item.faq-open .faq-body{max-height:320px;opacity:1}
 
-/* 5. Reveal — blur on enter */
-.reveal{opacity:0;transform:translateY(28px);filter:blur(6px);transition:opacity .75s var(--ease-out),transform .75s var(--ease-out),filter .6s var(--ease-out)}
-.reveal.in{opacity:1;transform:translateY(0);filter:blur(0)}
-.reveal-l{opacity:0;transform:translateX(-28px);filter:blur(6px);transition:opacity .75s var(--ease-out),transform .75s var(--ease-out),filter .6s var(--ease-out)}
-.reveal-l.in{opacity:1;transform:translateX(0);filter:blur(0)}
-.reveal-r{opacity:0;transform:translateX(28px);filter:blur(6px);transition:opacity .75s var(--ease-out),transform .75s var(--ease-out),filter .6s var(--ease-out)}
-.reveal-r.in{opacity:1;transform:translateX(0);filter:blur(0)}
+/* 5. Reveal on enter */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .75s var(--ease-out),transform .75s var(--ease-out)}
+.reveal.in{opacity:1;transform:translateY(0)}
+.reveal-l{opacity:0;transform:translateX(-28px);transition:opacity .75s var(--ease-out),transform .75s var(--ease-out)}
+.reveal-l.in{opacity:1;transform:translateX(0)}
+.reveal-r{opacity:0;transform:translateX(28px);transition:opacity .75s var(--ease-out),transform .75s var(--ease-out)}
+.reveal-r.in{opacity:1;transform:translateX(0)}
 
 /* ถ้า JS ไม่ทำงานเลย (ปิด JS หรือโหลดพัง) ให้เนื้อหาแสดงปกติหลัง 3 วิ */
 @media (prefers-reduced-motion: reduce) {
-  .reveal, .reveal-l, .reveal-r { opacity: 1 !important; transform: none !important; filter: none !important; }
+  .reveal, .reveal-l, .reveal-r { opacity: 1 !important; transform: none !important; }
 }
 
-/* 6. Nav logo img — spin blur on hover */
+/* 6. Nav logo img — spin on hover */
 .nav-logo:hover img{
   filter:drop-shadow(0 0 20px rgba(168,85,247,1));
   animation:logoSpin .6s var(--ease-out);
 }
 @keyframes logoSpin{
   0%{transform:rotateY(0) scale(1)}
-  40%{transform:rotateY(180deg) scale(1.1);filter:blur(2px) drop-shadow(0 0 24px rgba(168,85,247,1))}
-  100%{transform:rotateY(360deg) scale(1);filter:blur(0)}
+  40%{transform:rotateY(180deg) scale(1.1);filter:drop-shadow(0 0 24px rgba(168,85,247,1))}
+  100%{transform:rotateY(360deg) scale(1)}
 }
 
-/* 7. Toast — blur entrance */
+/* 7. Toast — entrance */
 .ix-toast{
-  transition:transform .45s var(--ease-out),opacity .4s ease,filter .4s;
-  filter:blur(8px);
+  transition:transform .45s var(--ease-out),opacity .4s ease;
 }
-.ix-toast.show{transform:translate(-50%,0);opacity:1;filter:blur(0)}
+.ix-toast.show{transform:translate(-50%,0);opacity:1}
 
 /* ══════════════════════════════════════════════════
    PRODUCT SHELF
@@ -1625,10 +1606,6 @@ footer{
 <div class="orb orb-1"></div>
 <div class="orb orb-2"></div>
 <div class="orb orb-3"></div>
-
-<!-- Cursor -->
-<div id="cx-dot"></div>
-<div id="cx-ring"></div>
 
 <!-- Progress Bar -->
 <div id="progress"></div>
@@ -1767,22 +1744,22 @@ footer{
   <div style="display:flex;gap:.8rem;justify-content:center" id="countdownDisplay">
     <div style="text-align:center">
       <div style="font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1.6rem;color:#ef4444" id="cdDays">00</div>
-      <div style="font-family:'Rajdhani',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">วัน</div>
+      <div style="font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">วัน</div>
     </div>
     <div style="font-family:'Orbitron','Chakra Petch',monospace;font-size:1.4rem;color:#ef4444;align-self:flex-start;margin-top:.2rem">:</div>
     <div style="text-align:center">
       <div style="font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1.6rem;color:#ef4444" id="cdHours">00</div>
-      <div style="font-family:'Rajdhani',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">ชั่วโมง</div>
+      <div style="font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">ชั่วโมง</div>
     </div>
     <div style="font-family:'Orbitron','Chakra Petch',monospace;font-size:1.4rem;color:#ef4444;align-self:flex-start;margin-top:.2rem">:</div>
     <div style="text-align:center">
       <div style="font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1.6rem;color:#ef4444" id="cdMins">00</div>
-      <div style="font-family:'Rajdhani',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">นาที</div>
+      <div style="font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">นาที</div>
     </div>
     <div style="font-family:'Orbitron','Chakra Petch',monospace;font-size:1.4rem;color:#ef4444;align-self:flex-start;margin-top:.2rem">:</div>
     <div style="text-align:center">
       <div style="font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1.6rem;color:#ef4444" id="cdSecs">00</div>
-      <div style="font-family:'Rajdhani',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">วินาที</div>
+      <div style="font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">วินาที</div>
     </div>
   </div>
 </div>
@@ -2262,7 +2239,7 @@ footer{
         <span style="color:var(--p1);font-size:1.1rem">★★★★★</span>
       </div>
       <span style="font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1.2rem;color:#fff">5.0</span>
-      <span style="font-size:.8rem;color:var(--text-dim);font-family:'Rajdhani',sans-serif;letter-spacing:.1em">/ 5.0 rating</span>
+      <span style="font-size:.8rem;color:var(--text-dim);font-family:'Rajdhani','Chakra Petch',sans-serif;letter-spacing:.1em">/ 5.0 rating</span>
     </div>
   </div>
 
@@ -2649,23 +2626,23 @@ footer{
     <span class="footer-logo-text">INSIDEX</span>
   </div>
   <div style="display:flex;justify-content:center;gap:1.2rem;margin-bottom:1rem;flex-wrap:wrap">
-  <a href="https://www.tiktok.com/@shxrkcxy" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
+  <a href="https://www.tiktok.com/@shxrkcxy" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.2 8.2 0 004.79 1.53V6.77a4.85 4.85 0 01-1.02-.08z"/></svg>
     TikTok
   </a>
-  <a href="https://www.facebook.com/profile.php?id=61591270036108" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#1877f2'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
+  <a href="https://www.facebook.com/profile.php?id=61591270036108" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#1877f2'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
     Facebook
   </a>
-  <a href="https://www.instagram.com/insidexstore.official/" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#e1306c'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
+  <a href="https://www.instagram.com/insidexstore.official/" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#e1306c'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
     Instagram
   </a>
-  <a href="https://www.youtube.com/@shxcry" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#ff0000'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
+  <a href="https://www.youtube.com/@shxcry" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#ff0000'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
     YouTube
   </a>
-  <a href="https://discord.gg/7thT8xaRpw" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#5865F2'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
+  <a href="https://discord.gg/7thT8xaRpw" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#5865F2'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
     <svg width="14" height="14" viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
     Discord
   </a>
@@ -2717,6 +2694,9 @@ footer{
 <div class="ix-overlay" id="modalShop" onclick="if(event.target===this)closeModal('modalShop')">
   <div class="ix-modal shop-modal-wide">
     <button onclick="closeModal('modalShop')" style="position:absolute;top:.8rem;right:.8rem;width:32px;height:32px;border-radius:50%;border:1px solid rgba(168,85,247,.25);background:rgba(10,10,15,.95);color:#fff;font-size:1rem;cursor:pointer;z-index:99999;display:flex;align-items:center;justify-content:center;pointer-events:all">✕</button>
+    <button id="shopBackBtn" onclick="backToProducts()" aria-label="กลับเลือกสินค้า" style="position:absolute;top:.8rem;left:.8rem;width:32px;height:32px;border-radius:50%;border:1px solid rgba(168,85,247,.25);background:rgba(10,10,15,.95);color:#fff;cursor:pointer;z-index:99999;display:none;align-items:center;justify-content:center;pointer-events:all">
+      <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M15 18l-6-6 6-6"/></svg>
+    </button>
     <div class="ix-modal-body">
       <div style="text-align:center;margin-bottom:1.2rem">
         <div class="ix-modal-title" style="margin-bottom:.3rem"><span>SHOP</span></div>
@@ -2758,7 +2738,7 @@ footer{
     <div id="qrInfo" style="display:none;margin-top:.5rem">
       <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.3rem">
         <div style="width:6px;height:6px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;animation:blink 1.4s infinite"></div>
-        <span style="font-size:.72rem;color:#34d399;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.1em">QR พร้อมใช้งาน</span>
+        <span style="font-size:.72rem;color:#34d399;font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;letter-spacing:.1em">QR พร้อมใช้งาน</span>
       </div>
       <div style="font-size:.65rem;color:var(--text-dim);text-align:center;font-family:'Space Mono',monospace">INISDEXSTORE</div>
     </div>
@@ -2776,9 +2756,6 @@ footer{
 
   <button class="ix-btn ix-btn-primary" style="width:100%;margin-top:1rem;padding:.85rem;border-radius:8px" id="confirmSlipBtn" onclick="submitSlip()">
     ✓ ยืนยันการชำระเงิน
-  </button>
-  <button class="ix-btn ix-btn-ghost" style="width:100%;margin-top:.5rem;border-radius:8px" onclick="backToProducts()">
-    ← กลับเลือกสินค้า
   </button>
 </div>
 
@@ -2798,9 +2775,9 @@ footer{
   <div style="margin-top:1rem;padding:.9rem 1rem;border:1px solid rgba(88,101,242,.3);border-radius:10px;background:rgba(88,101,242,.07);display:flex;align-items:center;gap:.8rem">
     <div style="font-size:1.4rem;flex-shrink:0"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.15em"><path d="M4 4h16v12H8l-4 4V4z"/></svg></div>
     <div>
-      <div style="font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;color:#fff;margin-bottom:.2rem">นำ Key ไปส่งให้ Admin ใน Discord</div>
+      <div style="font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.82rem;color:#fff;margin-bottom:.2rem">นำ Key ไปส่งให้ Admin ใน Discord</div>
       <div style="font-size:.72rem;color:var(--text-muted);margin-bottom:.4rem">Admin จะเข้ามา Remote ลง Setting ให้ทันที</div>
-      <a href="https://discord.gg/7thT8xaRpw" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:#5865F2;transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
+      <a href="https://discord.gg/7thT8xaRpw" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:#5865F2;transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
         <svg width="14" height="14" viewBox="0 0 127.14 96.36" fill="#5865F2"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
         เข้า Discord Server ! →
       </a>
@@ -2892,27 +2869,6 @@ function loadYoutube(el) {
   // Safety net: never let the loader get stuck forever if a resource hangs/fails
   setTimeout(finish, 8000);
 })();
-
-/* ══════════════════════════════════════════════════
-   CURSOR
-══════════════════════════════════════════════════ */
-if (!('ontouchstart' in window)) {
-  const dot = document.getElementById('cx-dot');
-  const ring = document.getElementById('cx-ring');
-  let mx = 0, my = 0, rx = 0, ry = 0;
-  document.addEventListener('mousemove', e => {
-    mx = e.clientX; my = e.clientY;
-    dot.style.left = mx + 'px'; dot.style.top = my + 'px';
-  });
-  (function raf() {
-    rx += (mx - rx) * .12; ry += (my - ry) * .12;
-    ring.style.left = rx + 'px'; ring.style.top = ry + 'px';
-    requestAnimationFrame(raf);
-  })();
-} else {
-  document.getElementById('cx-dot').style.display = 'none';
-  document.getElementById('cx-ring').style.display = 'none';
-}
 
 /* ══════════════════════════════════════════════════
    SCROLL PROGRESS
@@ -3317,7 +3273,7 @@ async function openHistory() {
           <div style="display:flex;justify-content:space-between;align-items:center">
             <span style="font-family:'Space Mono',monospace;font-size:.78rem;color:#34d399;font-weight:700">${p.key}</span>
             <button onclick="navigator.clipboard.writeText('${p.key}').then(()=>toast('Copy แล้ว!','success'))" 
-              style="font-size:.65rem;color:var(--p1);cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:none;border:none;padding:0">
+              style="font-size:.65rem;color:var(--p1);cursor:pointer;font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:none;border:none;padding:0">
               COPY
             </button>
           </div>
@@ -3500,6 +3456,7 @@ function showShopStep(n) {
   [1,2,3].forEach(i => {
     document.getElementById(`shopStep${i}`).style.display = i === n ? '' : 'none';
   });
+  document.getElementById('shopBackBtn').style.display = n === 2 ? 'flex' : 'none';
 }
 
 function selectProduct(el, id, name, price) {
@@ -3658,7 +3615,7 @@ async function submitSlip() {
       <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem">
         <div style="font-family:'Space Mono',monospace;font-size:.85rem;color:#34d399;font-weight:700;word-break:break-all">${key}</div>
         <button onclick="navigator.clipboard.writeText('${key}').then(()=>toast('Copy แล้ว!','success'))"
-          style="flex-shrink:0;font-size:.65rem;color:var(--p1);cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);border-radius:4px;padding:.3rem .6rem;transition:all .2s"
+          style="flex-shrink:0;font-size:.65rem;color:var(--p1);cursor:pointer;font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);border-radius:4px;padding:.3rem .6rem;transition:all .2s"
           onmouseover="this.style.background='rgba(168,85,247,.2)'"
           onmouseout="this.style.background='rgba(168,85,247,.1)'">
           COPY
