@@ -1644,6 +1644,14 @@ footer{
   .shelf-img-wrap{height:105px}
   .shelf-img{max-height:105px}
 }
+
+/* ── LANG PICKER ── */
+.lang-picker{display:inline-flex;align-items:center;gap:1px;background:rgba(255,255,255,.04);border:1px solid rgba(168,85,247,.2);border-radius:999px;padding:3px 7px;margin-right:4px}
+.lang-btn{font-size:16px;cursor:pointer;background:none;border:none;padding:2px 3px;border-radius:999px;opacity:.35;transition:opacity .2s,transform .15s;line-height:1;display:inline-flex;align-items:center}
+.lang-btn.active{opacity:1;transform:scale(1.15)}
+.lang-btn:hover:not(.active){opacity:.7}
+@media(max-width:480px){.lang-picker{padding:2px 5px}.lang-btn{font-size:14px}}
+
 </style>
 </head>
 <body>
@@ -1670,14 +1678,19 @@ footer{
     <span class="nav-logo-text" id="navLogoText">INSIDEX</span>
   </a>
   <ul class="nav-links">
-    <li><a href="#products" class="nav-link">สินค้า</a></li>
-    <li><a href="#shelf" class="nav-link">หมวดหมู่</a></li>
-    <li><a href="#about" class="nav-link">เกี่ยวกับ</a></li>
+    <li><a href="#products" class="nav-link" data-i18n="nav.products">สินค้า</a></li>
+    <li><a href="#shelf" class="nav-link" data-i18n="nav.shelf">หมวดหมู่</a></li>
+    <li><a href="#about" class="nav-link" data-i18n="nav.about">เกี่ยวกับ</a></li>
     <li><a href="#showcase" class="nav-link">Showcase</a></li>
-    <li><a href="#reviews" class="nav-link">รีวิว</a></li>
+    <li><a href="#reviews" class="nav-link" data-i18n="nav.reviews">รีวิว</a></li>
     <li><a href="#faq" class="nav-link">FAQ</a></li>
-    <li><a href="#discord" class="nav-link">ชุมชน</a></li>
+    <li><a href="#discord" class="nav-link" data-i18n="nav.community">ชุมชน</a></li>
   </ul>
+  <div class="lang-picker" id="langPicker">
+    <button class="lang-btn" data-lang="th" onclick="setLang('th')" title="ภาษาไทย">🇹🇭</button>
+    <button class="lang-btn" data-lang="en" onclick="setLang('en')" title="English">🇬🇧</button>
+    <button class="lang-btn" data-lang="vi" onclick="setLang('vi')" title="Tiếng Việt">🇻🇳</button>
+  </div>
   <div class="nav-ham" id="navHam" onclick="toggleMob()">
     <span></span>
     <span></span>
@@ -1686,7 +1699,7 @@ footer{
   <div class="nav-actions" id="navActions">
     <a href="https://cozy-healing-production-ee02.up.railway.app/auth/discord" class="nav-btn nav-btn-disc" id="loginBtn">
       <svg width="14" height="14" viewBox="0 0 127.14 96.36" fill="#fff" style="flex-shrink:0"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
-      Login Discord
+      <span data-i18n="nav.login">Login Discord</span>
     </a>
     <div class="user-bar" id="userBar" style="display:none" onclick="openModalUser()">
       <img class="user-avatar" id="navAvatar" src="" alt="">
@@ -1698,13 +1711,13 @@ footer{
 
 <!-- Mobile Menu -->
 <div class="mob-menu" id="mobMenu">
-  <a href="#products" class="mob-link" onclick="closeMob()">สินค้า</a>
-  <a href="#shelf" class="mob-link" onclick="closeMob()">หมวดหมู่</a>
-  <a href="#about" class="mob-link" onclick="closeMob()">เกี่ยวกับ</a>
+  <a href="#products" class="mob-link" onclick="closeMob()" data-i18n="nav.products">สินค้า</a>
+  <a href="#shelf" class="mob-link" onclick="closeMob()" data-i18n="nav.shelf">หมวดหมู่</a>
+  <a href="#about" class="mob-link" onclick="closeMob()" data-i18n="nav.about">เกี่ยวกับ</a>
   <a href="#showcase" class="mob-link" onclick="closeMob()">Showcase</a>
-  <a href="#reviews" class="mob-link" onclick="closeMob()">รีวิว</a>
+  <a href="#reviews" class="mob-link" onclick="closeMob()" data-i18n="nav.reviews">รีวิว</a>
   <a href="#faq" class="mob-link" onclick="closeMob()">FAQ</a>
-  <a href="#discord" class="mob-link" onclick="closeMob()">ชุมชน</a>
+  <a href="#discord" class="mob-link" onclick="closeMob()" data-i18n="nav.community">ชุมชน</a>
   <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn btn-primary" onclick="closeMob()">
     <svg width="18" height="18" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
     Join Discord
@@ -1731,15 +1744,15 @@ footer{
       <span class="hero-title-glow" aria-hidden="true">INSIDEX</span>
     </h1>
     <p class="hero-sub">The Best Of Product</p>
-    <p class="hero-desc">ร้านค้าสำหรับนักเล่นเกมที่ต้องการประสิทธิภาพสูงสุด<br>ลง Setup ให้โดยตรงโดยทีมงาน — ไม่ต้องทำเอง</p>
+    <p class="hero-desc" data-i18n-html="hero.desc">ร้านค้าสำหรับนักเล่นเกมที่ต้องการประสิทธิภาพสูงสุด<br>ลง Setup ให้โดยตรงโดยทีมงาน — ไม่ต้องทำเอง</p>
 
     <div class="hero-cta">
       <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn btn-primary">
         <svg viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
-        เข้าร่วม Discord
+        <span data-i18n="hero.joinDiscord">เข้าร่วม Discord</span>
       </a>
-      <a href="#" onclick="if(currentUser){openShop()}else{window.location.href='https://cozy-healing-production-ee02.up.railway.app/auth/discord'}" class="btn btn-secondary">ซื้อสินค้า</a>
-      <a href="#products" class="btn btn-ghost">ดูสินค้า ↓</a>
+      <a href="#" onclick="if(currentUser){openShop()}else{window.location.href='https://cozy-healing-production-ee02.up.railway.app/auth/discord'}" class="btn btn-secondary" data-i18n="hero.buy">ซื้อสินค้า</a>
+      <a href="#products" class="btn btn-ghost" data-i18n="hero.view">ดูสินค้า ↓</a>
     </div>
   </div>
 
@@ -1754,19 +1767,19 @@ footer{
   <div class="stats-inner">
     <div class="stat">
       <div class="stat-num" data-target="2200" data-suffix="+">0+</div>
-      <div class="stat-label">ลูกค้าที่พึงพอใจ</div>
+      <div class="stat-label" data-i18n="stat.customers">ลูกค้าที่พึงพอใจ</div>
     </div>
     <div class="stat">
       <div class="stat-num" data-target="4">0</div>
-      <div class="stat-label">หมวดสินค้า</div>
+      <div class="stat-label" data-i18n="stat.categories">หมวดสินค้า</div>
     </div>
     <div class="stat">
       <div class="stat-num">24/7</div>
-      <div class="stat-label">Support ตลอดเวลา</div>
+      <div class="stat-label" data-i18n="stat.support">Support ตลอดเวลา</div>
     </div>
     <div class="stat">
       <div class="stat-num">100%</div>
-      <div class="stat-label">ปลอดภัย & มั่นใจ</div>
+      <div class="stat-label" data-i18n="stat.safe">ปลอดภัย & มั่นใจ</div>
     </div>
   </div>
 </div>
@@ -1790,22 +1803,22 @@ footer{
   <div style="display:flex;gap:.8rem;justify-content:center" id="countdownDisplay">
     <div style="text-align:center">
       <div style="font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:1.6rem;color:#ef4444" id="cdDays">00</div>
-      <div style="font-family:'Rajdhani','Kanit',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">วัน</div>
+      <div style="font-family:'Rajdhani','Kanit',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)" data-i18n="cd.day">วัน</div>
     </div>
     <div style="font-family:'Orbitron','Kanit',monospace;font-size:1.4rem;color:#ef4444;align-self:flex-start;margin-top:.2rem">:</div>
     <div style="text-align:center">
       <div style="font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:1.6rem;color:#ef4444" id="cdHours">00</div>
-      <div style="font-family:'Rajdhani','Kanit',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">ชั่วโมง</div>
+      <div style="font-family:'Rajdhani','Kanit',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)" data-i18n="cd.hour">ชั่วโมง</div>
     </div>
     <div style="font-family:'Orbitron','Kanit',monospace;font-size:1.4rem;color:#ef4444;align-self:flex-start;margin-top:.2rem">:</div>
     <div style="text-align:center">
       <div style="font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:1.6rem;color:#ef4444" id="cdMins">00</div>
-      <div style="font-family:'Rajdhani','Kanit',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">นาที</div>
+      <div style="font-family:'Rajdhani','Kanit',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)" data-i18n="cd.min">นาที</div>
     </div>
     <div style="font-family:'Orbitron','Kanit',monospace;font-size:1.4rem;color:#ef4444;align-self:flex-start;margin-top:.2rem">:</div>
     <div style="text-align:center">
       <div style="font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:1.6rem;color:#ef4444" id="cdSecs">00</div>
-      <div style="font-family:'Rajdhani','Kanit',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">วินาที</div>
+      <div style="font-family:'Rajdhani','Kanit',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)" data-i18n="cd.sec">วินาที</div>
     </div>
   </div>
 </div>
@@ -1840,8 +1853,8 @@ footer{
 <!-- ══ PRODUCTS ══ -->
 <section class="section" id="products">
   <p class="section-eyebrow reveal">หมวดหมู่สินค้า</p>
-  <h2 class="section-title reveal">สินค้าของเรา</h2>
-  <p class="section-desc reveal">เลือกสรรสินค้าคุณภาพสูงเพื่อยกระดับประสบการณ์การเล่นเกมของคุณ — ทุกอย่างลงให้โดยตรง</p>
+  <h2 class="section-title reveal" data-i18n="sec.productsTitle">สินค้าของเรา</h2>
+  <p class="section-desc reveal" data-i18n="sec.productsDesc">เลือกสรรสินค้าคุณภาพสูงเพื่อยกระดับประสบการณ์การเล่นเกมของคุณ — ทุกอย่างลงให้โดยตรง</p>
 
   <div class="cards">
     <div class="card reveal" style="transition-delay:.05s">
@@ -1857,7 +1870,7 @@ footer{
         <li class="card-feat">ปรับ Network Settings</li>
         <li class="card-feat">Optimize ระบบ Windows</li>
       </ul>
-      <a href="#" onclick="if(currentUser){openShop()}else{window.location.href='https://cozy-healing-production-ee02.up.railway.app/auth/discord'}" class="card-cta">สั่งซื้อ →</a>
+      <a href="#" onclick="if(currentUser){openShop()}else{window.location.href='https://cozy-healing-production-ee02.up.railway.app/auth/discord'}" class="card-cta" data-i18n="btn.orderArrow">สั่งซื้อ →</a>
       <div class="card-price">฿309–฿629</div>
     </div>
 
@@ -1874,7 +1887,7 @@ footer{
         <li class="card-feat">เพิ่มความคมชัด</li>
         <li class="card-feat">ติดตั้งฟรี !</li>
       </ul>
-      <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="card-cta">สั่งซื้อ →</a>
+      <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="card-cta" data-i18n="btn.orderArrow">สั่งซื้อ →</a>
       <div class="card-price">฿39</div>
     </div>
 
@@ -1890,7 +1903,7 @@ footer{
         <li class="card-feat">ปรับอะไรต่างๆได้เยอะ</li>
         <li class="card-feat">Custom Config Files</li>
       </ul>
-      <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="card-cta">สั่งซื้อ →</a>
+      <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="card-cta" data-i18n="btn.orderArrow">สั่งซื้อ →</a>
       <div class="card-price">฿69–99</div>
     </div>
 
@@ -1907,7 +1920,7 @@ footer{
         <li class="card-feat">ลด RAM Usage</li>
         <li class="card-feat">Boot เร็วกว่า Windows ปกติ</li>
       </ul>
-      <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="card-cta">สั่งซื้อ →</a>
+      <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="card-cta" data-i18n="btn.orderArrow">สั่งซื้อ →</a>
       <div class="card-price">฿99–250</div>
     </div>
   </div>
@@ -1918,8 +1931,8 @@ footer{
 <!-- ══ PRODUCT SHELF ══ -->
 <section class="section" id="shelf">
   <p class="section-eyebrow reveal">คลังสินค้าทั้งหมด</p>
-  <h2 class="section-title reveal">ชั้นวางสินค้า INSIDEX</h2>
-  <p class="section-desc reveal">รวมสินค้าเด่นของเราไว้ในที่เดียว — คลิกเพื่อเลือกซื้อได้ทันที</p>
+  <h2 class="section-title reveal" data-i18n="sec.shelfTitle">ชั้นวางสินค้า INSIDEX</h2>
+  <p class="section-desc reveal" data-i18n="sec.shelfDesc">รวมสินค้าเด่นของเราไว้ในที่เดียว — คลิกเพื่อเลือกซื้อได้ทันที</p>
 
   <div class="shelf-grid">
     <div class="shelf-item reveal" style="transition-delay:.05s" onclick="if(currentUser){openShop()}else{window.location.href='https://cozy-healing-production-ee02.up.railway.app/auth/discord'}">
@@ -1974,15 +1987,15 @@ footer{
 <!-- ══ ABOUT ══ -->
 <section class="section" id="about">
   <p class="section-eyebrow reveal">เกี่ยวกับเรา</p>
-  <h2 class="section-title reveal">ทำไมต้อง INSIDEX?</h2>
-  <p class="section-desc reveal">เราคือร้านที่ให้บริการสินค้าดิจิทัลสำหรับนักเล่นเกมโดยเฉพาะ ทุกสินค้าผ่านการทดสอบและพัฒนา — ทีมงานลง Setup ให้คุณโดยตรง ไม่ต้องทำเอง</p>
+  <h2 class="section-title reveal" data-i18n="sec.aboutTitle">ทำไมต้อง INSIDEX?</h2>
+  <p class="section-desc reveal" data-i18n="sec.aboutDesc">เราคือร้านที่ให้บริการสินค้าดิจิทัลสำหรับนักเล่นเกมโดยเฉพาะ ทุกสินค้าผ่านการทดสอบและพัฒนา — ทีมงานลง Setup ให้คุณโดยตรง ไม่ต้องทำเอง</p>
 
   <div class="why-grid">
     <div class="why-card reveal" style="transition-delay:.05s">
       <div class="why-card-shine"></div>
       <div class="why-card-icon"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" style="vertical-align:-0.15em"><circle cx="12" cy="12" r="3.2"/><path d="M12 2v2.4M12 19.6V22M4.2 4.2l1.7 1.7M18.1 18.1l1.7 1.7M2 12h2.4M19.6 12H22M4.2 19.8l1.7-1.7M18.1 5.9l1.7-1.7"/></svg></div>
       <h3 class="why-card-title">SETTING</h3>
-      <p class="why-card-desc">การตั้งค่าที่ถูกออกแบบโดยผู้เชี่ยวชาญ ไม่ว่าจะเป็นการตั้งค่าในเกม, ระบบปฏิบัติการ หรือ Network เพื่อให้ได้ FPS สูงสุด ดีเลย์ต่ำสุด และ Input Lag น้อยที่สุด</p>
+      <p class="why-card-desc" data-i18n="why.settingDesc">การตั้งค่าที่ถูกออกแบบโดยผู้เชี่ยวชาญ ไม่ว่าจะเป็นการตั้งค่าในเกม, ระบบปฏิบัติการ หรือ Network เพื่อให้ได้ FPS สูงสุด ดีเลย์ต่ำสุด และ Input Lag น้อยที่สุด</p>
       <div class="why-tags">
         <span class="why-tag">✦ FPS BOOST</span>
         <span class="why-tag">✦ LOW LATENCY</span>
@@ -1993,7 +2006,7 @@ footer{
       <div class="why-card-shine" style="background:linear-gradient(225deg,rgba(99,102,241,.12) 0%,transparent 60%)"></div>
       <div class="why-card-icon"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.15em"><path d="M12 2a10 10 0 1 0 0 20c1.1 0 2-.9 2-2 0-.5-.2-1-.5-1.4-.3-.4-.5-.9-.5-1.4 0-1.1.9-2 2-2h2a4 4 0 0 0 4-4c0-5-4.5-9-9-9z"/><circle cx="7.5" cy="10.5" r="1.1"/><circle cx="12" cy="7.3" r="1.1"/><circle cx="16.5" cy="10.5" r="1.1"/></svg></div>
       <h3 class="why-card-title">RESHADE</h3>
-      <p class="why-card-desc">ReShade Preset ที่ถูก Custom มาให้ภาพในเกมสวยงาม คมชัด และมีสีสันที่สมจริงยิ่งขึ้น โดยไม่กระทบต่อ FPS ทีมงานติดตั้งให้ฟรี</p>
+      <p class="why-card-desc" data-i18n="why.reshadeDesc">ReShade Preset ที่ถูก Custom มาให้ภาพในเกมสวยงาม คมชัด และมีสีสันที่สมจริงยิ่งขึ้น โดยไม่กระทบต่อ FPS ทีมงานติดตั้งให้ฟรี</p>
       <div class="why-tags">
         <span class="why-tag" style="color:#818cf8">✦ COLOR GRADE</span>
         <span class="why-tag" style="color:#818cf8">✦ SHARP VISUAL</span>
@@ -2004,7 +2017,7 @@ footer{
       <div class="why-card-shine" style="background:linear-gradient(225deg,rgba(139,92,246,.12) 0%,transparent 60%)"></div>
       <div class="why-card-icon"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.15em"><rect x="2.5" y="8" width="19" height="10" rx="4"/><path d="M7 11v4M5 13h4"/><circle cx="16" cy="11.3" r="1"/><circle cx="18.2" cy="13.5" r="1"/></svg></div>
       <h3 class="why-card-title">MODE</h3>
-      <p class="why-card-desc">Mode ช่วยเพิ่มความสวยงามของ Graphic และเปิดตัวเลือกในการปรับแต่งที่มากกว่าปกติ ให้คุณปรับ Config ได้ตามสไตล์ตัวเอง</p>
+      <p class="why-card-desc" data-i18n="why.modeDesc">Mode ช่วยเพิ่มความสวยงามของ Graphic และเปิดตัวเลือกในการปรับแต่งที่มากกว่าปกติ ให้คุณปรับ Config ได้ตามสไตล์ตัวเอง</p>
       <div class="why-tags">
         <span class="why-tag" style="color:#a78bfa">✦ CUSTOM CONFIG</span>
         <span class="why-tag" style="color:#a78bfa">✦ BETTER VISUAL</span>
@@ -2015,7 +2028,7 @@ footer{
       <div class="why-card-shine" style="background:linear-gradient(225deg,rgba(88,101,242,.12) 0%,transparent 60%)"></div>
       <div class="why-card-icon"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.15em"><rect x="2.5" y="4" width="19" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
       <h3 class="why-card-title">WINDOWS OS</h3>
-      <p class="why-card-desc">Windows ที่ Optimize มาเพื่อการเล่นเกมโดยเฉพาะ ตัด Service และ Process ที่ไม่จำเป็นออก ทำให้ระบบเบา บูตเร็ว และให้ทรัพยากรกับเกมได้มากที่สุด</p>
+      <p class="why-card-desc" data-i18n="why.windowsDesc">Windows ที่ Optimize มาเพื่อการเล่นเกมโดยเฉพาะ ตัด Service และ Process ที่ไม่จำเป็นออก ทำให้ระบบเบา บูตเร็ว และให้ทรัพยากรกับเกมได้มากที่สุด</p>
       <div class="why-tags">
         <span class="why-tag" style="color:#6366f1">✦ NO BLOATWARE</span>
         <span class="why-tag" style="color:#6366f1">✦ FAST BOOT</span>
@@ -2027,35 +2040,35 @@ footer{
   <div class="value-banner reveal">
     <div class="value-left">
       <div class="value-label">// WHY INSIDEX</div>
-      <div class="value-title">พร้อมดูแลคุณ<br>ทุกขั้นตอน</div>
+      <div class="value-title" data-i18n-html="value.title">พร้อมดูแลคุณ<br>ทุกขั้นตอน</div>
     </div>
     <div class="value-right">
       <div class="value-item">
         <span class="value-dot">◈</span>
         <div>
           <div class="value-item-title">Support 24/7</div>
-          <div class="value-item-desc">ทีมงานพร้อมช่วยเหลือตลอดเวลา</div>
+          <div class="value-item-desc" data-i18n="value.supportDesc">ทีมงานพร้อมช่วยเหลือตลอดเวลา</div>
         </div>
       </div>
       <div class="value-item">
         <span class="value-dot">◈</span>
         <div>
-          <div class="value-item-title">ราคาคุ้มค่า</div>
-          <div class="value-item-desc">สินค้าคุณภาพในราคาที่เข้าถึงได้</div>
+          <div class="value-item-title" data-i18n="value.priceTitle">ราคาคุ้มค่า</div>
+          <div class="value-item-desc" data-i18n="value.priceDesc">สินค้าคุณภาพในราคาที่เข้าถึงได้</div>
         </div>
       </div>
       <div class="value-item">
         <span class="value-dot">◈</span>
         <div>
-          <div class="value-item-title">ลงให้โดยตรง</div>
-          <div class="value-item-desc">ทีมงาน Setup ให้คุณ ไม่ต้องทำเอง</div>
+          <div class="value-item-title" data-i18n="value.setupTitle">ลงให้โดยตรง</div>
+          <div class="value-item-desc" data-i18n="value.setupDesc">ทีมงาน Setup ให้คุณ ไม่ต้องทำเอง</div>
         </div>
       </div>
       <div class="value-item">
         <span class="value-dot">◈</span>
         <div>
-          <div class="value-item-title">ลูกค้า 2,000+</div>
-          <div class="value-item-desc">ไว้วางใจเราตลอดหลายเดือนที่ผ่านมา</div>
+          <div class="value-item-title" data-i18n="value.custTitle">ลูกค้า 2,000+</div>
+          <div class="value-item-desc" data-i18n="value.custDesc">ไว้วางใจเราตลอดหลายเดือนที่ผ่านมา</div>
         </div>
       </div>
     </div>
@@ -2066,9 +2079,9 @@ footer{
 
 <!-- ══ TOOLBOX PREMIUM ══ -->
 <section class="section" id="toolbox-premium">
-  <p class="section-eyebrow reveal">ซอฟต์แวร์เรือธง</p>
-  <h2 class="section-title reveal">INSIDEX Toolbox Premium</h2>
-  <p class="section-desc reveal">รวมทุกเครื่องมือ Optimize ไว้ในโปรแกรมเดียว กดใช้งานได้ทันทีโดยไม่ต้องตั้งค่าเอง</p>
+  <p class="section-eyebrow reveal" data-i18n="sec.toolboxEye">ซอฟต์แวร์เรือธง</p>
+  <h2 class="section-title reveal" data-i18n="sec.toolboxTitle">INSIDEX Toolbox Premium</h2>
+  <p class="section-desc reveal" data-i18n="sec.toolboxDesc">รวมทุกเครื่องมือ Optimize ไว้ในโปรแกรมเดียว กดใช้งานได้ทันทีโดยไม่ต้องตั้งค่าเอง</p>
 
   <div class="tbx-wrap reveal">
     <div class="tbx-top">
@@ -2094,18 +2107,18 @@ footer{
       <div class="tbx-plan">
         <div class="tbx-plan-name">1 เดือน</div>
         <div class="tbx-plan-price">฿199<span>/เดือน</span></div>
-        <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="tbx-plan-cta">สั่งซื้อ</a>
+        <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="tbx-plan-cta" data-i18n="btn.order">สั่งซื้อ</a>
       </div>
       <div class="tbx-plan is-best">
         <span class="tbx-plan-badge">คุ้มสุด</span>
         <div class="tbx-plan-name">3 เดือน</div>
         <div class="tbx-plan-price">฿549<span>/3 เดือน</span></div>
-        <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="tbx-plan-cta">สั่งซื้อ</a>
+        <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="tbx-plan-cta" data-i18n="btn.order">สั่งซื้อ</a>
       </div>
       <div class="tbx-plan">
         <div class="tbx-plan-name">12 เดือน</div>
         <div class="tbx-plan-price">฿1990<span>/ปี</span></div>
-        <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="tbx-plan-cta">สั่งซื้อ</a>
+        <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="tbx-plan-cta" data-i18n="btn.order">สั่งซื้อ</a>
       </div>
     </div>
   </div>
@@ -2117,7 +2130,7 @@ footer{
 <section class="section" id="showcase">
   <p class="section-eyebrow reveal">ตัวอย่างสินค้า</p>
   <h2 class="section-title reveal">Setting Showcase</h2>
-  <p class="section-desc reveal">ดูผลลัพธ์จริงจากทางร้าน — เลื่อนซ้าย/ขวาหรือลากเพื่อดูคลิปทั้งหมด</p>
+  <p class="section-desc reveal" data-i18n="sec.showcaseDesc">ดูผลลัพธ์จริงจากทางร้าน — เลื่อนซ้าย/ขวาหรือลากเพื่อดูคลิปทั้งหมด</p>
 
   <div class="showcase-wrap reveal">
     <div class="slider-outer" id="sliderOuter">
@@ -2148,7 +2161,7 @@ footer{
             </div>
             <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn btn-primary" style="padding:.5rem 1.2rem;font-size:.78rem">
               <svg width="16" height="16" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
-              สั่งซื้อ
+              <span data-i18n="btn.order">สั่งซื้อ</span>
             </a>
           </div>
         </div>
@@ -2178,7 +2191,7 @@ footer{
             </div>
             <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn btn-primary" style="padding:.5rem 1.2rem;font-size:.78rem;background:linear-gradient(135deg,#6366f1,#4f46e5)">
               <svg width="16" height="16" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
-              สั่งซื้อ
+              <span data-i18n="btn.order">สั่งซื้อ</span>
             </a>
           </div>
         </div>
@@ -2208,7 +2221,7 @@ footer{
             </div>
             <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn btn-primary" style="padding:.5rem 1.2rem;font-size:.78rem">
               <svg width="16" height="16" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
-              สั่งซื้อ
+              <span data-i18n="btn.order">สั่งซื้อ</span>
             </a>
           </div>
         </div>
@@ -2238,7 +2251,7 @@ footer{
             </div>
             <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn btn-primary" style="padding:.5rem 1.2rem;font-size:.78rem">
               <svg width="16" height="16" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
-              สั่งซื้อ
+              <span data-i18n="btn.order">สั่งซื้อ</span>
             </a>
           </div>
           </div>
@@ -2278,8 +2291,8 @@ footer{
 <section class="testi-section" id="reviews">
   <div class="testi-header">
     <div class="testi-header-left">
-      <p class="section-eyebrow reveal">รีวิวจากลูกค้าจริง</p>
-      <h2 class="section-title reveal" style="margin-bottom:0">เสียงจากลูกค้า<br>2,200+ คน</h2>
+      <p class="section-eyebrow reveal" data-i18n="sec.reviewsEye">รีวิวจากลูกค้าจริง</p>
+      <h2 class="section-title reveal" style="margin-bottom:0" data-i18n-html="sec.reviewsTitle">เสียงจากลูกค้า<br>2,200+ คน</h2>
     </div>
     <div class="reveal" style="display:flex;align-items:center;gap:.5rem">
       <div style="display:flex">
@@ -2500,10 +2513,10 @@ footer{
     <!-- Left: sticky heading -->
     <div class="faq-left reveal-l">
       <p class="faq-left-eyebrow">FAQ</p>
-      <h2 class="faq-left-title">คำถาม<br>ที่พบบ่อย</h2>
-      <p class="faq-left-desc">มีข้อสงสัยเพิ่มเติม? ติดต่อทีมงานผ่าน Discord ได้เลย พร้อม Support 24/7</p>
+      <h2 class="faq-left-title" data-i18n-html="faq.title">คำถาม<br>ที่พบบ่อย</h2>
+      <p class="faq-left-desc" data-i18n="faq.desc">มีข้อสงสัยเพิ่มเติม? ติดต่อทีมงานผ่าน Discord ได้เลย พร้อม Support 24/7</p>
       <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="faq-left-cta">
-        ถามเพิ่มเติมใน Discord →
+        <span data-i18n="faq.cta">ถามเพิ่มเติมใน Discord →</span>
       </a>
     </div>
 
@@ -2512,12 +2525,12 @@ footer{
 
       <div class="faq-item faq-open" >
         <button class="faq-q" onclick="faqToggle(this)">
-          ทีมงานลง Setup ให้ยังไง?
+          <span data-i18n="faq.q1">ทีมงานลง Setup ให้ยังไง?</span>
           <span class="faq-q-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
         </button>
         <div class="faq-body">
           <div class="faq-body-inner">
-            <p>หลังจากสั่งซื้อแล้ว ทีมงานจะนัด Remote เข้าเครื่องผ่าน Ultraviewer แล้วลง Setup ให้โดยตรง คุณไม่ต้องทำอะไรเองเลย แค่เปิดเครื่องทิ้งไว้ก็พอ ใช้เวลาประมาณ 3-5 นาที</p>
+            <p data-i18n="faq.a1">หลังจากสั่งซื้อแล้ว ทีมงานจะนัด Remote เข้าเครื่องผ่าน Ultraviewer แล้วลง Setup ให้โดยตรง คุณไม่ต้องทำอะไรเองเลย แค่เปิดเครื่องทิ้งไว้ก็พอ ใช้เวลาประมาณ 3-5 นาที</p>
             <div class="faq-tags">
               <span class="faq-tag">Remote Setup</span>
               <span class="faq-tag">Support 24/7</span>
@@ -2529,12 +2542,12 @@ footer{
 
       <div class="faq-item">
         <button class="faq-q" onclick="faqToggle(this)">
-          ซื้อแล้วใช้ได้นานแค่ไหน?
+          <span data-i18n="faq.q2">ซื้อแล้วใช้ได้นานแค่ไหน?</span>
           <span class="faq-q-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
         </button>
         <div class="faq-body">
           <div class="faq-body-inner">
-            <p>สินค้าส่วนใหญ่เป็น Lifetime — ซื้อครั้งเดียวใช้ได้ตลอด ถ้าไม่ได้ไปลง Setting ของร้านอื่นเเล้วค่าเกิดการทับกัน</p>
+            <p data-i18n="faq.a2">สินค้าส่วนใหญ่เป็น Lifetime — ซื้อครั้งเดียวใช้ได้ตลอด ถ้าไม่ได้ไปลง Setting ของร้านอื่นเเล้วค่าเกิดการทับกัน</p>
             <div class="faq-tags">
               <span class="faq-tag">Lifetime</span>
               <span class="faq-tag">ไม่มีค่ารายเดือน</span>
@@ -2545,12 +2558,12 @@ footer{
 
       <div class="faq-item">
         <button class="faq-q" onclick="faqToggle(this)">
-          ปลอดภัยไหม? โดน Ban ได้ไหม?
+          <span data-i18n="faq.q3">ปลอดภัยไหม? โดน Ban ได้ไหม?</span>
           <span class="faq-q-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
         </button>
         <div class="faq-body">
           <div class="faq-body-inner">
-            <p>Setting และ ReShade ปรับค่าในระดับ Windows System และ Graphics — ไม่ใช่ Cheat หรือ Hack ใดๆ ปลอดภัย 100% สำหรับ Windows OS เป็น Official ISO ที่ตัด Service ไม่จำเป็นออก</p>
+            <p data-i18n="faq.a3">Setting และ ReShade ปรับค่าในระดับ Windows System และ Graphics — ไม่ใช่ Cheat หรือ Hack ใดๆ ปลอดภัย 100% สำหรับ Windows OS เป็น Official ISO ที่ตัด Service ไม่จำเป็นออก</p>
             <div class="faq-tags">
               <span class="faq-tag">ปลอดภัย 100%</span>
               <span class="faq-tag">ไม่ใช่ Cheat</span>
@@ -2562,12 +2575,12 @@ footer{
 
       <div class="faq-item">
         <button class="faq-q" onclick="faqToggle(this)">
-          รองรับเกมอะไรบ้าง?
+          <span data-i18n="faq.q4">รองรับเกมอะไรบ้าง?</span>
           <span class="faq-q-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
         </button>
         <div class="faq-body">
           <div class="faq-body-inner">
-            <p>Setting และ Windows OS รองรับทุกเกมเพราะ Optimize ที่ระดับ System ReShade รองรับเกมส่วนใหญ่ที่เป็น DirectX สอบถาม Support ก่อนซื้อได้เสมอหากไม่แน่ใจ</p>
+            <p data-i18n="faq.a4">Setting และ Windows OS รองรับทุกเกมเพราะ Optimize ที่ระดับ System ReShade รองรับเกมส่วนใหญ่ที่เป็น DirectX สอบถาม Support ก่อนซื้อได้เสมอหากไม่แน่ใจ</p>
             <div class="faq-tags">
               <span class="faq-tag">ทุกเกม</span>
               <span class="faq-tag">FiveM</span>
@@ -2581,12 +2594,12 @@ footer{
 
       <div class="faq-item">
         <button class="faq-q" onclick="faqToggle(this)">
-          ชำระเงินผ่านช่องทางไหนได้บ้าง?
+          <span data-i18n="faq.q5">ชำระเงินผ่านช่องทางไหนได้บ้าง?</span>
           <span class="faq-q-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
         </button>
         <div class="faq-body">
           <div class="faq-body-inner">
-            <p>ชำระผ่านร้านค้า insidex.online หรือติดต่อผ่าน Discord โดยตรง รองรับ ทุกธนาคารในไทย,PromptPay, TrueMoney Wallet และช่องทางอื่นๆ</p>
+            <p data-i18n="faq.a5">ชำระผ่านร้านค้า insidex.online หรือติดต่อผ่าน Discord โดยตรง รองรับ ทุกธนาคารในไทย,PromptPay, TrueMoney Wallet และช่องทางอื่นๆ</p>
             <div class="faq-tags">
               <span class="faq-tag">PromptPay</span>
               <span class="faq-tag">TrueMoney</span>
@@ -2598,12 +2611,12 @@ footer{
 
       <div class="faq-item">
         <button class="faq-q" onclick="faqToggle(this)">
-          ถ้ามีปัญหาหลังลง Setup จะทำยังไง?
+          <span data-i18n="faq.q6">ถ้ามีปัญหาหลังลง Setup จะทำยังไง?</span>
           <span class="faq-q-icon"><svg viewBox="0 0 12 12"><line x1="6" y1="1" x2="6" y2="11"/><line x1="1" y1="6" x2="11" y2="6"/></svg></span>
         </button>
         <div class="faq-body">
           <div class="faq-body-inner">
-            <p>ทีมงานพร้อม Support ใน Discord ตลอด 24/7 ถ้ามีปัญหาหลัง Setup สามารถแจ้งได้เลย ทีมงานจะ Remote เข้ามาแก้ไขให้โดยไม่มีค่าใช้จ่ายเพิ่มเติม</p>
+            <p data-i18n="faq.a6">ทีมงานพร้อม Support ใน Discord ตลอด 24/7 ถ้ามีปัญหาหลัง Setup สามารถแจ้งได้เลย ทีมงานจะ Remote เข้ามาแก้ไขให้โดยไม่มีค่าใช้จ่ายเพิ่มเติม</p>
             <div class="faq-tags">
               <span class="faq-tag">After-Support</span>
               <span class="faq-tag">Free Fix</span>
@@ -2631,21 +2644,21 @@ footer{
       <!-- Left: text -->
       <div style="text-align:left">
         <div style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:#5865F2;margin-bottom:1rem;opacity:.8">// COMMUNITY</div>
-        <h2 class="discord-title" style="text-align:left;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:1rem">เข้าร่วม<br><span style="color:#5865F2">INSIDEX</span><br>Community</h2>
-        <p style="color:var(--text-muted);font-size:.92rem;line-height:1.75;margin-bottom:2rem">พูดคุย รับข่าวสาร และ Support 24/7<br>มีสมาชิกกว่า <span style="color:#fff;font-weight:700">4,569+</span> คน</p>
+        <h2 class="discord-title" style="text-align:left;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:1rem" data-i18n-html="disc.title">เข้าร่วม<br><span style="color:#5865F2">INSIDEX</span><br>Community</h2>
+        <p style="color:var(--text-muted);font-size:.92rem;line-height:1.75;margin-bottom:2rem" data-i18n-html="disc.desc">พูดคุย รับข่าวสาร และ Support 24/7<br>มีสมาชิกกว่า <span style="color:#fff;font-weight:700">4,569+</span> คน</p>
         
         <div style="display:flex;flex-direction:column;gap:.8rem;margin-bottom:2rem">
           <div style="display:flex;align-items:center;gap:.7rem;font-size:.88rem;color:var(--text-muted)">
             <span style="width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;flex-shrink:0"></span>
-            Support ตลอด 24/7
+            <span data-i18n="disc.bullet1">Support ตลอด 24/7</span>
           </div>
           <div style="display:flex;align-items:center;gap:.7rem;font-size:.88rem;color:var(--text-muted)">
             <span style="width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;flex-shrink:0"></span>
-            รับข่าวสารและ Update ก่อนใคร
+            <span data-i18n="disc.bullet2">รับข่าวสารและ Update ก่อนใคร</span>
           </div>
           <div style="display:flex;align-items:center;gap:.7rem;font-size:.88rem;color:var(--text-muted)">
             <span style="width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;flex-shrink:0"></span>
-            ส่ง Key และรับ Setup ผ่าน Discord
+            <span data-i18n="disc.bullet3">ส่ง Key และรับ Setup ผ่าน Discord</span>
           </div>
         </div>
 
@@ -2728,12 +2741,12 @@ footer{
     </div>
 
     <div class="ix-btn-row" style="margin-bottom:1rem">
-      <button class="ix-btn ix-btn-ghost" onclick="event.stopPropagation();closeModal('modalUser');setTimeout(openShop,200)">ซื้อสินค้า</button>
-      <button class="ix-btn ix-btn-ghost" onclick="event.stopPropagation();openHistory()">ประวัติการซื้อ</button>
+      <button class="ix-btn ix-btn-ghost" onclick="event.stopPropagation();closeModal('modalUser');setTimeout(openShop,200)" data-i18n="modal.buy">ซื้อสินค้า</button>
+      <button class="ix-btn ix-btn-ghost" onclick="event.stopPropagation();openHistory()" data-i18n="modal.history">ประวัติการซื้อ</button>
     </div>
 
 
-    <button class="ix-btn ix-btn-danger" style="width:100%" onclick="event.stopPropagation();doLogout()">ออกจากระบบ</button>
+    <button class="ix-btn ix-btn-danger" style="width:100%" onclick="event.stopPropagation();doLogout()" data-i18n="modal.logout">ออกจากระบบ</button>
   </div>
     </div>
   </div>
@@ -2860,7 +2873,7 @@ footer{
     <button class="ix-modal-close" onclick="event.stopPropagation();closeModal('modalHistory')" aria-label="ปิดหน้าต่าง">✕</button>
     <div class="ix-modal">
       <div class="ix-modal-body">
-        <div class="ix-modal-title"><span>ประวัติการซื้อ</span></div>
+        <div class="ix-modal-title"><span data-i18n="modal.history">ประวัติการซื้อ</span></div>
         <div id="historyList"></div>
       </div>
     </div>
@@ -3878,5 +3891,180 @@ function showClosedToast() {
 
 
 </script>
+
+<script>
+/* ══ i18n Translation System ══ */
+const TRANSLATIONS = {
+  th: {
+    'nav.products':'สินค้า','nav.shelf':'หมวดหมู่','nav.about':'เกี่ยวกับ',
+    'nav.reviews':'รีวิว','nav.community':'ชุมชน','nav.login':'Login Discord',
+    'hero.desc':'ร้านค้าสำหรับนักเล่นเกมที่ต้องการประสิทธิภาพสูงสุด<br>ลง Setup ให้โดยตรงโดยทีมงาน — ไม่ต้องทำเอง',
+    'hero.joinDiscord':'เข้าร่วม Discord','hero.buy':'ซื้อสินค้า','hero.view':'ดูสินค้า ↓',
+    'stat.customers':'ลูกค้าที่พึงพอใจ','stat.categories':'หมวดสินค้า',
+    'stat.support':'Support ตลอดเวลา','stat.safe':'ปลอดภัย & มั่นใจ',
+    'cd.day':'วัน','cd.hour':'ชั่วโมง','cd.min':'นาที','cd.sec':'วินาที',
+    'sec.productsTitle':'สินค้าของเรา',
+    'sec.productsDesc':'เลือกสรรสินค้าคุณภาพสูงเพื่อยกระดับประสบการณ์การเล่นเกมของคุณ — ทุกอย่างลงให้โดยตรง',
+    'sec.shelfTitle':'ชั้นวางสินค้า INSIDEX',
+    'sec.shelfDesc':'รวมสินค้าเด่นของเราไว้ในที่เดียว — คลิกเพื่อเลือกซื้อได้ทันที',
+    'sec.aboutTitle':'ทำไมต้อง INSIDEX?',
+    'sec.aboutDesc':'เราคือร้านที่ให้บริการสินค้าดิจิทัลสำหรับนักเล่นเกมโดยเฉพาะ ทุกสินค้าผ่านการทดสอบและพัฒนา — ทีมงานลง Setup ให้คุณโดยตรง ไม่ต้องทำเอง',
+    'why.settingDesc':'การตั้งค่าที่ถูกออกแบบโดยผู้เชี่ยวชาญ ไม่ว่าจะเป็นการตั้งค่าในเกม, ระบบปฏิบัติการ หรือ Network เพื่อให้ได้ FPS สูงสุด ดีเลย์ต่ำสุด และ Input Lag น้อยที่สุด',
+    'why.reshadeDesc':'ReShade Preset ที่ถูก Custom มาให้ภาพในเกมสวยงาม คมชัด และมีสีสันที่สมจริงยิ่งขึ้น โดยไม่กระทบต่อ FPS ทีมงานติดตั้งให้ฟรี',
+    'why.modeDesc':'Mode ช่วยเพิ่มความสวยงามของ Graphic และเปิดตัวเลือกในการปรับแต่งที่มากกว่าปกติ ให้คุณปรับ Config ได้ตามสไตล์ตัวเอง',
+    'why.windowsDesc':'Windows ที่ Optimize มาเพื่อการเล่นเกมโดยเฉพาะ ตัด Service และ Process ที่ไม่จำเป็นออก ทำให้ระบบเบา บูตเร็ว และให้ทรัพยากรกับเกมได้มากที่สุด',
+    'value.title':'พร้อมดูแลคุณ<br>ทุกขั้นตอน',
+    'value.supportDesc':'ทีมงานพร้อมช่วยเหลือตลอดเวลา','value.priceTitle':'ราคาคุ้มค่า',
+    'value.priceDesc':'สินค้าคุณภาพในราคาที่เข้าถึงได้','value.setupTitle':'ลงให้โดยตรง',
+    'value.setupDesc':'ทีมงาน Setup ให้คุณ ไม่ต้องทำเอง','value.custTitle':'ลูกค้า 2,000+',
+    'value.custDesc':'ไว้วางใจเราตลอดหลายเดือนที่ผ่านมา',
+    'sec.toolboxEye':'ซอฟต์แวร์เรือธง','sec.toolboxTitle':'INSIDEX Toolbox Premium',
+    'sec.toolboxDesc':'รวมทุกเครื่องมือ Optimize ไว้ในโปรแกรมเดียว กดใช้งานได้ทันทีโดยไม่ต้องตั้งค่าเอง',
+    'sec.showcaseDesc':'ดูผลลัพธ์จริงจากทางร้าน — เลื่อนซ้าย/ขวาหรือลากเพื่อดูคลิปทั้งหมด',
+    'btn.order':'สั่งซื้อ','btn.orderArrow':'สั่งซื้อ →',
+    'sec.reviewsEye':'รีวิวจากลูกค้าจริง','sec.reviewsTitle':'เสียงจากลูกค้า<br>2,200+ คน',
+    'faq.title':'คำถาม<br>ที่พบบ่อย','faq.desc':'มีข้อสงสัยเพิ่มเติม? ติดต่อทีมงานผ่าน Discord ได้เลย พร้อม Support 24/7',
+    'faq.cta':'ถามเพิ่มเติมใน Discord →',
+    'faq.q1':'ทีมงานลง Setup ให้ยังไง?','faq.q2':'ซื้อแล้วใช้ได้นานแค่ไหน?',
+    'faq.q3':'ปลอดภัยไหม? โดน Ban ได้ไหม?','faq.q4':'รองรับเกมอะไรบ้าง?',
+    'faq.q5':'ชำระเงินผ่านช่องทางไหนได้บ้าง?','faq.q6':'ถ้ามีปัญหาหลังลง Setup จะทำยังไง?',
+    'faq.a1':'หลังจากสั่งซื้อแล้ว ทีมงานจะนัด Remote เข้าเครื่องผ่าน Ultraviewer แล้วลง Setup ให้โดยตรง คุณไม่ต้องทำอะไรเองเลย แค่เปิดเครื่องทิ้งไว้ก็พอ ใช้เวลาประมาณ 3-5 นาที',
+    'faq.a2':'สินค้าส่วนใหญ่เป็น Lifetime — ซื้อครั้งเดียวใช้ได้ตลอด ถ้าไม่ได้ไปลง Setting ของร้านอื่นเเล้วค่าเกิดการทับกัน',
+    'faq.a3':'Setting และ ReShade ปรับค่าในระดับ Windows System และ Graphics — ไม่ใช่ Cheat หรือ Hack ใดๆ ปลอดภัย 100% สำหรับ Windows OS เป็น Official ISO ที่ตัด Service ไม่จำเป็นออก',
+    'faq.a4':'Setting และ Windows OS รองรับทุกเกมเพราะ Optimize ที่ระดับ System ReShade รองรับเกมส่วนใหญ่ที่เป็น DirectX สอบถาม Support ก่อนซื้อได้เสมอหากไม่แน่ใจ',
+    'faq.a5':'ชำระผ่านร้านค้า insidex.online หรือติดต่อผ่าน Discord โดยตรง รองรับ ทุกธนาคารในไทย, PromptPay, TrueMoney Wallet และช่องทางอื่นๆ',
+    'faq.a6':'ทีมงานพร้อม Support ใน Discord ตลอด 24/7 ถ้ามีปัญหาหลัง Setup สามารถแจ้งได้เลย ทีมงานจะ Remote เข้ามาแก้ไขให้โดยไม่มีค่าใช้จ่ายเพิ่มเติม',
+    'disc.title':'เข้าร่วม<br><span style="color:#5865F2">INSIDEX</span><br>Community',
+    'disc.desc':'พูดคุย รับข่าวสาร และ Support 24/7<br>มีสมาชิกกว่า <span style="color:#fff;font-weight:700">4,569+</span> คน',
+    'disc.bullet1':'Support ตลอด 24/7','disc.bullet2':'รับข่าวสารและ Update ก่อนใคร',
+    'disc.bullet3':'ส่ง Key และรับ Setup ผ่าน Discord',
+    'modal.buy':'ซื้อสินค้า','modal.history':'ประวัติการซื้อ','modal.logout':'ออกจากระบบ',
+    'toast.copied':'Copy แล้ว!',
+  },
+  en: {
+    'nav.products':'Products','nav.shelf':'Categories','nav.about':'About',
+    'nav.reviews':'Reviews','nav.community':'Community','nav.login':'Login Discord',
+    'hero.desc':'The ultimate store for gamers who demand peak performance.<br>Our team installs everything directly for you — no hassle.',
+    'hero.joinDiscord':'Join Discord','hero.buy':'Buy Products','hero.view':'View Products ↓',
+    'stat.customers':'Satisfied Customers','stat.categories':'Categories',
+    'stat.support':'24/7 Support','stat.safe':'Safe & Trusted',
+    'cd.day':'DAY','cd.hour':'HOUR','cd.min':'MIN','cd.sec':'SEC',
+    'sec.productsTitle':'Our Products',
+    'sec.productsDesc':'Premium products to elevate your gaming experience — everything installed directly for you.',
+    'sec.shelfTitle':'INSIDEX Product Shelf',
+    'sec.shelfDesc':'All our featured products in one place — click to purchase instantly.',
+    'sec.aboutTitle':'Why INSIDEX?',
+    'sec.aboutDesc':'We are a digital product store exclusively for gamers. All products are tested and developed — our team installs Setup directly for you, no need to do it yourself.',
+    'why.settingDesc':'Expert-designed settings for in-game, OS, and Network configuration to maximize FPS, minimize delay, and reduce Input Lag to the lowest possible.',
+    'why.reshadeDesc':'Custom ReShade Preset that makes in-game visuals beautiful, sharp, and vibrant — with no FPS impact. Free installation by our team.',
+    'why.modeDesc':'Mode enhances graphic quality and unlocks more customization options, letting you tweak the config to your own style.',
+    'why.windowsDesc':'Windows optimized exclusively for gaming — unnecessary services and processes removed, making the system lighter, booting faster, and dedicating more resources to your game.',
+    'value.title':'Ready to support you<br>every step of the way',
+    'value.supportDesc':'Our team is ready to help anytime','value.priceTitle':'Great Value',
+    'value.priceDesc':'Quality products at accessible prices','value.setupTitle':'Direct Installation',
+    'value.setupDesc':'Our team sets up for you — no need to do it yourself','value.custTitle':'2,000+ Customers',
+    'value.custDesc':'Trusting us over the past several months',
+    'sec.toolboxEye':'Flagship Software','sec.toolboxTitle':'INSIDEX Toolbox Premium',
+    'sec.toolboxDesc':'All optimization tools in one program. Ready to use instantly without manual setup.',
+    'sec.showcaseDesc':'See real results from our store — swipe left/right or drag to view all clips.',
+    'btn.order':'Order Now','btn.orderArrow':'Order Now →',
+    'sec.reviewsEye':'Real Customer Reviews','sec.reviewsTitle':'Voices from<br>2,200+ Customers',
+    'faq.title':'Frequently<br>Asked Questions','faq.desc':'Have more questions? Contact our team on Discord. Support 24/7.',
+    'faq.cta':'Ask more on Discord →',
+    'faq.q1':'How does the team install Setup?','faq.q2':'How long can I use after purchasing?',
+    'faq.q3':'Is it safe? Can I get banned?','faq.q4':'What games are supported?',
+    'faq.q5':'What payment methods are available?','faq.q6':'What if there\'s a problem after Setup?',
+    'faq.a1':'After purchasing, our team will schedule a remote session via Ultraviewer and install Setup directly. You don\'t need to do anything — just leave your PC on. Takes about 3-5 minutes.',
+    'faq.a2':'Most products are Lifetime — buy once, use forever, as long as you don\'t install conflicting settings from another store.',
+    'faq.a3':'Settings and ReShade adjust at the Windows System and Graphics level — not any Cheat or Hack. 100% safe. Windows OS is an Official ISO with unnecessary services removed.',
+    'faq.a4':'Settings and Windows OS support all games because they optimize at the System level. ReShade supports most DirectX games. Always feel free to ask Support before purchasing if unsure.',
+    'faq.a5':'Pay through insidex.online or contact Discord directly. We support all Thai banks, PromptPay, TrueMoney Wallet, and other channels.',
+    'faq.a6':'Our team provides 24/7 Support on Discord. If there\'s an issue after Setup, just let us know. The team will remote in to fix it at no extra charge.',
+    'disc.title':'Join<br><span style="color:#5865F2">INSIDEX</span><br>Community',
+    'disc.desc':'Chat, get news & 24/7 Support<br>Over <span style="color:#fff;font-weight:700">4,569+</span> members',
+    'disc.bullet1':'24/7 Support','disc.bullet2':'Get news & updates before anyone else',
+    'disc.bullet3':'Send Key and receive Setup via Discord',
+    'modal.buy':'Buy Products','modal.history':'Purchase History','modal.logout':'Log Out',
+    'toast.copied':'Copied!',
+  },
+  vi: {
+    'nav.products':'Sản phẩm','nav.shelf':'Danh mục','nav.about':'Giới thiệu',
+    'nav.reviews':'Đánh giá','nav.community':'Cộng đồng','nav.login':'Login Discord',
+    'hero.desc':'Cửa hàng tốt nhất cho game thủ muốn hiệu suất tối đa.<br>Đội ngũ cài đặt trực tiếp cho bạn — không cần tự làm.',
+    'hero.joinDiscord':'Tham gia Discord','hero.buy':'Mua sản phẩm','hero.view':'Xem sản phẩm ↓',
+    'stat.customers':'Khách hàng hài lòng','stat.categories':'Danh mục',
+    'stat.support':'Hỗ trợ 24/7','stat.safe':'An toàn & Tin cậy',
+    'cd.day':'NGÀY','cd.hour':'GIỜ','cd.min':'PHÚT','cd.sec':'GIÂY',
+    'sec.productsTitle':'Sản phẩm của chúng tôi',
+    'sec.productsDesc':'Sản phẩm chất lượng cao nâng cao trải nghiệm gaming của bạn — tất cả được cài đặt trực tiếp.',
+    'sec.shelfTitle':'Kệ sản phẩm INSIDEX',
+    'sec.shelfDesc':'Tất cả sản phẩm nổi bật trong một chỗ — nhấp để mua ngay.',
+    'sec.aboutTitle':'Tại sao chọn INSIDEX?',
+    'sec.aboutDesc':'Chúng tôi là cửa hàng sản phẩm kỹ thuật số dành riêng cho game thủ. Tất cả sản phẩm đã được kiểm tra — đội ngũ cài đặt trực tiếp cho bạn, không cần tự làm.',
+    'why.settingDesc':'Cài đặt được thiết kế bởi chuyên gia — trong game, hệ điều hành và mạng để tối đa FPS, giảm độ trễ và Input Lag.',
+    'why.reshadeDesc':'ReShade Preset tùy chỉnh giúp hình ảnh trong game đẹp hơn, sắc nét và màu sắc sống động hơn mà không ảnh hưởng FPS. Cài đặt miễn phí.',
+    'why.modeDesc':'Mode cải thiện chất lượng đồ họa và mở thêm nhiều tùy chọn tùy chỉnh, cho phép bạn điều chỉnh config theo phong cách của mình.',
+    'why.windowsDesc':'Windows tối ưu hóa dành riêng cho game — loại bỏ các service và tiến trình không cần thiết, giúp hệ thống nhẹ hơn, khởi động nhanh và dành nhiều tài nguyên hơn cho game.',
+    'value.title':'Sẵn sàng hỗ trợ bạn<br>mọi bước đi',
+    'value.supportDesc':'Đội ngũ sẵn sàng hỗ trợ bạn mọi lúc','value.priceTitle':'Giá trị tuyệt vời',
+    'value.priceDesc':'Sản phẩm chất lượng với giá cả phải chăng','value.setupTitle':'Cài đặt trực tiếp',
+    'value.setupDesc':'Đội ngũ cài đặt cho bạn — không cần tự làm','value.custTitle':'2,000+ Khách hàng',
+    'value.custDesc':'Tin tưởng chúng tôi trong nhiều tháng qua',
+    'sec.toolboxEye':'Phần mềm chủ lực','sec.toolboxTitle':'INSIDEX Toolbox Premium',
+    'sec.toolboxDesc':'Tất cả công cụ tối ưu trong một chương trình. Sử dụng ngay mà không cần cài đặt thủ công.',
+    'sec.showcaseDesc':'Xem kết quả thực từ cửa hàng — vuốt trái/phải hoặc kéo để xem tất cả clip.',
+    'btn.order':'Đặt mua','btn.orderArrow':'Đặt mua →',
+    'sec.reviewsEye':'Đánh giá từ khách hàng thực','sec.reviewsTitle':'Tiếng nói từ<br>2,200+ khách hàng',
+    'faq.title':'Câu hỏi<br>thường gặp','faq.desc':'Còn câu hỏi? Liên hệ đội ngũ qua Discord. Hỗ trợ 24/7.',
+    'faq.cta':'Hỏi thêm trên Discord →',
+    'faq.q1':'Đội ngũ cài Setup như thế nào?','faq.q2':'Sau khi mua dùng được bao lâu?',
+    'faq.q3':'Có an toàn không? Có bị ban không?','faq.q4':'Hỗ trợ những game nào?',
+    'faq.q5':'Có thể thanh toán qua những kênh nào?','faq.q6':'Nếu có vấn đề sau khi cài Setup thì làm sao?',
+    'faq.a1':'Sau khi mua, đội ngũ sẽ lên lịch kết nối từ xa qua Ultraviewer và cài Setup trực tiếp. Bạn không cần làm gì — chỉ cần để máy tính bật. Mất khoảng 3-5 phút.',
+    'faq.a2':'Hầu hết sản phẩm là Lifetime — mua một lần dùng mãi mãi, miễn là bạn không cài setting của cửa hàng khác gây xung đột.',
+    'faq.a3':'Setting và ReShade điều chỉnh ở cấp Windows System và Graphics — không phải Cheat hay Hack. An toàn 100%. Windows OS là Official ISO đã loại bỏ các service không cần thiết.',
+    'faq.a4':'Setting và Windows OS hỗ trợ tất cả game vì tối ưu ở cấp System. ReShade hỗ trợ hầu hết game DirectX. Luôn có thể hỏi Support trước khi mua nếu không chắc.',
+    'faq.a5':'Thanh toán qua insidex.online hoặc liên hệ Discord trực tiếp. Hỗ trợ tất cả ngân hàng Thái Lan, PromptPay, TrueMoney Wallet và các kênh khác.',
+    'faq.a6':'Đội ngũ hỗ trợ 24/7 trên Discord. Nếu có vấn đề sau khi cài Setup, cứ thông báo là xong. Đội ngũ sẽ kết nối từ xa để sửa miễn phí.',
+    'disc.title':'Tham gia<br><span style="color:#5865F2">INSIDEX</span><br>Community',
+    'disc.desc':'Trò chuyện, nhận tin tức & hỗ trợ 24/7<br>Có hơn <span style="color:#fff;font-weight:700">4,569+</span> thành viên',
+    'disc.bullet1':'Hỗ trợ 24/7','disc.bullet2':'Nhận tin tức & cập nhật trước mọi người',
+    'disc.bullet3':'Gửi Key và nhận Setup qua Discord',
+    'modal.buy':'Mua sản phẩm','modal.history':'Lịch sử mua hàng','modal.logout':'Đăng xuất',
+    'toast.copied':'Đã sao chép!',
+  }
+};
+
+let _currentLang = 'th';
+
+function setLang(lang) {
+  if (!TRANSLATIONS[lang]) return;
+  _currentLang = lang;
+  localStorage.setItem('ix_lang', lang);
+  document.documentElement.lang = lang;
+  document.querySelectorAll('.lang-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.lang === lang);
+  });
+  const t = TRANSLATIONS[lang];
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.dataset.i18n;
+    if (t[key] !== undefined) el.textContent = t[key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const key = el.dataset.i18nHtml;
+    if (t[key] !== undefined) el.innerHTML = t[key];
+  });
+}
+
+function t(key) {
+  return (TRANSLATIONS[_currentLang] || TRANSLATIONS.th)[key] || key;
+}
+
+(function initLang() {
+  const saved = localStorage.getItem('ix_lang') || 'th';
+  setLang(saved);
+})();
+</script>
+
 </body>
 </html>
