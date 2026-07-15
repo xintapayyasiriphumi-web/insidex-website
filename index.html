@@ -310,7 +310,7 @@ nav.scrolled{
 .hero-title{
   font-family:'Orbitron','Kanit',monospace;font-weight:900;
   font-size:clamp(3.5rem,11vw,8rem);line-height:.95;letter-spacing:.1em;
-  background:linear-gradient(160deg,#fff 0%,#a78bfa 15%,#7c3aed 40%,#4f46e5 65%,#312e81 100%);
+  background:linear-gradient(160deg,#fff 0%,#a78bfa 20%,#8b5cf6 45%,#6366f1 75%,#818cf8 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   animation:fadeUp 1s .35s var(--ease-out) both;
   position:relative;
@@ -343,11 +343,10 @@ nav.scrolled{
 .btn{
   display:inline-flex;align-items:center;gap:.55rem;
   font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.95rem;
-  letter-spacing:.12em;text-transform:uppercase;
-  padding:.9rem 2rem;border-radius:4px;
+  line-height:1.6;letter-spacing:.12em;text-transform:uppercase;
+  padding:.85rem 2rem;border-radius:999px;
   transition:transform .25s var(--ease-out),box-shadow .25s;
   position:relative;overflow:hidden;
-  clip-path:polygon(10px 0%,100% 0%,calc(100% - 10px) 100%,0% 100%);
 }
 .btn::before{
   content:'';position:absolute;inset:0;
@@ -363,10 +362,10 @@ nav.scrolled{
 .btn-primary:hover{box-shadow:0 8px 40px rgba(88,101,242,.55),0 0 0 1px rgba(88,101,242,.5)}
 .btn-secondary{
   background:transparent;color:var(--p1);
-  border:1px solid rgba(168,85,247,.45);backdrop-filter:blur(10px);
+  border:1px solid rgba(168,85,247,.45);
 }
 .btn-secondary:hover{background:rgba(168,85,247,.1);border-color:var(--p1);box-shadow:0 0 30px rgba(168,85,247,.15)}
-.btn-ghost{color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.1);backdrop-filter:blur(10px)}
+.btn-ghost{color:rgba(255,255,255,.55);border:1px solid rgba(255,255,255,.1)}
 .btn-ghost:hover{color:var(--text);border-color:rgba(255,255,255,.25);background:rgba(255,255,255,.04)}
 .btn svg{width:20px;height:20px;flex-shrink:0}
 
@@ -445,7 +444,6 @@ nav.scrolled{
   position:relative;border:1px solid var(--border);border-radius:var(--radius);
   padding:2rem;background:rgba(10,10,15,.55); /* เพิ่มความทึบแทน blur */
   overflow:hidden;transition:transform .35s var(--ease-out),border-color .3s,box-shadow .35s;
-  clip-path:polygon(16px 0%,100% 0%,calc(100% - 16px) 100%,0% 100%);
   display:flex;flex-direction:column;
 }
 .card-glow{
@@ -628,7 +626,7 @@ nav.scrolled{
   display:inline-flex;align-items:center;gap:.4rem;
   font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.78rem;
   letter-spacing:.1em;text-transform:uppercase;color:var(--p1);
-  border:1px solid rgba(168,85,247,.4);border-radius:6px;padding:.65rem 1rem;
+  border:1px solid rgba(168,85,247,.4);border-radius:999px;padding:.65rem 1rem;
   transition:background .25s,color .25s,border-color .25s;
 }
 .tbx-plan-cta:hover{background:rgba(168,85,247,.12);color:#fff;border-color:var(--p1)}
@@ -860,7 +858,7 @@ nav.scrolled{
 .faq-left-eyebrow::before{content:'//';opacity:.5}
 .faq-left-title{font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:clamp(1.6rem,4vw,2.4rem);background:linear-gradient(135deg,#fff 30%,var(--p1));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.15;margin-bottom:1rem}
 .faq-left-desc{font-size:.92rem;color:var(--text-muted);line-height:1.75;margin-bottom:2rem}
-.faq-left-cta{display:inline-flex;align-items:center;gap:.5rem;font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--p1);border:1px solid rgba(168,85,247,.3);padding:.6rem 1.2rem;border-radius:4px;transition:all .2s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.faq-left-cta{display:inline-flex;align-items:center;gap:.5rem;font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.78rem;line-height:1.6;letter-spacing:.15em;text-transform:uppercase;color:var(--p1);border:1px solid rgba(168,85,247,.3);padding:.6rem 1.4rem;border-radius:999px;transition:all .2s}
 .faq-left-cta:hover{background:rgba(168,85,247,.1);border-color:var(--p1);gap:.8rem}
 .faq-list{display:flex;flex-direction:column;gap:.6rem}
 .faq-item{
