@@ -60,7 +60,7 @@
 </script>
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=Sarabun:wght@300;400;600&family=Chakra+Petch:wght@400;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Rajdhani:wght@400;600;700&family=Orbitron:wght@400;700;900&family=Space+Mono:wght@400;700&family=Sarabun:wght@300;400;600&family=Kanit:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <style>
 /* ══════════════════════════════════════════════════
    DESIGN SYSTEM
@@ -89,7 +89,7 @@
 /* ── RESET ── */
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
-body{background:var(--bg);color:var(--text);font-family:'Chakra Petch','Sarabun',sans-serif;overflow-x:hidden}
+body{background:var(--bg);color:var(--text);font-family:'Kanit','Sarabun',sans-serif;overflow-x:hidden}
 img{display:block;max-width:100%}
 a{color:inherit;text-decoration:none}
 button{background:none;border:none;font:inherit;cursor:pointer}
@@ -117,7 +117,7 @@ ul{list-style:none}
   border-radius:999px;transition:width .25s var(--ease-out);
 }
 .loader-text{
-  font-family:'Orbitron','Chakra Petch',monospace;font-size:.65rem;letter-spacing:.3em;
+  font-family:'Orbitron','Kanit',monospace;font-size:.65rem;letter-spacing:.3em;
   color:rgba(168,85,247,0.7);text-transform:uppercase;min-width:2.5em;text-align:center;
 }
 @keyframes blink{0%,100%{opacity:.5}50%{opacity:1}}
@@ -161,11 +161,12 @@ nav{
   padding:.9rem 2rem;
   display:flex;align-items:center;justify-content:space-between;
   gap:1.5rem;
-  transition:all .4s var(--ease-out);
+  background:rgba(3,3,5,0);
+  border-bottom:1px solid rgba(255,255,255,0);
+  transition:background-color .3s var(--ease-out),border-color .3s var(--ease-out),padding .3s var(--ease-out);
 }
 nav.scrolled{
-  backdrop-filter:blur(20px);
-  background:rgba(3,3,5,0.82);
+  background:rgba(3,3,5,0.92);
   border-bottom:1px solid rgba(255,255,255,0.07);
   padding:.7rem 2rem;
 }
@@ -177,7 +178,7 @@ nav.scrolled{
 }
 .nav-logo:hover img{filter:drop-shadow(0 0 20px rgba(168,85,247,1))}
 .nav-logo-text{
-  font-family:'Orbitron','Chakra Petch',monospace;font-weight:700;font-size:.95rem;
+  font-family:'Orbitron','Kanit',monospace;font-weight:700;font-size:.95rem;
   letter-spacing:.12em;
   background:linear-gradient(135deg,#a78bfa,#6366f1,#312e81);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
@@ -188,14 +189,14 @@ nav.scrolled{
   border-radius:999px;padding:.3rem;margin:0 auto;
 }
 .nav-link{
-  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:600;font-size:.86rem;
+  font-family:'Rajdhani','Kanit',sans-serif;font-weight:600;font-size:.86rem;
   letter-spacing:.01em;color:var(--text-muted);
   transition:all .2s;position:relative;padding:.5rem 1.1rem;border-radius:999px;
 }
 .nav-link:hover{color:#fff;background:rgba(255,255,255,.06)}
 .nav-actions{display:flex;gap:.6rem;align-items:center;flex-shrink:0}
 .nav-btn{
-  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.82rem;
+  font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.82rem;
   letter-spacing:.01em;padding:.55rem 1.3rem;
   border-radius:999px;transition:all .2s;white-space:nowrap;
 }
@@ -228,7 +229,7 @@ nav.scrolled{
 .mob-menu.open{display:flex;animation:mobIn .4s var(--ease-out)}
 @keyframes mobIn{from{opacity:0;transform:scale(1.04)}to{opacity:1;transform:scale(1)}}
 .mob-link{
-  font-family:'Orbitron','Chakra Petch',monospace;font-size:1.6rem;font-weight:700;
+  font-family:'Orbitron','Kanit',monospace;font-size:1.6rem;font-weight:700;
   letter-spacing:.15em;color:rgba(255,255,255,0.6);
   transition:color .2s,letter-spacing .3s;
 }
@@ -307,7 +308,7 @@ nav.scrolled{
 
 /* Title */
 .hero-title{
-  font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;
+  font-family:'Orbitron','Kanit',monospace;font-weight:900;
   font-size:clamp(3.5rem,11vw,8rem);line-height:.95;letter-spacing:.1em;
   background:linear-gradient(160deg,#fff 0%,#a78bfa 15%,#7c3aed 40%,#4f46e5 65%,#312e81 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
@@ -323,7 +324,7 @@ nav.scrolled{
 }
 @keyframes glowPulse{0%,100%{opacity:.5}50%{opacity:1}}
 .hero-sub{
-  font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:clamp(.85rem,2.2vw,1.1rem);
+  font-family:'Rajdhani','Kanit',sans-serif;font-size:clamp(.85rem,2.2vw,1.1rem);
   letter-spacing:.45em;color:rgba(168,85,247,.7);text-transform:uppercase;
   margin-top:.6rem;
   animation:fadeUp 1s .5s var(--ease-out) both;
@@ -341,7 +342,7 @@ nav.scrolled{
 /* Buttons */
 .btn{
   display:inline-flex;align-items:center;gap:.55rem;
-  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.95rem;
+  font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.95rem;
   letter-spacing:.12em;text-transform:uppercase;
   padding:.9rem 2rem;border-radius:4px;
   transition:transform .25s var(--ease-out),box-shadow .25s;
@@ -403,13 +404,13 @@ nav.scrolled{
 }
 .stat:hover::before{opacity:1}
 .stat-num{
-  font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:2rem;
+  font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:2rem;
   background:linear-gradient(135deg,#fff,var(--p1));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   line-height:1.1;
 }
 .stat-label{
-  font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;
+  font-family:'Rajdhani','Kanit',sans-serif;font-size:.72rem;
   letter-spacing:.2em;text-transform:uppercase;color:var(--text-dim);margin-top:.3rem;
 }
 
@@ -424,7 +425,7 @@ nav.scrolled{
 }
 .section-eyebrow::before{content:'//';opacity:.5}
 .section-title{
-  font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;
+  font-family:'Orbitron','Kanit',monospace;font-weight:900;
   font-size:clamp(1.8rem,5vw,3.2rem);
   background:linear-gradient(135deg,#fff 30%,var(--p1));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
@@ -474,7 +475,7 @@ nav.scrolled{
   background:radial-gradient(circle at 30% 30%,rgba(255,255,255,.1),transparent 60%);
 }
 .card-title{
-  font-family:'Orbitron','Chakra Petch',monospace;font-weight:700;font-size:1.05rem;
+  font-family:'Orbitron','Kanit',monospace;font-weight:700;font-size:1.05rem;
   color:var(--text);margin-bottom:.5rem;letter-spacing:.04em;
 }
 .card-desc{font-size:.88rem;color:var(--text-muted);line-height:1.65;margin-bottom:1.4rem}
@@ -489,11 +490,11 @@ nav.scrolled{
 }
 .card-price{
   position:absolute;bottom:1.2rem;right:1.5rem;
-  font-family:'Orbitron','Chakra Petch',monospace;font-size:.95rem;font-weight:700;color:var(--p1);
+  font-family:'Orbitron','Kanit',monospace;font-size:.95rem;font-weight:700;color:var(--p1);
 }
 .card-cta{
   display:inline-flex;align-items:center;gap:.4rem;
-  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.75rem;
+  font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.75rem;
   letter-spacing:.12em;text-transform:uppercase;color:var(--p1);
   transition:gap .2s,color .2s;
 }
@@ -517,13 +518,13 @@ nav.scrolled{
 }
 .why-card-icon{font-size:2rem;margin-bottom:1rem}
 .why-card-title{
-  font-family:'Orbitron','Chakra Petch',monospace;font-weight:700;font-size:1rem;
+  font-family:'Orbitron','Kanit',monospace;font-weight:700;font-size:1rem;
   color:#fff;margin-bottom:.8rem;letter-spacing:.04em;
 }
 .why-card-desc{font-size:.88rem;color:var(--text-muted);line-height:1.75}
 .why-tags{display:flex;gap:.6rem;flex-wrap:wrap;margin-top:1.2rem;padding-top:1rem;border-top:1px solid rgba(168,85,247,.1)}
 .why-tag{
-  font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.68rem;letter-spacing:.18em;
+  font-family:'Rajdhani','Kanit',sans-serif;font-size:.68rem;letter-spacing:.18em;
   text-transform:uppercase;color:var(--p1);
 }
 
@@ -541,14 +542,14 @@ nav.scrolled{
   opacity:.8;
 }
 .value-title{
-  font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1.4rem;
+  font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:1.4rem;
   color:#fff;line-height:1.3;
 }
 .value-right{flex:2;min-width:260px;display:grid;grid-template-columns:1fr 1fr;gap:1.2rem}
 .value-item{display:flex;align-items:flex-start;gap:.7rem}
 .value-dot{color:var(--p1);font-size:1.2rem;margin-top:2px;flex-shrink:0}
 .value-item-title{
-  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.88rem;
+  font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.88rem;
   color:#fff;letter-spacing:.04em;margin-bottom:.2rem;
 }
 .value-item-desc{font-size:.78rem;color:var(--text-dim)}
@@ -587,7 +588,7 @@ nav.scrolled{
   padding:.3rem .7rem;border-radius:2px;margin-bottom:1.1rem;
 }
 .tbx-title{
-  font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:clamp(1.4rem,3vw,2rem);
+  font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:clamp(1.4rem,3vw,2rem);
   color:#fff;margin-bottom:.8rem;line-height:1.25;
 }
 .tbx-desc{font-size:.92rem;color:var(--text-muted);line-height:1.75;margin-bottom:1.6rem}
@@ -620,13 +621,13 @@ nav.scrolled{
   color:#fff;background:linear-gradient(135deg,var(--p3),var(--p1));
   padding:.25rem .55rem;border-radius:2px;
 }
-.tbx-plan-name{font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted)}
-.tbx-plan-price{font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1.7rem;color:#fff}
-.tbx-plan-price span{font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:600;font-size:.85rem;color:var(--text-dim)}
+.tbx-plan-name{font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-muted)}
+.tbx-plan-price{font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:1.7rem;color:#fff}
+.tbx-plan-price span{font-family:'Rajdhani','Kanit',sans-serif;font-weight:600;font-size:.85rem;color:var(--text-dim)}
 .tbx-plan-cta{
   width:100%;text-align:center;justify-content:center;
   display:inline-flex;align-items:center;gap:.4rem;
-  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.78rem;
+  font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.78rem;
   letter-spacing:.1em;text-transform:uppercase;color:var(--p1);
   border:1px solid rgba(168,85,247,.4);border-radius:6px;padding:.65rem 1rem;
   transition:background .25s,color .25s,border-color .25s;
@@ -651,7 +652,7 @@ nav.scrolled{
 .slide-badge{
   background:rgba(124,58,237,.88);backdrop-filter:blur(12px);
   border-radius:4px;padding:.3rem .8rem;
-  font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;
+  font-family:'Rajdhani','Kanit',sans-serif;font-size:.72rem;
   letter-spacing:.2em;color:#fff;text-transform:uppercase;
 }
 .slide-counter{
@@ -688,8 +689,8 @@ nav.scrolled{
   background:linear-gradient(135deg,rgba(124,58,237,.4),rgba(168,85,247,.15));
   border:1px solid rgba(168,85,247,.3);
 }
-.slide-title{font-family:'Orbitron','Chakra Petch',monospace;font-size:.85rem;font-weight:700;color:#fff;letter-spacing:.04em}
-.slide-meta{font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;color:var(--text-dim);letter-spacing:.08em}
+.slide-title{font-family:'Orbitron','Kanit',monospace;font-size:.85rem;font-weight:700;color:#fff;letter-spacing:.04em}
+.slide-meta{font-family:'Rajdhani','Kanit',sans-serif;font-size:.72rem;color:var(--text-dim);letter-spacing:.08em}
 
 /* Arrows */
 .slider-arrow{
@@ -725,12 +726,12 @@ nav.scrolled{
 }
 .show-stat:hover{border-color:rgba(168,85,247,.3);transform:translateY(-2px)}
 .show-stat-num{
-  font-family:'Orbitron','Chakra Petch',monospace;font-size:1.4rem;font-weight:900;
+  font-family:'Orbitron','Kanit',monospace;font-size:1.4rem;font-weight:900;
   background:linear-gradient(135deg,#fff,var(--p1));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
 .show-stat-label{
-  font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.68rem;
+  font-family:'Rajdhani','Kanit',sans-serif;font-size:.68rem;
   letter-spacing:.22em;color:var(--text-dim);text-transform:uppercase;margin-top:.25rem;
 }
 
@@ -761,10 +762,10 @@ nav.scrolled{
   font-family:'Space Mono',monospace;font-size:.6rem;
   letter-spacing:.4em;text-transform:uppercase;color:var(--p1);margin-bottom:.2rem;opacity:.8;
 }
-.shop-banner-title{font-family:'Orbitron','Chakra Petch',monospace;font-size:1.05rem;font-weight:700;color:#fff;letter-spacing:.04em}
+.shop-banner-title{font-family:'Orbitron','Kanit',monospace;font-size:1.05rem;font-weight:700;color:#fff;letter-spacing:.04em}
 .shop-banner-desc{font-size:.8rem;color:var(--text-muted);margin-top:.15rem}
 .shop-banner-cta{
-  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.82rem;
+  font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.82rem;
   letter-spacing:.18em;text-transform:uppercase;color:var(--p1);white-space:nowrap;
   transition:letter-spacing .25s;
 }
@@ -798,7 +799,7 @@ nav.scrolled{
 @keyframes discPulse{0%,100%{box-shadow:0 0 40px rgba(88,101,242,.4)}50%{box-shadow:0 0 80px rgba(88,101,242,.65)}}
 .discord-logo svg{width:44px;height:44px;fill:#fff}
 .discord-title{
-  font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;
+  font-family:'Orbitron','Kanit',monospace;font-weight:900;
   font-size:clamp(1.6rem,4.5vw,2.8rem);color:#fff;margin-bottom:1rem;
 }
 .discord-desc{color:var(--text-muted);font-size:1rem;max-width:480px;margin:0 auto 2.5rem;line-height:1.75}
@@ -840,15 +841,15 @@ nav.scrolled{
 .testi-quote{font-size:.88rem;color:var(--text-muted);line-height:1.75;margin-bottom:1.2rem;position:relative;padding-left:.2rem}
 .testi-quote::before{content:'\201C';position:absolute;top:-.5rem;left:-.3rem;font-size:2.8rem;color:rgba(168,85,247,.2);font-family:Georgia,serif;line-height:1;pointer-events:none}
 .testi-author{display:flex;align-items:center;gap:.75rem;border-top:1px solid rgba(168,85,247,.1);padding-top:1rem}
-.testi-avatar{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--p3),var(--b1));display:flex;align-items:center;justify-content:center;font-family:'Orbitron','Chakra Petch',monospace;font-weight:700;font-size:.6rem;color:#fff;border:1px solid rgba(168,85,247,.3)}
-.testi-name{font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.88rem;color:var(--text);letter-spacing:.04em}
+.testi-avatar{width:36px;height:36px;border-radius:50%;flex-shrink:0;background:linear-gradient(135deg,var(--p3),var(--b1));display:flex;align-items:center;justify-content:center;font-family:'Orbitron','Kanit',monospace;font-weight:700;font-size:.6rem;color:#fff;border:1px solid rgba(168,85,247,.3)}
+.testi-name{font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.88rem;color:var(--text);letter-spacing:.04em}
 .testi-product{font-size:.7rem;color:var(--text-dim);margin-top:.1rem}
 .testi-badge{position:absolute;top:.9rem;right:.9rem;font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.12em;text-transform:uppercase;padding:.2rem .5rem;border-radius:2px;border:1px solid rgba(168,85,247,.22);color:rgba(168,85,247,.65);background:rgba(168,85,247,.06)}
 .testi-summary{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2.5rem}
 .testi-sum-card{padding:1.4rem;border:1px solid var(--border);border-radius:var(--radius);background:rgba(124,58,237,.04);text-align:center;backdrop-filter:blur(10px);transition:border-color .25s,transform .25s}
 .testi-sum-card:hover{border-color:rgba(168,85,247,.35);transform:translateY(-2px)}
-.testi-sum-num{font-family:'Orbitron','Chakra Petch',monospace;font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,#fff,var(--p1));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
-.testi-sum-label{font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.7rem;letter-spacing:.22em;color:var(--text-dim);text-transform:uppercase;margin-top:.3rem}
+.testi-sum-num{font-family:'Orbitron','Kanit',monospace;font-size:1.8rem;font-weight:900;background:linear-gradient(135deg,#fff,var(--p1));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text}
+.testi-sum-label{font-family:'Rajdhani','Kanit',sans-serif;font-size:.7rem;letter-spacing:.22em;color:var(--text-dim);text-transform:uppercase;margin-top:.3rem}
 @media(max-width:768px){.testi-section{padding:4rem 1.2rem}.testi-header{flex-direction:column;align-items:flex-start}.testi-summary{grid-template-columns:1fr}}
 
 /* ══════════════════════════════════════════════════
@@ -859,9 +860,9 @@ nav.scrolled{
 .faq-left{position:sticky;top:7rem}
 .faq-left-eyebrow{font-family:'Space Mono',monospace;font-size:.65rem;letter-spacing:.45em;text-transform:uppercase;color:var(--p1);margin-bottom:.7rem;display:flex;align-items:center;gap:.7rem}
 .faq-left-eyebrow::before{content:'//';opacity:.5}
-.faq-left-title{font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:clamp(1.6rem,4vw,2.4rem);background:linear-gradient(135deg,#fff 30%,var(--p1));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.15;margin-bottom:1rem}
+.faq-left-title{font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:clamp(1.6rem,4vw,2.4rem);background:linear-gradient(135deg,#fff 30%,var(--p1));-webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;line-height:1.15;margin-bottom:1rem}
 .faq-left-desc{font-size:.92rem;color:var(--text-muted);line-height:1.75;margin-bottom:2rem}
-.faq-left-cta{display:inline-flex;align-items:center;gap:.5rem;font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--p1);border:1px solid rgba(168,85,247,.3);padding:.6rem 1.2rem;border-radius:4px;transition:all .2s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
+.faq-left-cta{display:inline-flex;align-items:center;gap:.5rem;font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.78rem;letter-spacing:.15em;text-transform:uppercase;color:var(--p1);border:1px solid rgba(168,85,247,.3);padding:.6rem 1.2rem;border-radius:4px;transition:all .2s;clip-path:polygon(6px 0%,100% 0%,calc(100% - 6px) 100%,0% 100%)}
 .faq-left-cta:hover{background:rgba(168,85,247,.1);border-color:var(--p1);gap:.8rem}
 .faq-list{display:flex;flex-direction:column;gap:.6rem}
 .faq-item{
@@ -870,7 +871,7 @@ nav.scrolled{
   transition:border-color .3s,box-shadow .3s
 }
 .faq-item.faq-open{border-color:rgba(168,85,247,.45);box-shadow:0 8px 32px rgba(124,58,237,.12)}
-.faq-q{width:100%;text-align:left;padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.03em;color:var(--text);background:none;border:none;cursor:pointer;transition:color .2s}
+.faq-q{width:100%;text-align:left;padding:1.1rem 1.4rem;display:flex;align-items:center;justify-content:space-between;gap:1rem;font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:1rem;letter-spacing:.03em;color:var(--text);background:none;border:none;cursor:pointer;transition:color .2s}
 .faq-q:hover{color:var(--p1)}
 .faq-item.faq-open .faq-q{color:var(--p1)}
 .faq-q-icon{width:26px;height:26px;flex-shrink:0;border-radius:50%;border:1px solid rgba(168,85,247,.3);display:flex;align-items:center;justify-content:center;transition:transform .35s var(--ease-out),background .2s,border-color .2s;background:rgba(168,85,247,.06)}
@@ -898,7 +899,7 @@ footer{
 .footer-logo{display:flex;align-items:center;justify-content:center;gap:.7rem;margin-bottom:1rem}
 .footer-logo img{width:28px;filter:drop-shadow(0 0 8px rgba(168,85,247,.5))}
 .footer-logo-text{
-  font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:.95rem;
+  font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:.95rem;
   letter-spacing:.25em;
   background:linear-gradient(135deg,#fff,var(--p1));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
@@ -922,7 +923,7 @@ footer{
 .fab-main:hover{transform:scale(1.12);box-shadow:0 8px 40px rgba(88,101,242,.7)}
 .fab-main svg{width:26px;height:26px;fill:#fff}
 .fab-tooltip{
-  font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;font-weight:700;
+  font-family:'Rajdhani','Kanit',sans-serif;font-size:.72rem;font-weight:700;
   letter-spacing:.12em;text-transform:uppercase;
   background:rgba(3,3,5,.9);backdrop-filter:blur(12px);
   border:1px solid rgba(168,85,247,.2);
@@ -1020,24 +1021,24 @@ footer{
   background:#ef4444;box-shadow:0 0 8px #ef4444;
 }
 .goatx-version{
-  font-family:'Orbitron','Chakra Petch',monospace;font-size:.7rem;letter-spacing:.35em;
+  font-family:'Orbitron','Kanit',monospace;font-size:.7rem;letter-spacing:.35em;
   color:rgba(239,68,68,.7);text-transform:uppercase;margin-bottom:.5rem;
 }
 .goatx-title{
-  font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;
+  font-family:'Orbitron','Kanit',monospace;font-weight:900;
   font-size:clamp(2rem,4.5vw,3.4rem);line-height:.95;letter-spacing:.06em;
   background:linear-gradient(160deg,#fff 0%,#fca5a5 40%,#ef4444 75%,#fff 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
   margin-bottom:.5rem;
 }
 .goatx-sub{
-  font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;
+  font-family:'Orbitron','Kanit',monospace;font-weight:900;
   font-size:clamp(1rem,2.5vw,1.6rem);letter-spacing:.1em;
   color:#ef4444;margin-bottom:1.6rem;
 }
 .goatx-feats{display:flex;flex-direction:column;gap:.55rem;margin-bottom:2rem}
 .goatx-feat{
-  display:flex;align-items:center;gap:.6rem;font-family:'Rajdhani','Chakra Petch',sans-serif;
+  display:flex;align-items:center;gap:.6rem;font-family:'Rajdhani','Kanit',sans-serif;
   font-size:.92rem;font-weight:600;color:rgba(255,255,255,.75);letter-spacing:.04em;
 }
 .goatx-feat::before{
@@ -1070,7 +1071,7 @@ footer{
 }
 .goatx-corner-badge{
   position:absolute;top:1.2rem;right:1.2rem;z-index:10;
-  font-family:'Orbitron','Chakra Petch',monospace;font-size:.6rem;font-weight:700;
+  font-family:'Orbitron','Kanit',monospace;font-size:.6rem;font-weight:700;
   letter-spacing:.25em;text-transform:uppercase;
   background:rgba(220,38,38,.88);backdrop-filter:blur(12px);
   border-radius:4px;padding:.35rem .9rem;color:#fff;
@@ -1104,15 +1105,15 @@ footer{
   width:26px;height:26px;border-radius:50%;
   background:linear-gradient(135deg,var(--p3),var(--b1));
   display:flex;align-items:center;justify-content:center;
-  font-family:'Orbitron','Chakra Petch',monospace;font-size:.55rem;color:#fff;font-weight:700;
+  font-family:'Orbitron','Kanit',monospace;font-size:.55rem;color:#fff;font-weight:700;
 }
 .user-name{
-  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.78rem;
+  font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.78rem;
   letter-spacing:.06em;color:var(--text);max-width:90px;
   overflow:hidden;text-overflow:ellipsis;white-space:nowrap;
 }
 .user-points-badge{
-  font-family:'Orbitron','Chakra Petch',monospace;font-size:.6rem;font-weight:700;
+  font-family:'Orbitron','Kanit',monospace;font-size:.6rem;font-weight:700;
   color:var(--p1);background:rgba(168,85,247,.1);
   border:1px solid rgba(168,85,247,.25);border-radius:999px;
   padding:.15rem .5rem;white-space:nowrap;
@@ -1149,7 +1150,7 @@ footer{
 }
 .ix-modal-close:hover{background:rgba(168,85,247,.2);color:var(--p1);border-color:var(--p1)}
 .ix-modal-title{
-  font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1.1rem;
+  font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:1.1rem;
   color:#fff;margin-bottom:1.5rem;letter-spacing:.06em;
 }
 .ix-modal-title span{color:var(--p1)}
@@ -1157,22 +1158,22 @@ footer{
 /* ── USER DROPDOWN MODAL ── */
 .user-profile{display:flex;align-items:center;gap:1rem;margin-bottom:1.5rem;padding-bottom:1.5rem;border-bottom:1px solid rgba(168,85,247,.1)}
 .user-profile-avatar{width:52px;height:52px;border-radius:50%;border:2px solid rgba(168,85,247,.4);object-fit:cover}
-.user-profile-name{font-family:'Orbitron','Chakra Petch',monospace;font-weight:700;font-size:.9rem;color:#fff}
+.user-profile-name{font-family:'Orbitron','Kanit',monospace;font-weight:700;font-size:.9rem;color:#fff}
 .user-profile-id{font-size:.72rem;color:var(--text-dim);margin-top:.2rem;font-family:'Space Mono',monospace}
 .points-display{
   text-align:center;padding:1.2rem;border:1px solid rgba(168,85,247,.2);
   border-radius:10px;background:rgba(168,85,247,.05);margin-bottom:1.5rem;
 }
 .points-num{
-  font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:2.2rem;
+  font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:2.2rem;
   background:linear-gradient(135deg,#fff,var(--p1));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
 }
-.points-label{font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.7rem;letter-spacing:.25em;color:var(--text-dim);text-transform:uppercase;margin-top:.2rem}
+.points-label{font-family:'Rajdhani','Kanit',sans-serif;font-size:.7rem;letter-spacing:.25em;color:var(--text-dim);text-transform:uppercase;margin-top:.2rem}
 .ix-btn-row{display:flex;gap:.6rem;flex-wrap:wrap}
 .ix-btn{
   flex:1;min-width:120px;padding:.65rem 1rem;border-radius:6px;
-  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.78rem;
+  font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.78rem;
   letter-spacing:.1em;text-transform:uppercase;text-align:center;
   cursor:pointer;transition:all .2s;border:none;
 }
@@ -1188,7 +1189,7 @@ footer{
 }
 .ix-history-item:last-child{border-bottom:none}
 .ix-history-type{color:var(--text-muted)}
-.ix-history-amount{font-family:'Orbitron','Chakra Petch',monospace;font-weight:700;font-size:.8rem}
+.ix-history-amount{font-family:'Orbitron','Kanit',monospace;font-weight:700;font-size:.8rem}
 .ix-history-amount.plus{color:#34d399}
 .ix-history-amount.minus{color:#f87171}
 
@@ -1203,8 +1204,8 @@ footer{
   border-color:var(--p1);background:rgba(168,85,247,.12);
   transform:translateY(-2px);
 }
-.pkg-amount{font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1rem;color:#fff}
-.pkg-pts{font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.68rem;letter-spacing:.15em;color:var(--p1);text-transform:uppercase;margin-top:.2rem}
+.pkg-amount{font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:1rem;color:#fff}
+.pkg-pts{font-family:'Rajdhani','Kanit',sans-serif;font-size:.68rem;letter-spacing:.15em;color:var(--p1);text-transform:uppercase;margin-top:.2rem}
 
 /* ── SHOP MODAL ── */
 .shop-product-card {
@@ -1227,7 +1228,7 @@ footer{
 /* ── QR PAYMENT ── */
 .qr-box{text-align:center;padding:1rem 0}
 .qr-img{width:180px;height:180px;margin:0 auto .8rem;border-radius:12px;border:2px solid rgba(168,85,247,.3)}
-.qr-amount{font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1.8rem;color:var(--p1);margin-bottom:.3rem}
+.qr-amount{font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:1.8rem;color:var(--p1);margin-bottom:.3rem}
 .qr-label{font-size:.72rem;color:var(--text-dim);letter-spacing:.2em;text-transform:uppercase}
 .slip-upload{margin-top:1rem}
 .slip-upload-label{
@@ -1245,15 +1246,15 @@ footer{
   color:var(--text-dim);letter-spacing:.05em;
 }
 .shop-step.active{border-color:var(--p1);color:var(--p1);background:rgba(168,85,247,.1)}
-.shop-step-num{font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1rem;color:var(--p1);display:block;margin-bottom:.2rem}
+.shop-step-num{font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:1rem;color:var(--p1);display:block;margin-bottom:.2rem}
 .shop-product-card:hover,.shop-product-card.selected{
   border-color:rgba(168,85,247,.5);background:rgba(168,85,247,.1);
 }
 .shop-product-icon{font-size:1.6rem;flex-shrink:0}
-.shop-product-name{font-family:'Orbitron','Chakra Petch',monospace;font-weight:700;font-size:.85rem;color:#fff}
+.shop-product-name{font-family:'Orbitron','Kanit',monospace;font-weight:700;font-size:.85rem;color:#fff}
 .shop-product-desc{font-size:.75rem;color:var(--text-muted);margin-top:.2rem}
 .shop-product-meta{display:flex;gap:.5rem;align-items:center;margin-top:.4rem}
-.shop-product-price{font-family:'Orbitron','Chakra Petch',monospace;font-size:.78rem;color:var(--p1);font-weight:700}
+.shop-product-price{font-family:'Orbitron','Kanit',monospace;font-size:.78rem;color:var(--p1);font-weight:700}
 .shop-product-stock{font-size:.65rem;color:var(--text-dim);font-family:'Space Mono',monospace}
 .key-result{
   margin-top:1rem;padding:1rem;border:1px solid rgba(52,211,153,.3);border-radius:8px;
@@ -1267,7 +1268,7 @@ footer{
 .key-result-value { white-space: pre-line; }
 .key-copy-btn{
   margin-top:.6rem;font-size:.7rem;color:var(--p1);cursor:pointer;
-  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;letter-spacing:.1em;
+  font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;letter-spacing:.1em;
   text-transform:uppercase;background:none;border:none;padding:0;
   transition:color .2s;
 }
@@ -1275,7 +1276,7 @@ footer{
 .ix-toast{
   position:fixed;bottom:2rem;left:50%;z-index:9000;
   padding:.75rem 1.5rem;border-radius:999px;
-  font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:.1em;
+  font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.88rem;letter-spacing:.1em;
   backdrop-filter:blur(24px);border:1px solid;
   display:flex;align-items:center;gap:.5rem;
   transform:translate(-50%, 120px);
@@ -1322,16 +1323,16 @@ footer{
   display:flex;align-items:center;justify-content:center;font-size:2.5rem;
 }
 .product-card-body{padding:.75rem}
-.product-card-name{font-family:'Orbitron','Chakra Petch',monospace;font-weight:700;font-size:.78rem;color:#fff;margin-bottom:.3rem}
+.product-card-name{font-family:'Orbitron','Kanit',monospace;font-weight:700;font-size:.78rem;color:#fff;margin-bottom:.3rem}
 .product-card-desc{font-size:.68rem;color:var(--text-muted);margin-bottom:.5rem}
 .product-card-footer{display:flex;justify-content:space-between;align-items:center}
-.product-card-price{font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:.95rem;color:var(--p1)}
+.product-card-price{font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:.95rem;color:var(--p1)}
 .product-card-stock{font-size:.6rem;color:var(--text-dim);font-family:'Space Mono',monospace}
 .product-card-stock.empty{color:#f87171}
 .product-selected-badge{
   position:absolute;top:.5rem;right:.5rem;
   background:#34d399;color:#000;font-size:.55rem;
-  font-family:'Orbitron','Chakra Petch',monospace;font-weight:700;
+  font-family:'Orbitron','Kanit',monospace;font-weight:700;
   padding:.2rem .5rem;border-radius:999px;letter-spacing:.1em;
   display:none;
   box-shadow:0 0 10px rgba(52,211,153,.5);
@@ -1584,7 +1585,7 @@ footer{
   background:linear-gradient(90deg,transparent,rgba(168,85,247,.45),transparent);
 }
 .shelf-label{
-  font-family:'Orbitron','Chakra Petch',monospace;font-weight:700;font-size:.8rem;
+  font-family:'Orbitron','Kanit',monospace;font-weight:700;font-size:.8rem;
   letter-spacing:.1em;text-align:center;
   background:linear-gradient(135deg,#fff,var(--p1));
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
@@ -1743,23 +1744,23 @@ footer{
   <div style="font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.3em;text-transform:uppercase;color:rgba(239,68,68,.7);margin-bottom:.5rem">⏳ เปิดขาย 1 มิ.ย. 69 เวลา 18:00</div>
   <div style="display:flex;gap:.8rem;justify-content:center" id="countdownDisplay">
     <div style="text-align:center">
-      <div style="font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1.6rem;color:#ef4444" id="cdDays">00</div>
-      <div style="font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">วัน</div>
+      <div style="font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:1.6rem;color:#ef4444" id="cdDays">00</div>
+      <div style="font-family:'Rajdhani','Kanit',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">วัน</div>
     </div>
-    <div style="font-family:'Orbitron','Chakra Petch',monospace;font-size:1.4rem;color:#ef4444;align-self:flex-start;margin-top:.2rem">:</div>
+    <div style="font-family:'Orbitron','Kanit',monospace;font-size:1.4rem;color:#ef4444;align-self:flex-start;margin-top:.2rem">:</div>
     <div style="text-align:center">
-      <div style="font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1.6rem;color:#ef4444" id="cdHours">00</div>
-      <div style="font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">ชั่วโมง</div>
+      <div style="font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:1.6rem;color:#ef4444" id="cdHours">00</div>
+      <div style="font-family:'Rajdhani','Kanit',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">ชั่วโมง</div>
     </div>
-    <div style="font-family:'Orbitron','Chakra Petch',monospace;font-size:1.4rem;color:#ef4444;align-self:flex-start;margin-top:.2rem">:</div>
+    <div style="font-family:'Orbitron','Kanit',monospace;font-size:1.4rem;color:#ef4444;align-self:flex-start;margin-top:.2rem">:</div>
     <div style="text-align:center">
-      <div style="font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1.6rem;color:#ef4444" id="cdMins">00</div>
-      <div style="font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">นาที</div>
+      <div style="font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:1.6rem;color:#ef4444" id="cdMins">00</div>
+      <div style="font-family:'Rajdhani','Kanit',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">นาที</div>
     </div>
-    <div style="font-family:'Orbitron','Chakra Petch',monospace;font-size:1.4rem;color:#ef4444;align-self:flex-start;margin-top:.2rem">:</div>
+    <div style="font-family:'Orbitron','Kanit',monospace;font-size:1.4rem;color:#ef4444;align-self:flex-start;margin-top:.2rem">:</div>
     <div style="text-align:center">
-      <div style="font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1.6rem;color:#ef4444" id="cdSecs">00</div>
-      <div style="font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">วินาที</div>
+      <div style="font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:1.6rem;color:#ef4444" id="cdSecs">00</div>
+      <div style="font-family:'Rajdhani','Kanit',sans-serif;font-size:.6rem;letter-spacing:.2em;color:rgba(239,68,68,.6)">วินาที</div>
     </div>
   </div>
 </div>
@@ -2238,8 +2239,8 @@ footer{
       <div style="display:flex">
         <span style="color:var(--p1);font-size:1.1rem">★★★★★</span>
       </div>
-      <span style="font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1.2rem;color:#fff">5.0</span>
-      <span style="font-size:.8rem;color:var(--text-dim);font-family:'Rajdhani','Chakra Petch',sans-serif;letter-spacing:.1em">/ 5.0 rating</span>
+      <span style="font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:1.2rem;color:#fff">5.0</span>
+      <span style="font-size:.8rem;color:var(--text-dim);font-family:'Rajdhani','Kanit',sans-serif;letter-spacing:.1em">/ 5.0 rating</span>
     </div>
   </div>
 
@@ -2626,23 +2627,23 @@ footer{
     <span class="footer-logo-text">INSIDEX</span>
   </div>
   <div style="display:flex;justify-content:center;gap:1.2rem;margin-bottom:1rem;flex-wrap:wrap">
-  <a href="https://www.tiktok.com/@shxrkcxy" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
+  <a href="https://www.tiktok.com/@shxrkcxy" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Kanit',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#fff'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M19.59 6.69a4.83 4.83 0 01-3.77-4.25V2h-3.45v13.67a2.89 2.89 0 01-2.88 2.5 2.89 2.89 0 01-2.89-2.89 2.89 2.89 0 012.89-2.89c.28 0 .54.04.79.1V9.01a6.33 6.33 0 00-.79-.05 6.34 6.34 0 00-6.34 6.34 6.34 6.34 0 006.34 6.34 6.34 6.34 0 006.33-6.34V8.69a8.2 8.2 0 004.79 1.53V6.77a4.85 4.85 0 01-1.02-.08z"/></svg>
     TikTok
   </a>
-  <a href="https://www.facebook.com/profile.php?id=61591270036108" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#1877f2'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
+  <a href="https://www.facebook.com/profile.php?id=61591270036108" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Kanit',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#1877f2'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
     Facebook
   </a>
-  <a href="https://www.instagram.com/insidexstore.official/" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#e1306c'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
+  <a href="https://www.instagram.com/insidexstore.official/" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Kanit',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#e1306c'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
     Instagram
   </a>
-  <a href="https://www.youtube.com/@shxcry" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#ff0000'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
+  <a href="https://www.youtube.com/@shxcry" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Kanit',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#ff0000'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
     <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M23.498 6.186a3.016 3.016 0 00-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 00.502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 002.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 002.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></svg>
     YouTube
   </a>
-  <a href="https://discord.gg/7thT8xaRpw" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Chakra Petch',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#5865F2'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
+  <a href="https://discord.gg/7thT8xaRpw" target="_blank" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Kanit',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--text-dim);transition:color .2s" onmouseover="this.style.color='#5865F2'" onmouseout="this.style.color='rgba(248,250,252,0.25)'">
     <svg width="14" height="14" viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
     Discord
   </a>
@@ -2738,7 +2739,7 @@ footer{
     <div id="qrInfo" style="display:none;margin-top:.5rem">
       <div style="display:flex;align-items:center;justify-content:center;gap:.5rem;margin-bottom:.3rem">
         <div style="width:6px;height:6px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;animation:blink 1.4s infinite"></div>
-        <span style="font-size:.72rem;color:#34d399;font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;letter-spacing:.1em">QR พร้อมใช้งาน</span>
+        <span style="font-size:.72rem;color:#34d399;font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;letter-spacing:.1em">QR พร้อมใช้งาน</span>
       </div>
       <div style="font-size:.65rem;color:var(--text-dim);text-align:center;font-family:'Space Mono',monospace">INISDEXSTORE</div>
     </div>
@@ -2764,7 +2765,7 @@ footer{
   <!-- celebrate header -->
   <div style="text-align:center;padding:1.2rem 0 1rem">
     <div style="font-size:2.8rem;margin-bottom:.6rem;color:#34d399;animation:bounceY 1s ease-in-out 3"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9.5"/><path d="M8 12.5l2.5 2.5L16 9.5"/></svg></div>
-    <div style="font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1.1rem;color:#34d399;margin-bottom:.3rem;letter-spacing:.04em">ชำระเงินสำเร็จ!</div>
+    <div style="font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:1.1rem;color:#34d399;margin-bottom:.3rem;letter-spacing:.04em">ชำระเงินสำเร็จ!</div>
     <div style="font-size:.78rem;color:var(--text-muted)" id="keyProductName"></div>
   </div>
 
@@ -2775,9 +2776,9 @@ footer{
   <div style="margin-top:1rem;padding:.9rem 1rem;border:1px solid rgba(88,101,242,.3);border-radius:10px;background:rgba(88,101,242,.07);display:flex;align-items:center;gap:.8rem">
     <div style="font-size:1.4rem;flex-shrink:0"><svg viewBox="0 0 24 24" width="1em" height="1em" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-0.15em"><path d="M4 4h16v12H8l-4 4V4z"/></svg></div>
     <div>
-      <div style="font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.82rem;color:#fff;margin-bottom:.2rem">นำ Key ไปส่งให้ Admin ใน Discord</div>
+      <div style="font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.82rem;color:#fff;margin-bottom:.2rem">นำ Key ไปส่งให้ Admin ใน Discord</div>
       <div style="font-size:.72rem;color:var(--text-muted);margin-bottom:.4rem">Admin จะเข้ามา Remote ลง Setting ให้ทันที</div>
-      <a href="https://discord.gg/7thT8xaRpw" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:#5865F2;transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
+      <a href="https://discord.gg/7thT8xaRpw" target="_blank" style="display:inline-flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.75rem;letter-spacing:.1em;text-transform:uppercase;color:#5865F2;transition:opacity .2s" onmouseover="this.style.opacity='.7'" onmouseout="this.style.opacity='1'">
         <svg width="14" height="14" viewBox="0 0 127.14 96.36" fill="#5865F2"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
         เข้า Discord Server ! →
       </a>
@@ -3267,13 +3268,13 @@ async function openHistory() {
       return `
         <div style="padding:.9rem;border:1px solid rgba(168,85,247,.12);border-radius:10px;margin-bottom:.6rem;background:rgba(168,85,247,.03)">
           <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:.4rem">
-            <span style="font-family:'Orbitron','Chakra Petch',monospace;font-weight:700;font-size:.82rem;color:#fff">${p.product_name}</span>
+            <span style="font-family:'Orbitron','Kanit',monospace;font-weight:700;font-size:.82rem;color:#fff">${p.product_name}</span>
             <span style="font-size:.62rem;color:var(--text-dim);font-family:'Space Mono',monospace">${date} · ${time}</span>
           </div>
           <div style="display:flex;justify-content:space-between;align-items:center">
             <span style="font-family:'Space Mono',monospace;font-size:.78rem;color:#34d399;font-weight:700">${p.key}</span>
             <button onclick="navigator.clipboard.writeText('${p.key}').then(()=>toast('Copy แล้ว!','success'))" 
-              style="font-size:.65rem;color:var(--p1);cursor:pointer;font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:none;border:none;padding:0">
+              style="font-size:.65rem;color:var(--p1);cursor:pointer;font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:none;border:none;padding:0">
               COPY
             </button>
           </div>
@@ -3411,7 +3412,7 @@ async function openShop() {
     ${closed ? `
 <div style="position:absolute;inset:0;z-index:9;display:flex;flex-direction:column;align-items:center;justify-content:center;background:rgba(0,0,0,.75);border-radius:12px">
   <div style="font-family:'Space Mono',monospace;font-size:.5rem;letter-spacing:.2em;color:rgba(239,68,68,.8);margin-bottom:.3rem">⏳ เปิดขาย</div>
-  <div style="font-family:'Orbitron','Chakra Petch',monospace;font-weight:900;font-size:1rem;color:#ef4444" id="shopCd_${p.id}">--:--:--</div>
+  <div style="font-family:'Orbitron','Kanit',monospace;font-weight:900;font-size:1rem;color:#ef4444" id="shopCd_${p.id}">--:--:--</div>
   <div style="font-family:'Space Mono',monospace;font-size:.45rem;color:rgba(255,255,255,.4);margin-top:.2rem;letter-spacing:.1em">1 มิ.ย. 69 · 18:00</div>
 </div>` : ''}
     ${imgUrl
@@ -3615,7 +3616,7 @@ async function submitSlip() {
       <div style="display:flex;align-items:center;justify-content:space-between;gap:.5rem">
         <div style="font-family:'Space Mono',monospace;font-size:.85rem;color:#34d399;font-weight:700;word-break:break-all">${key}</div>
         <button onclick="navigator.clipboard.writeText('${key}').then(()=>toast('Copy แล้ว!','success'))"
-          style="flex-shrink:0;font-size:.65rem;color:var(--p1);cursor:pointer;font-family:'Rajdhani','Chakra Petch',sans-serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);border-radius:4px;padding:.3rem .6rem;transition:all .2s"
+          style="flex-shrink:0;font-size:.65rem;color:var(--p1);cursor:pointer;font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;letter-spacing:.1em;text-transform:uppercase;background:rgba(168,85,247,.1);border:1px solid rgba(168,85,247,.3);border-radius:4px;padding:.3rem .6rem;transition:all .2s"
           onmouseover="this.style.background='rgba(168,85,247,.2)'"
           onmouseout="this.style.background='rgba(168,85,247,.1)'">
           COPY
