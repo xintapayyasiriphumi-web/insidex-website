@@ -375,14 +375,6 @@ nav.scrolled{
   transform:translateX(-110%);transition:transform .45s var(--ease-out);
 }
 .btn:hover::before{transform:translateX(110%)}
-/* Hover: left accent bar */
-.btn::after{
-  content:'';position:absolute;left:0;top:0;bottom:0;width:3px;
-  background:rgba(255,255,255,.55);
-  transform:scaleY(0);transform-origin:bottom;
-  transition:transform .18s var(--ease-out);
-}
-.btn:hover::after{transform:scaleY(1)}
 .btn:hover{transform:translateY(-2px)}
 .btn:active{transform:scale(.96)!important;transition-duration:.08s!important}
 .btn-primary{
