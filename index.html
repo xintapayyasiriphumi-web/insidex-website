@@ -781,38 +781,94 @@ nav.scrolled{
 /* ══════════════════════════════════════════════════
    DISCORD SECTION
 ══════════════════════════════════════════════════ */
-.discord-wrap{padding:7rem 2rem}
-.discord-inner{
-  max-width:1200px;margin:0 auto;position:relative;overflow:hidden;
-  border:1px solid rgba(88,101,242,.25);border-radius:16px;
-  padding:5rem 3rem;text-align:center;
-  background:linear-gradient(135deg,rgba(20,20,35,.95),rgba(30,20,45,.95));
+.dc-section{padding:8rem 2rem;position:relative;overflow:hidden}
+.dc-section::before{
+  content:'';position:absolute;inset:0;pointer-events:none;
+  background-image:
+    linear-gradient(rgba(88,101,242,.03) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(88,101,242,.03) 1px,transparent 1px);
+  background-size:64px 64px;
+  mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent);
+  -webkit-mask-image:radial-gradient(ellipse 80% 80% at 50% 50%,black 30%,transparent);
 }
-.discord-inner::before{
-  content:'';position:absolute;top:-50%;left:-50%;width:200%;height:200%;
-  background:radial-gradient(ellipse at center,rgba(88,101,242,.1) 0%,transparent 60%);
-  animation:rotateBg 25s linear infinite;
+.dc-glow-l,.dc-glow-r{
+  position:absolute;top:50%;transform:translateY(-50%);
+  width:500px;height:500px;border-radius:50%;pointer-events:none;
 }
-@keyframes rotateBg{from{transform:rotate(0)}to{transform:rotate(360deg)}}
-.discord-inner>*{position:relative;z-index:1}
-.discord-logo{
-  width:80px;height:80px;margin:0 auto 1.8rem;
-  background:var(--disc);border-radius:50%;
+.dc-glow-l{left:-14%;background:radial-gradient(circle,rgba(88,101,242,.09),transparent 70%)}
+.dc-glow-r{right:-14%;background:radial-gradient(circle,rgba(168,85,247,.07),transparent 70%)}
+.dc-inner{position:relative;z-index:1;max-width:640px;margin:0 auto;text-align:center}
+.dc-hero-icon{
+  width:70px;height:70px;margin:0 auto 1.2rem;border-radius:50%;
+  background:linear-gradient(135deg,rgba(88,101,242,.18),rgba(88,101,242,.04));
+  border:1px solid rgba(88,101,242,.28);
   display:flex;align-items:center;justify-content:center;
-  box-shadow:0 0 60px rgba(88,101,242,.45);
+  box-shadow:0 0 36px rgba(88,101,242,.22),0 0 0 1px rgba(88,101,242,.08);
   animation:discPulse 3s ease-in-out infinite;
 }
-@keyframes discPulse{0%,100%{box-shadow:0 0 40px rgba(88,101,242,.4)}50%{box-shadow:0 0 80px rgba(88,101,242,.65)}}
-.discord-logo svg{width:44px;height:44px;fill:#fff}
-.discord-title{
-  font-family:'Orbitron','Kanit',monospace;font-weight:900;
-  font-size:clamp(1.6rem,4.5vw,2.8rem);color:#fff;margin-bottom:1rem;
+@keyframes discPulse{0%,100%{box-shadow:0 0 30px rgba(88,101,242,.2)}50%{box-shadow:0 0 65px rgba(88,101,242,.5),0 0 90px rgba(168,85,247,.15)}}
+.dc-hero-icon svg{width:36px;height:36px}
+.dc-badge{
+  display:inline-flex;align-items:center;gap:.45rem;margin-bottom:1.2rem;
+  font-family:'Space Mono',monospace;font-size:.55rem;letter-spacing:.28em;text-transform:uppercase;
+  color:rgba(88,101,242,.9);padding:.3rem .9rem;border-radius:999px;
+  background:rgba(88,101,242,.07);border:1px solid rgba(88,101,242,.18);
 }
-.discord-desc{color:var(--text-muted);font-size:1rem;max-width:480px;margin:0 auto 2.5rem;line-height:1.75}
-.discord-widget{display:flex;justify-content:center;margin-top:2rem}
-.discord-widget iframe{
-  border-radius:12px;overflow:hidden;
-  box-shadow:0 0 48px rgba(88,101,242,.3),0 0 0 1px rgba(88,101,242,.2);
+.dc-title{
+  font-family:'Orbitron','Kanit',monospace;font-weight:900;
+  font-size:clamp(2rem,5vw,3.1rem);color:#fff;
+  line-height:1.15;margin-bottom:1rem;letter-spacing:-.01em;
+}
+.dc-accent{
+  background:linear-gradient(135deg,#5865F2 20%,#a78bfa 80%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;background-clip:text;
+}
+.dc-desc{font-size:.9rem;color:var(--text-muted);line-height:1.8;margin:0 auto 2.2rem;max-width:400px}
+.dc-stats{
+  display:flex;align-items:stretch;
+  background:rgba(255,255,255,.025);border:1px solid rgba(255,255,255,.07);
+  border-radius:12px;margin-bottom:2.8rem;overflow:hidden;
+}
+.dc-stat{flex:1;padding:.95rem .5rem;text-align:center}
+.dc-stat+.dc-stat{border-left:1px solid rgba(255,255,255,.07)}
+.dc-stat-num{font-family:'Orbitron',monospace;font-size:1.2rem;font-weight:700;color:#fff;line-height:1;margin-bottom:.28rem}
+.dc-stat-num.live{color:#34d399}
+.dc-stat-lbl{font-size:.58rem;letter-spacing:.14em;text-transform:uppercase;color:rgba(248,250,252,.33);font-family:'Space Mono',monospace}
+.dc-widget-center{display:flex;justify-content:center;margin-bottom:2.2rem}
+.dc-widget-glow{position:relative}
+.dc-widget-glow::before{
+  content:'';position:absolute;inset:-24px;
+  background:radial-gradient(ellipse at center,rgba(88,101,242,.12),transparent 70%);
+  pointer-events:none;z-index:0;border-radius:32px;
+}
+.dc-widget-glow .disc-widget{position:relative;z-index:1;width:400px}
+.dc-widget-glow .disc-widget-members{max-height:260px}
+.dc-perks{display:flex;align-items:center;justify-content:center;gap:.6rem;flex-wrap:wrap;margin-bottom:1.8rem}
+.dc-perk{
+  display:inline-flex;align-items:center;gap:.4rem;padding:.38rem .85rem;border-radius:999px;
+  background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.08);
+  font-size:.73rem;color:rgba(248,250,252,.55);
+  font-family:'Rajdhani','Kanit',sans-serif;font-weight:600;letter-spacing:.05em;
+}
+.dc-perk-dot{width:6px;height:6px;border-radius:50%;background:#34d399;box-shadow:0 0 5px #34d399;flex-shrink:0}
+.dc-cta-btn{
+  display:inline-flex;align-items:center;gap:.6rem;
+  padding:.95rem 2.2rem;border-radius:12px;font-weight:700;font-size:.9rem;
+  font-family:'Rajdhani','Kanit',sans-serif;letter-spacing:.12em;text-transform:uppercase;
+  background:linear-gradient(135deg,#5865F2,#818cf8);color:#fff;text-decoration:none;
+  box-shadow:0 0 28px rgba(88,101,242,.32),0 4px 18px rgba(88,101,242,.18);
+  transition:transform .2s,box-shadow .2s;
+}
+.dc-cta-btn:hover{transform:translateY(-2px);box-shadow:0 0 50px rgba(88,101,242,.5),0 8px 28px rgba(88,101,242,.28)}
+@media(max-width:768px){
+  .dc-section{padding:5rem 1.2rem}
+  .dc-widget-glow .disc-widget{width:100%;max-width:340px}
+  .dc-stat-num{font-size:1rem}
+}
+@media(max-width:480px){
+  .dc-stats{flex-direction:column}
+  .dc-stat+.dc-stat{border-left:none;border-top:1px solid rgba(255,255,255,.07)}
+  .dc-perks{gap:.4rem}
 }
 /* ── Custom Discord Widget ── */
 .disc-widget{
@@ -1074,9 +1130,6 @@ footer{
   #slidePrev{left:-12px}
   #slideNext{right:-12px}
   .show-stats{grid-template-columns:1fr}
-
-  .discord-inner{padding:3rem 1.5rem}
-  .discord-widget iframe{width:100%;max-width:340px}
 
   .shop-banner{padding:0 1.2rem 4rem}
   .shop-banner-left{flex-wrap:wrap}
@@ -1545,15 +1598,6 @@ footer{
   .nav-logo-text{font-size:.8rem;letter-spacing:.12em}
 }
 
-@media(max-width:768px){
-  .discord-inner > div[style*="grid-template-columns"]{
-    grid-template-columns:1fr!important;
-    gap:2rem!important;
-    text-align:center!important;
-  }
-  .discord-inner h2{text-align:center!important}
-  .discord-inner div[style*="text-align:left"]{text-align:center!important}
-}
 
 
 .product-card-new{
@@ -2735,45 +2779,46 @@ footer{
 <div class="divider"></div>
 
 <!-- ══ DISCORD ══ -->
-<div class="discord-wrap" id="discord">
-  <div class="discord-inner reveal">
-    
-    <!-- Background decoration -->
-    <div style="position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 0%,rgba(88,101,242,.15),transparent);pointer-events:none"></div>
+<div class="dc-section" id="discord">
+  <div class="dc-glow-l"></div>
+  <div class="dc-glow-r"></div>
 
-    <div style="position:relative;z-index:1;display:grid;grid-template-columns:1fr 1fr;gap:4rem;align-items:center;max-width:1000px;margin:0 auto">
-      
-      <!-- Left: text -->
-      <div style="text-align:left">
-        <div style="font-family:'Space Mono',monospace;font-size:.6rem;letter-spacing:.4em;text-transform:uppercase;color:#5865F2;margin-bottom:1rem;opacity:.8">// COMMUNITY</div>
-        <h2 class="discord-title" style="text-align:left;font-size:clamp(1.8rem,4vw,2.8rem);margin-bottom:1rem" data-i18n-html="disc.title">เข้าร่วม<br><span style="color:#5865F2">INSIDEX</span><br>Community</h2>
-        <p style="color:var(--text-muted);font-size:.92rem;line-height:1.75;margin-bottom:2rem" data-i18n-html="disc.desc">พูดคุย รับข่าวสาร และ Support 24/7<br>มีสมาชิกกว่า <span style="color:#fff;font-weight:700">4,569+</span> คน</p>
-        
-        <div style="display:flex;flex-direction:column;gap:.8rem;margin-bottom:2rem">
-          <div style="display:flex;align-items:center;gap:.7rem;font-size:.88rem;color:var(--text-muted)">
-            <span style="width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;flex-shrink:0"></span>
-            <span data-i18n="disc.bullet1">Support ตลอด 24/7</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:.7rem;font-size:.88rem;color:var(--text-muted)">
-            <span style="width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;flex-shrink:0"></span>
-            <span data-i18n="disc.bullet2">รับข่าวสารและ Update ก่อนใคร</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:.7rem;font-size:.88rem;color:var(--text-muted)">
-            <span style="width:8px;height:8px;border-radius:50%;background:#34d399;box-shadow:0 0 8px #34d399;flex-shrink:0"></span>
-            <span data-i18n="disc.bullet3">ส่ง Key และรับ Setup ผ่าน Discord</span>
-          </div>
-        </div>
+  <div class="dc-inner reveal">
 
-        <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="btn btn-primary" style="font-size:.9rem;padding:.9rem 2rem;display:inline-flex">
-          <svg width="20" height="20" viewBox="0 0 127.14 96.36" fill="#fff"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
-          Join Discord Now
-        </a>
+    <!-- Discord icon -->
+    <div class="dc-hero-icon">
+      <svg viewBox="0 0 127.14 96.36" fill="#5865F2"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+    </div>
+
+    <!-- Badge -->
+    <div class="dc-badge">⬡ Discord Community</div>
+
+    <!-- Title -->
+    <h2 class="dc-title" data-i18n-html="disc.title">เข้าร่วม<br><span class="dc-accent">INSIDEX</span><br>Community</h2>
+
+    <!-- Description -->
+    <p class="dc-desc" data-i18n-html="disc.desc">พูดคุย รับข่าวสาร และ Support 24/7<br>มีสมาชิกกว่า <span style="color:#fff;font-weight:700">4,569+</span> คน</p>
+
+    <!-- Stats row -->
+    <div class="dc-stats">
+      <div class="dc-stat">
+        <div class="dc-stat-num">4,569+</div>
+        <div class="dc-stat-lbl">สมาชิก</div>
       </div>
+      <div class="dc-stat">
+        <div class="dc-stat-num live" id="discOnlineCount">—</div>
+        <div class="dc-stat-lbl">ออนไลน์ตอนนี้</div>
+      </div>
+      <div class="dc-stat">
+        <div class="dc-stat-num">24/7</div>
+        <div class="dc-stat-lbl">Support</div>
+      </div>
+    </div>
 
-      <!-- Right: custom Discord widget -->
-      <div style="display:flex;justify-content:center">
+    <!-- Widget -->
+    <div class="dc-widget-center">
+      <div class="dc-widget-glow">
         <div class="disc-widget" id="discWidget">
-          <!-- Header -->
           <div class="disc-widget-header">
             <div class="disc-widget-icon">
               <svg viewBox="0 0 127.14 96.36" fill="#5865F2"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
@@ -2782,20 +2827,17 @@ footer{
               <div class="disc-widget-server-name">INSIDEX</div>
               <div class="disc-widget-online">
                 <span class="disc-online-dot"></span>
-                <span id="discOnlineCount">กำลังโหลด...</span>
+                <span id="discWidgetOnline">กำลังโหลด...</span>
               </div>
             </div>
           </div>
-          <!-- Section label -->
           <div class="disc-widget-label">— online members —</div>
-          <!-- Members list -->
           <div class="disc-widget-members" id="discMembersList">
             <div class="disc-widget-loading">
               <div class="disc-widget-spinner"></div>
               <span>Connecting...</span>
             </div>
           </div>
-          <!-- Footer join button -->
           <div class="disc-widget-footer">
             <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="disc-widget-join">
               <svg width="15" height="15" viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
@@ -2804,8 +2846,21 @@ footer{
           </div>
         </div>
       </div>
-
     </div>
+
+    <!-- Feature perks -->
+    <div class="dc-perks">
+      <span class="dc-perk"><span class="dc-perk-dot"></span><span data-i18n="disc.bullet1">Support ตลอด 24/7</span></span>
+      <span class="dc-perk"><span class="dc-perk-dot"></span><span data-i18n="disc.bullet2">รับข่าวสารและ Update ก่อนใคร</span></span>
+      <span class="dc-perk"><span class="dc-perk-dot"></span><span data-i18n="disc.bullet3">ส่ง Key และรับ Setup ผ่าน Discord</span></span>
+    </div>
+
+    <!-- CTA -->
+    <a href="https://discord.gg/7thT8xaRpw" target="_blank" class="dc-cta-btn">
+      <svg width="18" height="18" viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
+      Join Discord Now
+    </a>
+
   </div>
 </div>
 
@@ -4064,7 +4119,7 @@ const TRANSLATIONS = {
     'faq.a4':'Setting และ Windows OS รองรับทุกเกมเพราะ Optimize ที่ระดับ System ReShade รองรับเกมส่วนใหญ่ที่เป็น DirectX สอบถาม Support ก่อนซื้อได้เสมอหากไม่แน่ใจ',
     'faq.a5':'ชำระผ่านร้านค้า insidex.online หรือติดต่อผ่าน Discord โดยตรง รองรับ ทุกธนาคารในไทย, PromptPay, TrueMoney Wallet และช่องทางอื่นๆ',
     'faq.a6':'ทีมงานพร้อม Support ใน Discord ตลอด 24/7 ถ้ามีปัญหาหลัง Setup สามารถแจ้งได้เลย ทีมงานจะ Remote เข้ามาแก้ไขให้โดยไม่มีค่าใช้จ่ายเพิ่มเติม',
-    'disc.title':'เข้าร่วม<br><span style="color:#5865F2">INSIDEX</span><br>Community',
+    'disc.title':'เข้าร่วม<br><span class="dc-accent">INSIDEX</span><br>Community',
     'disc.desc':'พูดคุย รับข่าวสาร และ Support 24/7<br>มีสมาชิกกว่า <span style="color:#fff;font-weight:700">4,569+</span> คน',
     'disc.bullet1':'Support ตลอด 24/7','disc.bullet2':'รับข่าวสารและ Update ก่อนใคร',
     'disc.bullet3':'ส่ง Key และรับ Setup ผ่าน Discord',
@@ -4110,7 +4165,7 @@ const TRANSLATIONS = {
     'faq.a4':'Settings and Windows OS support all games because they optimize at the System level. ReShade supports most DirectX games. Always feel free to ask Support before purchasing if unsure.',
     'faq.a5':'Pay through insidex.online or contact Discord directly. We support all Thai banks, PromptPay, TrueMoney Wallet, and other channels.',
     'faq.a6':'Our team provides 24/7 Support on Discord. If there\'s an issue after Setup, just let us know. The team will remote in to fix it at no extra charge.',
-    'disc.title':'Join<br><span style="color:#5865F2">INSIDEX</span><br>Community',
+    'disc.title':'Join<br><span class="dc-accent">INSIDEX</span><br>Community',
     'disc.desc':'Chat, get news & 24/7 Support<br>Over <span style="color:#fff;font-weight:700">4,569+</span> members',
     'disc.bullet1':'24/7 Support','disc.bullet2':'Get news & updates before anyone else',
     'disc.bullet3':'Send Key and receive Setup via Discord',
@@ -4156,7 +4211,7 @@ const TRANSLATIONS = {
     'faq.a4':'Setting và Windows OS hỗ trợ tất cả game vì tối ưu ở cấp System. ReShade hỗ trợ hầu hết game DirectX. Luôn có thể hỏi Support trước khi mua nếu không chắc.',
     'faq.a5':'Thanh toán qua insidex.online hoặc liên hệ Discord trực tiếp. Hỗ trợ tất cả ngân hàng Thái Lan, PromptPay, TrueMoney Wallet và các kênh khác.',
     'faq.a6':'Đội ngũ hỗ trợ 24/7 trên Discord. Nếu có vấn đề sau khi cài Setup, cứ thông báo là xong. Đội ngũ sẽ kết nối từ xa để sửa miễn phí.',
-    'disc.title':'Tham gia<br><span style="color:#5865F2">INSIDEX</span><br>Community',
+    'disc.title':'Tham gia<br><span class="dc-accent">INSIDEX</span><br>Community',
     'disc.desc':'Trò chuyện, nhận tin tức & hỗ trợ 24/7<br>Có hơn <span style="color:#fff;font-weight:700">4,569+</span> thành viên',
     'disc.bullet1':'Hỗ trợ 24/7','disc.bullet2':'Nhận tin tức & cập nhật trước mọi người',
     'disc.bullet3':'Gửi Key và nhận Setup qua Discord',
@@ -4235,18 +4290,20 @@ function t(key) {
     fetch('https://discord.com/api/guilds/'+GUILD+'/widget.json')
       .then(function(r){ if(!r.ok) throw 0; return r.json(); })
       .then(function(data){
-        var countEl = document.getElementById('discOnlineCount');
-        if(countEl){
-          var n = data.presence_count||(data.members&&data.members.length)||0;
-          countEl.textContent = n+' คนออนไลน์';
-        }
+        var n = data.presence_count||(data.members&&data.members.length)||0;
+        var statsEl = document.getElementById('discOnlineCount');
+        if(statsEl) statsEl.textContent = n.toLocaleString();
+        var widgetEl = document.getElementById('discWidgetOnline');
+        if(widgetEl) widgetEl.textContent = n+' คนออนไลน์';
         renderMembers(data.members||[]);
       })
       .catch(function(){
         var list = document.getElementById('discMembersList');
         if(list) list.innerHTML='<div class="disc-widget-error">Widget ไม่พร้อมใช้งาน<br><span style="font-size:.6rem;opacity:.6">discord.com/api unavailable</span></div>';
-        var countEl = document.getElementById('discOnlineCount');
-        if(countEl) countEl.textContent='INSIDEX Community';
+        var statsEl = document.getElementById('discOnlineCount');
+        if(statsEl) statsEl.textContent='—';
+        var widgetEl = document.getElementById('discWidgetOnline');
+        if(widgetEl) widgetEl.textContent='INSIDEX Community';
       });
   }
 
