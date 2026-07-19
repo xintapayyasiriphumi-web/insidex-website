@@ -3748,7 +3748,12 @@ async function openShop() {
         const clientOpen  = releaseTime !== null && Date.now() >= releaseTime;
         const closed      = !p.is_active && !clientOpen;
         const disabled = outOfStock || closed;
-        const imgUrl = p.image_url;
+        const rawImg = p.image_url;
+        const imgUrl = rawImg
+          ? (rawImg.startsWith('http://') || rawImg.startsWith('https://') || rawImg.startsWith('//')
+              ? rawImg
+              : 'https://' + rawImg)
+          : null;
         return `
   <div class="product-card-new ${outOfStock && !closed ? 'disabled' : ''}"
     onclick="${closed ? `showClosedToast()` : outOfStock ? '' : `selectProduct(this,${p.id},'${p.name.replace(/'/g,"\\'")}',${p.price})`}"
