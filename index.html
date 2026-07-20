@@ -473,6 +473,7 @@ nav.scrolled{
   position:absolute;inset:0;opacity:0;
   transition:opacity .4s;pointer-events:none;
 }
+.card{cursor:pointer}
 .card:hover{transform:translateY(-7px);border-color:rgba(168,85,247,.5);box-shadow:0 24px 64px rgba(124,58,237,.2),0 0 0 1px rgba(168,85,247,.25)}
 .card:hover .card-glow{opacity:1}
 .card-corner{position:absolute;top:0;right:0;width:70px;height:70px;background:linear-gradient(225deg,rgba(168,85,247,.18) 0%,transparent 60%)}
@@ -517,7 +518,7 @@ nav.scrolled{
   display:inline-flex;align-items:center;gap:.4rem;
   font-family:'Rajdhani','Kanit',sans-serif;font-weight:700;font-size:.75rem;
   letter-spacing:.12em;text-transform:uppercase;color:var(--p1);
-  transition:gap .2s,color .2s;
+  transition:gap .2s,color .2s;position:relative;z-index:1;
 }
 .card-cta:hover{gap:.7rem;color:#fff}
 
@@ -2106,7 +2107,7 @@ footer{
   <p class="section-desc reveal" data-i18n="sec.productsDesc">เลือกสรรสินค้าคุณภาพสูงเพื่อยกระดับประสบการณ์การเล่นเกมของคุณ — ทุกอย่างลงให้โดยตรง</p>
 
   <div class="cards">
-    <div class="card reveal" style="transition-delay:.05s">
+    <div class="card reveal" style="transition-delay:.05s" onclick="window.open('https://discord.gg/7thT8xaRpw','_blank')">
       <div class="card-glow" style="background:linear-gradient(135deg,rgba(168,85,247,.06),transparent)"></div>
       <div class="card-corner"></div>
       <span class="card-badge badge-hot">HOT</span>
@@ -2123,7 +2124,7 @@ footer{
       <div class="card-price">฿309–฿629</div>
     </div>
 
-    <div class="card reveal" style="transition-delay:.1s">
+    <div class="card reveal" style="transition-delay:.1s" onclick="window.open('https://discord.gg/7thT8xaRpw','_blank')">
       <div class="card-glow" style="background:linear-gradient(135deg,rgba(99,102,241,.06),transparent)"></div>
       <div class="card-corner"></div>
       <span class="card-badge badge-pop">POPULAR</span>
@@ -2140,7 +2141,7 @@ footer{
       <div class="card-price">฿39</div>
     </div>
 
-    <div class="card reveal" style="transition-delay:.15s">
+    <div class="card reveal" style="transition-delay:.15s" onclick="window.open('https://discord.gg/7thT8xaRpw','_blank')">
       <div class="card-glow" style="background:linear-gradient(135deg,rgba(139,92,246,.06),transparent)"></div>
       <div class="card-corner"></div>
       <span class="card-badge badge-pop">POPULAR</span>
@@ -2156,7 +2157,7 @@ footer{
       <div class="card-price">฿69–99</div>
     </div>
 
-    <div class="card reveal" style="transition-delay:.2s">
+    <div class="card reveal" style="transition-delay:.2s" onclick="window.open('https://discord.gg/7thT8xaRpw','_blank')">
       <div class="card-glow" style="background:linear-gradient(135deg,rgba(88,101,242,.06),transparent)"></div>
       <div class="card-corner"></div>
       <span class="card-badge badge-top">TOP</span>
