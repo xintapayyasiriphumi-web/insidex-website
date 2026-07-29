@@ -1892,6 +1892,30 @@ footer{
 .stats-inner { background: rgba(3,3,5,.97) }
 .stat { border-right-color: rgba(255,255,255,.06) }
 
+
+/* Policy Modal */
+.policy-modal-overlay{position:fixed;inset:0;z-index:10000;background:rgba(0,0,0,.85);backdrop-filter:blur(6px);display:flex;align-items:center;justify-content:center;padding:1rem;opacity:0;pointer-events:none;transition:opacity .3s}
+.policy-modal-overlay.open{opacity:1;pointer-events:all}
+.policy-modal{background:#0d0d14;border:1px solid rgba(168,85,247,.25);border-radius:12px;width:100%;max-width:680px;max-height:88vh;display:flex;flex-direction:column;box-shadow:0 0 60px rgba(124,58,237,.2)}
+.policy-modal-head{display:flex;align-items:center;justify-content:space-between;padding:1.4rem 1.8rem;border-bottom:1px solid rgba(255,255,255,.07);flex-shrink:0}
+.policy-modal-head h2{font-family:'Orbitron',monospace;font-size:1rem;font-weight:700;letter-spacing:.08em;color:#fff}
+.policy-modal-head span{font-family:'Rajdhani',sans-serif;font-size:.72rem;color:rgba(248,250,252,.35);letter-spacing:.1em}
+.policy-close{background:rgba(255,255,255,.06);border:1px solid rgba(255,255,255,.1);border-radius:6px;color:rgba(248,250,252,.6);cursor:pointer;padding:.3rem .7rem;font-size:1rem;transition:all .2s;line-height:1}
+.policy-close:hover{background:rgba(239,68,68,.15);border-color:rgba(239,68,68,.4);color:#ef4444}
+.policy-modal-body{overflow-y:auto;padding:1.6rem 1.8rem;scrollbar-width:thin;scrollbar-color:rgba(168,85,247,.35) transparent}
+.policy-section{margin-bottom:1.6rem}
+.policy-section:last-child{margin-bottom:0}
+.policy-section h3{font-family:'Rajdhani',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;color:var(--p1);margin-bottom:.7rem;display:flex;align-items:center;gap:.5rem}
+.policy-section h3::after{content:'';flex:1;height:1px;background:rgba(168,85,247,.15)}
+.policy-section p,.policy-section li{font-family:'Kanit','Sarabun',sans-serif;font-size:.88rem;color:rgba(248,250,252,.72);line-height:1.75}
+.policy-section ul{padding-left:1.2rem;display:flex;flex-direction:column;gap:.3rem}
+.policy-section ul li::marker{color:var(--p2)}
+.policy-highlight{background:rgba(124,58,237,.1);border:1px solid rgba(168,85,247,.2);border-radius:8px;padding:.9rem 1.1rem;margin-bottom:.8rem}
+.policy-highlight p{color:rgba(248,250,252,.85)}
+.policy-modal-foot{padding:1rem 1.8rem;border-top:1px solid rgba(255,255,255,.07);display:flex;justify-content:space-between;align-items:center;flex-shrink:0;flex-wrap:wrap;gap:.6rem}
+.policy-modal-foot span{font-family:'Rajdhani',sans-serif;font-size:.7rem;color:rgba(248,250,252,.25);letter-spacing:.08em}
+.btn-policy-close{background:linear-gradient(135deg,var(--p3),var(--b1));border:none;border-radius:6px;color:#fff;cursor:pointer;font-family:'Rajdhani',sans-serif;font-weight:700;font-size:.82rem;letter-spacing:.1em;padding:.5rem 1.4rem;transition:opacity .2s}
+.btn-policy-close:hover{opacity:.85}
 </style>
 </head>
 <body>
@@ -2989,7 +3013,8 @@ footer{
     <svg width="14" height="14" viewBox="0 0 127.14 96.36" fill="currentColor"><path d="M107.7,8.07A105.15,105.15,0,0,0,81.47,0a72.06,72.06,0,0,0-3.36,6.83A97.68,97.68,0,0,0,49,6.83,72.37,72.37,0,0,0,45.64,0,105.89,105.89,0,0,0,19.39,8.09C2.79,32.65-1.71,56.6.54,80.21h0A105.73,105.73,0,0,0,32.71,96.36,77.7,77.7,0,0,0,39.6,85.25a68.42,68.42,0,0,1-10.85-5.18c.91-.66,1.8-1.34,2.66-2a75.57,75.57,0,0,0,64.32,0c.87.71,1.76,1.39,2.66,2a68.68,68.68,0,0,1-10.87,5.19,77,77,0,0,0,6.89,11.1A105.25,105.25,0,0,0,126.6,80.22h0C129.24,52.84,122.09,29.11,107.7,8.07ZM42.45,65.69C36.18,65.69,31,60,31,53s5-12.74,11.43-12.74S54,46,53.89,53,48.84,65.69,42.45,65.69Zm42.24,0C78.41,65.69,73.25,60,73.25,53s5-12.74,11.44-12.74S96.23,46,96.12,53,91.08,65.69,84.69,65.69Z"/></svg>
     Discord
   </a>
-</div>
+
+  <a href="#" onclick="openPolicyModal();return false;" style="display:flex;align-items:center;gap:.4rem;font-family:'Rajdhani','Kanit',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:rgba(248,250,252,.35);transition:color .2s" onmouseover="this.style.color='#c084fc'" onmouseout="this.style.color='rgba(248,250,252,.35)'"><svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>นโยบายและข้อตกลง</a></div>
   <p class="footer-copy">© 2025 INSIDEX — THE BEST STORE · ALL RIGHTS RESERVED</p>
 </footer>
 
@@ -4397,5 +4422,100 @@ function t(key) {
 })();
 </script>
 
+
+<!-- Policy Modal -->
+<div class="policy-modal-overlay" id="policyOverlay" role="dialog" aria-modal="true" aria-labelledby="policyTitle">
+  <div class="policy-modal">
+    <div class="policy-modal-head">
+      <div>
+        <h2 id="policyTitle">นโยบายและข้อตกลงการใช้งาน</h2>
+        <span>INSIDEX STORE · อัปเดตล่าสุด มิถุนายน 2025</span>
+      </div>
+      <button class="policy-close" onclick="closePolicyModal()" aria-label="ปิด">✕</button>
+    </div>
+    <div class="policy-modal-body">
+
+      <div class="policy-highlight">
+        <p>การซื้อสินค้าจากร้าน INSIDEX ถือว่าลูกค้าได้อ่านและยอมรับข้อตกลงทั้งหมดด้านล่างแล้ว</p>
+      </div>
+
+      <div class="policy-section">
+        <h3>การซื้อและชำระเงิน</h3>
+        <ul>
+          <li>สินค้าทุกประเภทเป็น <strong>สินค้าดิจิทัล (Digital Product)</strong> ส่งมอบผ่าน License Key ทาง Discord</li>
+          <li>ราคาสินค้าแสดงเป็นสกุลเงินบาท (฿) และอาจเปลี่ยนแปลงได้โดยไม่แจ้งล่วงหน้า</li>
+          <li>การชำระเงินผ่านช่องทางที่ร้านกำหนดเท่านั้น และต้องแจ้งสลิปยืนยันทุกครั้ง</li>
+          <li>กรุณาติดต่อผ่าน Discord Server อย่างเป็นทางการ: <strong>discord.gg/insidex</strong></li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h3>นโยบายการคืนเงิน</h3>
+        <ul>
+          <li><strong>ไม่รับคืนเงินทุกกรณี</strong> เนื่องจากสินค้าเป็น Digital Product ที่ส่งมอบทันทีหลังชำระเงิน</li>
+          <li>หากสินค้ามีปัญหาจากทางร้าน ทีมงานจะดำเนินการแก้ไขหรือชดเชยตามที่เห็นสมควร</li>
+          <li>ปัญหาจากความเข้ากันไม่ได้ของฮาร์ดแวร์หรือการตั้งค่าของลูกค้าไม่ถือเป็นข้อบกพร่องของสินค้า</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h3>ใบอนุญาตและสิทธิ์การใช้งาน</h3>
+        <ul>
+          <li>License Key <strong>1 key ต่อ 1 เครื่องเท่านั้น</strong> ผูกกับ HWID (Hardware ID) ของเครื่องที่ใช้</li>
+          <li><strong>ห้ามแบ่งปัน, ขายต่อ, หรือโอน</strong> License Key ให้ผู้อื่นโดยเด็ดขาด</li>
+          <li>การเปลี่ยนเครื่องใหม่ อาจมีค่าธรรมเนียม HWID Reset ตามนโยบายของแต่ละผลิตภัณฑ์</li>
+          <li>ห้าม Reverse Engineer, Decompile หรือดัดแปลงสินค้าในทุกรูปแบบ</li>
+          <li>ห้ามนำสินค้าไปสร้างผลิตภัณฑ์อื่น, คัดลอก หรือเผยแพร่โดยไม่ได้รับอนุญาต</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h3>ข้อห้ามการใช้งาน</h3>
+        <ul>
+          <li>ห้ามใช้สินค้าเพื่อวัตถุประสงค์ที่ผิดกฎหมายหรือผิดข้อตกลงของผู้ให้บริการเกม</li>
+          <li>ห้ามใช้สินค้าในสภาพแวดล้อม Anti-Cheat ระดับ Kernel ที่ไม่รองรับ</li>
+          <li>ผลลัพธ์อาจแตกต่างกันตามสเปคเครื่องและการตั้งค่าเริ่มต้นของแต่ละระบบ</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h3>การสนับสนุน (Support)</h3>
+        <ul>
+          <li>Support ให้บริการผ่าน <strong>Discord Server เท่านั้น</strong> ไม่รับผ่านช่องทางอื่น</li>
+          <li>เวลาตอบกลับโดยประมาณ 1–24 ชั่วโมง ขึ้นอยู่กับช่วงเวลา</li>
+          <li>กรุณาแจ้งปัญหาพร้อมหลักฐาน (สกรีนช็อต/วิดีโอ) เพื่อการแก้ไขที่รวดเร็ว</li>
+          <li>ฟีเจอร์อัปเดตฟรีตลอดอายุการใช้งานสำหรับผลิตภัณฑ์ที่ระบุ</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h3>ข้อจำกัดความรับผิดชอบ</h3>
+        <ul>
+          <li>ร้าน INSIDEX ไม่รับผิดชอบต่อความเสียหายใด ๆ ที่อาจเกิดจากการใช้งานสินค้า</li>
+          <li>ผู้ใช้ยอมรับความเสี่ยงในการใช้งานด้วยตนเอง</li>
+          <li>ร้านไม่รับประกันว่าสินค้าจะทำงานได้กับทุกระบบหรือทุกเวอร์ชันของ Windows</li>
+          <li>ร้านสงวนสิทธิ์ในการระงับ License โดยไม่แจ้งล่วงหน้า หากตรวจพบการละเมิดข้อตกลง</li>
+        </ul>
+      </div>
+
+      <div class="policy-section">
+        <h3>การเปลี่ยนแปลงข้อตกลง</h3>
+        <p>ร้าน INSIDEX สงวนสิทธิ์ในการแก้ไขหรือเปลี่ยนแปลงข้อตกลงนี้ได้ทุกเมื่อ การใช้งานสินค้าต่อไปหลังจากมีการเปลี่ยนแปลงถือว่ายอมรับข้อตกลงฉบับใหม่</p>
+      </div>
+
+    </div>
+    <div class="policy-modal-foot">
+      <span>© 2025 INSIDEX STORE · ALL RIGHTS RESERVED</span>
+      <button class="btn-policy-close" onclick="closePolicyModal()">รับทราบและปิด</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function openPolicyModal(){document.getElementById('policyOverlay').classList.add('open');document.body.style.overflow='hidden'}
+function closePolicyModal(){document.getElementById('policyOverlay').classList.remove('open');document.body.style.overflow=''}
+document.getElementById('policyOverlay').addEventListener('click',function(e){if(e.target===this)closePolicyModal()})
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closePolicyModal()})
+</script>
 </body>
 </html>
