@@ -1,0 +1,160 @@
+/* ══════════════════════════════════════════════════
+   INSIDEX — Translations (TH / EN / VI)
+   data-i18n="key"      → replaces textContent
+   data-i18n-html="key" → replaces innerHTML (trusted strings below only)
+══════════════════════════════════════════════════ */
+
+const TRANSLATIONS = {
+  th: {
+    'nav.products':'สินค้า','nav.shelf':'หมวดหมู่','nav.about':'เกี่ยวกับ',
+    'nav.reviews':'รีวิว','nav.community':'ชุมชน','nav.login':'Login Discord',
+    'hero.desc':'ร้านค้าสำหรับนักเล่นเกมที่ต้องการประสิทธิภาพสูงสุด<br>ลง Setup ให้โดยตรงโดยทีมงาน — ไม่ต้องทำเอง',
+    'hero.buy':'ซื้อสินค้า','hero.view':'ดูสินค้า ↓',
+    'stat.customers':'ลูกค้าที่พึงพอใจ','stat.categories':'หมวดสินค้า',
+    'stat.support':'Support ตลอดเวลา','stat.safe':'ปลอดภัย & มั่นใจ',
+    'sec.productsTitle':'สินค้าของเรา',
+    'sec.productsDesc':'เลือกสรรสินค้าคุณภาพสูงเพื่อยกระดับประสบการณ์การเล่นเกมของคุณ — ทุกอย่างลงให้โดยตรง',
+    'sec.shelfTitle':'ชั้นวางสินค้า INSIDEX',
+    'sec.shelfDesc':'รวมสินค้าเด่นของเราไว้ในที่เดียว — คลิกเพื่อเลือกซื้อได้ทันที',
+    'sec.aboutTitle':'ทำไมต้อง INSIDEX?',
+    'sec.aboutDesc':'เราคือร้านที่ให้บริการสินค้าดิจิทัลสำหรับนักเล่นเกมโดยเฉพาะ ทุกสินค้าผ่านการทดสอบและพัฒนา — ทีมงานลง Setup ให้คุณโดยตรง ไม่ต้องทำเอง',
+    'why.settingDesc':'การตั้งค่าที่ถูกออกแบบโดยผู้เชี่ยวชาญ ไม่ว่าจะเป็นการตั้งค่าในเกม, ระบบปฏิบัติการ หรือ Network เพื่อให้ได้ FPS สูงสุด ดีเลย์ต่ำสุด และ Input Lag น้อยที่สุด',
+    'why.reshadeDesc':'ReShade Preset ที่ถูก Custom มาให้ภาพในเกมสวยงาม คมชัด และมีสีสันที่สมจริงยิ่งขึ้น โดยไม่กระทบต่อ FPS ทีมงานติดตั้งให้ฟรี',
+    'why.modeDesc':'Mode ช่วยเพิ่มความสวยงามของ Graphic และเปิดตัวเลือกในการปรับแต่งที่มากกว่าปกติ ให้คุณปรับ Config ได้ตามสไตล์ตัวเอง',
+    'why.windowsDesc':'Windows ที่ Optimize มาเพื่อการเล่นเกมโดยเฉพาะ ตัด Service และ Process ที่ไม่จำเป็นออก ทำให้ระบบเบา บูตเร็ว และให้ทรัพยากรกับเกมได้มากที่สุด',
+    'value.title':'พร้อมดูแลคุณ<br>ทุกขั้นตอน',
+    'value.supportDesc':'ทีมงานพร้อมช่วยเหลือตลอดเวลา','value.priceTitle':'ราคาคุ้มค่า',
+    'value.priceDesc':'สินค้าคุณภาพในราคาที่เข้าถึงได้','value.setupTitle':'ลงให้โดยตรง',
+    'value.setupDesc':'ทีมงาน Setup ให้คุณ ไม่ต้องทำเอง','value.custTitle':'ลูกค้า 2,700+',
+    'value.custDesc':'ไว้วางใจเราตลอดหลายเดือนที่ผ่านมา',
+    'sec.toolboxEye':'ซอฟต์แวร์เรือธง','sec.toolboxTitle':'INSIDEX Toolbox Premium',
+    'sec.toolboxDesc':'รวมทุกเครื่องมือ Optimize ไว้ในโปรแกรมเดียว กดใช้งานได้ทันทีโดยไม่ต้องตั้งค่าเอง',
+    'sec.showcaseDesc':'ดูผลลัพธ์จริงจากทางร้าน — เลื่อนซ้าย/ขวาหรือลากเพื่อดูคลิปทั้งหมด',
+    'btn.order':'สั่งซื้อ',
+    'sec.reviewsEye':'รีวิวจากลูกค้าจริง','sec.reviewsTitle':'เสียงจากลูกค้า<br>2,700+ คน',
+    'faq.title':'คำถาม<br>ที่พบบ่อย','faq.desc':'มีข้อสงสัยเพิ่มเติม? ติดต่อทีมงานผ่าน Discord ได้เลย พร้อม Support 24/7',
+    'faq.cta':'ถามเพิ่มเติมใน Discord',
+    'faq.q1':'ทีมงานลง Setup ให้ยังไง?','faq.q2':'ซื้อแล้วใช้ได้นานแค่ไหน?',
+    'faq.q3':'ปลอดภัยไหม? โดน Ban ได้ไหม?','faq.q4':'รองรับเกมอะไรบ้าง?',
+    'faq.q5':'ชำระเงินผ่านช่องทางไหนได้บ้าง?','faq.q6':'ถ้ามีปัญหาหลังลง Setup จะทำยังไง?',
+    'faq.a1':'หลังจากสั่งซื้อแล้ว ทีมงานจะนัด Remote เข้าเครื่องผ่าน Ultraviewer แล้วลง Setup ให้โดยตรง คุณไม่ต้องทำอะไรเองเลย แค่เปิดเครื่องทิ้งไว้ก็พอ ใช้เวลาประมาณ 3-5 นาที',
+    'faq.a2':'สินค้าส่วนใหญ่เป็น Lifetime — ซื้อครั้งเดียวใช้ได้ตลอด ถ้าไม่ได้ไปลง Setting ของร้านอื่นเเล้วค่าเกิดการทับกัน',
+    'faq.a3':'Setting และ ReShade ปรับค่าในระดับ Windows System และ Graphics — ไม่ใช่ Cheat หรือ Hack ใดๆ ปลอดภัย 100% สำหรับ Windows OS เป็น Official ISO ที่ตัด Service ไม่จำเป็นออก',
+    'faq.a4':'Setting และ Windows OS รองรับทุกเกมเพราะ Optimize ที่ระดับ System ReShade รองรับเกมส่วนใหญ่ที่เป็น DirectX สอบถาม Support ก่อนซื้อได้เสมอหากไม่แน่ใจ',
+    'faq.a5':'ชำระผ่านร้านค้า insidex.online หรือติดต่อผ่าน Discord โดยตรง รองรับ ทุกธนาคารในไทย, PromptPay, TrueMoney Wallet และช่องทางอื่นๆ',
+    'faq.a6':'ทีมงานพร้อม Support ใน Discord ตลอด 24/7 ถ้ามีปัญหาหลัง Setup สามารถแจ้งได้เลย ทีมงานจะ Remote เข้ามาแก้ไขให้โดยไม่มีค่าใช้จ่ายเพิ่มเติม',
+    'disc.title':'เข้าร่วม<br><span class="text-gradient">INSIDEX</span> Community',
+    'disc.desc':'พูดคุย รับข่าวสาร และ Support 24/7 — มีสมาชิกกว่า <strong>6,262+</strong> คน',
+    'disc.bullet1':'Support ตลอด 24/7','disc.bullet2':'รับข่าวสารและ Update ก่อนใคร',
+    'disc.bullet3':'ส่ง Key และรับ Setup ผ่าน Discord',
+    'modal.buy':'ซื้อสินค้า','modal.history':'ประวัติการซื้อ','modal.logout':'ออกจากระบบ',
+  },
+  en: {
+    'nav.products':'Products','nav.shelf':'Categories','nav.about':'About',
+    'nav.reviews':'Reviews','nav.community':'Community','nav.login':'Login Discord',
+    'hero.desc':'The ultimate store for gamers who demand peak performance.<br>Our team installs everything directly for you — no hassle.',
+    'hero.buy':'Buy Products','hero.view':'View Products ↓',
+    'stat.customers':'Satisfied Customers','stat.categories':'Categories',
+    'stat.support':'24/7 Support','stat.safe':'Safe & Trusted',
+    'sec.productsTitle':'Our Products',
+    'sec.productsDesc':'Premium products to elevate your gaming experience — everything installed directly for you.',
+    'sec.shelfTitle':'INSIDEX Product Shelf',
+    'sec.shelfDesc':'All our featured products in one place — click to purchase instantly.',
+    'sec.aboutTitle':'Why INSIDEX?',
+    'sec.aboutDesc':'We are a digital product store exclusively for gamers. All products are tested and developed — our team installs Setup directly for you, no need to do it yourself.',
+    'why.settingDesc':'Expert-designed settings for in-game, OS, and Network configuration to maximize FPS, minimize delay, and reduce Input Lag to the lowest possible.',
+    'why.reshadeDesc':'Custom ReShade Preset that makes in-game visuals beautiful, sharp, and vibrant — with no FPS impact. Free installation by our team.',
+    'why.modeDesc':'Mode enhances graphic quality and unlocks more customization options, letting you tweak the config to your own style.',
+    'why.windowsDesc':'Windows optimized exclusively for gaming — unnecessary services and processes removed, making the system lighter, booting faster, and dedicating more resources to your game.',
+    'value.title':'Ready to support you<br>every step of the way',
+    'value.supportDesc':'Our team is ready to help anytime','value.priceTitle':'Great Value',
+    'value.priceDesc':'Quality products at accessible prices','value.setupTitle':'Direct Installation',
+    'value.setupDesc':'Our team sets up for you — no need to do it yourself','value.custTitle':'2,700+ Customers',
+    'value.custDesc':'Trusting us over the past several months',
+    'sec.toolboxEye':'Flagship Software','sec.toolboxTitle':'INSIDEX Toolbox Premium',
+    'sec.toolboxDesc':'All optimization tools in one program. Ready to use instantly without manual setup.',
+    'sec.showcaseDesc':'See real results from our store — swipe left/right or drag to view all clips.',
+    'btn.order':'Order Now',
+    'sec.reviewsEye':'Real Customer Reviews','sec.reviewsTitle':'Voices from<br>2,700+ Customers',
+    'faq.title':'Frequently<br>Asked Questions','faq.desc':'Have more questions? Contact our team on Discord. Support 24/7.',
+    'faq.cta':'Ask more on Discord',
+    'faq.q1':'How does the team install Setup?','faq.q2':'How long can I use after purchasing?',
+    'faq.q3':'Is it safe? Can I get banned?','faq.q4':'What games are supported?',
+    'faq.q5':'What payment methods are available?','faq.q6':'What if there\'s a problem after Setup?',
+    'faq.a1':'After purchasing, our team will schedule a remote session via Ultraviewer and install Setup directly. You don\'t need to do anything — just leave your PC on. Takes about 3-5 minutes.',
+    'faq.a2':'Most products are Lifetime — buy once, use forever, as long as you don\'t install conflicting settings from another store.',
+    'faq.a3':'Settings and ReShade adjust at the Windows System and Graphics level — not any Cheat or Hack. 100% safe. Windows OS is an Official ISO with unnecessary services removed.',
+    'faq.a4':'Settings and Windows OS support all games because they optimize at the System level. ReShade supports most DirectX games. Always feel free to ask Support before purchasing if unsure.',
+    'faq.a5':'Pay through insidex.online or contact Discord directly. We support all Thai banks, PromptPay, TrueMoney Wallet, and other channels.',
+    'faq.a6':'Our team provides 24/7 Support on Discord. If there\'s an issue after Setup, just let us know. The team will remote in to fix it at no extra charge.',
+    'disc.title':'Join the<br><span class="text-gradient">INSIDEX</span> Community',
+    'disc.desc':'Chat, get news & 24/7 Support — over <strong>6,262+</strong> members',
+    'disc.bullet1':'24/7 Support','disc.bullet2':'Get news & updates before anyone else',
+    'disc.bullet3':'Send Key and receive Setup via Discord',
+    'modal.buy':'Buy Products','modal.history':'Purchase History','modal.logout':'Log Out',
+  },
+  vi: {
+    'nav.products':'Sản phẩm','nav.shelf':'Danh mục','nav.about':'Giới thiệu',
+    'nav.reviews':'Đánh giá','nav.community':'Cộng đồng','nav.login':'Login Discord',
+    'hero.desc':'Cửa hàng tốt nhất cho game thủ muốn hiệu suất tối đa.<br>Đội ngũ cài đặt trực tiếp cho bạn — không cần tự làm.',
+    'hero.buy':'Mua sản phẩm','hero.view':'Xem sản phẩm ↓',
+    'stat.customers':'Khách hàng hài lòng','stat.categories':'Danh mục',
+    'stat.support':'Hỗ trợ 24/7','stat.safe':'An toàn & Tin cậy',
+    'sec.productsTitle':'Sản phẩm của chúng tôi',
+    'sec.productsDesc':'Sản phẩm chất lượng cao nâng cao trải nghiệm gaming của bạn — tất cả được cài đặt trực tiếp.',
+    'sec.shelfTitle':'Kệ sản phẩm INSIDEX',
+    'sec.shelfDesc':'Tất cả sản phẩm nổi bật trong một chỗ — nhấp để mua ngay.',
+    'sec.aboutTitle':'Tại sao chọn INSIDEX?',
+    'sec.aboutDesc':'Chúng tôi là cửa hàng sản phẩm kỹ thuật số dành riêng cho game thủ. Tất cả sản phẩm đã được kiểm tra — đội ngũ cài đặt trực tiếp cho bạn, không cần tự làm.',
+    'why.settingDesc':'Cài đặt được thiết kế bởi chuyên gia — trong game, hệ điều hành và mạng để tối đa FPS, giảm độ trễ và Input Lag.',
+    'why.reshadeDesc':'ReShade Preset tùy chỉnh giúp hình ảnh trong game đẹp hơn, sắc nét và màu sắc sống động hơn mà không ảnh hưởng FPS. Cài đặt miễn phí.',
+    'why.modeDesc':'Mode cải thiện chất lượng đồ họa và mở thêm nhiều tùy chọn tùy chỉnh, cho phép bạn điều chỉnh config theo phong cách của mình.',
+    'why.windowsDesc':'Windows tối ưu hóa dành riêng cho game — loại bỏ các service và tiến trình không cần thiết, giúp hệ thống nhẹ hơn, khởi động nhanh và dành nhiều tài nguyên hơn cho game.',
+    'value.title':'Sẵn sàng hỗ trợ bạn<br>mọi bước đi',
+    'value.supportDesc':'Đội ngũ sẵn sàng hỗ trợ bạn mọi lúc','value.priceTitle':'Giá trị tuyệt vời',
+    'value.priceDesc':'Sản phẩm chất lượng với giá cả phải chăng','value.setupTitle':'Cài đặt trực tiếp',
+    'value.setupDesc':'Đội ngũ cài đặt cho bạn — không cần tự làm','value.custTitle':'2,700+ Khách hàng',
+    'value.custDesc':'Tin tưởng chúng tôi trong nhiều tháng qua',
+    'sec.toolboxEye':'Phần mềm chủ lực','sec.toolboxTitle':'INSIDEX Toolbox Premium',
+    'sec.toolboxDesc':'Tất cả công cụ tối ưu trong một chương trình. Sử dụng ngay mà không cần cài đặt thủ công.',
+    'sec.showcaseDesc':'Xem kết quả thực từ cửa hàng — vuốt trái/phải hoặc kéo để xem tất cả clip.',
+    'btn.order':'Đặt mua',
+    'sec.reviewsEye':'Đánh giá từ khách hàng thực','sec.reviewsTitle':'Tiếng nói từ<br>2,700+ khách hàng',
+    'faq.title':'Câu hỏi<br>thường gặp','faq.desc':'Còn câu hỏi? Liên hệ đội ngũ qua Discord. Hỗ trợ 24/7.',
+    'faq.cta':'Hỏi thêm trên Discord',
+    'faq.q1':'Đội ngũ cài Setup như thế nào?','faq.q2':'Sau khi mua dùng được bao lâu?',
+    'faq.q3':'Có an toàn không? Có bị ban không?','faq.q4':'Hỗ trợ những game nào?',
+    'faq.q5':'Có thể thanh toán qua những kênh nào?','faq.q6':'Nếu có vấn đề sau khi cài Setup thì làm sao?',
+    'faq.a1':'Sau khi mua, đội ngũ sẽ lên lịch kết nối từ xa qua Ultraviewer và cài Setup trực tiếp. Bạn không cần làm gì — chỉ cần để máy tính bật. Mất khoảng 3-5 phút.',
+    'faq.a2':'Hầu hết sản phẩm là Lifetime — mua một lần dùng mãi mãi, miễn là bạn không cài setting của cửa hàng khác gây xung đột.',
+    'faq.a3':'Setting và ReShade điều chỉnh ở cấp Windows System và Graphics — không phải Cheat hay Hack. An toàn 100%. Windows OS là Official ISO đã loại bỏ các service không cần thiết.',
+    'faq.a4':'Setting và Windows OS hỗ trợ tất cả game vì tối ưu ở cấp System. ReShade hỗ trợ hầu hết game DirectX. Luôn có thể hỏi Support trước khi mua nếu không chắc.',
+    'faq.a5':'Thanh toán qua insidex.online hoặc liên hệ Discord trực tiếp. Hỗ trợ tất cả ngân hàng Thái Lan, PromptPay, TrueMoney Wallet và các kênh khác.',
+    'faq.a6':'Đội ngũ hỗ trợ 24/7 trên Discord. Nếu có vấn đề sau khi cài Setup, cứ thông báo là xong. Đội ngũ sẽ kết nối từ xa để sửa miễn phí.',
+    'disc.title':'Tham gia<br><span class="text-gradient">INSIDEX</span> Community',
+    'disc.desc':'Trò chuyện, nhận tin tức & hỗ trợ 24/7 — có hơn <strong>6,262+</strong> thành viên',
+    'disc.bullet1':'Hỗ trợ 24/7','disc.bullet2':'Nhận tin tức & cập nhật trước mọi người',
+    'disc.bullet3':'Gửi Key và nhận Setup qua Discord',
+    'modal.buy':'Mua sản phẩm','modal.history':'Lịch sử mua hàng','modal.logout':'Đăng xuất',
+  },
+};
+
+function setLang(lang) {
+  const dict = TRANSLATIONS[lang];
+  if (!dict) return;
+  store.set('ix_lang', lang);
+  document.documentElement.lang = lang;
+  $$('.lang-btn').forEach(btn => btn.classList.toggle('active', btn.dataset.lang === lang));
+  $$('[data-i18n]').forEach(el => {
+    const text = dict[el.dataset.i18n];
+    if (text !== undefined) el.textContent = text;
+  });
+  $$('[data-i18n-html]').forEach(el => {
+    const html = dict[el.dataset.i18nHtml];
+    if (html !== undefined) el.innerHTML = html;
+  });
+}
+
+Actions.lang = el => setLang(el.dataset.lang);
+
+setLang(store.get('ix_lang') || 'th');
