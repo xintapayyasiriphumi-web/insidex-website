@@ -146,12 +146,25 @@ function productState(p) {
 
 const isSelected = id => selectedProducts.some(p => p.id === id);
 
-function renderProductCard(p) {
+/* Promo: the API returns the price in effect as `price` and the normal one as `original_price`
+   only while a promo runs — the backend decides, so nothing here knows promo dates or prices. */
+const fmt = n => Number(n).toLocaleString();
+const hasPromo = p => p.original_price > p.price;
+const wasHtml = p => `<s class="price-was"><span class="sr-only">ราคาปกติ </span>฿${fmt(p.original_price)}</s>`;
+const promoChipHtml = p => `<span class="chip chip-promo">ลด ฿${fmt(p.original_price - p.price)}</span>`;
+
+// Pinned to the top of the product list as the best seller (Max Pack → v2.5)
+const FEATURED_ID = 8;
+
+function renderProductCard(p, hot = false) {
   const { soon, out } = productState(p);
   const gold = p.category === 'supportx';
   const selected = isSelected(p.id);
-  const classes = ['pcard', gold && 'is-gold', soon && 'is-soon', out && !soon && 'is-out', selected && 'selected']
+  const classes = ['pcard', hot && 'is-hot', gold && 'is-gold', soon && 'is-soon', out && !soon && 'is-out', selected && 'selected']
     .filter(Boolean).join(' ');
+  const badge = hot
+    ? '<span class="chip chip-hot pcard-badge"><svg class="i"><use href="#i-flame"/></svg>ยอดฮิต</span>'
+    : gold ? '<span class="chip chip-gold pcard-badge">Limited</span>' : '';
   const media = p.image_url
     ? `<img class="pcard-img" src="${esc(p.image_url)}" alt="${esc(p.name)}" loading="lazy" decoding="async">`
     : `<div class="pcard-ph"><svg class="i"><use href="#${gold ? 'i-bulb' : 'i-gear'}"/></svg></div>`;
@@ -160,7 +173,7 @@ function renderProductCard(p) {
   return `
     <div class="${classes}" role="button" tabindex="${out && !soon ? -1 : 0}" aria-pressed="${selected}"
          data-action="select-product" data-id="${Number(p.id)}">
-      ${gold ? '<span class="chip chip-gold pcard-badge">Limited</span>' : ''}
+      ${badge}
       <span class="pcard-check"><svg class="i"><use href="#i-check"/></svg></span>
       ${soon ? '<span class="pcard-soon">COMING SOON</span>' : ''}
       ${media}
@@ -168,7 +181,10 @@ function renderProductCard(p) {
         <p class="pcard-name">${esc(p.name)}</p>
         <p class="pcard-desc">${esc(p.description || '')}</p>
         <div class="pcard-foot">
-          <span class="pcard-price"><span class="cur">฿</span>${Number(p.price).toLocaleString()}</span>
+          <div class="pcard-pricebox">
+            ${hasPromo(p) ? `<span class="pcard-promo">${wasHtml(p)}${promoChipHtml(p)}</span>` : ''}
+            <span class="pcard-price"><span class="cur">฿</span>${fmt(p.price)}</span>
+          </div>
           <span class="pcard-stock${out ? ' empty' : ''}">${stock}</span>
         </div>
       </div>
@@ -176,12 +192,16 @@ function renderProductCard(p) {
 }
 
 function renderShopProducts() {
+  const catOf = p => CATEGORY_ORDER.includes(p.category) ? p.category : 'setting';
+  const featured = shopProducts.find(p => p.id === FEATURED_ID);
+
+  // The featured product is pulled out of its group and pinned on top instead
   const grouped = {};
   for (const p of shopProducts) {
-    const cat = CATEGORY_ORDER.includes(p.category) ? p.category : 'setting';
-    (grouped[cat] ||= []).push(p);
+    if (p !== featured) (grouped[catOf(p)] ||= []).push(p);
   }
-  const countOf = tab => tab.cats.reduce((n, c) => n + (grouped[c]?.length || 0), 0);
+  const showsFeatured = tab => !!featured && tab.cats.includes(catOf(featured));
+  const countOf = tab => tab.cats.reduce((n, c) => n + (grouped[c]?.length || 0), 0) + (showsFeatured(tab) ? 1 : 0);
 
   const tabsHtml = SHOP_TABS.map(t => `
     <button class="shop-tab${t.key === shopTab ? ' active' : ''}" role="tab" aria-selected="${t.key === shopTab}"
@@ -191,10 +211,13 @@ function renderShopProducts() {
   const activeTab = SHOP_TABS.find(t => t.key === shopTab) || SHOP_TABS[0];
   const cats = activeTab.cats.filter(c => grouped[c]?.length);
   const withLabels = shopTab === 'all' && cats.length > 1;
-  const cardsHtml = cats.map(c => {
+  const pinnedHtml = showsFeatured(activeTab)
+    ? (withLabels ? '<p class="pgroup-label is-hot">ยอดฮิต</p>' : '') + renderProductCard(featured, true)
+    : '';
+  const cardsHtml = pinnedHtml + cats.map(c => {
     const meta = CATEGORY_META[c];
     const label = withLabels ? `<p class="pgroup-label ${meta.tone || ''}">${meta.label}</p>` : '';
-    return label + grouped[c].map(renderProductCard).join('');
+    return label + grouped[c].map(p => renderProductCard(p)).join('');
   }).join('');
 
   $('#productList').innerHTML = `
@@ -421,6 +444,34 @@ async function openHistory() {
   }
 }
 
+/* ══ Pricing section ══
+   The HTML holds normal prices so it reads fine without the API; live prices + promo are filled in here. */
+async function hydratePriceTable() {
+  const els = $$('[data-price-id]');
+  if (!els.length) return;
+  let products;
+  try { products = await fetchProducts(); } catch { return; }
+  const byId = new Map(products.map(p => [p.id, p]));
+
+  els.forEach(el => {
+    const p = byId.get(Number(el.dataset.priceId));
+    if (!p) return;
+    el.textContent = `${fmt(p.price)}.-`;
+    if (!hasPromo(p)) return;
+
+    const name = $('.price-name', el.closest('.price-row'));
+    const breakdown = $('.price-breakdown', name);
+    if (breakdown) breakdown.insertAdjacentHTML('beforebegin', promoChipHtml(p));
+    else name.insertAdjacentHTML('beforeend', promoChipHtml(p));
+
+    const stack = document.createElement('span');
+    stack.className = 'price-stack';
+    el.before(stack);
+    stack.innerHTML = wasHtml(p);
+    stack.append(el);
+  });
+}
+
 /* ══ Actions ══ */
 Actions.buy = (el, e) => {
   e.preventDefault();
@@ -431,3 +482,4 @@ Actions['open-history'] = () => openHistory();
 Actions.logout          = () => doLogout();
 
 checkLogin();
+hydratePriceTable();

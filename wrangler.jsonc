@@ -1,0 +1,17 @@
+// Cloudflare Worker (static assets only) — serves insidex.online
+// Deploy:  npx wrangler@4 deploy        Local:  npx wrangler@4 dev
+// Files uploaded are allowlisted in .assetsignore (index.html, css/, js/, assets/).
+{
+  "name": "insidex-store",
+  "compatibility_date": "2026-10-01",
+  "assets": {
+    "directory": "./"
+  }
+
+  // Attach the domain only after confirming nothing else (Pages project / GitHub Pages) owns it —
+  // a custom domain can belong to one Worker/Pages project at a time.
+  // ,"routes": [
+  //   { "pattern": "insidex.online", "custom_domain": true },
+  //   { "pattern": "www.insidex.online", "custom_domain": true }
+  // ]
+}

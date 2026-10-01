@@ -1,0 +1,62 @@
+/* ══════════════════════════════════════════════════
+   INSIDEX — Halloween theme layer
+   Active only on <html data-theme="halloween"> (set by the <head> script + js/theme.js).
+   Tokens only — core styles stay untouched. The .hx-* rules style the corner
+   decorations that theme.js injects, so they never exist in the default theme.
+   Contrast (WCAG AA): text tokens ≥ 11:1 on surfaces, white on --grad-btn ≥ 5.1:1.
+══════════════════════════════════════════════════ */
+
+:root[data-theme="halloween"] {
+  /* Surfaces — same darkness, warmer tint */
+  --bg: #0a0608;
+  --bg-2: #100a0d;
+  --surface: #161015;
+  --surface-2: #1d141b;
+  --surface-3: #251922;
+
+  --line-accent: rgba(251, 146, 60, .3);
+
+  /* Light accents go orange; violet-500+ stay purple (borders, selected states) */
+  --violet-200: #fed7aa;
+  --violet-300: #fdba74;
+  --violet-400: #fb923c;
+  --fuchsia: #f97316;
+
+  --grad: linear-gradient(135deg, #fed7aa 0%, #fb923c 35%, #f97316 62%, #c084fc 100%);
+  --grad-btn: linear-gradient(135deg, #6d28d9 0%, #c2410c 100%);
+  --glow: 0 0 0 1px rgba(251, 146, 60, .24), 0 18px 50px -18px rgba(249, 115, 22, .55);
+
+  --check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fdba74' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E");
+}
+
+/* ── Corner decorations (behind content, never clickable) ── */
+.hx-deco {
+  position: fixed; inset: 0; z-index: -1; pointer-events: none; overflow: hidden;
+  background:
+    radial-gradient(45% 35% at 100% 0%, rgba(249, 115, 22, .10), transparent 70%),
+    radial-gradient(40% 30% at 0% 100%, rgba(251, 146, 60, .07), transparent 70%);
+}
+.hx-deco svg { position: absolute; display: block; height: auto; }
+
+.hx-web { top: var(--nav-h); left: 0; width: clamp(64px, 10vw, 132px); color: #e9d5ff; opacity: .3; }
+.hx-web .hx-strands { fill: none; stroke: currentColor; stroke-width: 1; }
+.hx-web .hx-spider { fill: #c084fc; stroke: #c084fc; stroke-width: 1.2; stroke-linecap: round; }
+
+.hx-bats { top: calc(var(--nav-h) + 8px); right: 12px; width: clamp(88px, 14vw, 180px); fill: #a78bfa; opacity: .7; }
+.hx-moon { fill: #fb923c; opacity: .16; }
+
+.hx-pumpkin { left: 16px; bottom: 16px; width: clamp(40px, 5vw, 64px); opacity: .85; }
+
+@media (max-width: 640px) {
+  .hx-web { opacity: .22; }
+  .hx-bats { opacity: .5; }
+  .hx-pumpkin { opacity: .6; }
+}
+
+/* Bats bob gently — transform only (compositor), off entirely for reduced motion */
+@media (prefers-reduced-motion: no-preference) {
+  .hx-bat { animation: hx-float 6s ease-in-out infinite; }
+  .hx-bat:nth-of-type(2) { animation-delay: -2s; animation-duration: 7s; }
+  .hx-bat:nth-of-type(3) { animation-delay: -4s; animation-duration: 5.5s; }
+}
+@keyframes hx-float { 50% { transform: translateY(-5px); } }

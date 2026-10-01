@@ -1,0 +1,6 @@
+# Allowlist: upload only the public site. Anything new at the top level stays private by default.
+/*
+!/index.html
+!/css/
+!/js/
+!/assets/

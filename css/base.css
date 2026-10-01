@@ -19,7 +19,7 @@
   /* Text */
   --text: #f4f2fb;
   --text-2: #b7b2cc;
-  --text-3: #7f7a96;
+  --text-3: #8a85a0; /* ≥4.5:1 on every surface (WCAG AA) */
 
   /* Purple scale */
   --violet-200: #ddd6fe;
@@ -32,7 +32,7 @@
   --indigo: #6366f1;
 
   --grad: linear-gradient(135deg, #c4b5fd 0%, #a78bfa 35%, #8b5cf6 65%, #d946ef 100%);
-  --grad-btn: linear-gradient(135deg, #7c3aed 0%, #9333ea 60%, #a855f7 100%);
+  --grad-btn: linear-gradient(135deg, #7c3aed 0%, #9333ea 100%); /* white text ≥5.3:1 across the gradient */
 
   /* Status */
   --success: #34d399;

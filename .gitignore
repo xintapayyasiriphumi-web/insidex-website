@@ -3,6 +3,9 @@
 .claude/
 skills-lock.json
 
+# Cloudflare wrangler local state
+.wrangler/
+
 # OS / editor
 Thumbs.db
 .DS_Store
