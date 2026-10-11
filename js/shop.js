@@ -420,7 +420,15 @@ async function openHistory() {
   list.innerHTML = '<div class="hist-sk"><div class="skeleton sk-line w-60"></div><div class="skeleton sk-line w-30"></div></div>'.repeat(3);
 
   try {
-    const res = await fetch(`${API}/shop/history/${encodeURIComponent(currentUser.discord_id)}`);
+    // The backend answers from the login session cookie, never from a Discord ID in the URL
+    const res = await fetch(`${API}/shop/history`, { credentials: 'include' });
+    if (res.status === 401) {
+      list.innerHTML = `
+        <p class="shop-empty">กรุณา Login ใหม่เพื่อดูประวัติการซื้อ</p>
+        <p class="shop-empty"><a class="btn btn-outline btn-xs" href="${LOGIN_URL}">Login ด้วย Discord</a></p>`;
+      return;
+    }
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
     const data = await res.json();
     if (!data.length) {
       list.innerHTML = '<p class="shop-empty">ยังไม่มีประวัติการซื้อ</p>';
