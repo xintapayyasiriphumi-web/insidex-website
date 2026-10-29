@@ -315,8 +315,32 @@ function renderPayment() {
     $('#qrInfo').hidden = false;
   };
   img.onerror = () => { loading.textContent = 'สร้าง QR ไม่สำเร็จ'; };
-  const payload = generatePromptPayPayload(PROMPTPAY_ID, total);
-  img.src = `https://api.qrserver.com/v1/create-qr-code/?size=240x240&data=${encodeURIComponent(payload)}&bgcolor=ffffff&color=000000&margin=12`;
+  try {
+    img.src = qrDataURL(generatePromptPayPayload(PROMPTPAY_ID, total));
+  } catch {
+    img.onerror();
+  }
+}
+
+// QR สร้างในเครื่องลูกค้า (js/vendor/qrcode.js) เป็น PNG — กดค้างเซฟลงเครื่องแล้วสแกนจากแอปธนาคารได้
+function qrDataURL(text) {
+  const qr = qrcode(0, 'M');
+  qr.addData(text);
+  qr.make();
+  const quiet = 4;                          // ขอบขาว 4 ช่องตามมาตรฐาน QR
+  const count = qr.getModuleCount();
+  const cell = Math.ceil(480 / (count + quiet * 2));
+  const size = (count + quiet * 2) * cell;
+  const canvas = document.createElement('canvas');
+  canvas.width = canvas.height = size;
+  const ctx = canvas.getContext('2d');
+  ctx.fillStyle = '#fff';
+  ctx.fillRect(0, 0, size, size);
+  ctx.fillStyle = '#000';
+  for (let r = 0; r < count; r++)
+    for (let c = 0; c < count; c++)
+      if (qr.isDark(r, c)) ctx.fillRect((c + quiet) * cell, (r + quiet) * cell, cell, cell);
+  return canvas.toDataURL('image/png');
 }
 
 // EMVCo PromptPay payload with CRC16-CCITT checksum
@@ -425,6 +449,32 @@ const readAsDataURL = file => new Promise((resolve, reject) => {
   reader.readAsDataURL(file);
 });
 
+// รูปสลิปจากมือถือมักใหญ่หลาย MB — ย่อด้านยาวเหลือ 1600px เป็น JPEG ก่อนส่ง (QR บนสลิปยังอ่านได้)
+// รูปเล็กอยู่แล้ว หรือย่อไม่ได้ (เช่น HEIC บางเครื่อง) → ส่งไฟล์เดิม
+const SLIP_MAX_SIDE = 1600;
+const SLIP_KEEP_BYTES = 700 * 1024;
+async function slipDataURL(file) {
+  const original = await readAsDataURL(file);
+  try {
+    const img = new Image();
+    img.src = original;
+    await img.decode();
+    const scale = Math.min(1, SLIP_MAX_SIDE / Math.max(img.naturalWidth, img.naturalHeight));
+    if (scale === 1 && file.size <= SLIP_KEEP_BYTES) return original;
+    const canvas = document.createElement('canvas');
+    canvas.width = Math.round(img.naturalWidth * scale);
+    canvas.height = Math.round(img.naturalHeight * scale);
+    const ctx = canvas.getContext('2d');
+    ctx.fillStyle = '#fff';               // PNG โปร่งใส → พื้นขาว ไม่ใช่ดำ
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
+    const small = canvas.toDataURL('image/jpeg', 0.85);
+    return small.length < original.length ? small : original;
+  } catch {
+    return original;
+  }
+}
+
 function resetSlip() {
   $('#slipInput').value = '';
   $('#slipPreview').hidden = true;
@@ -460,7 +510,7 @@ Actions['submit-slip'] = async btn => {
       body: JSON.stringify({
         product_ids: selectedProducts.map(p => p.id),
         discord_id: currentUser.discord_id,
-        slip_image: await readAsDataURL(file),
+        slip_image: await slipDataURL(file),
         promo_code: appliedPromo?.code,
       }),
     });

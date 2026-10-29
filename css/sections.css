@@ -137,7 +137,7 @@
   filter: blur(8px); opacity: .35; transition: opacity .4s;
 }
 .shelf-img img {
-  position: relative; z-index: 1; max-height: 140px; object-fit: contain;
+  position: relative; z-index: 1; width: auto; max-height: 140px; object-fit: contain;
   filter: drop-shadow(0 16px 22px rgba(0, 0, 0, .6));
   transition: transform .6s var(--ease);
 }
@@ -237,10 +237,13 @@
 .slider-arrow:hover { color: #fff; background: var(--accent-solid); border-color: var(--accent-solid); transform: scale(1.05); }
 .slider-arrow.prev { left: -24px; }
 .slider-arrow.next { right: -24px; }
-.slider-dots { display: flex; justify-content: center; gap: 8px; margin-top: 22px; }
-.dot { width: 7px; height: 7px; border-radius: 999px; background: rgba(255, 255, 255, .16); transition: width .4s var(--ease), background .3s; }
-.dot:hover { background: rgba(255, 255, 255, .35); }
-.dot.active { width: 28px; background: var(--grad-accent); }
+.slider-dots { display: flex; justify-content: center; gap: 2px; margin-top: 12px; }
+/* The visible pill stays 7px; the button itself is a 24px-tall tap target */
+.dot { position: relative; width: 24px; height: 24px; background: none; transition: width .4s var(--ease); }
+.dot::before { content: ''; position: absolute; left: 50%; top: 50%; width: 7px; height: 7px; border-radius: 999px; background: rgba(255, 255, 255, .16); transform: translate(-50%, -50%); transition: width .4s var(--ease), background .3s; }
+.dot:hover::before { background: rgba(255, 255, 255, .35); }
+.dot.active { width: 40px; }
+.dot.active::before { width: 28px; background: var(--grad-accent); }
 
 .mini-stats { display: grid; grid-template-columns: repeat(3, 1fr); gap: 16px; margin-top: 36px; }
 .mini-stat { padding: 28px 24px; text-align: center; }
