@@ -232,6 +232,7 @@
 }
 .qr-ready { display: inline-flex; align-items: center; gap: 8px; font-size: 13px; font-weight: 500; color: #6ee7b7; }
 .qr-save { display: flex; margin: 12px auto 0; }
+.qr-save.saved { color: #6ee7b7; border-color: rgba(52, 211, 153, .5); background: rgba(52, 211, 153, .1); }
 
 .slip { margin: 22px 0 16px; padding: 16px; background: rgba(255, 255, 255, .02); border: 1px solid var(--line); border-radius: var(--r); }
 .slip-title { margin-bottom: 10px; font: 600 10.5px/1 var(--font-label); letter-spacing: .16em; text-transform: uppercase; color: var(--text-3); }

@@ -359,26 +359,43 @@ function dataURLToFile(url, name) {
   return new File([bytes], name, { type: 'image/png' });
 }
 
-Actions['qr-save'] = async () => {
+const QR_SAVE_LABEL = '<svg class="i"><use href="#i-download"/></svg>บันทึก QR';
+let qrSavedTimer;
+
+// แจ้งว่าบันทึกสำเร็จ: toast + ปุ่มเปลี่ยนเป็น "บันทึกแล้ว" สักครู่
+function qrSaved(btn) {
+  toast('✓ บันทึก QR สำเร็จ — เปิดแอปธนาคารแล้วสแกนจากรูปได้เลย', 'success', 4000);
+  btn.innerHTML = '<svg class="i"><use href="#i-check"/></svg>บันทึกแล้ว';
+  btn.classList.add('saved');
+  clearTimeout(qrSavedTimer);
+  qrSavedTimer = setTimeout(() => { btn.innerHTML = QR_SAVE_LABEL; btn.classList.remove('saved'); }, 2500);
+}
+
+Actions['qr-save'] = async btn => {
   const img = $('#qrImg');
   if (!img.classList.contains('ready')) return;
   const file = dataURLToFile(img.src, `INSIDEX-QR-${qrTotal}.png`);
   if (isIOS && navigator.canShare?.({ files: [file] })) {
     try {
       await navigator.share({ files: [file] });
+      qrSaved(btn);
       return;
     } catch (err) {
       if (err.name === 'AbortError') return;   // ปิด share sheet เอง
     }
   }
-  const a = document.createElement('a');
-  a.href = URL.createObjectURL(file);
-  a.download = file.name;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-  toast('บันทึก QR แล้ว — เปิดแอปธนาคารแล้วสแกนจากรูปได้เลย', 'success');
+  try {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(file);
+    a.download = file.name;
+    document.body.appendChild(a);
+    a.click();
+    a.remove();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+    qrSaved(btn);
+  } catch {
+    toast('บันทึก QR ไม่สำเร็จ — กดค้างที่รูป QR แล้วเลือกบันทึกรูปแทน', 'error', 4000);
+  }
 };
 
 // EMVCo PromptPay payload with CRC16-CCITT checksum
