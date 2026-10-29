@@ -22,9 +22,19 @@
   --violet-400: #fb923c;
   --fuchsia: #f97316;
 
+  --accent-100: #ffedd5;
+  --accent-200: #fed7aa;
+  --accent-300: #fdba74;
+  --accent-400: #fb923c;
+  --accent-500: #f97316;
+  --accent-solid: #c2410c; /* white on it ≥5.1:1 */
+
   --grad: linear-gradient(135deg, #fed7aa 0%, #fb923c 35%, #f97316 62%, #c084fc 100%);
+  --grad-accent: linear-gradient(135deg, #fed7aa 0%, #fb923c 55%, #f97316 100%);
+  --grad-title: linear-gradient(180deg, #fff 30%, #fdba74 100%);
   --grad-btn: linear-gradient(135deg, #6d28d9 0%, #c2410c 100%);
-  --glow: 0 0 0 1px rgba(251, 146, 60, .24), 0 18px 50px -18px rgba(249, 115, 22, .55);
+  --btn-glow: rgba(249, 115, 22, .55);
+  --glow: 0 0 0 1px rgba(251, 146, 60, .24), 0 18px 50px -18px rgba(249, 115, 22, .5);
 
   --check: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%23fdba74' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M5 12.5l4.5 4.5L19 7.5'/%3E%3C/svg%3E");
 }

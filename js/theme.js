@@ -7,7 +7,7 @@
 
 (() => {
   const THEMES = ['default', 'halloween'];
-  const THEME_COLOR = { default: '#07060b', halloween: '#0a0608' };
+  const THEME_COLOR = { default: '#09080d', halloween: '#0a0608' };
   const API_TIMEOUT_MS = 3000;
   const root = document.documentElement;
 
