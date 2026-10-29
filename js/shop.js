@@ -33,6 +33,7 @@ let shopProducts = [];
 let shopTab = 'all';
 let shopStep = 1;
 let selectedProducts = [];
+let appliedPromo = null;   // { code, label, subtotal, discount, total } จาก POST /shop/promo-code
 
 /* ══ Auth ══ */
 function checkLogin() {
@@ -286,10 +287,20 @@ Actions['go-pay'] = () => {
 
 function startPayment(items) {
   selectedProducts = items;
-  const total = items.reduce((sum, p) => sum + p.price, 0);
-  $('#qrAmount').textContent = `฿${total.toLocaleString()}`;
   $('#qrLabel').textContent = items.map(p => p.name).join(' + ');
   resetSlip();
+  setPromo(null);
+  showShopStep(2);
+}
+
+// ยอดเปลี่ยน (เปิดหน้าจ่าย / ใช้โค้ด / ลบโค้ด) → อัปเดตยอด + สร้าง QR ใหม่
+function renderPayment() {
+  const subtotal = selectedProducts.reduce((sum, p) => sum + p.price, 0);
+  const total = appliedPromo ? appliedPromo.total : subtotal;
+  $('#qrAmount').textContent = `฿${fmt(total)}`;
+  const was = $('#qrWas');
+  was.hidden = !appliedPromo;
+  was.textContent = appliedPromo ? `฿${fmt(subtotal)}` : '';
 
   const img = $('#qrImg');
   const loading = $('#qrLoading');
@@ -297,7 +308,6 @@ function startPayment(items) {
   loading.hidden = false;
   loading.innerHTML = '<span class="spinner"></span>GENERATING...';
   $('#qrInfo').hidden = true;
-  showShopStep(2);
 
   img.onload = () => {
     loading.hidden = true;
@@ -332,6 +342,72 @@ function generatePromptPayPayload(phone, amount) {
     '6304';
   return payload + crc16(payload);
 }
+
+/* ══ Promo code ══
+   Backend คิดส่วนลด + เช็คสิทธิ์ แล้วคิดซ้ำอีกรอบตอน verify สลิป — ที่นี่แค่แสดงยอดและสร้าง QR ตามนั้น */
+function setPromo(promo) {
+  appliedPromo = promo;
+  $('#promoRow').hidden = !!promo;
+  $('#promoApplied').hidden = !promo;
+  $('#promoMsg').textContent = '';
+  $('#promoInput').removeAttribute('aria-invalid');
+  if (promo) {
+    $('#promoCode').textContent = promo.code;
+    $('#promoDiscount').textContent = `ลด ฿${fmt(promo.discount)}`;
+  } else {
+    $('#promoInput').value = '';
+  }
+  renderPayment();
+}
+
+$('#promoForm').addEventListener('submit', async e => {
+  e.preventDefault();
+  const input = $('#promoInput');
+  const msg = $('#promoMsg');
+  const code = input.value.trim();
+  if (!code) { input.focus(); return; }
+
+  const btn = $('#promoBtn');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner spinner-sm"></span>';
+  msg.textContent = '';
+  try {
+    const res = await fetch(`${API}/shop/promo-code`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        code,
+        product_ids: selectedProducts.map(p => p.id),
+        discord_id: currentUser?.discord_id,
+      }),
+    });
+    const data = await res.json().catch(() => ({}));
+    if (!res.ok || !data.success) {
+      msg.textContent = data.message || data.error || 'ใช้โค้ดไม่ได้';
+      input.setAttribute('aria-invalid', 'true');
+      return;
+    }
+    if ($('#slipInput').files.length) resetSlip();   // ยอดเปลี่ยน — สลิปที่แนบไว้ใช้ไม่ได้แล้ว
+    setPromo(data);
+    toast(`ใช้โค้ด ${data.code} แล้ว — ลด ฿${fmt(data.discount)}`, 'success');
+  } catch {
+    msg.textContent = 'เชื่อมต่อไม่สำเร็จ ลองใหม่อีกครั้ง';
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'ใช้โค้ด';
+  }
+});
+
+$('#promoInput').addEventListener('input', e => {
+  e.target.removeAttribute('aria-invalid');
+  $('#promoMsg').textContent = '';
+});
+
+Actions['promo-remove'] = () => {
+  if ($('#slipInput').files.length) resetSlip();
+  setPromo(null);
+  $('#promoInput').focus();
+};
 
 /* ══ Slip upload & verify ══ */
 const readAsDataURL = file => new Promise((resolve, reject) => {
@@ -376,6 +452,7 @@ Actions['submit-slip'] = async btn => {
         product_ids: selectedProducts.map(p => p.id),
         discord_id: currentUser.discord_id,
         slip_image: await readAsDataURL(file),
+        promo_code: appliedPromo?.code,
       }),
     });
     const data = await res.json();

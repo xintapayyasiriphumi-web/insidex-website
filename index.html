@@ -1040,8 +1040,25 @@ document.documentElement.classList.add('js');
       <div id="shopStep2" hidden>
         <div class="pay">
           <p class="pay-label">PromptPay Payment</p>
+          <p class="pay-was" id="qrWas" hidden></p>
           <p class="pay-amount text-gradient" id="qrAmount">฿0</p>
           <p class="pay-items" id="qrLabel">กำลังสร้าง QR Code...</p>
+
+          <!-- โค้ดส่วนลด: ตรวจกับ backend แล้วสร้าง QR ใหม่ตามยอดหลังลด -->
+          <form class="promo" id="promoForm" novalidate>
+            <label class="promo-title" for="promoInput"><svg class="i"><use href="#i-tag"/></svg>มีโค้ดส่วนลด? กรอกก่อนสแกนจ่าย</label>
+            <div class="promo-row" id="promoRow">
+              <input class="promo-input" id="promoInput" type="text" placeholder="กรอกโค้ด" maxlength="40"
+                     autocomplete="off" autocapitalize="characters" spellcheck="false">
+              <button class="btn btn-outline btn-sm" type="submit" id="promoBtn">ใช้โค้ด</button>
+            </div>
+            <div class="promo-applied" id="promoApplied" hidden>
+              <svg class="i"><use href="#i-check"/></svg>
+              <span>ใช้โค้ด <strong id="promoCode"></strong> · <span id="promoDiscount"></span></span>
+              <button class="promo-remove" type="button" data-action="promo-remove" aria-label="ยกเลิกโค้ดส่วนลด"><svg class="i"><use href="#i-x"/></svg></button>
+            </div>
+            <p class="promo-msg" id="promoMsg" role="status" aria-live="polite"></p>
+          </form>
           <div class="qr" id="qrWrapper">
             <div class="qr-loading" id="qrLoading"><span class="spinner"></span>GENERATING...</div>
             <img id="qrImg" alt="QR PromptPay" width="220" height="220">

@@ -180,6 +180,41 @@
 .pay-amount { margin: 10px 0 4px; font: 600 42px/1.1 var(--font-display); letter-spacing: -.04em; }
 .pay-amount.text-gradient { background-image: var(--grad-accent); }
 .pay-items { font-size: 13.5px; color: var(--text-2); }
+.pay-was { margin-top: 10px; margin-bottom: -6px; font: 500 15px/1 var(--font-label); color: var(--text-3); text-decoration: line-through; }
+
+/* Promo code */
+.promo { max-width: 360px; margin: 18px auto 0; text-align: left; }
+.promo-title { display: flex; align-items: center; gap: 7px; margin-bottom: 8px; font-size: 12.5px; color: var(--text-3); }
+.promo-title .i { width: 14px; height: 14px; color: var(--accent-300); }
+.promo-row { display: flex; gap: 8px; }
+.promo-input {
+  flex: 1; min-width: 0; height: 38px; padding: 0 12px;
+  font: 600 14px/1 var(--font-code); letter-spacing: .06em; text-transform: uppercase; color: var(--text);
+  background: rgba(255, 255, 255, .03); border: 1px solid var(--line-2); border-radius: 10px;
+  transition: border-color .2s, background .2s;
+}
+.promo-input::placeholder { font-family: var(--font-body); letter-spacing: 0; text-transform: none; color: var(--text-3); }
+.promo-input:focus { outline: none; border-color: var(--accent-400); background: rgba(167, 139, 250, .05); }
+.promo-input[aria-invalid="true"] { border-color: rgba(248, 113, 113, .55); }
+.promo-row .btn { flex-shrink: 0; }
+.promo-applied {
+  display: flex; align-items: center; gap: 8px;
+  min-height: 38px; padding: 0 6px 0 12px;
+  font-size: 13.5px; color: #6ee7b7;
+  background: rgba(52, 211, 153, .07); border: 1px solid rgba(52, 211, 153, .3); border-radius: 10px;
+}
+.promo-applied > .i { width: 15px; height: 15px; flex-shrink: 0; }
+.promo-applied > span { flex: 1; min-width: 0; }
+.promo-applied strong { font-family: var(--font-code); letter-spacing: .04em; color: var(--text); }
+.promo-remove {
+  display: grid; place-items: center; width: 28px; height: 28px; flex-shrink: 0;
+  color: var(--text-3); background: none; border: 0; border-radius: 7px; cursor: pointer;
+  transition: color .2s, background .2s;
+}
+.promo-remove:hover { color: var(--text); background: rgba(255, 255, 255, .06); }
+.promo-remove .i { width: 14px; height: 14px; }
+.promo-msg { margin-top: 6px; font-size: 12.5px; color: var(--danger); }
+.promo-msg:empty { display: none; }
 .qr {
   position: relative; overflow: hidden;
   width: 220px; height: 220px; margin: 22px auto 14px;
