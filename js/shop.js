@@ -343,6 +343,12 @@ function generatePromptPayPayload(phone, amount) {
   return payload + crc16(payload);
 }
 
+/* ยืนยันตัวตนตอนใช้โค้ด: cookie session (ถ้า browser ยอม) + token จากตอน login (Safari บล็อก cookie ข้ามเว็บ) */
+const authHeaders = () => ({
+  'Content-Type': 'application/json',
+  ...(currentUser?.token ? { 'X-User-Token': currentUser.token } : {}),
+});
+
 /* ══ Promo code ══
    Backend คิดส่วนลด + เช็คสิทธิ์ แล้วคิดซ้ำอีกรอบตอน verify สลิป — ที่นี่แค่แสดงยอดและสร้าง QR ตามนั้น */
 function setPromo(promo) {
@@ -372,16 +378,18 @@ $('#promoForm').addEventListener('submit', async e => {
   btn.innerHTML = '<span class="spinner spinner-sm"></span>';
   msg.textContent = '';
   try {
+    // สิทธิ์ใช้โค้ดนับจากคนที่ login ไว้ (ไม่ใช่ Discord ID ที่ส่งไป)
     const res = await fetch(`${API}/shop/promo-code`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        code,
-        product_ids: selectedProducts.map(p => p.id),
-        discord_id: currentUser?.discord_id,
-      }),
+      credentials: 'include',
+      headers: authHeaders(),
+      body: JSON.stringify({ code, product_ids: selectedProducts.map(p => p.id) }),
     });
     const data = await res.json().catch(() => ({}));
+    if (data.login) {
+      msg.innerHTML = `${esc(data.error)} <a href="${LOGIN_URL}">Login ด้วย Discord</a>`;
+      return;
+    }
     if (!res.ok || !data.success) {
       msg.textContent = data.message || data.error || 'ใช้โค้ดไม่ได้';
       input.setAttribute('aria-invalid', 'true');
@@ -447,7 +455,8 @@ Actions['submit-slip'] = async btn => {
   try {
     const res = await fetch(`${API}/shop/buy-slip`, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      headers: authHeaders(),
       body: JSON.stringify({
         product_ids: selectedProducts.map(p => p.id),
         discord_id: currentUser.discord_id,
