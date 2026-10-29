@@ -33,7 +33,8 @@ let shopProducts = [];
 let shopTab = 'all';
 let shopStep = 1;
 let selectedProducts = [];
-let appliedPromo = null;   // { code, label, subtotal, discount, total } จาก POST /shop/promo-code
+let appliedPromo = null;
+let qrTotal = 0;   // ยอดของ QR ที่แสดงอยู่ — ใช้ตั้งชื่อไฟล์ตอนบันทึก   // { code, label, subtotal, discount, total } จาก POST /shop/promo-code
 
 /* ══ Auth ══ */
 function checkLogin() {
@@ -308,11 +309,14 @@ function renderPayment() {
   loading.hidden = false;
   loading.innerHTML = '<span class="spinner"></span>GENERATING...';
   $('#qrInfo').hidden = true;
+  $('#qrSave').hidden = true;
+  qrTotal = total;
 
   img.onload = () => {
     loading.hidden = true;
     img.classList.add('ready');
     $('#qrInfo').hidden = false;
+    $('#qrSave').hidden = false;
   };
   img.onerror = () => { loading.textContent = 'สร้าง QR ไม่สำเร็จ'; };
   try {
@@ -342,6 +346,40 @@ function qrDataURL(text) {
       if (qr.isDark(r, c)) ctx.fillRect((c + quiet) * cell, (r + quiet) * cell, cell, cell);
   return canvas.toDataURL('image/png');
 }
+
+// บันทึก QR ลงเครื่อง เพื่อเปิดแอปธนาคารแล้วสแกนจากรูป
+// iPhone/iPad: เปิด share sheet ให้กด "บันทึกรูปภาพ" ลง Photos (ลิงก์ download จะไปลง Files ซึ่งแอปธนาคารเลือกไม่ได้)
+// เครื่องอื่น: ดาวน์โหลดเป็นไฟล์ PNG
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+
+function dataURLToFile(url, name) {
+  const bin = atob(url.slice(url.indexOf(',') + 1));
+  const bytes = new Uint8Array(bin.length);
+  for (let i = 0; i < bin.length; i++) bytes[i] = bin.charCodeAt(i);
+  return new File([bytes], name, { type: 'image/png' });
+}
+
+Actions['qr-save'] = async () => {
+  const img = $('#qrImg');
+  if (!img.classList.contains('ready')) return;
+  const file = dataURLToFile(img.src, `INSIDEX-QR-${qrTotal}.png`);
+  if (isIOS && navigator.canShare?.({ files: [file] })) {
+    try {
+      await navigator.share({ files: [file] });
+      return;
+    } catch (err) {
+      if (err.name === 'AbortError') return;   // ปิด share sheet เอง
+    }
+  }
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(file);
+  a.download = file.name;
+  document.body.appendChild(a);
+  a.click();
+  a.remove();
+  setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  toast('บันทึก QR แล้ว — เปิดแอปธนาคารแล้วสแกนจากรูปได้เลย', 'success');
+};
 
 // EMVCo PromptPay payload with CRC16-CCITT checksum
 function generatePromptPayPayload(phone, amount) {
