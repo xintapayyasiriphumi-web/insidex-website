@@ -77,27 +77,50 @@ function sanitizeUser(raw) {
   };
 }
 
+function storeUser(user, welcome) {
+  store.set('ix_user', JSON.stringify(user));
+  setUser(user);
+  if (welcome) toast(`ยินดีต้อนรับ ${user.username}!`, 'success');
+}
+
+/* แลกโค้ดส่งต่อเป็นข้อมูล user — โค้ดใช้ได้ครั้งเดียว อายุ 2 นาที
+   ทำให้ token 30 วันไม่ต้องเดินทางมาใน URL (ไม่ค้างใน history หรือ log ของ Cloudflare) */
+async function exchangeLogin(code, welcome) {
+  try {
+    const res = await fetch(`${API}/auth/exchange`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      credentials: 'include',
+      body: JSON.stringify({ code }),
+    });
+    const user = res.ok ? sanitizeUser((await res.json()).user) : null;
+    if (user) storeUser(user, welcome);
+    else toast('Login ไม่สำเร็จ กดปุ่ม Login ใหม่อีกครั้ง', 'error');
+  } catch {
+    toast('ต่อกับเซิร์ฟเวอร์ไม่ได้ ลองใหม่อีกครั้ง', 'error');
+  }
+}
+
 function checkLogin() {
   const params = new URLSearchParams(location.search);
-  const userParam = params.get('user');
+  const handoff = params.get('code');     // ทางใหม่: โค้ดส่งต่อใช้ครั้งเดียว
+  const userParam = params.get('user');   // ทางเดิม: ข้อมูล user มาทั้งก้อนใน URL
 
   // Coming back from the Discord OAuth callback
-  if (userParam) {
+  if (handoff || userParam) {
     const started = session.get(LOGIN_NONCE_KEY);
     session.remove(LOGIN_NONCE_KEY);                   // ใช้ได้ครั้งเดียว
-    history.replaceState({}, '', location.pathname);   // token ไม่ค้างใน URL แม้ payload จะถูกทิ้ง
+    history.replaceState({}, '', location.pathname);   // ไม่ค้างใน URL แม้ payload จะถูกทิ้ง
+    const welcome = params.get('login') === 'success';
 
-    let user = null;
-    if (started) {
+    // ไม่ได้มาจากการกด Login ที่หน้านี้ → ทิ้ง ไม่แตะ session ที่ลูกค้ามีอยู่
+    if (started && handoff) {
+      exchangeLogin(handoff, welcome);                 // จบเองเมื่อ backend ตอบ
+    } else if (started && userParam) {
+      let user = null;
       try { user = sanitizeUser(JSON.parse(decodeURIComponent(userParam))); } catch {}
+      if (user) { storeUser(user, welcome); return; }
     }
-    if (user) {
-      store.set('ix_user', JSON.stringify(user));
-      setUser(user);
-      if (params.get('login') === 'success') toast(`ยินดีต้อนรับ ${user.username}!`, 'success');
-      return;
-    }
-    // ไม่ได้มาจากการกด Login ที่หน้านี้ → ไม่แตะ session ที่ลูกค้ามีอยู่
   }
 
   const saved = store.get('ix_user');
