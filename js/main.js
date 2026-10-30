@@ -19,6 +19,13 @@ const store = {
   remove(key)     { try { localStorage.removeItem(key); } catch {} },
 };
 
+// แท็บเดียว — รอดข้าม navigation ออกนอกเว็บแล้วกลับมา แต่หน้าอื่นเขียนให้ไม่ได้
+const session = {
+  get(key)        { try { return sessionStorage.getItem(key); } catch { return null; } },
+  set(key, value) { try { sessionStorage.setItem(key, value); } catch {} },
+  remove(key)     { try { sessionStorage.removeItem(key); } catch {} },
+};
+
 /* ── Action registry ──
    <el data-action="name"> → Actions.name(el, event)
    Each script registers its own actions, one delegated listener handles all. */

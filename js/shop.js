@@ -36,26 +36,76 @@ let selectedProducts = [];
 let appliedPromo = null;
 let qrTotal = 0;   // ยอดของ QR ที่แสดงอยู่ — ใช้ตั้งชื่อไฟล์ตอนบันทึก   // { code, label, subtotal, discount, total } จาก POST /shop/promo-code
 
-/* ══ Auth ══ */
+/* ══ Auth ══
+   OAuth เริ่มจากหน้านี้เสมอ: ก่อนออกไป Discord เขียน nonce ลง sessionStorage แล้ว
+   callback ถึงจะยอมรับ ?user= — nonce รอดข้าม navigation ของแท็บเดิม แต่เว็บอื่น
+   เขียนให้ไม่ได้ ลิงก์ ?user= ที่ส่งมาจากข้างนอกจึงไม่มี nonce และถูกทิ้ง
+   (ไม่งั้นคนส่งลิงก์ยัด token ของตัวเองใส่เครื่องลูกค้าได้ แล้ว key ที่ลูกค้าจ่ายเงิน
+   ซื้อจะไปเข้าบัญชีคนนั้น) */
+const LOGIN_NONCE_KEY = 'ix_login';
+
+function beginLogin() {
+  let nonce;
+  try { nonce = crypto.randomUUID(); } catch { nonce = `${Date.now()}.${Math.random()}`; }
+  session.set(LOGIN_NONCE_KEY, nonce);
+}
+
+// ลิงก์ Login ทุกอัน — ปุ่มใน index.html และที่ render จาก JS — ผ่านทางนี้
+document.addEventListener('click', e => {
+  if (e.target.closest(`a[href^="${LOGIN_URL}"]`)) beginLogin();
+});
+
+/* รับแค่ field ที่ใช้จริงและบังคับชนิด — payload แปลกปลอมไม่ถูกเก็บลงเครื่อง
+   avatar จำกัดเฉพาะ CDN ของ Discord, is_admin เป็น badge เท่านั้น (backend เช็คสิทธิ์จริงอยู่แล้ว) */
+function sanitizeUser(raw) {
+  if (!raw || typeof raw !== 'object') return null;
+
+  const text = (value, max) => (typeof value === 'string' && value.length <= max ? value : '');
+  const username = text(raw.username, 100).trim();
+  if (!username) return null;
+
+  const token = typeof raw.token === 'string' && raw.token.length <= 1000 && !/[\s<>"']/.test(raw.token)
+    ? raw.token
+    : '';
+
+  return {
+    username,
+    token,
+    discord_id: /^\d{5,25}$/.test(raw.discord_id) ? String(raw.discord_id) : '',
+    avatar: /^https:\/\/cdn\.discordapp\.com\/[\w./-]*$/.test(raw.avatar) ? raw.avatar : '',
+    is_admin: !!raw.is_admin,
+  };
+}
+
 function checkLogin() {
   const params = new URLSearchParams(location.search);
   const userParam = params.get('user');
 
   // Coming back from the Discord OAuth callback
   if (userParam) {
-    try {
-      const user = JSON.parse(decodeURIComponent(userParam));
+    const started = session.get(LOGIN_NONCE_KEY);
+    session.remove(LOGIN_NONCE_KEY);                   // ใช้ได้ครั้งเดียว
+    history.replaceState({}, '', location.pathname);   // token ไม่ค้างใน URL แม้ payload จะถูกทิ้ง
+
+    let user = null;
+    if (started) {
+      try { user = sanitizeUser(JSON.parse(decodeURIComponent(userParam))); } catch {}
+    }
+    if (user) {
       store.set('ix_user', JSON.stringify(user));
       setUser(user);
       if (params.get('login') === 'success') toast(`ยินดีต้อนรับ ${user.username}!`, 'success');
-      history.replaceState({}, '', location.pathname);
       return;
-    } catch {}
+    }
+    // ไม่ได้มาจากการกด Login ที่หน้านี้ → ไม่แตะ session ที่ลูกค้ามีอยู่
   }
 
   const saved = store.get('ix_user');
   if (saved) {
-    try { setUser(JSON.parse(saved)); } catch {}
+    let user = null;
+    try { user = sanitizeUser(JSON.parse(saved)); } catch {}
+    if (user) setUser(user);
+    else store.remove('ix_user');
   }
 }
 
@@ -94,7 +144,7 @@ async function doLogout() {
 
 /* Entry point for every "buy" button on the page */
 function buyNow(productId) {
-  if (!currentUser) { location.href = LOGIN_URL; return; }
+  if (!currentUser) { beginLogin(); location.href = LOGIN_URL; return; }
   if (productId) openShopProduct(productId);
   else openShop();
 }
@@ -170,7 +220,7 @@ function renderProductCard(p, hot = false) {
   const media = p.image_url
     ? `<img class="pcard-img" src="${esc(p.image_url)}" alt="${esc(p.name)}" loading="lazy" decoding="async">`
     : `<div class="pcard-ph"><svg class="i"><use href="#${gold ? 'i-bulb' : 'i-gear'}"/></svg></div>`;
-  const stock = soon ? 'SOON' : out ? 'OUT' : `${p.stock_count} left`;
+  const stock = soon ? 'SOON' : out ? 'OUT' : `${Number(p.stock_count) || 0} left`;
 
   return `
     <div class="${classes}" role="button" tabindex="${out && !soon ? -1 : 0}" aria-pressed="${selected}"
@@ -540,9 +590,22 @@ function resetSlip() {
   btn.innerHTML = CONFIRM_LABEL;
 }
 
+// accept="image/*" เป็นแค่ตัวกรองของ file picker — เช็คจริงตอนเลือกไฟล์
+const SLIP_MAX_BYTES = 20 * 1024 * 1024;
+
 $('#slipInput').addEventListener('change', async e => {
   const file = e.target.files[0];
   if (!file) return;
+  if (!file.type.startsWith('image/')) {
+    resetSlip();
+    toast('แนบได้แค่ไฟล์รูปเท่านั้น', 'error');
+    return;
+  }
+  if (file.size > SLIP_MAX_BYTES) {
+    resetSlip();
+    toast('รูปใหญ่เกิน 20MB — ย่อรูปก่อนแนบ', 'error');
+    return;
+  }
   const preview = $('#slipPreview');
   preview.src = await readAsDataURL(file);
   preview.hidden = false;
