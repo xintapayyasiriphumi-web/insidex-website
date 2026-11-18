@@ -165,6 +165,9 @@
 .tbx-top { display: grid; grid-template-columns: 1.05fr 1fr; }
 .tbx-media { position: relative; min-height: 360px; border-right: 1px solid var(--line); }
 .tbx-media img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.tbx-media > a { position: absolute; inset: 0; display: block; }
+.tbx-link { color: inherit; text-decoration: none; transition: color .25s; }
+.tbx-link:hover { color: var(--accent-200); }
 .tbx-body { padding: clamp(26px, 4vw, 48px); }
 .tbx-title { margin: 16px 0 12px; font: 600 clamp(26px, 3vw, 34px)/1.2 var(--font-display); letter-spacing: -.025em; }
 .tbx-desc { margin-bottom: 28px; font-size: 15px; color: var(--text-2); }
