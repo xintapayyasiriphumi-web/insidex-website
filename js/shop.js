@@ -317,9 +317,60 @@ Actions['select-product'] = el => {
   updateCheckoutBar();
 };
 
+// ลบสินค้าจากสรุปคำสั่งซื้อ (เฉพาะตอนเลือกสินค้า — หน้าจ่ายเงินยอดผูกกับ QR แล้ว)
+Actions['order-remove'] = el => {
+  const id = Number(el.dataset.id);
+  selectedProducts = selectedProducts.filter(p => p.id !== id);
+  const card = $(`#productList .pcard[data-id="${id}"]`);
+  if (card) { card.classList.remove('selected'); card.setAttribute('aria-pressed', 'false'); }
+  updateCheckoutBar();
+};
+
+/* ══ Order summary (aside) ══
+   ราคาที่แสดงมาจาก selectedProducts (ราคาที่ส่งไป backend) — ราคาปกติ/รูปดึงจาก shopProducts แค่ไว้แสดงผล */
+function renderSummary() {
+  const rows = selectedProducts.map(sel => ({ ...shopProducts.find(p => p.id === sel.id), ...sel }));
+  const editable = shopStep === 1;
+
+  $('#orderCount').textContent = `${rows.length} รายการ`;
+  $('#orderItems').innerHTML = rows.length
+    ? rows.map(p => {
+        const gold = p.category === 'supportx';
+        const thumb = p.image_url
+          ? `<img src="${esc(p.image_url)}" alt="" loading="lazy" decoding="async">`
+          : `<svg class="i"><use href="#${gold ? 'i-bulb' : 'i-gear'}"/></svg>`;
+        const cat = CATEGORY_META[p.category]?.label || 'Standard';
+        return `
+          <li class="order-item">
+            <span class="order-thumb">${thumb}</span>
+            <span class="order-info">
+              <span class="order-name">${esc(p.name)}</span>
+              <span class="order-cat">${esc(cat)}</span>
+            </span>
+            <span class="order-price">
+              ${hasPromo(p) ? `<s>฿${fmt(p.original_price)}</s>` : ''}฿${fmt(p.price)}
+            </span>
+            ${editable ? `<button class="order-remove" type="button" data-action="order-remove" data-id="${Number(p.id)}" aria-label="เอา ${esc(p.name)} ออก"><svg class="i"><use href="#i-x"/></svg></button>` : ''}
+          </li>`;
+      }).join('')
+    : '<li class="order-empty"><svg class="i"><use href="#i-cart"/></svg>ยังไม่ได้เลือกสินค้า<small>แตะการ์ดสินค้าเพื่อเพิ่มลงคำสั่งซื้อ</small></li>';
+
+  const subtotal = rows.reduce((sum, p) => sum + p.price, 0);
+  const regular = rows.reduce((sum, p) => sum + (hasPromo(p) ? p.original_price : p.price), 0);
+  const promoOff = editable ? 0 : (appliedPromo?.discount || 0);
+  $('#orderSubtotal').textContent = `฿${fmt(regular)}`;
+  $('#orderSaveRow').hidden = regular <= subtotal;
+  $('#orderSave').textContent = `−฿${fmt(regular - subtotal)}`;
+  $('#orderDiscountRow').hidden = !promoOff;
+  $('#orderDiscount').textContent = `−฿${fmt(promoOff)}`;
+  $('#orderTotal').textContent = `฿${fmt(appliedPromo && !editable ? appliedPromo.total : subtotal)}`;
+  $('#buyBtn').disabled = !rows.length;
+}
+
 /* ══ Steps & checkout bar ══ */
 function showShopStep(n) {
   shopStep = n;
+  $('#checkout').dataset.step = n;
   [1, 2, 3].forEach(i => { $(`#shopStep${i}`).hidden = i !== n; });
   $('#shopBackBtn').hidden = n !== 2;
 
@@ -332,10 +383,12 @@ function showShopStep(n) {
   $$('#shopSteps .step-line').forEach((el, i) => el.classList.toggle('done', i + 1 < n));
   $('#shopStepHint').textContent = STEP_HINTS[n] || '';
   $('#modalShop .modal-body').scrollTop = 0;
+  $('#shopScroll').scrollTop = 0;   // มือถือ: ทั้งคอลัมน์เลื่อนรวมกัน
   updateCheckoutBar();
 }
 
 function updateCheckoutBar() {
+  renderSummary();
   const bar = $('#shopStickyBar');
   const show = shopStep === 1 && selectedProducts.length > 0;
   bar.hidden = !show;
@@ -375,6 +428,7 @@ function renderPayment() {
   const was = $('#qrWas');
   was.hidden = !appliedPromo;
   was.textContent = appliedPromo ? `฿${fmt(subtotal)}` : '';
+  renderSummary();
 
   const img = $('#qrImg');
   const loading = $('#qrLoading');

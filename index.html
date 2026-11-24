@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<meta name="theme-color" content="#09080d">
+<meta name="theme-color" content="#07050f">
 
 <!-- ══ SEO ══ -->
 <title>INSIDEX — ร้านขาย FPS Setting, ReShade, Windows OS สำหรับเกมเมอร์</title>
@@ -57,7 +57,7 @@
 <!-- ══ Fonts ══ -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@500;600&display=swap">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Anuphan:wght@300;400;500;600;700&family=Chakra+Petch:wght@500;600;700&family=Inter:wght@400;500;600;700&family=Inter+Tight:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&display=swap">
 
 <!-- ══ Styles ══ -->
 <link rel="stylesheet" href="css/base.css">
@@ -65,6 +65,7 @@
 <link rel="stylesheet" href="css/sections.css">
 <link rel="stylesheet" href="css/shop.css">
 <link rel="stylesheet" href="css/theme-halloween.css">
+<link rel="stylesheet" href="css/redesign.css">
 
 <!-- ══ Scripts (order matters: boot → main → i18n → shop → theme → discord) ══ -->
 <script src="js/boot.js"></script>
@@ -114,6 +115,27 @@
 
 <div class="page-bg" aria-hidden="true"></div>
 <div class="progress" id="progress" aria-hidden="true"></div>
+
+<!-- ══ TOP STRIP ══ -->
+<div class="topstrip" aria-hidden="true">
+  <span class="topstrip-badge"><svg class="i"><use href="#i-flame"/></svg><span>Update</span></span>
+  <div class="topstrip-view">
+    <div class="topstrip-track">
+      <span><b>V2.5</b> Setting ทุกตัวปรับใหม่หมด</span>
+      <span>ลง Setup ให้โดยตรง — Remote 3–5 นาที</span>
+      <span>Support <b>24/7</b> บน Discord</span>
+      <span>ลูกค้ากว่า <b>4,399+</b> คน</span>
+      <span>Toolbox Premium — All‑in‑One Optimizer</span>
+      <span>ReShade เริ่ม <b>฿39</b> ติดตั้งฟรี</span>
+      <span><b>V2.5</b> Setting ทุกตัวปรับใหม่หมด</span>
+      <span>ลง Setup ให้โดยตรง — Remote 3–5 นาที</span>
+      <span>Support <b>24/7</b> บน Discord</span>
+      <span>ลูกค้ากว่า <b>4,399+</b> คน</span>
+      <span>Toolbox Premium — All‑in‑One Optimizer</span>
+      <span>ReShade เริ่ม <b>฿39</b> ติดตั้งฟรี</span>
+    </div>
+  </div>
+</div>
 
 <!-- ══ NAVBAR ══ -->
 <header class="nav" id="nav">
@@ -965,6 +987,8 @@
       </nav>
     </div>
 
+    <p class="footer-mark" aria-hidden="true">INSIDEX</p>
+
     <div class="footer-bottom">
       <p class="footer-copy">© 2026 INSIDEX — THE BEST STORE · ALL RIGHTS RESERVED</p>
       <button class="footer-link" data-action="open-modal" data-target="modalPolicy"><svg class="i"><use href="#i-shield"/></svg>นโยบายและข้อตกลง</button>
@@ -1005,106 +1029,155 @@
   </div>
 </div>
 
-<!-- ══ MODAL: SHOP ══ -->
+<!-- ══ MODAL: SHOP ══
+     Checkout: main column (products → payment → keys) + order summary aside.
+     The aside holds the promo form so the total is final before the QR is scanned. -->
 <div class="modal" id="modalShop" role="dialog" aria-modal="true" aria-labelledby="shopTitle">
-  <div class="modal-dialog wide">
-    <header class="modal-head">
+  <div class="modal-dialog checkout" id="checkout" data-step="1">
+    <header class="modal-head co-head">
       <button class="icon-btn" id="shopBackBtn" data-action="shop-back" aria-label="กลับเลือกสินค้า" hidden><svg class="i"><use href="#i-chev-l"/></svg></button>
       <div class="modal-head-text">
+        <p class="co-kicker">INSIDEX Store · Checkout</p>
         <h2 class="modal-title" id="shopTitle">INSIDEX <span class="text-gradient">Shop</span></h2>
         <p class="modal-sub" id="shopStepHint">เลือกสินค้าที่ต้องการ</p>
       </div>
+      <ol class="steps" id="shopSteps" aria-label="ขั้นตอนการสั่งซื้อ">
+        <li class="step active" data-step="1"><span class="step-dot">1</span><span class="step-label">เลือกสินค้า</span></li>
+        <li class="step-line" aria-hidden="true"></li>
+        <li class="step" data-step="2"><span class="step-dot">2</span><span class="step-label">ชำระเงิน</span></li>
+        <li class="step-line" aria-hidden="true"></li>
+        <li class="step" data-step="3"><span class="step-dot">3</span><span class="step-label">รับ Key</span></li>
+      </ol>
       <button class="icon-btn" data-action="close-modal" aria-label="ปิดหน้าต่าง"><svg class="i"><use href="#i-x"/></svg></button>
     </header>
 
-    <ol class="steps" id="shopSteps">
-      <li class="step active" data-step="1"><span class="step-dot">1</span><span class="step-label">เลือกสินค้า</span></li>
-      <li class="step-line" aria-hidden="true"></li>
-      <li class="step" data-step="2"><span class="step-dot">2</span><span class="step-label">ชำระเงิน</span></li>
-      <li class="step-line" aria-hidden="true"></li>
-      <li class="step" data-step="3"><span class="step-dot">3</span><span class="step-label">รับ Key</span></li>
-    </ol>
+    <div class="co-body" id="shopScroll">
+      <div class="modal-body co-main">
+        <!-- Step 1: เลือกสินค้า -->
+        <div id="shopStep1">
+          <div id="productList"><p class="shop-empty">กำลังโหลด...</p></div>
+        </div>
 
-    <div class="modal-body">
-      <!-- Step 1: เลือกสินค้า -->
-      <div id="shopStep1">
-        <div id="productList"><p class="shop-empty">กำลังโหลด...</p></div>
-      </div>
-
-      <!-- Step 2: QR + แนบสลิป -->
-      <div id="shopStep2" hidden>
-        <div class="pay">
-          <p class="pay-label">PromptPay Payment</p>
-          <p class="pay-was" id="qrWas" hidden></p>
-          <p class="pay-amount text-gradient" id="qrAmount">฿0</p>
-          <p class="pay-items" id="qrLabel">กำลังสร้าง QR Code...</p>
-
-          <!-- โค้ดส่วนลด: ตรวจกับ backend แล้วสร้าง QR ใหม่ตามยอดหลังลด -->
-          <form class="promo" id="promoForm" novalidate>
-            <label class="promo-title" for="promoInput"><svg class="i"><use href="#i-tag"/></svg>มีโค้ดส่วนลด? กรอกก่อนสแกนจ่าย</label>
-            <div class="promo-row" id="promoRow">
-              <input class="promo-input" id="promoInput" type="text" placeholder="กรอกโค้ด" maxlength="40"
-                     autocomplete="off" autocapitalize="characters" spellcheck="false">
-              <button class="btn btn-outline btn-sm" type="submit" id="promoBtn">ใช้โค้ด</button>
+        <!-- Step 2: QR + แนบสลิป -->
+        <div id="shopStep2" hidden>
+          <section class="co-panel pay">
+            <div class="pay-head">
+              <div class="pay-head-text">
+                <p class="pay-label">ยอดที่ต้องชำระ</p>
+                <div class="pay-amount-row">
+                  <p class="pay-amount" id="qrAmount">฿0</p>
+                  <p class="pay-was" id="qrWas" hidden></p>
+                </div>
+                <p class="pay-items" id="qrLabel">กำลังสร้าง QR Code...</p>
+              </div>
+              <span class="pay-method"><span class="live-dot"></span>PromptPay</span>
             </div>
-            <div class="promo-applied" id="promoApplied" hidden>
-              <svg class="i"><use href="#i-check"/></svg>
-              <span>ใช้โค้ด <strong id="promoCode"></strong> · <span id="promoDiscount"></span></span>
-              <button class="promo-remove" type="button" data-action="promo-remove" aria-label="ยกเลิกโค้ดส่วนลด"><svg class="i"><use href="#i-x"/></svg></button>
+
+            <div class="pay-qr">
+              <div class="qr-col">
+                <div class="qr" id="qrWrapper">
+                  <div class="qr-loading" id="qrLoading"><span class="spinner"></span>GENERATING...</div>
+                  <img id="qrImg" alt="QR PromptPay" width="220" height="220">
+                </div>
+                <p class="qr-ready" id="qrInfo" hidden><svg class="i"><use href="#i-check"/></svg>QR พร้อมใช้งาน · INSIDEXSTORE</p>
+                <button class="btn btn-outline btn-sm qr-save" type="button" id="qrSave" data-action="qr-save" hidden><svg class="i"><use href="#i-download"/></svg>บันทึก QR</button>
+              </div>
+              <ol class="howto">
+                <li><b>สแกน QR</b><span>เปิดแอปธนาคารแล้วสแกน หรือบันทึก QR แล้วสแกนจากรูป</span></li>
+                <li><b>ตรวจยอดแล้วโอน</b><span>ยอดในแอปต้องตรงกับยอดที่ต้องชำระด้านบน</span></li>
+                <li><b>แนบสลิปแล้วยืนยัน</b><span>ระบบตรวจสลิปอัตโนมัติ และแสดง Key ทันที</span></li>
+              </ol>
             </div>
-            <p class="promo-msg" id="promoMsg" role="status" aria-live="polite"></p>
-          </form>
-          <div class="qr" id="qrWrapper">
-            <div class="qr-loading" id="qrLoading"><span class="spinner"></span>GENERATING...</div>
-            <img id="qrImg" alt="QR PromptPay" width="220" height="220">
+          </section>
+
+          <section class="co-panel slip">
+            <p class="co-panel-title">แนบหลักฐานการโอน</p>
+            <label class="slip-drop" for="slipInput">
+              <svg class="i"><use href="#i-upload"/></svg>
+              <span class="slip-drop-text"><span id="slipLabel">อัพโหลดสลิปโอนเงิน</span><small>ไฟล์รูป · สูงสุด 20MB</small></span>
+            </label>
+            <input type="file" id="slipInput" accept="image/*" hidden>
+            <img class="slip-preview" id="slipPreview" alt="slip preview" hidden>
+          </section>
+
+          <div class="note">
+            <svg class="i"><use href="#i-alert"/></svg>
+            <p><strong>ไม่มีการคืนเงินทุกกรณี</strong> — เมื่อชำระเงินสำเร็จ ระบบจะแสดง License Key ให้คุณทันที ถือว่าสินค้าได้ส่งมอบแล้ว จึงไม่สามารถขอคืนเงินได้</p>
           </div>
-          <p class="qr-ready" id="qrInfo" hidden><span class="live-dot"></span>QR พร้อมใช้งาน · INSIDEXSTORE</p>
-          <button class="btn btn-outline btn-sm qr-save" type="button" id="qrSave" data-action="qr-save" hidden><svg class="i"><use href="#i-download"/></svg>บันทึก QR</button>
+          <label class="agree"><input type="checkbox" id="refundAgree"><span>ฉันอ่านและยอมรับนโยบายไม่คืนเงินแล้ว</span></label>
+          <button class="btn btn-primary btn-lg btn-block" id="confirmSlipBtn" data-action="submit-slip">
+            <svg class="i"><use href="#i-check"/></svg> ยืนยันการชำระเงิน
+          </button>
         </div>
 
-        <div class="slip">
-          <p class="slip-title">แนบหลักฐานการโอน</p>
-          <label class="slip-drop" for="slipInput"><svg class="i"><use href="#i-upload"/></svg><span id="slipLabel">อัพโหลดสลิปโอนเงิน</span></label>
-          <input type="file" id="slipInput" accept="image/*" hidden>
-          <img class="slip-preview" id="slipPreview" alt="slip preview" hidden>
+        <!-- Step 3: รับ Key -->
+        <div id="shopStep3" hidden>
+          <div class="success-head">
+            <span class="success-icon"><svg class="i"><use href="#i-check"/></svg></span>
+            <p class="success-title">ชำระเงินสำเร็จ!</p>
+            <p class="success-sub" id="keyProductName"></p>
+          </div>
+          <div id="keysList"></div>
+          <div class="notice">
+            <svg class="i"><use href="#i-message"/></svg>
+            <div>
+              <p class="notice-title">นำ Key ไปส่งให้ Admin ใน Discord</p>
+              <p class="notice-desc">Admin จะเข้ามา Remote ลง Setting ให้ทันที</p>
+              <a href="https://discord.gg/7thT8xaRpw" target="_blank" rel="noopener" class="notice-link"><svg class="i"><use href="#i-discord"/></svg>เข้า Discord Server <svg class="i"><use href="#i-arrow"/></svg></a>
+            </div>
+          </div>
+          <button class="btn btn-ghost btn-block" data-action="shop-back">← ซื้อสินค้าอื่น</button>
         </div>
-
-        <div class="note">
-          <svg class="i"><use href="#i-alert"/></svg>
-          <p><strong>ไม่มีการคืนเงินทุกกรณี</strong> — เมื่อชำระเงินสำเร็จ ระบบจะแสดง License Key ให้คุณทันที ถือว่าสินค้าได้ส่งมอบแล้ว จึงไม่สามารถขอคืนเงินได้</p>
-        </div>
-        <label class="agree"><input type="checkbox" id="refundAgree"><span>ฉันอ่านและยอมรับนโยบายไม่คืนเงินแล้ว</span></label>
-        <button class="btn btn-primary btn-lg btn-block" id="confirmSlipBtn" data-action="submit-slip">
-          <svg class="i"><use href="#i-check"/></svg> ยืนยันการชำระเงิน
-        </button>
       </div>
 
-      <!-- Step 3: รับ Key -->
-      <div id="shopStep3" hidden>
-        <div class="success-head">
-          <span class="success-icon"><svg class="i"><use href="#i-check"/></svg></span>
-          <p class="success-title">ชำระเงินสำเร็จ!</p>
-          <p class="success-sub" id="keyProductName"></p>
+      <!-- Order summary -->
+      <aside class="co-aside" aria-labelledby="orderTitle">
+        <div class="co-aside-head">
+          <p class="co-aside-title" id="orderTitle">สรุปคำสั่งซื้อ</p>
+          <span class="co-aside-count" id="orderCount">0 รายการ</span>
         </div>
-        <div id="keysList"></div>
-        <div class="notice">
-          <svg class="i"><use href="#i-message"/></svg>
-          <div>
-            <p class="notice-title">นำ Key ไปส่งให้ Admin ใน Discord</p>
-            <p class="notice-desc">Admin จะเข้ามา Remote ลง Setting ให้ทันที</p>
-            <a href="https://discord.gg/7thT8xaRpw" target="_blank" rel="noopener" class="notice-link"><svg class="i"><use href="#i-discord"/></svg>เข้า Discord Server <svg class="i"><use href="#i-arrow"/></svg></a>
+        <ul class="order-items" id="orderItems"></ul>
+
+        <!-- โค้ดส่วนลด: ตรวจกับ backend แล้วสร้าง QR ใหม่ตามยอดหลังลด -->
+        <form class="promo" id="promoForm" novalidate>
+          <label class="promo-title" for="promoInput"><svg class="i"><use href="#i-tag"/></svg>มีโค้ดส่วนลด? กรอกก่อนสแกนจ่าย</label>
+          <div class="promo-row" id="promoRow">
+            <input class="promo-input" id="promoInput" type="text" placeholder="กรอกโค้ด" maxlength="40"
+                   autocomplete="off" autocapitalize="characters" spellcheck="false">
+            <button class="btn btn-outline btn-sm" type="submit" id="promoBtn">ใช้โค้ด</button>
           </div>
-        </div>
-        <button class="btn btn-ghost btn-block" data-action="shop-back">← ซื้อสินค้าอื่น</button>
-      </div>
+          <div class="promo-applied" id="promoApplied" hidden>
+            <svg class="i"><use href="#i-check"/></svg>
+            <span>ใช้โค้ด <strong id="promoCode"></strong> · <span id="promoDiscount"></span></span>
+            <button class="promo-remove" type="button" data-action="promo-remove" aria-label="ยกเลิกโค้ดส่วนลด"><svg class="i"><use href="#i-x"/></svg></button>
+          </div>
+          <p class="promo-msg" id="promoMsg" role="status" aria-live="polite"></p>
+        </form>
+
+        <dl class="order-totals">
+          <div><dt>ราคาปกติ</dt><dd id="orderSubtotal">฿0</dd></div>
+          <div id="orderSaveRow" hidden><dt>ส่วนลดโปรโมชัน</dt><dd class="is-save" id="orderSave"></dd></div>
+          <div id="orderDiscountRow" hidden><dt>โค้ดส่วนลด</dt><dd class="is-save" id="orderDiscount"></dd></div>
+          <div class="is-total"><dt>ยอดชำระ</dt><dd id="orderTotal">฿0</dd></div>
+        </dl>
+
+        <button class="btn btn-primary btn-lg btn-block co-cta" id="buyBtn" data-action="go-pay" disabled>ไปชำระเงิน <svg class="i"><use href="#i-arrow"/></svg></button>
+
+        <ul class="co-trust">
+          <li><svg class="i"><use href="#i-shield"/></svg>ตรวจสลิปอัตโนมัติ ได้ Key ทันที</li>
+          <li><svg class="i"><use href="#i-check"/></svg>PromptPay รองรับทุกธนาคาร</li>
+          <li><svg class="i"><use href="#i-headset"/></svg>ทีมงานช่วยติดตั้งผ่าน Discord</li>
+        </ul>
+      </aside>
     </div>
 
+    <!-- Mobile: compact bar instead of the aside while picking products -->
     <footer class="modal-foot shop-bar" id="shopStickyBar" hidden>
       <div>
         <p class="shop-bar-count" id="stickyCount">0 รายการ</p>
         <p class="shop-bar-total" id="stickyTotal"><span class="cur">฿</span>0</p>
       </div>
-      <button class="btn btn-primary" id="buyBtn" data-action="go-pay">ซื้อเลย <svg class="i"><use href="#i-arrow"/></svg></button>
+      <button class="btn btn-primary" data-action="go-pay">ไปชำระเงิน <svg class="i"><use href="#i-arrow"/></svg></button>
     </footer>
   </div>
 </div>

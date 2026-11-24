@@ -70,3 +70,10 @@
   .hx-bat:nth-of-type(3) { animation-delay: -4s; animation-duration: 5.5s; }
 }
 @keyframes hx-float { 50% { transform: translateY(-5px); } }
+
+/* The default mark is the purple INSIDEX logo; this layer swaps the pumpkin
+   variant back in while the Halloween theme is active. */
+:root[data-theme="halloween"] .brand img,
+:root[data-theme="halloween"] .dw-logo img {
+  content: url("../assets/img/logo-halloween.webp");
+}
