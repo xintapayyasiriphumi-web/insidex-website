@@ -238,14 +238,3 @@ Actions.faq = el => {
     el.setAttribute('aria-expanded', 'true');
   }
 };
-
-/* ── Reviews marquee: clone the set once for a seamless loop ── */
-(() => {
-  const track = $('#testiTrack');
-  if (!track) return;
-  Array.from(track.children).forEach(card => {
-    const clone = card.cloneNode(true);
-    clone.setAttribute('aria-hidden', 'true');
-    track.appendChild(clone);
-  });
-})();
