@@ -217,6 +217,7 @@ body { background: var(--bg); font-family: var(--font-body); }
   font-family: var(--font-label); font-weight: 600; letter-spacing: -.01em;
   font-size: clamp(24px, 2.8vw, 32px); color: var(--text); font-variant-numeric: tabular-nums;
 }
+.stat-unit { margin-left: 6px; font: 500 .6em/1 var(--font-body); color: var(--text-2); }
 .stat-label { font: 400 14px/1.4 var(--font-body); letter-spacing: 0; text-transform: none; color: var(--text-3); margin-top: 8px; }
 
 /* ── Feature (GOATX): media left, copy right ────── */
