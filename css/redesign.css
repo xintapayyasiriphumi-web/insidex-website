@@ -311,7 +311,7 @@ body { background: var(--bg); font-family: var(--font-body); }
 .review-text { color: var(--text); }
 .review-name { font-family: var(--font-body); font-weight: 600; letter-spacing: 0; font-size: 14px; overflow-wrap: anywhere; }
 .review-meta { font: 400 12px/1.4 var(--font-body); letter-spacing: 0; color: var(--text-3); }
-.avatar, .review:nth-child(n) .avatar { border-radius: 50%; font-family: var(--font-label); background: var(--surface-3); color: var(--text-2); box-shadow: none; }
+.avatar { border-radius: 50%; font-family: var(--font-label); background: var(--surface-3); color: var(--text-2); box-shadow: none; }
 
 /* ── Shop CTA ────────────────────────────────────── */
 .cta-banner { border-radius: var(--r-xl); background: var(--surface); }

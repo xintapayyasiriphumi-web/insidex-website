@@ -221,13 +221,9 @@
 .avatar {
   width: 38px; height: 38px; flex-shrink: 0;
   display: grid; place-items: center;
-  font: 600 12px/1 var(--font-display); color: #fff;
-  background: var(--grad-btn); border-radius: 50%;
-  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .18);
+  font: 600 12px/1 var(--font-display); color: var(--text-2);
+  background: var(--surface-3); border-radius: 50%;
 }
-.review:nth-child(4n + 2) .avatar { background: linear-gradient(135deg, #6366f1, #4c1d95); }
-.review:nth-child(4n + 3) .avatar { background: linear-gradient(135deg, #a855f7, #db2777); }
-.review:nth-child(4n + 4) .avatar { background: linear-gradient(135deg, #4f46e5, #0ea5e9); }
 .review-name { font-size: 14.5px; font-weight: 600; }
 .review-meta { font-size: 12px; color: var(--text-3); }
 
