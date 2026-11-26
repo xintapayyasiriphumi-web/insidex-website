@@ -249,35 +249,3 @@ Actions.faq = el => {
     track.appendChild(clone);
   });
 })();
-
-/* ── V2.5 launch countdown ──
-   Default markup is "launched"; before launch we lock the section and hide the buy button. */
-(() => {
-  const LAUNCH = Date.parse('2026-09-01T01:00:00Z'); // 1 ก.ย. 08:00 เวลาไทย
-  if (Date.now() >= LAUNCH) return;
-
-  const section = $('#v25Section');
-  const overlay = $('#v25Countdown');
-  const buyRow = $('#goatxBuyRow');
-  const out = { d: $('#v25D'), h: $('#v25H'), m: $('#v25M'), s: $('#v25S') };
-  const pad = n => String(n).padStart(2, '0');
-
-  section.classList.add('is-locked');
-  overlay.hidden = false;
-  buyRow.hidden = true;
-
-  (function tick() {
-    const diff = LAUNCH - Date.now();
-    if (diff <= 0) {
-      section.classList.remove('is-locked');
-      overlay.hidden = true;
-      buyRow.hidden = false;
-      return;
-    }
-    out.d.textContent = pad(Math.floor(diff / 864e5));
-    out.h.textContent = pad(Math.floor(diff % 864e5 / 36e5));
-    out.m.textContent = pad(Math.floor(diff % 36e5 / 6e4));
-    out.s.textContent = pad(Math.floor(diff % 6e4 / 1e3));
-    setTimeout(tick, 1000);
-  })();
-})();

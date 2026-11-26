@@ -147,8 +147,8 @@
     </a>
 
     <nav class="nav-links" aria-label="เมนูหลัก">
-      <a href="#products" class="nav-link" data-i18n="nav.products">สินค้า</a>
-      <a href="#shelf" class="nav-link" data-i18n="nav.shelf">หมวดหมู่</a>
+      <a href="#shelf" class="nav-link" data-i18n="nav.products">สินค้า</a>
+      <a href="#products" class="nav-link" data-i18n="nav.shelf">หมวดหมู่</a>
       <a href="#about" class="nav-link" data-i18n="nav.about">เกี่ยวกับ</a>
       <a href="#showcase" class="nav-link">Showcase</a>
       <a href="#reviews" class="nav-link" data-i18n="nav.reviews">รีวิว</a>
@@ -190,8 +190,8 @@
 <!-- Mobile menu -->
 <div class="mob-menu" id="mobMenu">
   <nav class="mob-links" aria-label="เมนูมือถือ">
-    <a href="#products" data-action="menu-close" data-i18n="nav.products">สินค้า</a>
-    <a href="#shelf" data-action="menu-close" data-i18n="nav.shelf">หมวดหมู่</a>
+    <a href="#shelf" data-action="menu-close" data-i18n="nav.products">สินค้า</a>
+    <a href="#products" data-action="menu-close" data-i18n="nav.shelf">หมวดหมู่</a>
     <a href="#about" data-action="menu-close" data-i18n="nav.about">เกี่ยวกับ</a>
     <a href="#showcase" data-action="menu-close">Showcase</a>
     <a href="#reviews" data-action="menu-close" data-i18n="nav.reviews">รีวิว</a>
@@ -222,7 +222,7 @@
             <svg class="i"><use href="#i-cart"/></svg>
             <span data-i18n="hero.buy">ซื้อสินค้า</span>
           </a>
-          <a href="#products" class="btn btn-ghost btn-lg" data-i18n="hero.view">ดูสินค้า ↓</a>
+          <a href="#shelf" class="btn btn-ghost btn-lg" data-i18n="hero.view">ดูสินค้า ↓</a>
         </div>
 
         <div class="hero-proof">
@@ -300,97 +300,96 @@
   </div>
 </section>
 
-<!-- ══ V2.5 SHOWCASE ══ -->
-<section class="section section-tight" id="v25Section">
+<!-- ══ PRODUCT SHELF ══
+     Cards come from GET /products (js/shop.js renderShelf) so names, images and prices always
+     match the shop. The cards below are a copy for when the API is slow or down. -->
+<section class="section" id="shelf">
   <div class="container">
     <div class="section-head">
-      <span class="eyebrow reveal">อัปเดตล่าสุด</span>
-      <h2 class="section-title reveal">UPDATE V2.5 <span class="text-gradient">มาแล้ว!</span></h2>
-      <p class="section-desc reveal">อัปเดตครั้งใหญ่ในรอบ 3 เดือน — Setting ทุกตัวปรับใหม่หมด เพิ่มประสิทธิภาพ ลด Input Lag ภาพตรงขึ้น</p>
+      <span class="eyebrow reveal">สินค้าทั้งหมด</span>
+      <h2 class="section-title reveal" data-i18n="sec.shelfTitle">ชั้นวางสินค้า</h2>
+      <p class="section-desc reveal" data-i18n="sec.shelfDesc">กดที่สินค้าเพื่อสั่งซื้อ — ชื่อและราคาตรงกับหน้าร้าน</p>
     </div>
 
-    <div class="v25-banner reveal">
-      <img src="assets/img/v25/banner.webp" alt="UPDATE V2.5 มาแล้ว — GOATX, SHX, ULTIMATEX, ULTIMATEX Plus" width="1200" height="1200" loading="lazy" decoding="async">
-      <div class="countdown" id="v25Countdown" hidden>
-        <p class="countdown-title">V2.5 Launch In</p>
-        <div class="countdown-nums">
-          <div class="cd-block"><span class="cd-val" id="v25D">00</span><span class="cd-label">Days</span></div>
-          <div class="cd-block"><span class="cd-val" id="v25H">00</span><span class="cd-label">Hours</span></div>
-          <div class="cd-block"><span class="cd-val" id="v25M">00</span><span class="cd-label">Min</span></div>
-          <div class="cd-block"><span class="cd-val" id="v25S">00</span><span class="cd-label">Sec</span></div>
-        </div>
+    <div id="shelf-groups">
+      <h3 class="shelf-group-title">Setting รายตัว</h3>
+      <div class="shelf-grid">
+        <button class="card card-hover shelf-item" data-action="buy" data-pick="5">
+          <span class="shelf-img"><img src="https://insidex.online/assets/img/shop/goatx-v2-5.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
+          <span class="shelf-label">GOATX V2.5</span>
+          <span class="shelf-desc">GOATX Setting V2.5 — 40 tweaks</span>
+          <span class="shelf-foot"><span class="shelf-price">฿648</span></span>
+        </button>
+        <button class="card card-hover shelf-item" data-action="buy" data-pick="7">
+          <span class="shelf-img"><img src="https://insidex.online/assets/img/shop/shx-v2-5.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
+          <span class="shelf-label">SHX V2.5</span>
+          <span class="shelf-desc">SHX Setting V2.5</span>
+          <span class="shelf-foot"><span class="shelf-price">฿488</span></span>
+        </button>
+        <button class="card card-hover shelf-item" data-action="buy" data-pick="1">
+          <span class="shelf-img"><img src="https://insidex.online/assets/img/shop/goatx-v2-0.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
+          <span class="shelf-label">GOATX v2.0</span>
+          <span class="shelf-desc">The best Setting Of InsideX</span>
+          <span class="shelf-foot"><span class="shelf-price">฿429</span></span>
+        </button>
+        <button class="card card-hover shelf-item" data-action="buy" data-pick="2">
+          <span class="shelf-img"><img src="https://insidex.online/assets/img/shop/ultimatex-plus.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
+          <span class="shelf-label">ULTIMATEXXPLUS</span>
+          <span class="shelf-desc">The best duo setting of InsideX</span>
+          <span class="shelf-foot"><span class="shelf-price">฿629</span></span>
+        </button>
+        <button class="card card-hover shelf-item" data-action="buy" data-pick="3">
+          <span class="shelf-img"><img src="https://insidex.online/assets/img/shop/ultimatex.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
+          <span class="shelf-label">ULTIMATEX</span>
+          <span class="shelf-desc">The best setting of the year</span>
+          <span class="shelf-foot"><span class="shelf-price">฿399</span></span>
+        </button>
+        <button class="card card-hover shelf-item" data-action="buy" data-pick="4">
+          <span class="shelf-img"><img src="https://insidex.online/assets/img/shop/shx-v-2.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
+          <span class="shelf-label">Shx V.2</span>
+          <span class="shelf-desc">Classic Style Setting</span>
+          <span class="shelf-foot"><span class="shelf-price">฿309</span></span>
+        </button>
+        <button class="card card-hover shelf-item" data-action="buy" data-pick="12">
+          <span class="shelf-img"><img src="https://insidex.online/assets/img/shop/internet-x.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
+          <span class="shelf-label">Internet X</span>
+          <span class="shelf-desc">Best Internet Setting By.INSIDEX</span>
+          <span class="shelf-foot"><span class="shelf-price">฿179</span></span>
+        </button>
+        <button class="card card-hover shelf-item" data-action="buy" data-pick="11">
+          <span class="shelf-img"><img src="https://insidex.online/assets/img/shop/supportx.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
+          <span class="shelf-label">SupportX</span>
+          <span class="shelf-desc">บริการ Remote ลง Setting + OS + ดูแลเครื่องครบจบ</span>
+          <span class="shelf-foot"><span class="shelf-price">฿7,999</span></span>
+        </button>
       </div>
-    </div>
 
-    <div class="v25-grid">
-      <button class="v25-card reveal" style="--d:.05s" data-action="buy">
-        <img src="assets/img/v25/goatx.webp" alt="GOATX Setting V2.5" width="800" height="800" loading="lazy" decoding="async">
-        <span class="v25-card-label">GOATX V2.5</span>
-      </button>
-      <button class="v25-card reveal" style="--d:.1s" data-action="buy">
-        <img src="assets/img/v25/shx.webp" alt="SHX Setting V2.5" width="800" height="800" loading="lazy" decoding="async">
-        <span class="v25-card-label">SHX V2.5</span>
-      </button>
-      <button class="v25-card reveal" style="--d:.15s" data-action="buy">
-        <img src="assets/img/v25/ultimatex.webp" alt="ULTIMATEX Setting V2.5" width="800" height="800" loading="lazy" decoding="async">
-        <span class="v25-card-label">ULTIMATEX V2.5</span>
-      </button>
-      <button class="v25-card reveal" style="--d:.2s" data-action="buy">
-        <img src="assets/img/v25/ultimatex-plus.webp" alt="ULTIMATEX Plus Setting V2.5" width="800" height="800" loading="lazy" decoding="async">
-        <span class="v25-card-label">ULTIMATEX PLUS V2.5</span>
-      </button>
+      <h3 class="shelf-group-title">Pack V2.5 <span>— รวมหลายตัว คุ้มกว่า</span></h3>
+      <div class="shelf-grid">
+        <button class="card card-hover shelf-item" data-action="buy" data-pick="8">
+          <span class="shelf-img"><img src="https://insidex.online/assets/img/shop/max-pack-v2-5.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
+          <span class="shelf-label">Max Pack → v2.5</span>
+          <span class="shelf-desc">GOATX + ULTIMATEX + ULTIMATEX PLUS V2.5 ครบ 3 ตัวฮิต !</span>
+          <span class="shelf-foot"><span class="shelf-price">฿1,708</span></span>
+        </button>
+        <button class="card card-hover shelf-item" data-action="buy" data-pick="9">
+          <span class="shelf-img"><img src="https://insidex.online/assets/img/shop/goat-pack-v2-5.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
+          <span class="shelf-label">Goat Pack → v2.5</span>
+          <span class="shelf-desc">GOATX + ULTIMATEX V2.5</span>
+          <span class="shelf-foot"><span class="shelf-price">฿1,267</span></span>
+        </button>
+        <button class="card card-hover shelf-item" data-action="buy" data-pick="10">
+          <span class="shelf-img"><img src="https://insidex.online/assets/img/shop/elite-pack-v2-5.webp" alt="" width="640" height="640" loading="lazy" decoding="async"></span>
+          <span class="shelf-label">Elite Pack → v2.5</span>
+          <span class="shelf-desc">ULTIMATEX + ULTIMATEX PLUS V2.5</span>
+          <span class="shelf-foot"><span class="shelf-price">฿1,298</span></span>
+        </button>
+      </div>
     </div>
 
     <div class="v25-links reveal">
       <a href="https://settinginfo.insidex.online/" target="_blank" rel="noopener" class="btn btn-outline">ดูรายละเอียด Setting ทุกเวอร์ชัน <svg class="i"><use href="#i-arrow"/></svg></a>
       <a href="https://os.insidex.online/" target="_blank" rel="noopener" class="btn btn-ghost">INSIDEXOS — Custom Windows <svg class="i"><use href="#i-arrow"/></svg></a>
-    </div>
-  </div>
-</section>
-
-<!-- ══ V2.5 PRICING ══ -->
-<section class="section section-tight" id="pricing">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow reveal">ราคา V2.5</span>
-      <h2 class="section-title reveal">ข้าม v1 → v2.5 รวดเดียว</h2>
-      <p class="section-desc reveal">ลูกค้าใหม่ / คนที่ยังอยู่ v1 (ยังไม่อัป 1.5)</p>
-    </div>
-
-    <div class="price-grid">
-      <article class="card price-card reveal" style="--d:.05s">
-        <header class="price-head">
-          <span class="icon-tile"><svg class="i"><use href="#i-gear"/></svg></span>
-          <div><h3>SETTING V2.5</h3><p>รายตัว</p></div>
-        </header>
-        <div class="price-body">
-          <p class="price-label">Individual items</p>
-          <div class="price-row"><span class="price-name">GOATX V2.5</span><span class="price-val" data-price-id="5">628.-</span></div>
-          <div class="price-row"><span class="price-name">SHX V2.5</span><span class="price-val" data-price-id="7">468.-</span></div>
-        </div>
-      </article>
-
-      <article class="card price-card is-featured reveal" style="--d:.1s">
-        <header class="price-head">
-          <span class="icon-tile"><svg class="i"><use href="#i-box"/></svg></span>
-          <div><h3>PACK V2.5</h3><p>ชุดรวมหลายตัว</p></div>
-        </header>
-        <div class="price-body">
-          <p class="price-label">Pack — full price to V2.5</p>
-          <div class="price-row">
-            <span class="price-name">👑 Max Pack → v2.5<span class="price-breakdown">GOATX + ULTIMATEX + ULTIMATEX PLUS</span></span>
-            <span class="price-val text-gradient" data-price-id="8">1,708.-</span>
-          </div>
-          <div class="price-row">
-            <span class="price-name">🐐 Goat Pack → v2.5<span class="price-breakdown">GOATX + ULTIMATEX</span></span>
-            <span class="price-val text-gradient" data-price-id="9">1,418.-</span>
-          </div>
-          <div class="price-row">
-            <span class="price-name">💎 Elite Pack → v2.5<span class="price-breakdown">ULTIMATEX + ULTIMATEX PLUS</span></span>
-            <span class="price-val text-gradient" data-price-id="10">1,298.-</span>
-          </div>
-        </div>
-      </article>
     </div>
   </div>
 </section>
@@ -455,40 +454,6 @@
         </ul>
         <div class="cat-foot"><span class="cat-price">฿99–250</span><span class="cat-link">ดูรายละเอียด <svg class="i"><use href="#i-arrow"/></svg></span></div>
       </a>
-    </div>
-  </div>
-</section>
-
-<!-- ══ PRODUCT SHELF ══ -->
-<section class="section" id="shelf">
-  <div class="container">
-    <div class="section-head">
-      <span class="eyebrow reveal">คลังสินค้าทั้งหมด</span>
-      <h2 class="section-title reveal" data-i18n="sec.shelfTitle">ชั้นวางสินค้า INSIDEX</h2>
-      <p class="section-desc reveal" data-i18n="sec.shelfDesc">รวมสินค้าเด่นของเราไว้ในที่เดียว — คลิกเพื่อเลือกซื้อได้ทันที</p>
-    </div>
-
-    <div class="shelf-grid">
-      <button class="card card-hover shelf-item reveal" style="--d:.05s" data-action="buy">
-        <span class="shelf-img"><img src="assets/img/products/goatx.webp" alt="GOATX V2.5" width="800" height="800" loading="lazy" decoding="async"></span>
-        <span class="shelf-label">GOATX V2.5</span>
-      </button>
-      <button class="card card-hover shelf-item reveal" style="--d:.1s" data-action="buy">
-        <span class="shelf-img"><img src="assets/img/products/ultimatex-plus.webp" alt="ULTIMATEX PLUS V2.5" width="800" height="800" loading="lazy" decoding="async"></span>
-        <span class="shelf-label">ULTIMATEX PLUS V2.5</span>
-      </button>
-      <button class="card card-hover shelf-item reveal" style="--d:.15s" data-action="buy">
-        <span class="shelf-img"><img src="assets/img/products/ultimatex.webp" alt="ULTIMATEX V2.5" width="800" height="800" loading="lazy" decoding="async"></span>
-        <span class="shelf-label">ULTIMATEX V2.5</span>
-      </button>
-      <button class="card card-hover shelf-item reveal" style="--d:.2s" data-action="buy">
-        <span class="shelf-img"><img src="assets/img/products/shx-v2.webp" alt="SHX V2.5" width="800" height="800" loading="lazy" decoding="async"></span>
-        <span class="shelf-label">SHX V2.5</span>
-      </button>
-      <button class="card card-hover shelf-item reveal" style="--d:.25s" data-action="buy">
-        <span class="shelf-img"><img src="assets/img/products/shx-v1.webp" alt="SHX V.1" width="800" height="800" loading="lazy" decoding="async"></span>
-        <span class="shelf-label">SHX V.1</span>
-      </button>
     </div>
   </div>
 </section>

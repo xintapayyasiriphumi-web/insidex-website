@@ -166,10 +166,10 @@ async function doLogout() {
 }
 
 /* Entry point for every "buy" button on the page */
-function buyNow(productId) {
+function buyNow(productId, pickId = null) {
   if (!currentUser) { beginLogin(); location.href = LOGIN_URL; return; }
   if (productId) openShopProduct(productId);
-  else openShop();
+  else openShop(pickId);
 }
 
 /* ══ Products ══ */
@@ -183,7 +183,8 @@ function showProductSkeleton() {
   $('#productList').innerHTML = `<div class="pgrid">${SKELETON_CARD.repeat(4)}</div>`;
 }
 
-async function openShop() {
+// pickId (from a shelf card): open on that product's tab with it already in the order
+async function openShop(pickId = null) {
   openModal('modalShop');
   selectedProducts = [];
   shopTab = 'all';
@@ -191,7 +192,16 @@ async function openShop() {
   showProductSkeleton();
   try {
     shopProducts = await fetchProducts();
+    const pick = pickId && shopProducts.find(p => p.id === pickId);
+    if (pick) {
+      const tab = SHOP_TABS.find(t => t.key !== 'all' && t.cats.includes(catOf(pick)));
+      if (tab) shopTab = tab.key;
+      const { soon, out } = productState(pick);
+      if (!soon && !out) selectedProducts = [{ id: pick.id, name: pick.name, price: pick.price }];
+    }
     renderShopProducts();
+    updateCheckoutBar();
+    $('#productList .pcard.selected')?.scrollIntoView({ block: 'nearest' });
   } catch {
     $('#productList').innerHTML = '<p class="shop-empty">โหลดไม่สำเร็จ</p>';
   }
@@ -266,8 +276,9 @@ function renderProductCard(p, hot = false) {
     </div>`;
 }
 
+const catOf = p => CATEGORY_ORDER.includes(p.category) ? p.category : 'setting';
+
 function renderShopProducts() {
-  const catOf = p => CATEGORY_ORDER.includes(p.category) ? p.category : 'setting';
   const featured = shopProducts.find(p => p.id === FEATURED_ID);
 
   // The featured product is pulled out of its group and pinned on top instead
@@ -783,42 +794,54 @@ async function openHistory() {
   }
 }
 
-/* ══ Pricing section ══
-   The HTML holds normal prices so it reads fine without the API; live prices + promo are filled in here. */
-async function hydratePriceTable() {
-  const els = $$('[data-price-id]');
-  if (!els.length) return;
+/* ══ Product shelf (#shelf on the page) ══
+   Built from the same /products list as the shop, so a new product, name or price shows up
+   here without editing index.html. The HTML holds a copy of the cards for when the API fails. */
+const SHELF_GROUPS = [
+  { title: 'Setting รายตัว', cats: ['v25', 'setting', 'supportx'] },
+  { title: 'Pack V2.5 <span>— รวมหลายตัว คุ้มกว่า</span>', cats: ['pack'] },
+];
+
+function renderShelfCard(p) {
+  const { soon, out } = productState(p);
+  const foot = soon ? '<span class="shelf-note">เร็วๆ นี้</span>'
+    : out ? '<span class="shelf-note">สินค้าหมด</span>'
+    : `${hasPromo(p) ? wasHtml(p) : ''}<span class="shelf-price">฿${fmt(p.price)}</span>`;
+  const media = p.image_url
+    ? `<img src="${esc(p.image_url)}" alt="" width="640" height="640" loading="lazy" decoding="async">`
+    : '<svg class="i"><use href="#i-gear"/></svg>';
+  return `
+        <button class="card card-hover shelf-item${out && !soon ? ' is-out' : ''}" data-action="buy" data-pick="${Number(p.id)}">
+          <span class="shelf-img">${media}</span>
+          <span class="shelf-label">${esc(p.name)}</span>
+          <span class="shelf-desc">${esc(p.description || '')}</span>
+          <span class="shelf-foot">${foot}</span>
+        </button>`;
+}
+
+async function renderShelf() {
+  const root = $('#shelf-groups');
+  if (!root) return;
   let products;
-  try { products = await fetchProducts(); } catch { return; }
-  const byId = new Map(products.map(p => [p.id, p]));
+  try { products = await fetchProducts(); } catch { return; }   // keep the HTML copy
 
-  els.forEach(el => {
-    const p = byId.get(Number(el.dataset.priceId));
-    if (!p) return;
-    el.textContent = `${fmt(p.price)}.-`;
-    if (!hasPromo(p)) return;
-
-    const name = $('.price-name', el.closest('.price-row'));
-    const breakdown = $('.price-breakdown', name);
-    if (breakdown) breakdown.insertAdjacentHTML('beforebegin', promoChipHtml(p));
-    else name.insertAdjacentHTML('beforeend', promoChipHtml(p));
-
-    const stack = document.createElement('span');
-    stack.className = 'price-stack';
-    el.before(stack);
-    stack.innerHTML = wasHtml(p);
-    stack.append(el);
-  });
+  const rank = p => SHELF_GROUPS.flatMap(g => g.cats).indexOf(catOf(p));
+  const sorted = [...products].sort((a, b) => rank(a) - rank(b) || a.id - b.id);
+  root.innerHTML = SHELF_GROUPS.map(g => {
+    const items = sorted.filter(p => g.cats.includes(catOf(p)));
+    if (!items.length) return '';
+    return `<h3 class="shelf-group-title">${g.title}</h3><div class="shelf-grid">${items.map(renderShelfCard).join('')}</div>`;
+  }).join('');
 }
 
 /* ══ Actions ══ */
 Actions.buy = (el, e) => {
   e.preventDefault();
-  buyNow(el.dataset.product ? Number(el.dataset.product) : null);
+  buyNow(el.dataset.product ? Number(el.dataset.product) : null, Number(el.dataset.pick) || null);
 };
 Actions['user-shop']    = () => openShop();
 Actions['open-history'] = () => openHistory();
 Actions.logout          = () => doLogout();
 
 checkLogin();
-hydratePriceTable();
+renderShelf();

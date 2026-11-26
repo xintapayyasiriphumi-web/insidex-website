@@ -19,8 +19,8 @@
   --line-accent: rgba(141, 59, 252, .36);
 
   --text: #f1eeff;
-  --text-2: #aaa3c6;
-  --text-3: #7d7799;
+  --text-2: #b9b3d3;
+  --text-3: #9690b2;
 
   /* Accent scale sampled straight off the INSIDEX mark:
      its gradient runs #a344fe at the top tips → #5327ec at the roots. */
@@ -122,8 +122,8 @@ body { background: var(--bg); font-family: var(--font-body); counter-reset: ixse
 .nav-links { gap: 0; }
 .nav-link {
   position: relative; padding: 8px 14px; border-radius: 0; background: none;
-  font: 600 11px/1 var(--font-label); letter-spacing: .14em; text-transform: uppercase;
-  color: var(--text-3);
+  font: 600 13px/1 var(--font-label); letter-spacing: .06em; text-transform: uppercase;
+  color: var(--text-2);
 }
 .nav-link::after {
   content: ""; position: absolute; left: 14px; right: 14px; bottom: -1px;
@@ -197,7 +197,7 @@ body { background: var(--bg); font-family: var(--font-body); counter-reset: ixse
 .section-head > .section-title { grid-area: ttl; margin: 16px 0 0; max-width: 22ch; }
 .section-head > .section-desc { grid-area: dsc; justify-self: start; margin: 12px 0 0; max-width: 62ch; }
 .eyebrow {
-  font: 600 11px/1 var(--font-label); letter-spacing: .22em; text-transform: uppercase; color: var(--text-3);
+  font: 600 12px/1 var(--font-label); letter-spacing: .14em; text-transform: uppercase; color: var(--text-3);
 }
 .eyebrow::before { display: none; }
 .section-title {
@@ -259,7 +259,7 @@ body { background: var(--bg); font-family: var(--font-body); counter-reset: ixse
 }
 .hv-card { border-radius: 4px; border: 1px solid var(--line-2); background: rgba(14, 10, 28, .9); backdrop-filter: blur(12px); }
 .hv-title { font-family: var(--font-display); text-transform: uppercase; letter-spacing: .05em; }
-.hv-sub { font-family: var(--font-label); font-size: 11px; letter-spacing: .04em; }
+.hv-sub { font-family: var(--font-label); font-size: 12px; letter-spacing: .04em; }
 
 /* ── Stats: one instrument bar ───────────────────── */
 .stats {
@@ -277,7 +277,7 @@ body { background: var(--bg); font-family: var(--font-body); counter-reset: ixse
   font-family: var(--font-label); font-weight: 700; letter-spacing: -.01em;
   font-size: clamp(26px, 3vw, 34px);
 }
-.stat-label { font: 500 11px/1.4 var(--font-label); letter-spacing: .16em; text-transform: uppercase; color: var(--text-3); margin-top: 8px; }
+.stat-label { font: 500 12px/1.4 var(--font-label); letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); margin-top: 8px; }
 
 /* ── Feature (GOATX) : media left, copy right ───── */
 .feature { border-radius: var(--r-lg); background: var(--surface); border: 1px solid var(--line); overflow: hidden; }
@@ -289,30 +289,6 @@ body { background: var(--bg); font-family: var(--font-body); counter-reset: ixse
 .feature-sub { font: 600 13px/1 var(--font-label); letter-spacing: .26em; color: var(--text-3); text-transform: uppercase; }
 .feature-badge { top: 14px; left: 14px; right: auto; }
 .check-list li { font-size: 14.5px; }
-
-/* ── V2.5 banner + tiles ─────────────────────────── */
-.v25-banner { border-radius: var(--r-lg); border: 1px solid var(--line); }
-.v25-card { border-radius: var(--r); border: 1px solid var(--line); background: var(--surface); overflow: hidden; }
-.v25-card:hover { border-color: var(--line-accent); box-shadow: var(--glow); }
-.v25-card-label {
-  font: 600 11px/1.3 var(--font-label); letter-spacing: .16em; text-transform: uppercase;
-  background: linear-gradient(180deg, transparent, rgba(7, 5, 15, .95) 42%);
-}
-.cd-val { font-family: var(--font-label); }
-.cd-label { font-family: var(--font-label); letter-spacing: .14em; text-transform: uppercase; }
-
-/* ── Pricing: ledger rows, mono figures ─────────── */
-.price-grid { grid-template-columns: minmax(0, .85fr) minmax(0, 1.15fr); }
-.price-card { border-radius: var(--r-lg); }
-.price-card.is-featured { border-color: var(--line-accent); background: linear-gradient(180deg, rgba(141, 59, 252, .055), transparent 56%); }
-.price-head h3 { font-family: var(--font-display); text-transform: uppercase; letter-spacing: .08em; }
-.price-head p { font: 500 11.5px/1 var(--font-label); letter-spacing: .1em; color: var(--text-3); }
-.price-label { font: 600 10.5px/1 var(--font-label); letter-spacing: .2em; text-transform: uppercase; color: var(--text-3); }
-.price-row { border-color: var(--line); }
-.price-row:hover { background: rgba(141, 59, 252, .04); }
-.price-name { font-family: var(--font-body); }
-.price-breakdown { font: 500 11px/1.5 var(--font-label); letter-spacing: .04em; color: var(--text-3); }
-.price-val { font-family: var(--font-label); font-weight: 700; font-variant-numeric: tabular-nums; }
 
 /* ── Categories: bento (1 wide + 3) ─────────────── */
 .cat-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 14px; }
@@ -333,19 +309,12 @@ body { background: var(--bg); font-family: var(--font-body); counter-reset: ixse
 .cat-desc { color: var(--text-2); }
 .cat-foot { border-top: 1px solid var(--line); }
 .cat-price { font-family: var(--font-label); font-weight: 700; color: var(--ac); font-variant-numeric: tabular-nums; }
-.cat-link { font: 600 11px/1 var(--font-label); letter-spacing: .14em; text-transform: uppercase; }
+.cat-link { font: 600 12px/1 var(--font-label); letter-spacing: .08em; text-transform: uppercase; }
 .dot-list li::before { background: var(--ac); box-shadow: 0 0 7px var(--ac); }
 
-/* ── Shelf: snap rail instead of a grid ─────────── */
-.shelf-grid {
-  display: flex; gap: 14px; grid-template-columns: none;
-  overflow-x: auto; scroll-snap-type: x mandatory;
-  padding-bottom: 14px; margin-inline: calc(var(--gutter) * -1); padding-inline: var(--gutter);
-  scrollbar-width: thin;
-}
-.shelf-item { flex: 0 0 clamp(200px, 23vw, 260px); scroll-snap-align: start; border-radius: var(--r); }
-.shelf-img { border-radius: 3px; }
-.shelf-label { font: 600 11px/1.3 var(--font-label); letter-spacing: .14em; text-transform: uppercase; }
+/* ── Shelf ── */
+.shelf-item { border-radius: var(--r); }
+.shelf-price { color: #c9a8ff; }
 
 /* ── Why / value ────────────────────────────────── */
 .why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -381,7 +350,7 @@ body { background: var(--bg); font-family: var(--font-body); counter-reset: ixse
 .dot.active { background: var(--ac); box-shadow: 0 0 9px var(--ac); }
 .mini-stat { border-radius: var(--r); }
 .mini-stat-num { font-family: var(--font-label); font-weight: 700; }
-.mini-stat-label { font: 500 11px/1.4 var(--font-label); letter-spacing: .14em; text-transform: uppercase; color: var(--text-3); }
+.mini-stat-label { font: 500 12px/1.4 var(--font-label); letter-spacing: .1em; text-transform: uppercase; color: var(--text-3); }
 
 /* ── Reviews ─────────────────────────────────────── */
 .rating { border-radius: var(--r); }
@@ -398,7 +367,7 @@ body { background: var(--bg); font-family: var(--font-body); counter-reset: ixse
   border-radius: var(--r-lg);
   background: linear-gradient(104deg, rgba(141, 59, 252, .17), rgba(83, 39, 236, .08) 62%, transparent);
 }
-.cta-kicker { font: 600 11px/1 var(--font-label); letter-spacing: .22em; text-transform: uppercase; color: var(--ac); }
+.cta-kicker { font: 600 12px/1 var(--font-label); letter-spacing: .14em; text-transform: uppercase; color: var(--ac); }
 .cta-title { font-family: var(--font-display); text-transform: uppercase; letter-spacing: .06em; }
 .cta-desc { color: var(--text-2); }
 
@@ -490,7 +459,6 @@ body { background: var(--bg); font-family: var(--font-body); counter-reset: ixse
   .cat-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .cat-card:first-child { grid-column: span 2; grid-template-columns: 1fr; gap: 0; }
   .cat-card:first-child .dot-list { grid-column: 1; grid-row: auto; }
-  .price-grid { grid-template-columns: 1fr; }
 }
 @media (max-width: 760px) {
   .topstrip-badge span { display: none; }
