@@ -184,3 +184,46 @@
 .rv-side { display: flex; align-items: center; gap: 16px; }
 .rv-nav { display: flex; gap: 8px; }
 .rv-nav .icon-btn { width: 44px; height: 44px; }
+
+/* ── ATHENAX — Coming Soon: the clip in a box frame, crossed by the tape ── */
+.soon {
+  --bk: var(--ac-hi);
+  display: grid; grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); align-items: center;
+  background: #07060b; border-color: var(--frame);
+}
+.card.soon:hover { background: #07060b; }
+.soon-media { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: #05040a; }
+.soon-video { display: block; width: 100%; height: 100%; object-fit: cover; }
+.soon-tape {
+  position: absolute; top: 26px; left: -54px; width: 230px;
+  transform: rotate(-38deg);
+  background: #050407; border-block: 2px solid var(--ac);
+  text-align: center; pointer-events: none;
+}
+.soon-tape span { display: block; padding: 7px 0 6px; font: 800 italic 14px/1 var(--font-display); letter-spacing: .12em; color: #f0eef6; }
+.soon-toggle {
+  position: absolute; right: 14px; bottom: 14px; z-index: 3;
+  width: 40px; height: 40px; color: #f0eef6;
+  background: rgba(5, 4, 7, .72); border-color: rgba(240, 238, 246, .24);
+}
+.soon-toggle:hover { background: rgba(5, 4, 7, .9); }
+.soon-body { padding: clamp(28px, 4vw, 56px); }
+.soon-status { display: inline-flex; align-items: center; gap: 8px; font: 600 14px/1 var(--font-body); color: var(--ac-text); }
+.soon-status .live-dot { background: var(--ac-hi); }
+.soon-title {
+  margin-top: 14px;
+  font: 900 italic clamp(44px, 5.4vw, 76px)/.95 var(--font-display); letter-spacing: -.01em; color: var(--text);
+}
+.soon-sub { margin-top: 10px; font: 700 italic clamp(15px, 1.6vw, 18px)/1.2 var(--font-display); text-transform: uppercase; letter-spacing: .04em; color: var(--ac-text); }
+.soon-list { display: grid; gap: 12px; margin-top: 28px; padding-top: 22px; border-top: 1px solid var(--line); }
+.soon-list li { display: grid; gap: 2px; }
+.soon-list strong { font: 600 15px/1.3 var(--font-display); color: var(--text); }
+.soon-list span { font-size: 13.5px; line-height: 1.45; color: var(--text-3); }
+
+@media (max-width: 960px) {
+  .soon { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 760px) {
+  .soon-media { aspect-ratio: 9 / 16; max-height: 78svh; }
+  .soon-tape { top: 20px; left: -60px; }
+}

@@ -310,3 +310,47 @@ Actions.faq = el => {
 
   requestAnimationFrame(tick);
 })();
+
+/* ── ATHENAX Coming Soon clip ──
+   Loaded only when it nears the viewport (preload="none" + data-src), the 9:16 cut on phones,
+   played while on screen and paused off it. A pause/play button stays on the clip
+   (a looping video needs one). prefers-reduced-motion: it loads but waits for the button. */
+(() => {
+  const video = $('#athenaxVideo');
+  if (!video) return;
+  const toggle = $('[data-action="athenax-toggle"]');
+  const portrait = matchMedia('(max-width: 760px)').matches;
+  const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (portrait) video.poster = video.dataset.posterPortrait;
+
+  let userPaused = reduce;
+  let onScreen = false;
+
+  const setToggle = playing => {
+    toggle.hidden = false;
+    toggle.setAttribute('aria-label', playing ? 'หยุดคลิป' : 'เล่นคลิป');
+    $('use', toggle).setAttribute('href', playing ? '#i-pause' : '#i-play');
+  };
+  const sync = () => {
+    if (onScreen && !userPaused) video.play().catch(() => setToggle(false));
+    else video.pause();
+  };
+  video.addEventListener('play', () => setToggle(true));
+  video.addEventListener('pause', () => setToggle(false));
+
+  Actions['athenax-toggle'] = () => {
+    userPaused = !video.paused;
+    if (userPaused) video.pause();
+    else video.play().catch(() => {});
+  };
+
+  const load = () => {
+    if (video.src) return;
+    video.src = portrait ? video.dataset.srcPortrait : video.dataset.src;
+    setToggle(false);
+  };
+
+  if (!('IntersectionObserver' in window)) { load(); onScreen = true; sync(); return; }
+  new IntersectionObserver(([entry]) => { if (entry.isIntersecting) load(); }, { rootMargin: '400px 0px' }).observe(video);
+  new IntersectionObserver(([entry]) => { onScreen = entry.isIntersecting; sync(); }, { threshold: 0.35 }).observe(video);
+})();

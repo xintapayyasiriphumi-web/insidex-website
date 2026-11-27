@@ -104,6 +104,7 @@
   <symbol id="i-shield" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round" d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></symbol>
   <symbol id="i-flame" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.07-2.14-.22-4.05 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.15.43-2.29 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></symbol>
   <symbol id="i-star" viewBox="0 0 24 24"><path fill="currentColor" d="M12 2.5l2.9 6.1 6.6.8-4.9 4.6 1.3 6.5L12 17.3l-5.9 3.2 1.3-6.5-4.9-4.6 6.6-.8z"/></symbol>
+  <symbol id="i-pause" viewBox="0 0 24 24"><path fill="currentColor" d="M7 5h3.5v14H7zM13.5 5H17v14h-3.5z"/></symbol>
   <symbol id="i-play" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5.5v13a1 1 0 0 0 1.5.86l10.5-6.5a1 1 0 0 0 0-1.72L9.5 4.64A1 1 0 0 0 8 5.5z"/></symbol>
   <symbol id="i-chev-l" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M15 18l-6-6 6-6"/></symbol>
   <symbol id="i-chev-r" viewBox="0 0 24 24"><path fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" d="M9 18l6-6-6-6"/></symbol>
@@ -262,6 +263,40 @@
       </div>
       <div class="feature-media">
         <img src="assets/img/products/goatx-setting.webp" alt="GOATX Setting V2.5" width="1200" height="1200" loading="lazy" decoding="async">
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ══ ATHENAX — COMING SOON ══
+     Muted looping preview; js/main.js loads it when it nears the viewport, picks the 9:16
+     cut on phones, and pauses it off-screen. Captions in the clip are the app's own modules. -->
+<section class="section section-tight" id="athenax">
+  <div class="container">
+    <article class="card soon reveal">
+      <div class="soon-media">
+        <video class="soon-video" id="athenaxVideo" muted loop playsinline preload="none"
+               poster="assets/video/athenax-poster-16x9.webp"
+               data-src="assets/video/athenax-preview-16x9.mp4"
+               data-src-portrait="assets/video/athenax-preview-9x16.mp4"
+               data-poster-portrait="assets/video/athenax-poster-9x16.webp"
+               aria-label="คลิปตัวอย่างโปรแกรม ATHENAX"></video>
+        <div class="soon-tape" aria-hidden="true"><span>COMING SOON</span></div>
+        <button class="icon-btn soon-toggle" type="button" data-action="athenax-toggle" aria-label="หยุดคลิป" hidden>
+          <svg class="i"><use href="#i-pause"/></svg>
+        </button>
+      </div>
+      <div class="soon-body">
+        <p class="soon-status"><span class="live-dot"></span>เร็วๆ นี้</p>
+        <h2 class="soon-title">ATHENAX</h2>
+        <p class="soon-sub">Performance Control Center</p>
+        <ul class="soon-list">
+          <li><strong>Install</strong><span>Download · integrity check · shortcuts</span></li>
+          <li><strong>Sign in</strong><span>One license key · bound to your PC</span></li>
+          <li><strong>System</strong><span>Live CPU · RAM · GPU detection</span></li>
+          <li><strong>Preset tuning</strong><span>Latency · Input · Graphics · Power · Services</span></li>
+          <li><strong>Weapon presets</strong><span>Per-weapon values · 3D models from your own GTA V</span></li>
+        </ul>
       </div>
     </article>
   </div>
