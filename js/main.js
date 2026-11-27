@@ -238,3 +238,71 @@ Actions.faq = el => {
     el.setAttribute('aria-expanded', 'true');
   }
 };
+
+/* ── Reviews row ──
+   Prev/next buttons for everyone (a mouse wheel can't scroll sideways). On top of that the
+   row drifts on its own and loops: hover, keyboard focus, a touch or a button press pauses it,
+   and it carries on from wherever the visitor left it. The cards are cloned once (hidden from
+   assistive tech) so the loop has no seam. prefers-reduced-motion (also on when Windows
+   animations are turned off): no drift, the buttons and the scrollbar still work. */
+(() => {
+  const row = $('#reviews .marquee');
+  const track = $('#testiTrack');
+  if (!row || !track || !track.children.length) return;
+
+  const cards = Array.from(track.children);
+  const step = () => cards[0].offsetWidth + (parseFloat(getComputedStyle(cards[0]).marginRight) || 0);
+  let loopWidth = () => 0;
+  let holdUntil = 0;
+
+  const nudge = dir => {
+    holdUntil = performance.now() + 3000;
+    const w = loopWidth();
+    if (w && dir < 0 && row.scrollLeft < step()) row.scrollLeft += w;   // wrap before going back past the start
+    row.scrollBy({ left: dir * step(), behavior: 'smooth' });
+  };
+  Actions['reviews-prev'] = () => nudge(-1);
+  Actions['reviews-next'] = () => nudge(1);
+
+  if (matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+
+  cards.forEach(card => {
+    const copy = card.cloneNode(true);
+    copy.setAttribute('aria-hidden', 'true');
+    copy.inert = true;
+    track.append(copy);
+  });
+  row.classList.add('is-auto');
+  loopWidth = () => track.children[cards.length].offsetLeft - cards[0].offsetLeft;
+
+  const SPEED = 32;                       // px per second
+  let pos = row.scrollLeft;
+  let last = 0;
+  let hover = false, touch = false, focus = false, inView = false;
+  let touchTimer = 0;
+
+  const tick = now => {
+    const dt = last ? Math.min(now - last, 64) : 0;
+    last = now;
+    if (inView && !hover && !touch && !focus && now > holdUntil) {
+      if (Math.abs(row.scrollLeft - pos) > 2) pos = row.scrollLeft;   // the visitor moved it
+      pos += SPEED * dt / 1000;
+      const w = loopWidth();
+      if (w > 0 && pos >= w) pos -= w;
+      row.scrollLeft = pos;
+    } else {
+      pos = row.scrollLeft;
+    }
+    requestAnimationFrame(tick);
+  };
+
+  row.addEventListener('pointerenter', e => { if (e.pointerType === 'mouse') hover = true; });
+  row.addEventListener('pointerleave', e => { if (e.pointerType === 'mouse') hover = false; });
+  row.addEventListener('touchstart', () => { touch = true; clearTimeout(touchTimer); }, { passive: true });
+  row.addEventListener('touchend', () => { touchTimer = setTimeout(() => { touch = false; }, 2500); }, { passive: true });
+  row.addEventListener('focusin', () => { focus = true; });
+  row.addEventListener('focusout', () => { focus = false; });
+  new IntersectionObserver(([entry]) => { inView = entry.isIntersecting; }).observe(row);
+
+  requestAnimationFrame(tick);
+})();

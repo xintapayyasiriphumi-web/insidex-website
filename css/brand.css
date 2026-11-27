@@ -178,3 +178,9 @@
   .feature-body::after { display: none; }
   .shelf-label { font-size: 14px; }
 }
+
+/* Reviews drift on their own (js/main.js); snapping would fight the per-frame scroll */
+.marquee.is-auto { scroll-snap-type: none; }
+.rv-side { display: flex; align-items: center; gap: 16px; }
+.rv-nav { display: flex; gap: 8px; }
+.rv-nav .icon-btn { width: 44px; height: 44px; }
