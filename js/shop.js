@@ -43,6 +43,8 @@ let qrTotal = 0;   // ยอดของ QR ที่แสดงอยู่ �
    (ไม่งั้นคนส่งลิงก์ยัด token ของตัวเองใส่เครื่องลูกค้าได้ แล้ว key ที่ลูกค้าจ่ายเงิน
    ซื้อจะไปเข้าบัญชีคนนั้น) */
 const LOGIN_NONCE_KEY = 'ix_login';
+// สินค้าที่เลือกไว้ก่อนออกไป Login — กลับมาแล้วเปิดคำสั่งซื้อเดิมให้ต่อเลย
+const PENDING_ORDER_KEY = 'ix_pending_order';
 
 function beginLogin() {
   let nonce;
@@ -81,6 +83,16 @@ function storeUser(user, welcome) {
   store.set('ix_user', JSON.stringify(user));
   setUser(user);
   if (welcome) toast(`ยินดีต้อนรับ ${user.username}!`, 'success');
+  resumeOrder();
+}
+
+function resumeOrder() {
+  const raw = session.get(PENDING_ORDER_KEY);
+  if (!raw) return;
+  session.remove(PENDING_ORDER_KEY);
+  let ids = [];
+  try { ids = JSON.parse(raw).map(Number).filter(Number.isInteger); } catch {}
+  if (ids.length) openShop(ids);
 }
 
 /* แลกโค้ดส่งต่อเป็นข้อมูล user — โค้ดใช้ได้ครั้งเดียว อายุ 2 นาที
@@ -153,6 +165,7 @@ function setUser(user) {
   $('#profileAvatar').innerHTML = user.avatar
     ? `<img src="${esc(user.avatar)}" alt="">`
     : esc((user.username || '?').slice(0, 2).toUpperCase());
+  renderPayButtons();
 }
 
 async function doLogout() {
@@ -162,14 +175,16 @@ async function doLogout() {
   $('#loginBtn').hidden = false;
   $('#userBar').hidden = true;
   closeModal('modalUser');
+  renderPayButtons();
   toast('ออกจากระบบแล้ว', 'info');
 }
 
-/* Entry point for every "buy" button on the page */
+/* Entry point for every "buy" button on the page.
+   Anyone can open the shop and build an order; Discord login is asked for at "ไปชำระเงิน",
+   because the key is delivered to the buyer's Discord account. */
 function buyNow(productId, pickId = null) {
-  if (!currentUser) { beginLogin(); location.href = LOGIN_URL; return; }
-  if (productId) openShopProduct(productId);
-  else openShop(pickId);
+  if (productId && currentUser) openShopProduct(productId);
+  else openShop(pickId || productId);
 }
 
 /* ══ Products ══ */
@@ -183,8 +198,10 @@ function showProductSkeleton() {
   $('#productList').innerHTML = `<div class="pgrid">${SKELETON_CARD.repeat(4)}</div>`;
 }
 
-// pickId (from a shelf card): open on that product's tab with it already in the order
-async function openShop(pickId = null) {
+// pick: one product id (a shelf card — opens on its tab, already in the order)
+// or several (an order resumed after Login)
+async function openShop(pick = null) {
+  const pickIds = [].concat(pick ?? []).filter(Boolean);
   openModal('modalShop');
   selectedProducts = [];
   shopTab = 'all';
@@ -192,13 +209,14 @@ async function openShop(pickId = null) {
   showProductSkeleton();
   try {
     shopProducts = await fetchProducts();
-    const pick = pickId && shopProducts.find(p => p.id === pickId);
-    if (pick) {
-      const tab = SHOP_TABS.find(t => t.key !== 'all' && t.cats.includes(catOf(pick)));
+    const picks = pickIds.map(id => shopProducts.find(p => p.id === id)).filter(Boolean);
+    if (picks.length === 1) {
+      const tab = SHOP_TABS.find(t => t.key !== 'all' && t.cats.includes(catOf(picks[0])));
       if (tab) shopTab = tab.key;
-      const { soon, out } = productState(pick);
-      if (!soon && !out) selectedProducts = [{ id: pick.id, name: pick.name, price: pick.price }];
     }
+    selectedProducts = picks
+      .filter(p => { const { soon, out } = productState(p); return !soon && !out; })
+      .map(p => ({ id: p.id, name: p.name, price: p.price }));
     renderShopProducts();
     updateCheckoutBar();
     $('#productList .pcard.selected')?.scrollIntoView({ block: 'nearest' });
@@ -417,9 +435,23 @@ function backToProducts() {
 Actions['shop-back'] = backToProducts;
 
 /* ══ Payment ══ */
+const PAY_LABEL = 'ไปชำระเงิน <svg class="i"><use href="#i-arrow"/></svg>';
+const LOGIN_PAY_LABEL = '<svg class="i"><use href="#i-discord"/></svg> Login เพื่อชำระเงิน';
+
+// Logged out: the pay buttons say they lead to Discord, and a note says why
+function renderPayButtons() {
+  $$('[data-action="go-pay"]').forEach(btn => { btn.innerHTML = currentUser ? PAY_LABEL : LOGIN_PAY_LABEL; });
+  $('#coLoginNote').hidden = !!currentUser;
+}
+
 Actions['go-pay'] = () => {
-  if (!currentUser) { toast('กรุณา Login ก่อน', 'error'); return; }
   if (!selectedProducts.length) { toast('กรุณาเลือกสินค้า', 'error'); return; }
+  if (!currentUser) {
+    session.set(PENDING_ORDER_KEY, JSON.stringify(selectedProducts.map(p => p.id)));
+    beginLogin();
+    location.href = LOGIN_URL;
+    return;
+  }
   startPayment([...selectedProducts]);
 };
 
@@ -802,8 +834,18 @@ const SHELF_GROUPS = [
   { title: 'Pack V2.5 <span>— รวมหลายตัว คุ้มกว่า</span>', cats: ['pack'] },
 ];
 
+/* Each product's colour comes from its box art (css/brand.css [data-tone]).
+   Packs are checked first because their names contain the single products. */
+const SHELF_TONES = [
+  [/max/i, 'max'], [/goat\s*pack/i, 'chrome'], [/elite/i, 'copper'],
+  [/goat/i, 'goat'], [/plus/i, 'plus'], [/ultimate/i, 'ultimate'],
+  [/shx/i, 'shx'], [/internet/i, 'net'], [/support/i, 'support'],
+];
+const toneOf = name => (SHELF_TONES.find(([re]) => re.test(name || '')) || [, ''])[1];
+
 function renderShelfCard(p) {
   const { soon, out } = productState(p);
+  const tone = toneOf(p.name);
   const foot = soon ? '<span class="shelf-note">เร็วๆ นี้</span>'
     : out ? '<span class="shelf-note">สินค้าหมด</span>'
     : `${hasPromo(p) ? wasHtml(p) : ''}<span class="shelf-price">฿${fmt(p.price)}</span>`;
@@ -811,7 +853,7 @@ function renderShelfCard(p) {
     ? `<img src="${esc(p.image_url)}" alt="" width="640" height="640" loading="lazy" decoding="async">`
     : '<svg class="i"><use href="#i-gear"/></svg>';
   return `
-        <button class="card card-hover shelf-item${out && !soon ? ' is-out' : ''}" data-action="buy" data-pick="${Number(p.id)}">
+        <button class="card card-hover shelf-item${out && !soon ? ' is-out' : ''}" data-action="buy" data-pick="${Number(p.id)}"${tone ? ` data-tone="${tone}"` : ''}>
           <span class="shelf-img">${media}</span>
           <span class="shelf-label">${esc(p.name)}</span>
           <span class="shelf-desc">${esc(p.description || '')}</span>
@@ -844,4 +886,5 @@ Actions['open-history'] = () => openHistory();
 Actions.logout          = () => doLogout();
 
 checkLogin();
+renderPayButtons();
 renderShelf();

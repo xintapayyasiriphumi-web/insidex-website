@@ -239,6 +239,8 @@
 .order-totals .is-total { margin-top: 2px; padding-top: 14px; border-top: 1px dashed var(--line-2); font-size: 14px; font-weight: 600; color: var(--text); }
 .order-totals .is-total dd { font: 700 26px/1 var(--font-label); letter-spacing: -.02em; color: var(--accent-100); }
 
+.co-login-note { margin: -4px 0 14px; font-size: 12.5px; line-height: 1.55; color: var(--text-3); text-align: center; }
+.checkout:not([data-step="1"]) .co-login-note { display: none; }
 .co-trust { display: flex; flex-direction: column; gap: 9px; padding-top: 14px; border-top: 1px solid var(--line); }
 .co-trust li { display: flex; align-items: center; gap: 10px; font-size: 12.5px; color: var(--text-3); }
 .co-trust .i { width: 15px; height: 15px; flex-shrink: 0; color: var(--accent-300); }
