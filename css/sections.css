@@ -89,7 +89,7 @@
 .value-title { font: 600 clamp(22px, 2.6vw, 28px)/1.3 var(--font-display); letter-spacing: -.02em; }
 .value-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 22px 26px; }
 .value-item { display: flex; gap: 14px; }
-.value-item h4 { font-size: 15px; font-weight: 600; }
+.value-item h3 { font-size: 15px; font-weight: 600; }
 .value-item p { font-size: 13.5px; color: var(--text-3); }
 
 /* ── Toolbox premium ── */

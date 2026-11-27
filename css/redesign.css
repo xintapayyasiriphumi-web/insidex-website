@@ -262,7 +262,7 @@ body { background: var(--bg); font-family: var(--font-body); }
 /* ── Why / value ────────────────────────────────── */
 .value { border-radius: var(--r-lg); background: var(--surface); }
 .value-title { font-family: var(--font-display); font-weight: 600; text-transform: none; letter-spacing: 0; }
-.value-item h4 { font-family: var(--font-body); font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 15px; }
+.value-item h3 { font-family: var(--font-body); font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 15px; }
 .value-item p { font-size: 14px; color: var(--text-3); }
 
 /* ── Toolbox ─────────────────────────────────────── */
