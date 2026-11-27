@@ -182,8 +182,9 @@ body { background: var(--bg); font-family: var(--font-body); }
 .announce:hover { background: none; color: var(--text); }
 .announce .i { width: 16px; height: 16px; }
 .hero-title {
-  font-family: var(--font-display); font-weight: 600; text-transform: uppercase;
-  font-size: clamp(56px, 10vw, 128px); line-height: .95; letter-spacing: -.02em;
+  font-family: var(--font-display); font-weight: 600; text-transform: none;
+  font-size: clamp(36px, 4.4vw, 60px); line-height: 1.25; letter-spacing: 0;
+  max-width: 15em; text-wrap: balance;
   margin-top: 20px;
   background: none; color: var(--text); -webkit-text-fill-color: currentColor;
 }
@@ -407,6 +408,6 @@ body { background: var(--bg); font-family: var(--font-body); }
   .stat { padding: 20px; }
   .stat:nth-child(odd) { border-left: 0; }
   .stat:nth-child(n+3) { border-top: 1px solid var(--line); }
-  .hero-title { font-size: clamp(44px, 14vw, 76px); }
+  .hero-title { font-size: clamp(30px, 8.4vw, 40px); }
   .hero-desc { font-size: 16px; }
 }

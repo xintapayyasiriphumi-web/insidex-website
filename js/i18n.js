@@ -8,7 +8,8 @@ const TRANSLATIONS = {
   th: {
     'nav.products':'สินค้า','nav.shelf':'หมวดหมู่','nav.about':'เกี่ยวกับ',
     'nav.reviews':'รีวิว','nav.community':'ชุมชน','nav.login':'Login Discord',
-    'hero.desc':'ร้านค้าสำหรับนักเล่นเกมที่ต้องการประสิทธิภาพสูงสุด<br>ลง Setup ให้โดยตรงโดยทีมงาน — ไม่ต้องทำเอง',
+    'hero.title':'Setting เพิ่ม FPS และลดดีเลย์ สำหรับคอมเล่นเกม',
+    'hero.desc':'มี ReShade, Mode และ Windows สำหรับเกมเมอร์ด้วย ทีมงานลงให้ถึงเครื่องผ่าน Remote ไม่ต้องทำเอง ราคาเริ่มต้น ฿39',
     'hero.buy':'ซื้อสินค้า','hero.view':'ดูสินค้า ↓',
     'stat.customers':'ลูกค้าที่พึงพอใจ','stat.categories':'หมวดสินค้า',
     'stat.support':'Support ตลอดเวลา','stat.remote':'ลง Setup ผ่าน Remote',
@@ -48,7 +49,8 @@ const TRANSLATIONS = {
   en: {
     'nav.products':'Products','nav.shelf':'Categories','nav.about':'About',
     'nav.reviews':'Reviews','nav.community':'Community','nav.login':'Login Discord',
-    'hero.desc':'The ultimate store for gamers who demand peak performance.<br>Our team installs everything directly for you — no hassle.',
+    'hero.title':'FPS and input‑lag settings for gaming PCs',
+    'hero.desc':'Plus ReShade, mods and a gaming build of Windows. Our team installs it on your PC over remote, so there is nothing to set up yourself. From ฿39.',
     'hero.buy':'Buy Products','hero.view':'View Products ↓',
     'stat.customers':'Satisfied Customers','stat.categories':'Categories',
     'stat.support':'24/7 Support','stat.remote':'Remote setup by our team',
@@ -88,7 +90,8 @@ const TRANSLATIONS = {
   vi: {
     'nav.products':'Sản phẩm','nav.shelf':'Danh mục','nav.about':'Giới thiệu',
     'nav.reviews':'Đánh giá','nav.community':'Cộng đồng','nav.login':'Login Discord',
-    'hero.desc':'Cửa hàng tốt nhất cho game thủ muốn hiệu suất tối đa.<br>Đội ngũ cài đặt trực tiếp cho bạn — không cần tự làm.',
+    'hero.title':'Setting tăng FPS và giảm độ trễ cho PC chơi game',
+    'hero.desc':'Có cả ReShade, Mode và Windows cho game thủ. Đội ngũ cài đặt từ xa lên máy của bạn, không cần tự làm. Giá từ ฿39.',
     'hero.buy':'Mua sản phẩm','hero.view':'Xem sản phẩm ↓',
     'stat.customers':'Khách hàng hài lòng','stat.categories':'Danh mục',
     'stat.support':'Hỗ trợ 24/7','stat.remote':'Cài đặt từ xa',
