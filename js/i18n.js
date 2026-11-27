@@ -45,6 +45,9 @@ const TRANSLATIONS = {
     'disc.bullet1':'Support ตลอด 24/7','disc.bullet2':'รับข่าวสารและ Update ก่อนใคร',
     'disc.bullet3':'ส่ง Key และรับ Setup ผ่าน Discord',
     'modal.buy':'ซื้อสินค้า','modal.history':'ประวัติการซื้อ','modal.logout':'ออกจากระบบ',
+    'disc.members':'สมาชิก','disc.onlineNow':'ออนไลน์ตอนนี้',
+    'dw.label':'Online members','dw.loading':'กำลังโหลด...','dw.connecting':'Connecting...',
+    'dw.online':'{n} คนออนไลน์','dw.none':'ไม่มีสมาชิกออนไลน์','dw.unavailable':'Widget ไม่พร้อมใช้งาน',
     'shop.loginPay':'Login เพื่อชำระเงิน',
     'shop.loginNote':'Key ส่งเข้า Discord ของคุณ — Login แล้วกลับมาที่คำสั่งซื้อนี้ได้เลย',
   },
@@ -88,6 +91,9 @@ const TRANSLATIONS = {
     'disc.bullet1':'24/7 Support','disc.bullet2':'Get news & updates before anyone else',
     'disc.bullet3':'Send Key and receive Setup via Discord',
     'modal.buy':'Buy Products','modal.history':'Purchase History','modal.logout':'Log Out',
+    'disc.members':'Members','disc.onlineNow':'Online now',
+    'dw.label':'Online members','dw.loading':'Loading...','dw.connecting':'Connecting...',
+    'dw.online':'{n} online','dw.none':'No members online','dw.unavailable':'Widget unavailable',
     'shop.loginPay':'Log in to pay',
     'shop.loginNote':'Your key is sent to your Discord — after logging in you come back to this order',
   },
@@ -131,6 +137,9 @@ const TRANSLATIONS = {
     'disc.bullet1':'Hỗ trợ 24/7','disc.bullet2':'Nhận tin tức & cập nhật trước mọi người',
     'disc.bullet3':'Gửi Key và nhận Setup qua Discord',
     'modal.buy':'Mua sản phẩm','modal.history':'Lịch sử mua hàng','modal.logout':'Đăng xuất',
+    'disc.members':'Thành viên','disc.onlineNow':'Đang trực tuyến',
+    'dw.label':'Thành viên trực tuyến','dw.loading':'Đang tải...','dw.connecting':'Đang kết nối...',
+    'dw.online':'{n} đang trực tuyến','dw.none':'Không có thành viên trực tuyến','dw.unavailable':'Widget không khả dụng',
     'shop.loginPay':'Đăng nhập để thanh toán',
     'shop.loginNote':'Key được gửi vào Discord của bạn — đăng nhập xong sẽ quay lại đơn hàng này',
   },
@@ -150,6 +159,14 @@ function setLang(lang) {
     const html = dict[el.dataset.i18nHtml];
     if (html !== undefined) el.innerHTML = html;
   });
+  // Text that scripts write at runtime (Discord widget, …) re-renders on this
+  document.dispatchEvent(new CustomEvent('ix:lang', { detail: lang }));
+}
+
+// A string in the current page language, falling back to Thai; {name} placeholders filled from vars
+function tr(key, vars = {}) {
+  const text = TRANSLATIONS[document.documentElement.lang]?.[key] ?? TRANSLATIONS.th[key] ?? key;
+  return text.replace(/\{(\w+)\}/g, (m, k) => (k in vars ? vars[k] : m));
 }
 
 Actions.lang = el => setLang(el.dataset.lang);

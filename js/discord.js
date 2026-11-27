@@ -34,6 +34,27 @@
   const POLL = 60000;
   let loadedAt = 0;
 
+  // state: 'loading' | 'ok' | 'error' — the text is drawn from it in the page language,
+  // and drawn again when the visitor switches language (ix:lang from js/i18n.js)
+  let state = 'loading';
+  let online = 0;
+  let hasMembers = false;
+
+  function renderText() {
+    if (state === 'ok') {
+      countEl.textContent = online.toLocaleString();
+      onlineEl.textContent = tr('dw.online', { n: online.toLocaleString() });
+      if (!hasMembers) list.innerHTML = `<div class="dw-state">${esc(tr('dw.none'))}</div>`;
+    } else if (state === 'error') {
+      countEl.textContent = '—';
+      onlineEl.textContent = 'INSIDEX Community';
+      list.innerHTML = `<div class="dw-state">${esc(tr('dw.unavailable'))}<small>discord.com/api unavailable</small></div>`;
+    } else {
+      onlineEl.textContent = tr('dw.loading');
+      list.innerHTML = `<div class="dw-state"><span class="spinner"></span>${esc(tr('dw.connecting'))}</div>`;
+    }
+  }
+
   async function load() {
     if (document.hidden) return;
     loadedAt = Date.now();
@@ -43,19 +64,18 @@
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       const members = data.members || [];
-      const online = data.presence_count || members.length || 0;
-
-      countEl.textContent = online.toLocaleString();
-      onlineEl.textContent = `${online.toLocaleString()} คนออนไลน์`;
-      list.innerHTML = members.length
-        ? `<ul>${members.map(memberHtml).join('')}</ul>`
-        : '<div class="dw-state">ไม่มีสมาชิกออนไลน์</div>';
+      online = data.presence_count || members.length || 0;
+      hasMembers = members.length > 0;
+      state = 'ok';
+      if (hasMembers) list.innerHTML = `<ul>${members.map(memberHtml).join('')}</ul>`;
     } catch {
-      countEl.textContent = '—';
-      onlineEl.textContent = 'INSIDEX Community';
-      list.innerHTML = '<div class="dw-state">Widget ไม่พร้อมใช้งาน<small>discord.com/api unavailable</small></div>';
+      state = 'error';
     }
+    renderText();
   }
+
+  renderText();
+  document.addEventListener('ix:lang', renderText);
 
   load();
   setInterval(load, POLL);
