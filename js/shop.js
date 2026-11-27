@@ -44,7 +44,9 @@ let qrTotal = 0;   // ยอดของ QR ที่แสดงอยู่ �
    ซื้อจะไปเข้าบัญชีคนนั้น) */
 const LOGIN_NONCE_KEY = 'ix_login';
 // สินค้าที่เลือกไว้ก่อนออกไป Login — กลับมาแล้วเปิดคำสั่งซื้อเดิมให้ต่อเลย
+// เก่าเกิน 10 นาที (เช่นกดยกเลิกที่ Discord แล้วมา Login ทีหลัง) ทิ้งไป ไม่เด้งร้านขึ้นมาเอง
 const PENDING_ORDER_KEY = 'ix_pending_order';
+const PENDING_ORDER_TTL = 10 * 60 * 1000;
 
 function beginLogin() {
   let nonce;
@@ -91,7 +93,10 @@ function resumeOrder() {
   if (!raw) return;
   session.remove(PENDING_ORDER_KEY);
   let ids = [];
-  try { ids = JSON.parse(raw).map(Number).filter(Number.isInteger); } catch {}
+  try {
+    const { at, ids: saved } = JSON.parse(raw);
+    if (Date.now() - Number(at) < PENDING_ORDER_TTL) ids = saved.map(Number).filter(Number.isInteger);
+  } catch {}
   if (ids.length) openShop(ids);
 }
 
@@ -436,18 +441,21 @@ Actions['shop-back'] = backToProducts;
 
 /* ══ Payment ══ */
 const PAY_LABEL = 'ไปชำระเงิน <svg class="i"><use href="#i-arrow"/></svg>';
-const LOGIN_PAY_LABEL = '<svg class="i"><use href="#i-discord"/></svg> Login เพื่อชำระเงิน';
 
-// Logged out: the pay buttons say they lead to Discord, and a note says why
+// Logged out: the pay buttons say they lead to Discord, and a note says why.
+// The label span carries data-i18n so a later language switch (js/i18n.js) updates it too.
 function renderPayButtons() {
-  $$('[data-action="go-pay"]').forEach(btn => { btn.innerHTML = currentUser ? PAY_LABEL : LOGIN_PAY_LABEL; });
+  const lang = document.documentElement.lang;
+  const label = TRANSLATIONS[lang]?.['shop.loginPay'] || TRANSLATIONS.th['shop.loginPay'];
+  const loginLabel = `<svg class="i"><use href="#i-discord"/></svg> <span data-i18n="shop.loginPay">${esc(label)}</span>`;
+  $$('[data-action="go-pay"]').forEach(btn => { btn.innerHTML = currentUser ? PAY_LABEL : loginLabel; });
   $('#coLoginNote').hidden = !!currentUser;
 }
 
 Actions['go-pay'] = () => {
   if (!selectedProducts.length) { toast('กรุณาเลือกสินค้า', 'error'); return; }
   if (!currentUser) {
-    session.set(PENDING_ORDER_KEY, JSON.stringify(selectedProducts.map(p => p.id)));
+    session.set(PENDING_ORDER_KEY, JSON.stringify({ at: Date.now(), ids: selectedProducts.map(p => p.id) }));
     beginLogin();
     location.href = LOGIN_URL;
     return;

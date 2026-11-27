@@ -45,6 +45,8 @@ const TRANSLATIONS = {
     'disc.bullet1':'Support ตลอด 24/7','disc.bullet2':'รับข่าวสารและ Update ก่อนใคร',
     'disc.bullet3':'ส่ง Key และรับ Setup ผ่าน Discord',
     'modal.buy':'ซื้อสินค้า','modal.history':'ประวัติการซื้อ','modal.logout':'ออกจากระบบ',
+    'shop.loginPay':'Login เพื่อชำระเงิน',
+    'shop.loginNote':'Key ส่งเข้า Discord ของคุณ — Login แล้วกลับมาที่คำสั่งซื้อนี้ได้เลย',
   },
   en: {
     'nav.products':'Products','nav.shelf':'Categories','nav.about':'About',
@@ -86,6 +88,8 @@ const TRANSLATIONS = {
     'disc.bullet1':'24/7 Support','disc.bullet2':'Get news & updates before anyone else',
     'disc.bullet3':'Send Key and receive Setup via Discord',
     'modal.buy':'Buy Products','modal.history':'Purchase History','modal.logout':'Log Out',
+    'shop.loginPay':'Log in to pay',
+    'shop.loginNote':'Your key is sent to your Discord — after logging in you come back to this order',
   },
   vi: {
     'nav.products':'Sản phẩm','nav.shelf':'Danh mục','nav.about':'Giới thiệu',
@@ -127,6 +131,8 @@ const TRANSLATIONS = {
     'disc.bullet1':'Hỗ trợ 24/7','disc.bullet2':'Nhận tin tức & cập nhật trước mọi người',
     'disc.bullet3':'Gửi Key và nhận Setup qua Discord',
     'modal.buy':'Mua sản phẩm','modal.history':'Lịch sử mua hàng','modal.logout':'Đăng xuất',
+    'shop.loginPay':'Đăng nhập để thanh toán',
+    'shop.loginNote':'Key được gửi vào Discord của bạn — đăng nhập xong sẽ quay lại đơn hàng này',
   },
 };
 

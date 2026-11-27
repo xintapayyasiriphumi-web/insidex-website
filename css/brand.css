@@ -46,6 +46,8 @@
     linear-gradient(var(--bk) 0 0) bottom right / var(--bk-w) var(--bk-len);
   background-repeat: no-repeat;
 }
+/* These clip their content, so the brackets sit just inside the edge instead of on it */
+.hv-frame::after, .tbx::after { inset: 0; }
 .card-hover { transition: background-color .15s var(--ease), border-color .15s var(--ease); }
 .card-hover:hover { --bk: var(--p, var(--ac-hi)); border-color: var(--frame-hi); }
 
@@ -59,6 +61,8 @@
     var(--plate) center / 100% 100% no-repeat;
   pointer-events: none;
 }
+[data-theme="christmas"] :is(.feature, .stats, .tbx)::before { background-image: url("../assets/img/logo-christmas.webp"), var(--plate); }
+[data-theme="halloween"] :is(.feature, .stats, .tbx)::before { background-image: url("../assets/img/logo-halloween.webp"), var(--plate); }
 
 /* ── Type: heavy italic Kanit for display, Anuphan for reading ── */
 .brand { font: 800 italic 19px/1 var(--font-display); letter-spacing: .03em; }
@@ -93,7 +97,9 @@
 .stat-unit { font-style: normal; }
 
 /* ── Caution tape: the strip that runs across every box corner ── */
-.tape-wrap { overflow: hidden; padding-block: clamp(28px, 4vw, 44px) 8px; }
+/* The strip is tilted 1.6deg across the full width, so its ends rise/drop about 1.4vw;
+   the padding grows with the viewport to keep both ends inside the clip. */
+.tape-wrap { overflow: hidden; padding-block: calc(1.4vw + 24px) calc(1.4vw + 8px); }
 .tape {
   width: calc(100% + 48px); margin-left: -24px;
   transform: rotate(-1.6deg);
