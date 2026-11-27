@@ -260,10 +260,6 @@ body { background: var(--bg); font-family: var(--font-body); }
 .shelf-price { color: var(--ac-text); }
 
 /* ── Why / value ────────────────────────────────── */
-.why-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.why-card { border-radius: var(--r-lg); }
-.why-card h3 { font-family: var(--font-display); font-weight: 600; text-transform: none; letter-spacing: .02em; font-size: 17px; }
-.why-card p { color: var(--text-2); }
 .value { border-radius: var(--r-lg); background: var(--surface); }
 .value-title { font-family: var(--font-display); font-weight: 600; text-transform: none; letter-spacing: 0; }
 .value-item h4 { font-family: var(--font-body); font-weight: 600; text-transform: none; letter-spacing: 0; font-size: 15px; }
@@ -404,7 +400,7 @@ body { background: var(--bg); font-family: var(--font-body); }
   .cat-card:first-child .dot-list { grid-column: 1; grid-row: auto; }
 }
 @media (max-width: 760px) {
-  .why-grid, .cat-grid { grid-template-columns: 1fr; }
+  .cat-grid { grid-template-columns: 1fr; }
   .cat-card:first-child { grid-column: span 1; }
   .section-head > .section-title { max-width: none; }
   .stats { grid-template-columns: repeat(2, 1fr); }

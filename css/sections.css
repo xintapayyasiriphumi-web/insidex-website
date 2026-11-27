@@ -82,10 +82,6 @@
 .shelf-item.is-out { opacity: .55; }
 
 /* ── About ── */
-.why-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; margin-bottom: 16px; }
-.why-card { display: grid; grid-template-columns: auto 1fr; gap: 20px; padding: 30px; }
-.why-card h3 { margin-bottom: 8px; font: 600 18px/1.3 var(--font-display); letter-spacing: -.01em; }
-.why-card p { font-size: 14.5px; color: var(--text-2); }
 .tag-row { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 16px; }
 
 .value { display: grid; grid-template-columns: 1fr 2fr; gap: 32px; align-items: center; padding: clamp(26px, 4vw, 40px); }
@@ -373,7 +369,6 @@
   .feature-media { min-height: 300px; order: -1; }
   .feature-media::after { background: linear-gradient(0deg, #100f15 0%, transparent 45%); }
   .tbx-media { min-height: 260px; border-right: 0; border-bottom: 1px solid var(--line); }
-  .why-grid { grid-template-columns: 1fr; }
   .faq-aside { position: static; }
   .tbx-plans { grid-template-columns: 1fr; gap: 20px; }
 }
@@ -385,7 +380,6 @@
   .shelf-label { font-size: 14px; }
   .shelf-price { font-size: 17px; }
   .value-grid, .tbx-body .check-list { grid-template-columns: 1fr; }
-  .why-card { grid-template-columns: 1fr; padding: 24px; }
   .slider-arrow { top: calc(28vw - 24px); width: 40px; height: 40px; }
   .slide-footer .btn { width: 100%; }
   .review { width: 286px; }
