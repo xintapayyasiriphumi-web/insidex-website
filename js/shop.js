@@ -203,10 +203,17 @@ function showProductSkeleton() {
   $('#productList').innerHTML = `<div class="pgrid">${SKELETON_CARD.repeat(4)}</div>`;
 }
 
+// A failed product load shows this with a retry that repeats the same open (same picks)
+let retryShopOpen = () => openShop();
+const SHOP_LOAD_FAILED = '<p class="shop-empty">โหลดสินค้าไม่สำเร็จ เช็กอินเทอร์เน็ตแล้วลองใหม่'
+  + '<br><button class="btn btn-outline btn-xs" type="button" data-action="shop-retry">ลองใหม่</button></p>';
+Actions['shop-retry'] = () => retryShopOpen();
+
 // pick: one product id (a shelf card — opens on its tab, already in the order)
 // or several (an order resumed after Login)
 async function openShop(pick = null) {
   const pickIds = [].concat(pick ?? []).filter(Boolean);
+  retryShopOpen = () => openShop(pick);
   openModal('modalShop');
   selectedProducts = [];
   shopTab = 'all';
@@ -226,12 +233,13 @@ async function openShop(pick = null) {
     updateCheckoutBar();
     $('#productList .pcard.selected')?.scrollIntoView({ block: 'nearest' });
   } catch {
-    $('#productList').innerHTML = '<p class="shop-empty">โหลดไม่สำเร็จ</p>';
+    $('#productList').innerHTML = SHOP_LOAD_FAILED;
   }
 }
 
 // Straight to payment for a single product (e.g. GOATX banner)
 async function openShopProduct(productId) {
+  retryShopOpen = () => openShopProduct(productId);
   openModal('modalShop');
   selectedProducts = [];
   showShopStep(1);
@@ -242,7 +250,7 @@ async function openShopProduct(productId) {
     if (!p) { renderShopProducts(); toast('ไม่พบสินค้า', 'error'); return; }
     startPayment([{ id: p.id, name: p.name, price: p.price }]);
   } catch {
-    toast('เกิดข้อผิดพลาด', 'error');
+    $('#productList').innerHTML = SHOP_LOAD_FAILED;   // was a toast over skeletons that never cleared
   }
 }
 
@@ -830,7 +838,8 @@ async function openHistory() {
         </div>`;
     }).join('');
   } catch {
-    list.innerHTML = '<p class="shop-empty">โหลดไม่สำเร็จ</p>';
+    list.innerHTML = '<p class="shop-empty">โหลดประวัติไม่สำเร็จ เช็กอินเทอร์เน็ตแล้วลองใหม่'
+      + '<br><button class="btn btn-outline btn-xs" type="button" data-action="open-history">ลองใหม่</button></p>';
   }
 }
 

@@ -160,6 +160,7 @@
 .pgroup-label.is-hot { color: var(--accent-200); }
 
 .shop-empty { grid-column: 1 / -1; padding: 40px 16px; text-align: center; font-size: 14px; color: var(--text-3); }
+.shop-empty .btn { margin-top: 14px; }
 
 /* Skeleton card */
 .sk-card { overflow: hidden; border: 1px solid var(--line); border-radius: 14px; }

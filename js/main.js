@@ -273,7 +273,11 @@ Actions.faq = el => {
     track.append(copy);
   });
   row.classList.add('is-auto');
-  loopWidth = () => track.children[cards.length].offsetLeft - cards[0].offsetLeft;
+  let loopW = 0;
+  const measure = () => { loopW = track.children[cards.length].offsetLeft - cards[0].offsetLeft; };
+  measure();
+  new ResizeObserver(measure).observe(track);   // fonts loading / viewport changes resize the cards
+  loopWidth = () => loopW;
 
   const SPEED = 32;                       // px per second
   let pos = row.scrollLeft;

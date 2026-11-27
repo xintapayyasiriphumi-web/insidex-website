@@ -28,10 +28,18 @@
   // Broken avatar → fall back to the initials underneath
   list.addEventListener('error', e => { if (e.target.tagName === 'IMG') e.target.remove(); }, true);
 
+  // A page opened in a background tab skipped the first load and showed "Connecting..."
+  // until the next minute's poll; a hung request showed it forever. Now: a 10 s timeout,
+  // and a load as soon as the tab is shown if the last one is older than the poll interval.
+  const POLL = 60000;
+  let loadedAt = 0;
+
   async function load() {
     if (document.hidden) return;
+    loadedAt = Date.now();
     try {
-      const res = await fetch(`https://discord.com/api/guilds/${GUILD_ID}/widget.json`);
+      const signal = typeof AbortSignal.timeout === 'function' ? AbortSignal.timeout(10000) : undefined;
+      const res = await fetch(`https://discord.com/api/guilds/${GUILD_ID}/widget.json`, { signal });
       if (!res.ok) throw new Error(`HTTP ${res.status}`);
       const data = await res.json();
       const members = data.members || [];
@@ -50,5 +58,8 @@
   }
 
   load();
-  setInterval(load, 60000);
+  setInterval(load, POLL);
+  document.addEventListener('visibilitychange', () => {
+    if (!document.hidden && Date.now() - loadedAt >= POLL) load();
+  });
 })();
